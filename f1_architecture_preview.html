@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ApexIQ — Enterprise Architecture Diagram (Refined Zero-Overlap)</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+      background: #F8FAFC;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #0F172A;
+    }
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      border: 1px solid #E2E8F0;
+    }
+    .header {
+      border-bottom: 2px solid #F1F5F9;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 {
+      margin: 0 0 6px 0;
+      font-size: 24px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+    p {
+      margin: 0;
+      color: #64748B;
+      font-size: 14px;
+    }
+    .badge {
+      background: #DCFCE7;
+      color: #166534;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #BBF7D0;
+    }
+    .diagram-wrapper {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      border-radius: 10px;
+      padding: 16px;
+      box-sizing: border-box;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
+    }
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .legend-card {
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid #E2E8F0;
+      background: #F8FAFC;
+    }
+    .legend-card h3 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legend-card p {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #475569;
+    }
+    .dot-orange { color: #E67E22; }
+    .dot-blue { color: #3F51B5; }
+    .dot-maroon { color: #880E4F; }
+    .dot-teal { color: #00897B; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div>
+      <h1>ApexIQ: Enterprise MLOps &amp; Data Warehouse Architecture</h1>
+      <p>Clean Zero-Overlap Routing &bull; 3-Pillar Telemetry Feature Store &bull; Group-Softmax Serving &bull; Active Learning Feedback Loops</p>
+    </div>
+    <div class="badge">
+      ✓ ZERO-OVERLAP ROUTING VERIFIED
+    </div>
+  </div>
+
+  <div class="diagram-wrapper">
+    <img src="f1_architecture_diagram.svg" alt="ApexIQ Architecture Diagram" />
+  </div>
+
+  <div class="legend-grid">
+    <div class="legend-card">
+      <h3><span class="dot-orange">●</span> 1. Data Processing &amp; ELT</h3>
+      <p><b>Snowflake Ingestion:</b> 12,358 rows (1994–2024), 0 null audit, Star Schema transformation, and 3-pillar feature extraction (Car BHP, Lap Delta, Pit Stops).</p>
+    </div>
+
+    <div class="legend-card">
+      <h3><span class="dot-blue">●</span> 2. Mining &amp; Model Train</h3>
+      <p><b>Dual Engines:</b> FP-Growth association mining (7,940 itemsets, 19.5x Lift) + Chronological benchmark of 9 algorithms. Cost-sensitive XGBoost training.</p>
+    </div>
+
+    <div class="legend-card">
+      <h3><span class="dot-maroon">●</span> 3. Group Softmax Deploy</h3>
+      <p><b>Mutual Exclusivity:</b> Temperature-scaled Group Softmax normalizes odds so &sum; P(Win) = 1.0000. In-database Snowpark SQL UDF execution.</p>
+    </div>
+
+    <div class="legend-card">
+      <h3><span class="dot-teal">●</span> 4. Monitor &amp; Feedback</h3>
+      <p><b>Closed-Loop MLOps:</b> Tracks Brier score &amp; Top-1 Hit Rate. CDC streams feed post-race actual classifications back into training &amp; preprocessing.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

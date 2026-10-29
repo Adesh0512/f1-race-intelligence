@@ -1,0 +1,13 @@
+pandas
+numpy
+scipy
+scikit-learn
+xgboost
+lightgbm
+mlxtend
+plotly
+joblib
+streamlit
+python-dotenv
+jsonschema
+openpyxl
