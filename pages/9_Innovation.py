@@ -34,7 +34,7 @@ t1, t2, t3 = st.tabs(["🔬 4-Phase Ablation Study Table", "📊 Incremental Per
 with t1:
     st.markdown("#### Step-by-Step Ablation Study Results")
     if not ablation_df.empty:
-        st.dataframe(ablation_df, use_container_width=True)
+        st.dataframe(ablation_df, width="stretch")
     else:
         # Fallback table
         default_ablation = pd.DataFrame([
@@ -43,7 +43,7 @@ with t1:
             {"Phase": "3. + Cost-Sensitive Imbalance Rebalancing", "ROC-AUC": 0.9654, "PR-AUC": 0.6845, "F1-Score": 0.5980, "Top-1 Hit %": 63.89, "Gain vs Baseline": "+9.72%"},
             {"Phase": "4. Full Innovation (+ Group Softmax Ranking)", "ROC-AUC": 0.9836, "PR-AUC": 0.7281, "F1-Score": 0.6765, "Top-1 Hit %": 67.65, "Gain vs Baseline": "+13.48%"}
         ])
-        st.dataframe(default_ablation, use_container_width=True)
+        st.dataframe(default_ablation, width="stretch")
 
 with t2:
     st.markdown("#### Progressive Improvement Across Ablation Phases")
@@ -59,7 +59,7 @@ with t2:
             labels={"x": "Ablation Phase", "y": "ROC-AUC"}
         )
         fig_roc.update_traces(line_color="#D500F9", line_width=3, marker=dict(size=10, color="#FFFFFF"))
-        st.plotly_chart(get_plotly_theme(fig_roc), use_container_width=True)
+        st.plotly_chart(get_plotly_theme(fig_roc), width="stretch")
 
     with col_g2:
         top1_values = [54.17, 58.33, 63.89, 67.65]
@@ -69,7 +69,7 @@ with t2:
             title="Top-1 Winner Grand Prix Hit Rate (%)",
             labels={"x": "Ablation Phase", "y": "Top-1 Winner Accuracy (%)"}
         )
-        st.plotly_chart(get_plotly_theme(fig_top1), use_container_width=True)
+        st.plotly_chart(get_plotly_theme(fig_top1), width="stretch")
 
 with t3:
     st.markdown("#### Mathematical Formulation of Group Softmax Constraint")

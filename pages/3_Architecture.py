@@ -63,13 +63,14 @@ with col1:
 with col2:
     st.markdown("""
     #### 3. Pattern Mining & ML Engine (MLxtend / Scikit-Learn / XGBoost)
-    * **FP-Growth & Apriori**: Discretizes telemetry into items; discovers 7,940 frequent itemsets and 141,763 rules.
-    * **Classifier Benchmark**: 8 baselines evaluated on 5-fold stratified CV & 2021–2024 holdout test set.
-    * **Champion Innovation**: Association-Rule Feature Augmentation + Cost-Sensitive Hessian Scaling (`scale_pos_weight = 19.5`) + Group Softmax argmax constraint.
+    * **FP-Growth & Apriori**: 12,358 race transactions over 24 items; both find the same 414 frequent itemsets and 1,393 rules.
+    * **Classifier Benchmark**: 7 models on a chronological 2022–2024 holdout + 6-fold expanding-window validation + race-level bootstrap test.
+    * **Champion**: Cost-sensitive XGBoost (`scale_pos_weight = 15`) on 16 leakage-safe features + race-level softmax (ROC-AUC 0.9629).
+    * **Clustering**: K-Means (k = 3) on 703 driver-season profiles, compared with Ward, GMM, BIRCH and DBSCAN.
     * **Secondary Regression**: Independent Random Forest Regressor predicting finish position.
     
     #### 4. Snowflake Serving & Streamlit UI (SiS & Cortex AI)
     * **Registry Tables**: `ML.MODEL_COMPARISON`, `ML.ASSOCIATION_RULES`, `ML.MODEL_METRICS`.
     * **Snowflake Enterprise**: Zero-Copy Clone, Time Travel, Dynamic Tables, Streams & Tasks, Secure Views.
-    * **Streamlit in Snowflake**: 14 multi-page dashboard with interactive What-If scenario simulations.
+    * **Streamlit**: 3 rubric dashboards (warehouse, supervised, unsupervised) + extras.
     """)

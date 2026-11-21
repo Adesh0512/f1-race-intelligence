@@ -209,15 +209,16 @@ Finally, we extend our heartfelt appreciation to our faculty members, lab instru
 
 ## ABSTRACT
 
-Formula 1 motorsport represents one of the world's most telemetry-intensive athletic and technological arenas, where victory is determined by non-linear interactions across qualifying grid position, engine aerodynamic power unit performance, historical circuit pace records, and sub-2.5-second pit stop executions. Historically, motorsport analytics systems suffer from severe data fragmentation across independent telemetry dumps, vulnerability to in-race lookahead data leakage, and catastrophic classification failure caused by an extreme 19:1 class imbalance (where exactly one driver wins out of approximately twenty entrants per Grand Prix, representing a baseline prevalence of only 4.76%).
+Formula 1 motorsport represents one of the world's most telemetry-intensive athletic and technological arenas, where victory is determined by non-linear interactions across qualifying grid position, engine aerodynamic power unit performance, historical circuit pace records, and sub-2.5-second pit stop executions. Historically, motorsport analytics systems suffer from severe data fragmentation across independent telemetry dumps, vulnerability to in-race lookahead data leakage, and catastrophic classification failure caused by an extreme 20.4:1 class imbalance (where exactly one driver wins out of approximately twenty entrants per Grand Prix, representing a baseline prevalence of only 4.67%).
 
 This project presents **ApexIQ**, an enterprise-grade cloud data warehouse and predictive machine learning classification platform designed and deployed on **Snowflake Data Cloud** and **Python 3.10+**. The system synthesizes 31 FIA Formula 1 World Championship seasons (1994–2024), spanning 12,358 driver-race observations across 577 distinct Grands Prix and 38 global circuits. The platform is architected around three foundational technical deliverables:
 
 1. **Enterprise Data Warehousing & 3-Pillar Ingestion:** A 5-tier Medallion architecture (`RAW`, `CLEAN`, `ML`, `ANALYTICS`) hosting normalized Star and Snowflake dimensional schemas (`FactRaceResults`, `DimDriver`, `DimConstructor`, `DimCircuit`, `DimDate`). It organizes 31 pre-race features into three engineering pillars: Car Specifications (BHP, power-to-weight, reliability), Lap Record Benchmarks (track records, qualifying pace deltas), and Pit Stop Execution (lane penalty, stationary stoppage times). Native Snowflake capabilities—including Zero-Copy Cloning, 1-hour declarative Dynamic Tables (`DT_DRIVER_SEASON_FORM`), Change Data Capture (CDC Streams), and in-database SQL UDF scoring—are fully operationalized.
-2. **Unsupervised Frequent Pattern Mining:** Apriori and FP-Growth association rule mining algorithms were implemented and benchmarked on 12,358 discretized race transactions. The empirical benchmark proved exact mathematical equivalence (identifying 7,940 identical frequent itemsets with 0.0% error) while demonstrating a 1.32× runtime speedup for memory-resident FP-Trees (0.5312 s vs. 0.7028 s for Apriori). High-lift association rules (up to 19.47× lift) were discovered and injected into the supervised pipeline as binary feature augmentations.
-3. **Supervised Classification & Champion XGBoost Engine:** A rigorous benchmark across nine distinct classification algorithms was conducted under strict chronological holdout discipline (training on 1994–2021 with 10,999 records; testing on the unseen 2022–2024 modern ground-effect regulation era with 1,359 records across 68 Grands Prix). An Extreme Gradient Boosted Trees (XGBoost) champion model was designed utilizing a cost-sensitive loss function ($w_{\text{pos}} = 15.0$) and a novel temperature-scaled Group Softmax normalization layer enforcing mutual exclusivity ($\sum_{i \in \text{Race } j} P(\text{Win}_i) = 1.0000$).
+2. **Frequent Pattern Mining:** Apriori and FP-Growth were implemented and benchmarked on 12,358 discretised race transactions (24 items). Both discover exactly the same 414 frequent itemsets and 1,393 association rules. Apriori's candidate set grows 11× as the support threshold drops while the FP-tree stays bounded, and FP-Growth overtakes Apriori at min_support = 0.005. High-lift rules such as {pole, podium} ⇒ winner (13.8× lift) explain race outcomes.
+3. **Supervised Classification:** Seven classifiers were benchmarked under strict chronological holdout (train 1994–2021, 10,999 entries; test on the unseen 2022–2024 ground-effect era, 1,359 entries, 68 Grands Prix), plus 6-fold expanding-window validation. The champion is a cost-sensitive XGBoost ($w_{\text{pos}} = 15$) with a race-level softmax that makes each race's win probabilities sum to 1.
+4. **Unsupervised Clustering:** 703 driver-season performance profiles were clustered with five algorithms (K-Means, Agglomerative Ward, Gaussian Mixture, BIRCH, DBSCAN). K-Means with k = 3 (chosen by the elbow method and confirmed by the dendrogram) wins on silhouette, Davies-Bouldin and Calinski-Harabasz scores and discovers three tiers: Title Contenders, Midfield Regulars and Backmarkers.
 
-On the held-out 2022–2024 test partition, the Champion XGBoost pipeline achieved a **0.9635 ROC-AUC** (peak 0.9836 when rule-augmented), a **0.6029 PR-AUC** (compared to a 0.0500 random baseline), an **80.88% Winner Recall** (capturing 55 of 68 unseen race winners), and a **57.35% Top-1 Grand Prix Winner Hit Rate**. Paired Student's $t$-testing ($t = -8.2045, p = 0.0012$) proved statistically significant superiority over linear baselines at the 99% confidence level. The end-to-end platform is operationalized via a 15-page interactive Streamlit evaluation portal and an executive Microsoft Power BI telemetry workspace.
+On the held-out 2022–2024 partition the champion classifier achieves **ROC-AUC 0.9629**, **PR-AUC 0.6433** (random baseline 0.05), **85.3% winner recall** (58 of 68 winners) and a **58.8% top-1 race-winner hit rate** (40/68, vs. 51.5% for "the pole-sitter wins"). A race-level paired bootstrap confirms the gain over the baseline is significant (ΔAUC +0.042, 95% CI [+0.018, +0.073], p < 0.001). The clustering scores silhouette 0.264 with seed-stability ARI 0.92, and 81% of "Title Contender" seasons finished in the championship top 3. All results are served through a rubric-organised Streamlit portal and regenerated by a single command.
 
 <br>
 
@@ -265,7 +266,7 @@ On the held-out 2022–2024 test partition, the Champion XGBoost pipeline achiev
 
 ### CHAPTER 4 : MULTI-MODEL CLASSIFICATION BENCHMARK
 * 4.1 Chronological Holdout Evaluation Protocol ............................................................ 37
-* 4.2 Benchmark Across Nine Machine Learning Algorithms ........................................... 39
+* 4.2 Benchmark Across Seven Machine Learning Algorithms ........................................... 39
 * 4.3 6-Fold Expanding-Window Temporal Cross-Validation ............................................ 43
 * 4.4 Hypothesis Testing & Statistical Significance Analysis ............................................ 46
 
@@ -277,15 +278,22 @@ On the held-out 2022–2024 test partition, the Champion XGBoost pipeline achiev
 * 5.5 Quantitative Holdout Performance & Confusion Matrix ........................................... 61
 * 5.6 Architectural Trade-offs, Limitations & Boundary Conditions ................................ 64
 
-### CHAPTER 6 : RESULTS, DASHBOARDS & REAL-WORLD VALIDATION
-* 6.1 Interactive Jury Evaluation Portal (Streamlit Showcase) ......................................... 67
-* 6.2 Executive Power BI Telemetry Workspace ............................................................. 70
-* 6.3 Real-World Case Study: 2024 British Grand Prix (Silverstone) ................................. 73
+### CHAPTER 6 : UNSUPERVISED LEARNING: DRIVER PERFORMANCE CLUSTERING
+* 6.1 Unsupervised Dataset Construction ................................................................... 67
+* 6.2 Choosing the Number of Clusters ........................................................................ 68
+* 6.3 Comparison of Five Clustering Algorithms ............................................................. 69
+* 6.4 Champion Algorithm: K-Means (k = 3) ................................................................... 71
+* 6.5 Clustering Performance Metrics ........................................................................... 72
 
-### CHAPTER 7 : CONCLUSION & FUTURE WORK
-* 7.1 Summary of Technical Contributions ...................................................................... 76
-* 7.2 Research Limitations .............................................................................................. 78
-* 7.3 Future Research Directions ..................................................................................... 79
+### CHAPTER 7 : RESULTS, DASHBOARDS & REAL-WORLD VALIDATION
+* 7.1 Interactive Jury Evaluation Portal (Streamlit) ........................................................ 74
+* 7.2 Executive Power BI Telemetry Workspace ............................................................. 76
+* 7.3 Real-World Case Studies (2024 Season) ................................................................. 77
+
+### CHAPTER 8 : CONCLUSION & FUTURE WORK
+* 8.1 Summary of Technical Contributions ...................................................................... 79
+* 8.2 Research Limitations .............................................................................................. 80
+* 8.3 Future Research Directions ..................................................................................... 81
 
 <br>
 
@@ -305,19 +313,18 @@ On the held-out 2022–2024 test partition, the Champion XGBoost pipeline achiev
 * Figure 2.2: Relational Snowflake Schema Diagram for Formula 1 Intelligence ............... 14
 * Figure 2.3: Structural Decomposition of the Three Telemetry Feature Pillars ................. 17
 * Figure 3.1: Structural Comparison of Apriori Join vs. FP-Tree Prefix Path ....................... 30
-* Figure 3.2: Runtime Execution Latency Comparison: Apriori vs. FP-Growth .................... 33
 * Figure 4.1: Timeline of Chronological Holdout Partition (1994–2021 vs. 2022–2024) ........ 38
-* Figure 4.2: Comparative Model ROC Curves on the 2022–2024 Unseen Holdout ............ 42
 * Figure 4.3: 6-Fold Expanding-Window ROC-AUC Scores across Regulation Eras ............. 45
 * Figure 5.1: Structural Decision Tree Topology of the Champion XGBoost Estimator ........ 53
 * Figure 5.2: Feature Importance Attribution Breakdown by Relative Gain ........................ 57
 * Figure 5.3: Temperature-Scaled Group Softmax Normalization Architecture ................... 60
 * Figure 5.4: Holdout Confusion Matrix on 68 Unseen Modern Grands Prix ....................... 63
-* Figure 6.1: Streamlit Jury Evaluation Portal Executive Hub ........................................... 68
-* Figure 6.2: Interactive Rule Explorer & Pattern Mining Dashboard ................................ 69
-* Figure 6.3: Multi-Model Benchmark & Paired $t$-Test Evaluation Module ........................ 71
-* Figure 6.4: Live Decision Threshold Slider & Dynamic Confusion Matrix ........................ 72
-* Figure 6.5: Case Study Probability Trajectory: 2024 British GP at Silverstone ................. 75
+* Figure 6.1: Elbow & Silhouette Curves for k = 2…8 ........................................................ 68
+* Figure 6.2: Agglomerative (Ward) Dendrogram with 3-Cluster Cut ................................... 69
+* Figure 6.3: PCA Map of 703 Driver-Seasons Coloured by K-Means Tier ............................... 71
+* Figure 6.4: Silhouette Plot per Driver-Season ................................................................. 72
+* Figure 7.1: Rubric Scorecard Home of the Streamlit Jury Portal .......................................... 74
+* Figure 7.2: Live Decision Threshold Slider & Dynamic Confusion Matrix ............................... 75
 
 <br>
 
@@ -328,14 +335,20 @@ On the held-out 2022–2024 test partition, the Champion XGBoost pipeline achiev
 * Table 2.1: Dimensional Table Grain & Volumetric Specifications ................................... 13
 * Table 2.2: Complete Data Dictionary for `CLEAN.F1_MODELING_MASTER` .................... 16
 * Table 3.1: Telemetry Discretization Mapping Scheme (24 Symbolic Tokens) .................. 28
-* Table 3.2: Benchmark of Apriori vs. FP-Growth Algorithms ............................................ 32
-* Table 3.3: Top Discovered High-Lift Association Rules Predicting Victory ....................... 35
-* Table 4.1: Benchmark Across 9 Classification Algorithms on Unseen Holdout ................. 40
-* Table 4.2: 6-Fold Expanding-Window Cross-Validation Results ...................................... 44
-* Table 4.3: Paired Student's $t$-Test and Wilcoxon Hypothesis Testing Metrics .................. 47
+* Table 3.2: Apriori vs. FP-Growth at min_support = 0.02 ............................................... 32
+* Table 3.3: Scaling as the Support Threshold Drops ......................................................... 33
+* Table 3.4: Representative High-Lift Association Rules ................................................. 35
+* Table 4.1: Benchmark of 7 Classifiers on the Unseen Holdout ......................................... 40
+* Table 4.2: Expanding-Window Validation: XGBoost vs. Baseline ...................................... 44
+* Table 4.3: Significance Tests (Race-Level Bootstrap & Wilcoxon) ...................................... 47
 * Table 5.1: Final Hyperparameter Topology for Champion XGBoost Classifier ................. 54
 * Table 5.2: Per-Class Precision, Recall, and F1 Metrics Under Cost-Sensitive Loss ............ 62
-* Table 6.1: Real-World Predictions vs. Actual Classification: 2024 British GP ................... 74
+* Table 5.3: Train vs. Validation vs. Test (Overfitting Check) ............................................ 63
+* Table 6.1: Elbow and Silhouette Analysis ....................................................................... 68
+* Table 6.2: Clustering Benchmark of 5 Algorithms ............................................................. 69
+* Table 6.3: Discovered Driver Performance Tiers ............................................................. 71
+* Table 6.4: Clustering Performance Metrics ...................................................................... 72
+* Table 7.1: Case Study: 2024 Canadian GP ...................................................................... 77
 
 <br>
 
@@ -349,7 +362,7 @@ On the held-out 2022–2024 test partition, the Champion XGBoost pipeline achiev
 * $g_i$: First-order gradient of loss function with respect to logit $\hat{y}_i$
 * $h_i$: Second-order Hessian of loss function with respect to logit $\hat{y}_i$
 * $w_{\text{pos}}$: Cost-sensitive positive class weight multiplier ($w_{\text{pos}} = 15.0$)
-* $T$: Softmax temperature scaling parameter ($T = 1.0$)
+* $T$: Softmax temperature scaling parameter ($T = 0.8$)
 * $\Omega(f)$: Tree complexity penalization term (leaf count $\gamma T$ and weight L2 norm $\frac{1}{2}\lambda w^2$)
 
 ---
@@ -367,7 +380,7 @@ Despite this abundance of real-time telemetry, motorsport analytics has historic
 
 The modern Formula 1 championship encompasses 24 global events staged across varying track geometries—from high-downforce street circuits like Monaco and Singapore to ultra-high-speed temple tracks like Monza and Spa-Francorchamps. Historically, a driver's probability of winning has been heavily correlated with Saturday qualifying position; however, modern Formula 1 regulation changes—most notably the 2022 ground-effect aerodynamic overhaul—have dramatically increased overtaking variability and tyre wear volatility. Consequently, single-variable predictions (such as assuming the pole-sitter always wins) fail in approximately half of all modern Grands Prix.
 
-The objective of this capstone research is to design, develop, and empirically validate **ApexIQ**, an end-to-end cloud data warehouse and predictive machine learning intelligence system. By uniting 31 consecutive FIA World Championship seasons (1994–2024) within an enterprise **Snowflake Cloud Data Warehouse**, ApexIQ establishes an idempotent, leak-proof telemetry repository. On top of this dimensional foundation, the platform executes dual analytical paradigms: unsupervised frequent pattern mining (benchmarking Apriori against FP-Growth to discover high-lift telemetry co-occurrences) and supervised multi-model classification (benchmarking nine distinct algorithms to yield an Extreme Gradient Boosted Trees champion classifier).
+The objective of this capstone research is to design, develop, and empirically validate **ApexIQ**, an end-to-end cloud data warehouse and predictive machine learning intelligence system. By uniting 31 consecutive FIA World Championship seasons (1994–2024) within an enterprise **Snowflake Cloud Data Warehouse**, ApexIQ establishes an idempotent, leak-proof telemetry repository. On top of this dimensional foundation, the platform executes dual analytical paradigms: unsupervised frequent pattern mining (benchmarking Apriori against FP-Growth to discover high-lift telemetry co-occurrences) and supervised multi-model classification (benchmarking seven distinct algorithms to yield an Extreme Gradient Boosted Trees champion classifier).
 
 ---
 
@@ -380,18 +393,18 @@ Predicting Formula 1 Grand Prix winners prior to race start is an extraordinaril
 │                        CORE DATA MINING & ML BOTTLENECKS                               │
 ├─────────────────────────┬──────────────────────────────┬───────────────────────────────┤
 │  1. EXTREME CLASS       │  2. TEMPORAL DATA LEAKAGE    │  3. ZERO-SUM COMPETITIVE      │
-│     IMBALANCE (19:1)    │     & LOOKAHEAD BIAS         │     EXCLUSIVITY               │
+│     IMBALANCE (20:1)    │     & LOOKAHEAD BIAS         │     EXCLUSIVITY               │
 ├─────────────────────────┼──────────────────────────────┼───────────────────────────────┤
 │• Exactly 1 winner among │• Pre-race models often leak  │• Traditional binary models    │
 │  20–24 starting cars.   │  in-race events (pit laps,   │  predict each driver          │
 │• 95.24% non-winners vs. │  mid-race safety cars,       │  independently [0, 1].        │
-│  4.76% true winners.    │  race retirements).          │• Risk: Predicting 3 winners   │
+│  4.67% true winners.    │  race retirements).          │• Risk: Predicting 3 winners   │
 │• Naive classifiers      │• Must enforce a strict       │  or 0 winners for the same    │
 │  predict all zeros.     │  T0 pre-race boundary.       │  Grand Prix.                  │
 └─────────────────────────┴──────────────────────────────┴───────────────────────────────┘
 ```
 
-1. **Extreme Class Imbalance (19:1 Ratio):** A Formula 1 race features an average starting grid of 20 to 22 cars, but the sporting regulations mandate that exactly one driver can win. Across our historical modeling universe of 12,358 entries, there are only 577 positive winner instances ($4.76\%$) compared to 11,781 negative instances ($95.33\%$). Standard cross-entropy objective functions optimize for global accuracy by predicting that no driver will win, achieving a deceptively high accuracy of $95.2\%$ while delivering a catastrophic **0.0% winner recall**.
+1. **Extreme Class Imbalance (20.4:1 Ratio):** A Formula 1 race features an average starting grid of 20 to 22 cars, but the sporting regulations mandate that exactly one driver can win. Across our historical modeling universe of 12,358 entries, there are only 577 positive winner instances ($4.67\%$) compared to 11,781 negative instances ($95.33\%$). Standard cross-entropy objective functions optimize for global accuracy by predicting that no driver will win, achieving a deceptively high accuracy of $95.2\%$ while delivering a catastrophic **0.0% winner recall**.
 2. **Temporal Data Leakage and Lookahead Bias:** Many existing academic papers inadvertently train models on in-race variables that are physically unknowable prior to lights-out, such as the lap number of the fastest pit stop, mid-race virtual safety car deployments, final race duration, or post-race mechanical retirements. Models trained on such leaky features achieve near-perfect synthetic accuracy during cross-validation but completely fail in real-world deployment. A strict pre-race information boundary ($T_0$) must be mathematically guaranteed.
 3. **Zero-Sum Mutual Exclusivity Violation:** Standard machine learning binary classifiers evaluate each driver entry as an independent Bernoulli trial, computing a sigmoid probability $\hat{p}_i = \sigma(w^T x_i) \in [0, 1]$. When applied across a 20-car starting grid, the sum of independent probabilities frequently sums to $2.8$ or $0.4$, resulting in scenarios where multiple drivers are predicted as winners or no winner is selected at all. The modeling pipeline requires a group-level ranking architecture enforcing $\sum_{i=1}^{M_j} P(\text{Win}_i) = 1.0000$.
 
@@ -405,9 +418,10 @@ To achieve this aim, the following concrete technical objectives were establishe
 1. **Architect an Enterprise Cloud Data Warehouse:** Implement a multi-tier Medallion architecture on Snowflake Data Cloud (`RAW`, `CLEAN`, `ML`, `ANALYTICS`) hosting normalized Star and Snowflake dimensional schemas (`FactRaceResults`, `DimDriver`, `DimConstructor`, `DimCircuit`, `DimDate`).
 2. **Implement the Three Telemetry Feature Pillars:** Engineer 31 leak-free pre-race features categorized strictly into Car Specifications, Lap Record Benchmarks, and Pit Stop Strategy, enforced at the $T_0$ pre-race boundary.
 3. **Execute Unsupervised Frequent Pattern Mining:** Discretize 12,358 race transactions into 24 symbolic telemetry tokens; implement and benchmark Apriori against FP-Growth algorithms to prove mathematical itemset equivalence while measuring algorithmic runtime acceleration.
-4. **Conduct a Multi-Model Classification Benchmark:** Train and evaluate nine distinct machine learning algorithms under a strict chronological holdout split (1994–2021 Train vs. 2022–2024 Unseen Test) and 6-fold expanding-window cross-validation, performing paired $t$-test hypothesis testing to verify statistical significance.
+4. **Conduct a Multi-Model Classification Benchmark:** Train and evaluate seven distinct machine learning algorithms under a strict chronological holdout split (1994–2021 Train vs. 2022–2024 Unseen Test) and 6-fold expanding-window cross-validation, with a race-level bootstrap and a Wilcoxon signed-rank test to verify statistical significance.
 5. **Engineer a Cost-Sensitive Champion XGBoost Pipeline:** Formulate an Extreme Gradient Boosted Trees classifier with an asymmetric loss weight ($w_{\text{pos}} = 15.0$) and a temperature-scaled Group Softmax normalization layer.
-6. **Operationalize Full-Stack BI Serving Layers:** Deploy a 15-page interactive Streamlit evaluation portal and a 12-table Microsoft Power BI executive telemetry workspace connected via in-database Snowflake SQL scoring.
+6. **Discover Driver Performance Tiers by Clustering:** Build an unlabelled driver-season dataset and compare at least four clustering algorithms using internal validity, stability and external checks.
+7. **Operationalize Full-Stack BI Serving Layers:** Deploy a rubric-organised Streamlit evaluation portal and a 12-table Microsoft Power BI executive telemetry workspace connected via in-database Snowflake SQL scoring.
 
 ---
 
@@ -503,8 +517,8 @@ To guarantee data integrity, traceability, and zero in-race leakage, ApexIQ impl
          ▼                                  ▼
   ┌───────────────────────┐        ┌───────────────────────┐
   │ TIER 3: PATTERN MINING│        │ TIER 4: ML REGISTRY   │
-  │ Apriori & FP-Growth   │        │ 9-Model Benchmark     │
-  │ 7,940 Frequent Sets   │        │ Champion XGBoost      │
+  │ Apriori & FP-Growth   │        │ 7-Model Benchmark     │
+  │ 414 Frequent Sets     │        │ Champion XGBoost      │
   └───────────┬───────────┘        └───────────┬───────────┘
               │                                │
               └───────────────┬────────────────┘
@@ -721,7 +735,7 @@ Here, $X$ denotes the **antecedent** (the pre-race telemetry conditions), and $Y
 3. **Lift Factor ($L$):** The ratio of observed joint confidence to the expected confidence under statistical independence:
    $$\text{Lift}(X \Longrightarrow Y) = \frac{P(X \cup Y)}{P(X) \cdot P(Y)} = \frac{\text{Confidence}(X \Longrightarrow Y)}{\text{Support}(Y)}$$
    * $\text{Lift} = 1.0$: Itemsets $X$ and $Y$ are statistically independent.
-   * $\text{Lift} > 1.0$: Strong positive co-occurrence. A Lift of $19.47\times$ indicates the antecedent increases victory probability by almost 20 times over base prevalence.
+   * $\text{Lift} > 1.0$: Strong positive co-occurrence. A Lift of $13.77\times$ (pole + podium ⇒ winner) means the antecedent makes victory almost 14 times more likely than its base rate.
 
 ---
 
@@ -783,44 +797,44 @@ FP-Growth eliminates candidate generation entirely by adopting a **divide-and-co
 
 ## 3.4 Runtime Benchmarking & Mathematical Equivalence Proof
 
-Both algorithms were executed on the identical one-hot encoded transaction matrix of 12,358 records using identical threshold constraints: $\text{min\_support} = 0.02$ ($2.0\% \approx 247$ transactions) and $\text{min\_confidence} = 0.25$ ($25\%$).
+Both algorithms were executed (`04_pattern_mining/fp_growth_analysis.py`, mlxtend 0.25) on the identical one-hot transaction matrix of **12,358 race transactions × 24 items** with min_support = 0.02 (≈ 247 transactions) and min_confidence = 0.25.
 
-*Table 3.2: Benchmark of Apriori vs. FP-Growth Algorithms.*
-| Empirical Evaluation Parameter | Classical Apriori Engine | FP-Growth Tree Engine | Experimental Delta |
+*Table 3.2: Apriori vs. FP-Growth at min_support = 0.02.*
+| Evaluation Parameter | Apriori | FP-Growth | Verdict |
 | :--- | :---: | :---: | :---: |
-| **Execution Runtime** | **0.7028 seconds** | **0.5312 seconds** | **1.32× Speedup (FP-Growth)** |
-| **Database Scans** | Multiple ($k$ passes for length $k$) | Exactly 2 Passes | Substantial I/O reduction |
-| **Candidate Sets Generated** | Exponential ($O(2^d)$) | None (Tree-compressed) | Zero candidate generation |
-| **Total Frequent Itemsets Found**| **7,940 itemsets** | **7,940 itemsets** | **Exact Equivalence (0.0% error)**|
-| **Total Association Rules Exported**| **141,763 rules** | **141,763 rules** | **100% Identical determinism** |
+| **Database scans** | 5 (one per itemset length $k$) | **2** | FP-Growth: fewer scans |
+| **Search structure** | **770 candidate itemsets** generated and counted | **4,230-node FP-tree** (12,358 transactions compressed 2.9×) | No candidate generation in FP-Growth |
+| **Frequent itemsets found** | **414** | **414** | **Identical** |
+| **Association rules (conf ≥ 0.25)** | **1,393** | **1,393** | **Identical** |
 
-```
-                 ALGORITHMIC RUNTIME EXECUTION BENCHMARK
-                 ────────────────────────────────────────
-  Apriori   [██████████████████████████████████████] 0.7028 s
-  FP-Growth [████████████████████████████] 0.5312 s  (1.32x Speedup)
-                 ────────────────────────────────────────
-```
-*Figure 3.2: Runtime Execution Latency Comparison: Apriori vs. FP-Growth.*
+*Table 3.3: Scaling as the support threshold drops (`support_sweep_benchmark.csv`).*
+| min_support | Itemsets | Apriori candidates | FP-tree nodes | Apriori time | FP-Growth time |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+| 0.05 | 126 | 280 | 2,361 | 0.003 s | 0.023 s |
+| 0.02 | 414 | 770 | 4,230 | 0.009 s | 0.029 s |
+| 0.01 | 943 | 1,570 | 4,230 | 0.022 s | 0.052 s |
+| 0.005 | 2,130 | 3,089 | 4,230 | 0.046 s | **0.042 s** |
 
-### Mathematical Equivalence Proof:
-To verify that FP-Growth’s performance gain did not compromise rule accuracy, a bitwise equivalence assertion was performed:
+**Interpretation.** With only 24 items, Apriori's level-wise counting is cheap at high support and wins on wall-clock time. As the threshold drops, Apriori's candidate set grows **11×** (280 → 3,089) while the FP-tree stays capped at 4,230 nodes. At min_support = 0.005 **FP-Growth overtakes Apriori**: the theoretical crossover, observed empirically. Exact timings vary by run; candidate and node counts are deterministic.
 
-$$\Delta_{\text{itemsets}} = |S_{\text{Apriori}} \setminus S_{\text{FP-Growth}}| = 0$$
-
-Every itemset discovered by Apriori matched the exact support value in FP-Growth to 8 decimal places. FP-Growth is confirmed as the production pattern engine.
+### Mathematical Equivalence Proof
+**|S_Apriori △ S_FP-Growth| = 0**: the symmetric difference of the two itemset collections is empty.
+The set of 414 frequent itemsets is identical, and the same assertion is re-checked automatically in `tests/test_f1_pattern_matching_qa.py`.
 
 ---
 
 ## 3.5 Discovered High-Lift Association Rules & Domain Insights
 
-*Table 3.3: Top Discovered High-Lift Association Rules Predicting Victory.*
-| Antecedent Itemset ($X$) | Consequent ($Y$) | Support | Confidence | Lift Factor | Domain Interpretation |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| `{Grid_Pole_P1, Pit_Sub2.5s_Elite, Outcome_Podium}` | `Outcome_Winner` | 0.0215 | 0.5842 | **19.47×** | Pole position combined with sub-2.5s pit execution increases victory odds by near 20x. |
-| `{Grid_Pole_P1, Team_Pace_Dominant, Reliab_High}` | `Outcome_Winner` | 0.0284 | 0.5210 | **17.37×** | Mechanical power unit reliability is the critical prerequisite for converting pole position. |
-| `{Grid_FrontRow_P2, Driver_Form_Elite}` | `Outcome_Winner` | 0.0268 | 0.4421 | **14.74×** | An elite driver starting P2 converts to victory in 44% of historical entries. |
-| `{Grid_Top4, Overtake_Delta_Positive, Pit_Sub2.5s}` | `Outcome_Winner` | 0.0142 | 0.3815 | **12.72×** | Aggressive track position progression combined with pit crew overcut strategy. |
+*Table 3.4: Representative high-lift rules (from `04_pattern_mining/association_rules.csv`).*
+| Antecedent ($X$) | Consequent ($Y$) | Support | Confidence | Lift | Interpretation |
+| :--- | :--- | :-: | :-: | :-: | :--- |
+| `{Grid_Pole_P1, Outcome_Podium}` | `Outcome_Winner` | 0.0224 | 0.643 | **13.77×** | A pole-sitter who reaches the podium wins 64% of the time. |
+| `{Grid_Pole_P1}` | `{Beat_Teammate_In_Quali, Outcome_Winner}` | 0.0224 | 0.480 | **12.84×** | Pole alone converts to a win in 48% of races, about 13× the base rate. |
+| `{Beat_Teammate_In_Quali, Grid_Pole_P1}` | `Outcome_Winner` | 0.0224 | 0.480 | **10.28×** | Out-qualifying the identical-car teammate *and* taking pole is a strong winning signature. |
+| `{Beat_Teammate_In_Quali, Outcome_Winner}` | `Outcome_Podium` | 0.0374 | 1.000 | **7.14×** | Sanity check: every winner is on the podium. |
+| `{Grid_Backmarker, Team_Midfield_Customer}` | `Outcome_DNF` | 0.1524 | 0.357 | **1.27×** | Back-of-grid customer teams retire 27% more often than average. |
+
+The rules are **descriptive** (unsupervised). They motivated the grid and teammate features of the classifier, but rule outcomes are never used as classifier inputs, which avoids leakage.
 
 ---
 *Footer: MITSOC, Department of Computer Engineering, 2025-26*
@@ -848,72 +862,56 @@ To guarantee enterprise-grade validity, ApexIQ enforces a **strict chronological
 
 ---
 
-## 4.2 Benchmark Across Nine Machine Learning Algorithms
+## 4.2 Benchmark Across Seven Machine Learning Algorithms
 
-Nine algorithms representing diverse inductive biases—spanning stochastic baselines, linear estimators, decision trees, bagging ensembles, kernel methods, and gradient boosting—were trained on the identical 1994–2021 training partition and evaluated on the 68 holdout Grands Prix:
+Seven algorithms with different inductive biases were trained on the identical 1994–2021 partition and evaluated on the 68 unseen 2022–2024 Grands Prix (`05_algorithm_comparison/train_comparison.py`). All tree ensembles use the same 16 pre-race features. The champion XGBoost configuration is identical in modules 05–08: `n_estimators=100, max_depth=4, learning_rate=0.05, scale_pos_weight=15, subsample=0.85, colsample_bytree=0.85`.
 
-*Table 4.1: Benchmark Across 9 Classification Algorithms on Unseen Holdout.*
-| # | Model Architecture | Inductive Bias / Category | 5-Fold CV ROC-AUC | Test ROC-AUC | Test PR-AUC | Winner Recall | Top-1 Winner Hit | Top-3 Podium Hit |
-| :-: | :--- | :--- | :-: | :-: | :-: | :-: | :-: | :-: |
-| 1 | **Dummy Classifier** | Stochastic Prior Baseline | 0.5000 | 0.5000 | 0.0500 | 48.53% | 33.8% (23/68) | 76.5% |
-| 2 | **Logistic Regression** | Linear / Grid Only Baseline | 0.9198 | 0.9198 | 0.3994 | 0.00% | 51.5% (35/68) | 83.8% |
-| 3 | **Decision Tree (Depth 5)** | Non-Linear CART Tree | 0.8758 | 0.9177 | 0.4715 | 83.82% | 52.9% (36/68) | 76.5% |
-| 4 | **Random Forest (100 Trees)**| Bagging Ensemble | 0.9616 | 0.9561 | 0.5866 | **89.71%** | 51.5% (35/68) | 86.8% |
-| 5 | **Gradient Boosting (GBDT)** | Sequential Residual Boosting| 0.9599 | 0.9622 | 0.5994 | 41.18% | 52.9% (36/68) | 86.8% |
-| 6 | **LightGBM Classifier** | Leaf-Wise Histogram Boosting| 0.9586 | 0.9586 | 0.6152 | 83.82% | 51.5% (35/68) | 83.8% |
-| 7 | **Support Vector Machine** | RBF Kernel Hyperplane | 0.9469 | 0.9512 | 0.5442 | 15.56% | 54.4% (37/68) | 88.9% |
-| 8 | **Naive Bayes (Gaussian)** | Conditional Independence | 0.9356 | 0.9246 | 0.3919 | **94.44%** | 62.2% (42/68) | 87.8% |
-| 9 | **XGBoost (Champion)** | **Cost-Sensitive Trees** | **0.9640** | **0.9635** | **0.6029** | **82.35%** | **54.4% (37/68)** | **88.2%** |
-| — | **Rule-Augmented XGBoost** | **Champion + Association Rules**| **0.9842** | **0.9836** | **0.7281** | **86.70%** | **67.6% (46/68)** | **97.1%** |
+*Table 4.1: Benchmark of 7 classifiers on the unseen 2022–2024 holdout.*
+| # | Model | Inductive bias | ROC-AUC | PR-AUC | Balanced Acc | Winner Recall | Top-1 Winner Hit | Top-3 Hit | Brier |
+| :-: | :--- | :--- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| 1 | Dummy (uniform) | Random prior | 0.5000 | 0.0500 | 49.28% | 48.53% | 33.8% (23/68) | 55.9% | 0.2500 |
+| 2 | Logistic Regression (grid only) | Linear, 1 feature | 0.9198 | 0.3994 | 50.00% | 0.00% | 51.5% (35/68) | 83.8% | 0.0345 |
+| 3 | Decision Tree (depth 5) | Axis-aligned splits | 0.9177 | 0.4715 | 84.75% | 83.82% | 52.9% (36/68) | 76.5% | 0.1005 |
+| 4 | Random Forest (150 trees) | Bagging | 0.9561 | 0.5866 | **88.19%** | **89.71%** | 51.5% (35/68) | 86.8% | 0.0919 |
+| 5 | Gradient Boosting (GBDT) | Sequential boosting | 0.9622 | 0.5994 | 70.20% | 41.18% | 52.9% (36/68) | 86.8% | **0.0293** |
+| 6 | LightGBM | Leaf-wise histogram boosting | 0.9586 | 0.6152 | 86.02% | 83.82% | 51.5% (35/68) | 83.8% | 0.0811 |
+| 7 | **XGBoost (champion)** | **Regularised 2nd-order boosting, cost-sensitive** | **0.9629** | **0.6433** | 87.92% | 85.29% | **58.8% (40/68)** | **86.8%** | 0.0669 |
 
-```
-                 TEST RECEIVER OPERATING CHARACTERISTIC (ROC)
-  1.0 ┌───────────────────────────────────────────────╭───────
-      │                                       . ╭─────╯       Rule-Augmented XGB (0.9836)
-  0.8 │                                  . ╭──╯               Champion XGBoost   (0.9635)
-  TPR │                             . ╭──╯                    Random Forest      (0.9561)
-  0.6 │                        .  . ╭─╯                       Logistic Reg       (0.9198)
-  0.4 │                   . . . . ╯                           Dummy Baseline     (0.5000)
-  0.2 │              . . .
-  0.0 └──────────────┴──────────────┴──────────────┴──────────
-      0.0           0.2            0.4            0.6        1.0
-                                  FPR
-```
-*Figure 4.2: Comparative Model ROC Curves on the 2022–2024 Unseen Holdout.*
+**Reading the table.** The grid-only baseline reaches 95% accuracy by predicting "no win" for every driver (recall 0%). This is why accuracy is not used to rank models under a 20.4 : 1 imbalance. XGBoost has the best ROC-AUC, PR-AUC and race-level top-1 hit rate. Random Forest has slightly higher recall but picks the winner in 5 fewer races.
 
 ---
 
 ## 4.3 6-Fold Expanding-Window Temporal Cross-Validation
 
-To verify that model accuracy does not degrade over time as car aerodynamics evolve, a **6-Fold Expanding-Window Cross-Validation** was executed. The training window expands chronologically, evaluating each upcoming championship season:
+The training window expands one season at a time and each fold is tested on the next unseen season (`temporal_validation.py`). An assertion aborts the run if any training season ≥ test season.
 
-*Table 4.2: 6-Fold Expanding-Window Cross-Validation Results.*
-| Fold Number | Historical Training Span | Evaluation Test Season | Test Entrants / GPs | Fold ROC-AUC | Top-1 Winner Hit |
-| :-: | :--- | :-: | :-: | :-: | :-: |
-| **Fold 1** | 1994 – 2018 (25 Seasons) | **2019 Season** | 420 entrants (21 GPs) | 0.9512 | 52.38% (11/21) |
-| **Fold 2** | 1994 – 2019 (26 Seasons) | **2020 Season** | 340 entrants (17 GPs) | 0.9213 | 52.94% (9/17) |
-| **Fold 3** | 1994 – 2020 (27 Seasons) | **2021 Season** | 440 entrants (22 GPs) | 0.9242 | 54.55% (12/22) |
-| **Fold 4** | 1994 – 2021 (28 Seasons) | **2022 Season** | 440 entrants (22 GPs) | 0.9587 | 50.00% (11/22) |
-| **Fold 5** | 1994 – 2022 (29 Seasons) | **2023 Season** | 440 entrants (22 GPs) | 0.9856 | 63.64% (14/22) |
-| **Fold 6** | 1994 – 2023 (30 Seasons) | **2024 Season** | 479 entrants (24 GPs) | 0.9367 | 54.17% (13/24) |
-| **MEAN** | — | **6-Fold Aggregate** | **2,559 entrants (128 GPs)** | **0.9463** | **54.44% (70/128)** |
+*Table 4.2: Expanding-window validation: XGBoost vs. grid-only baseline.*
+| Fold | Training span | Test season | Entrants (GPs) | XGBoost ROC-AUC | Baseline ROC-AUC | XGBoost Top-1 Hit |
+| :-: | :--- | :-: | :-: | :-: | :-: | :-: |
+| 1 | 1994–2018 | 2019 | 420 (21) | 0.9480 | 0.9549 | 38.1% (8/21) |
+| 2 | 1994–2019 | 2020 | 340 (17) | 0.9137 | 0.9226 | 47.1% (8/17) |
+| 3 | 1994–2020 | 2021 | 440 (22) | 0.9336 | 0.9213 | 54.5% (12/22) |
+| 4 | 1994–2021 | 2022 | 440 (22) | 0.9606 | 0.9000 | 50.0% (11/22) |
+| 5 | 1994–2022 | 2023 | 440 (22) | 0.9844 | 0.9409 | 77.3% (17/22) |
+| 6 | 1994–2023 | 2024 | 479 (24) | 0.9317 | 0.9186 | 50.0% (12/24) |
+| **Mean** | — | **2019–2024** | **2,559 (128)** | **0.9453** | **0.9264** | **52.8%** |
+
+XGBoost beats the baseline in the four most recent seasons. 2019–2020 were dominated by pole-sitters, so grid position alone was already near-optimal in those seasons.
 
 ---
 
 ## 4.4 Hypothesis Testing & Statistical Significance Analysis
 
-To confirm that the Champion XGBoost model's performance superiority over the baseline logistic classifier was statistically significant:
+* **H0:** XGBoost and the grid-only baseline have the same out-of-sample ROC-AUC.
+* **H1:** XGBoost's ROC-AUC is higher.
 
-* **Null Hypothesis ($H_0$):** There is no significant difference in out-of-sample ROC-AUC between the baseline model and the proposed XGBoost champion ($\mu_{\text{XGB}} - \mu_{\text{Base}} = 0$).
-* **Alternative Hypothesis ($H_1$):** XGBoost significantly outperforms baseline models across folds ($\mu_{\text{XGB}} - \mu_{\text{Base}} > 0$).
+*Table 4.3: Significance tests.*
+| Test | Unit of resampling | Statistic | $p$-value | Verdict |
+| :--- | :--- | :-: | :-: | :--- |
+| **Paired race-level bootstrap** (1,000 resamples) | 68 holdout Grands Prix (1,359 entries) | ΔAUC = +0.0424, 95% CI [+0.0183, +0.0732] | **< 0.001** | **Reject H0** |
+| Wilcoxon signed-rank (one-sided) | 6 expanding-window folds | W = 18 | 0.078 | Not significant at 0.05 |
 
-*Table 4.3: Paired Student's $t$-Test and Wilcoxon Hypothesis Testing Metrics.*
-| Statistical Test Type | Test Statistic | Critical Value ($\alpha = 0.01$) | $p$-Value | Hypothesis Verdict |
-| :--- | :---: | :---: | :---: | :--- |
-| **Paired Student’s $t$-Test** | $t = -8.2045$ | $\pm 4.032$ | **$0.0012$** | **Reject $H_0$ ($p < 0.01$)** |
-| **Wilcoxon Signed-Rank** | $W = 0.0000$ | $W_{\text{crit}} = 1.0$ | **$0.0312$** | **Reject $H_0$ ($p < 0.05$)** |
-
-The $p$-value of $0.0012$ conclusively disproves the null hypothesis at the 99% confidence level, verifying that our feature engineering and cost-sensitive boosting architecture deliver genuine predictive advantage.
+The bootstrap resamples whole races, so it respects the fact that drivers in the same race are dependent. Its confidence interval excludes zero, so the improvement is significant. The Wilcoxon test over only 6 folds has low power: its smallest achievable one-sided p is 1/64 = 0.016, and the baseline legitimately wins 2 folds. We report both tests for transparency.
 
 ---
 *Footer: MITSOC, Department of Computer Engineering, 2025-26*
@@ -940,7 +938,7 @@ $$\Omega(f_t) = \gamma T + \frac{1}{2}\lambda \sum_{j=1}^T w_j^2 + \alpha \sum_{
 Where $T$ represents the number of terminal leaves and $w$ represents leaf weight magnitudes.
 
 ### Cost-Sensitive Loss Reweighting:
-To resolve the catastrophic 19:1 class imbalance, an asymmetric positive gradient multiplier ($w_{\text{pos}} = 15.0$) is embedded into the binary log-loss:
+To resolve the catastrophic 20.4:1 class imbalance, an asymmetric positive gradient multiplier ($w_{\text{pos}} = 15.0$) is embedded into the binary log-loss:
 
 $$\mathcal{L}_{\text{imbalance}}(\theta) = -\sum_{i=1}^N \left[ 15.0 \cdot y_i \log(\hat{p}_i) + (1 - y_i)\log(1 - \hat{p}_i) \right]$$
 
@@ -968,132 +966,196 @@ This forces the split optimizer to penalize false negatives (missed race winners
 *Table 5.1: Final Hyperparameter Topology for Champion XGBoost Classifier.*
 | Hyperparameter Name | Optimized Setting | Technical Architectural Rationale |
 | :--- | :---: | :--- |
-| `n_estimators` | `120` | Sufficient sequential boosting stages without over-fitting. |
+| `n_estimators` | `100` | Sufficient sequential boosting stages without over-fitting. |
 | `max_depth` | `4` | Restricts tree interaction depth; prevents memorization of driver IDs. |
 | `learning_rate` ($\eta$) | `0.05` | Conservative shrinkage preventing divergence. |
 | `subsample` | `0.85` | Row-level subsampling to induce tree variance reduction. |
-| `colsample_bytree` | `0.80` | Feature-level subsampling preventing dominance of grid slot alone. |
-| `scale_pos_weight` | `15.0` | Cost-sensitive penalty multiplier resolving 19:1 class imbalance. |
-| `reg_lambda` ($\lambda$) | `1.0` | L2 leaf weight regularization penalizing extreme probability logits. |
+| `colsample_bytree` | `0.85` | Feature-level subsampling preventing dominance of grid slot alone. |
+| `scale_pos_weight` | `15.0` | Cost-sensitive penalty multiplier resolving 20.4:1 class imbalance. |
+| `reg_lambda` ($\lambda$) | `1.0` (default) | L2 leaf weight regularization penalizing extreme probability logits. |
 
 ---
 
 ## 5.3 16 Pre-Race Input Vector & Feature Attribution
 
-The model ingests a 16-dimensional continuous and ordinal feature vector $X_i$ at $T_0$:
+The model ingests a 16-dimensional feature vector, every component known before the race starts (T0):
 
 ```
-                 FEATURE ATTRIBUTION BY RELATIVE GAIN
-                 ────────────────────────────────────
-  grid_position             [██████████████████████████████] 38.14%
-  constructor_rolling_10    [████████] 10.60%
-  driver_rolling_5          [█████] 7.23%
-  career_win_rate           [████] 6.12%
-  lap_record_delta_sec      [████] 5.60%
-  pit_crew_score            [███] 4.85%
-  ahead_of_teammate_grid    [███] 4.20%
-                 ────────────────────────────────────
+                 FEATURE ATTRIBUTION BY RELATIVE GAIN (feature_importance.csv)
+                 ─────────────────────────────────────────────────────────────
+  grid_position                   [██████████████████████████████] 47.46%
+  driver_rolling_finish_5         [██████] 10.04%
+  career_win_rate                 [███] 4.67%
+  constructor_rolling_points_10   [██] 4.02%
+  grid_vs_form_gap                [██] 3.94%
+                 ─────────────────────────────────────────────────────────────
 ```
-*Figure 5.2: Feature Importance Attribution Breakdown by Relative Gain.*
+*Figure 5.2: Top-5 features by XGBoost gain.*
 
-1. `grid_position` (38.14% gain): Front-row starting position is the single strongest predictor of race victory.
-2. `constructor_rolling_finish_10` (10.60% gain): Captures the contemporary pace of the vehicle across recent rounds.
-3. `driver_rolling_finish_5` (7.23% gain): Driver confidence and execution over the prior 5 Grands Prix.
-4. `career_win_rate` (6.12% gain): Historical capability to execute under championship pressure.
-5. `driver_lap_record_delta_sec` (5.60% gain): True one-lap pace benchmarked against circuit history.
+1. `grid_position` (47.5%): starting position is the single strongest predictor of victory.
+2. `driver_rolling_finish_5` (10.0%): the driver's form over the previous 5 races.
+3. `career_win_rate` (4.7%): long-run ability to convert opportunities.
+4. `constructor_rolling_points_10` (4.0%): current car competitiveness.
+5. `grid_vs_form_gap` (3.9%): a driver starting behind their usual pace is a likely recovery candidate.
 
 ---
 
 ## 5.4 Output Formulation: Temperature-Scaled Group Softmax
 
-Standard binary classifiers predict each car independently, producing unconstrained logits $z_i \in (-\infty, \infty)$. Because a Grand Prix is a zero-sum game where exactly one car can win, unconstrained probabilities violate sports domain reality.
+A binary classifier scores each car independently, so the raw probabilities in a race do not sum to 1. Because exactly one car can win, ApexIQ applies a **temperature-scaled softmax over the log-probabilities of all entrants in the same Grand Prix**:
 
-To solve this, ApexIQ implements a **Temperature-Scaled Group Softmax Normalization Layer**:
+**P(win_i | race) = exp(log p_i / T) / Σ_k exp(log p_k / T),  with T = 0.8**
 
-$$P(\text{Win}_i \mid \text{Race } j) = \frac{\exp(z_i / T)}{\sum_{k \in \text{Race } j} \exp(z_k / T)}, \quad \text{where } T = 1.0$$
+Invariants enforced: **Σ_i P(win_i | race) = 1** and **predicted winner = argmax_i P(win_i)**.
 
-Enforcing two invariants:
-
-$$\sum_{i=1}^{M_j} P(\text{Win}_i \mid \text{Race } j) = 1.0000 \quad \text{and} \quad \text{Predicted Winner} = \arg\max_{i} P(\text{Win}_i)$$
+T < 1 sharpens the distribution toward the favourite. Because softmax is monotonic, it does not change the ranking within a race; it converts scores into odds that can be compared and that sum to 100%.
 
 ```
-  Driver 1 Logit: z1 ──► [ exp(z1/T) ] ──┐
-  Driver 2 Logit: z2 ──► [ exp(z2/T) ] ──┼──► [ SUM ] ──► P(Win_i) = exp(zi) / SUM
-  Driver M Logit: zM ──► [ exp(zM/T) ] ──┘                 Constraint: SUM = 1.0000
+ log p1 ─► exp(·/T) ─┐
+ log p2 ─► exp(·/T) ─┼─► ÷ sum ─► P(win), Σ=1
+ log pM ─► exp(·/T) ─┘
 ```
-*Figure 5.3: Temperature-Scaled Group Softmax Normalization Architecture.*
+*Figure 5.3: Race-level softmax normalisation.*
 
 ---
 
 ## 5.5 Quantitative Holdout Performance & Confusion Matrix
 
-Evaluated at the default decision threshold $\tau = 0.50$ across the 68 holdout Grands Prix (1,359 records):
+Evaluated at threshold τ = 0.50 on the 68 holdout Grands Prix (1,359 entries). Source: `08_performance_metrics/`.
 
-*Table 5.2: Per-Class Precision, Recall, and F1 Metrics Under Cost-Sensitive Loss.*
-| Class Label | Support Count | Precision | Recall | F1-Score | Area Under ROC |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **Class 0 (Non-Winner)** | 1,291 | 0.9890 | 0.9070 | 0.9462 | — |
-| **Class 1 (Grand Prix Winner)** | 68 | **0.3143** | **0.8088** | **0.4527** | **0.9635** |
-| **Macro Average** | 1,359 | 0.6517 | 0.8579 | 0.6995 | — |
-| **Weighted Average** | 1,359 | 0.9552 | 0.9021 | 0.9215 | — |
+*Table 5.2: Per-class metrics under cost-sensitive loss.*
+| Class | Support | Precision | Recall | F1 |
+| :--- | :-: | :-: | :-: | :-: |
+| **Class 0 (non-winner)** | 1,291 | 0.9915 | 0.9055 | 0.9466 |
+| **Class 1 (winner)** | 68 | **0.3222** | **0.8529** | **0.4677** |
+| Macro average | 1,359 | 0.6569 | 0.8792 | 0.7072 |
+| Weighted average | 1,359 | 0.9580 | 0.9029 | 0.9226 |
 
 ```
-                       HOLDOUT CONFUSION MATRIX (68 Modern GPs)
-                       ────────────────────────────────────────
-                                    Predicted Loss (0)   Predicted Win (1)
-                   Actual Loss (0)      1,171 (TN)            120 (FP)
-                   Actual Win  (1)         13 (FN)             55 (TP)
+ HOLDOUT CONFUSION MATRIX (τ = 0.5)
+                 Pred. 0      Pred. 1
+ Actual 0     1,169 (TN)    122 (FP)
+ Actual 1        10 (FN)     58 (TP)
 ```
-*Figure 5.4: Holdout Confusion Matrix on 68 Unseen Modern Grands Prix.*
+*Figure 5.4: Holdout confusion matrix.*
 
-* **Winner Class Recall (80.88% = 55/68):** Successfully captures over 4 out of 5 race winners in positive predictions.
-* **Top-1 Grand Prix Winner Hit Rate (57.35% = 39/68 GPs):** Out of 68 races, 39 winners were predicted outright in the top probability slot.
-* **Top-3 Podium Winner Presence (88.24% = 60/68 GPs):** The true winner appeared within the top 3 predicted contenders in 60 out of 68 races.
-* **Brier Calibration Score (0.0663):** Demonstrates excellent probabilistic calibration.
-* **Inference Latency (5.64 ms):** Full 20-car starting grid scored in under 6 milliseconds.
+*Table 5.3: Train vs. validation vs. test (overfitting check).*
+| Partition | ROC-AUC | PR-AUC | Winner recall | Brier | Top-1 winner hit |
+| :--- | :-: | :-: | :-: | :-: | :-: |
+| Train 1994–2021 | 0.9730 | 0.5990 | 93.52% | 0.0625 | 59.1% (301/509) |
+| Validation 2022 | 0.9606 | 0.5997 | 90.91% | 0.0692 | 50.0% (11/22) |
+| Test 2023–2024 | 0.9636 | 0.6658 | 82.61% | 0.0658 | 63.0% (29/46) |
+| **Holdout 2022–2024** | **0.9629** | **0.6433** | **85.29%** | **0.0669** | **58.8% (40/68)** |
+
+* **Winner recall 85.29% (58/68):** more than 4 in 5 real winners are flagged as contenders.
+* **Precision 32.22% (58/180):** about 2.6 drivers per race cross the 0.5 threshold. The softmax then picks one of them.
+* **Top-1 winner hit 58.8% (40/68)** vs. 51.5% for "the pole-sitter wins". **Top-3 presence 86.8% (59/68).**
+* **Small train–test gap (ROC-AUC 0.973 → 0.963):** little overfitting.
+* **Inference:** about 3 ms to score all 1,359 holdout entries in one batch.
 
 ---
 
 ## 5.6 Architectural Trade-offs, Limitations & Boundary Conditions
 
-1. **Interpretability vs. Non-Linear Power:** XGBoost outperforms linear models by $+4.37\%$ ROC-AUC by capturing non-linear interactions (e.g. pole position is only advantageous if mechanical reliability is high). However, individual tree splits require TreeSHAP feature attributions for post-hoc explanation.
-2. **Dominance of Starting Grid:** Grid position accounts for $38.14\%$ of decision splits. If qualifying takes place in chaotic wet weather, the model may over-index on anomalous front-row starters.
-3. **In-Race Unforeseen Shocks:** Collisions on Lap 1 or engine electrical blowouts cannot be anticipated prior to race start from pre-race telemetry alone.
+1. **Interpretability vs. power:** XGBoost beats the linear grid-only baseline by +0.043 ROC-AUC (95% CI [+0.018, +0.073]) by learning non-linear interactions, but individual trees need feature-importance or SHAP analysis to explain.
+2. **Dominance of the starting grid:** grid position carries 47% of the gain, so chaotic wet qualifying can mislead the model.
+3. **In-race shocks:** first-lap collisions and mechanical failures cannot be predicted from pre-race data (see the 2024 British GP in §7.3).
 
 ---
 *Footer: MITSOC, Department of Computer Engineering, 2025-26*
 
 <div style="page-break-after: always;"></div>
 
-# CHAPTER 6 : RESULTS, DASHBOARDS & REAL-WORLD VALIDATION
+# CHAPTER 6 : UNSUPERVISED LEARNING: DRIVER PERFORMANCE CLUSTERING
 
-## 6.1 Interactive Jury Evaluation Portal (Streamlit Showcase)
+## 6.1 Unsupervised Dataset Construction
 
-The entire predictive framework is operationalized via an interactive **Streamlit Jury Evaluation Portal** organized into modular tabs:
+Clustering needs **no label**. The grain changes from *one driver in one race* to **one driver across one season** (`09_unsupervised_dataset/build_unsupervised_dataset.py`):
 
-```
-c:\Users\dhruv\.gemini\antigravity-ide\scratch\f1_dw\f1-race-intelligence\
-├── jury/
-│   ├── 1_Pattern_Matching/                      <-- Deliverable 1
-│   ├── 2_Classification_Comparison/             <-- Deliverable 2
-│   ├── 3_Model_Classification_with_Performance_Metrics/ <-- Deliverable 3
-│   ├── dashboard_screenshots/                   <-- 10 HD Captured Visuals & PDF
-│   │   ├── F1_Race_Intelligence_Jury_Dashboards.pdf
-│   │   └── *.png
-│   ├── pages/                                   <-- 3 Streamlit Dashboards
-│   └── streamlit_app.py                         <-- Dedicated Jury Portal
-└── logic/                                       <-- Deep Data Pipelines & Backend
-```
+* **Source:** the 12,358 race entries (1994–2024), grouped by `(driver_id, season)`.
+* **Filter:** at least 5 starts in the season, which removes one-off substitutes. Result: **703 driver-season profiles from 153 drivers**.
+* **9 features, no class label:** `avg_grid`, `avg_finish`, `finish_std` (consistency), `win_rate`, `podium_rate`, `points_rate`, `dnf_rate`, `teammate_quali_rate` (driver vs. car), `starts`.
+* **Preprocessing:** z-score standardisation. K-Means uses Euclidean distance, so without it `starts` (≈17) would swamp `win_rate` (≈0.04). There are no missing values.
+* Using season outcomes as features is legitimate here: clustering is descriptive, not predictive, so there is no future to leak.
 
-### Module Highlights:
-* **Jury Executive Hub:** Displays platform health, real-time Snowflake session status, and high-level KPIs (Figure 6.1).
-* **Pattern Matching Studio:** Features interactive slicers for support ($0.01$ to $0.10$) and confidence ($0.10$ to $0.90$), enabling dynamic exploration of 141,763 rules (Figure 6.2).
-* **Classification Benchmark Studio:** Renders comparative ROC curves, PR curves, and hypothesis test metrics across all nine evaluated algorithms (Figure 6.3).
-* **Live Threshold & Confusion Matrix Simulator:** An interactive slider ($\tau \in [0.05, 0.95]$) allows race strategists to dynamically adjust the decision boundary, observing live trade-offs between precision, recall, and false alarms (Figure 6.4).
+## 6.2 Choosing the Number of Clusters
+
+*Table 6.1: Elbow and silhouette analysis (K-Means, k = 2…8).*
+| k | 2 | **3** | 4 | 5 | 6 | 7 | 8 |
+| :-- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| Inertia (WCSS) | 4,074.6 | **3,174.8** | 2,741.7 | 2,407.9 | 2,151.7 | 1,983.2 | 1,870.3 |
+| Silhouette | 0.319 | **0.264** | 0.243 | 0.234 | 0.222 | 0.218 | 0.216 |
+
+The elbow (largest bend in inertia) is at **k = 3**. k = 2 has a higher silhouette but only splits front-runners from everyone else. Cutting the Ward dendrogram at its largest vertical gap also gives 3 clusters.
+
+## 6.3 Comparison of Five Clustering Algorithms
+
+*Table 6.2: Clustering benchmark on 703 standardised profiles (`10_clustering_comparison/`).*
+| Rank | Algorithm | k | Noise | Silhouette ↑ | Davies-Bouldin ↓ | Calinski-H. ↑ | Stability ARI ↑ |
+| :-: | :--- | :-: | :-: | :-: | :-: | :-: | :-: |
+| **1** | **K-Means** | 3 | 0% | **0.2636** | 1.2759 | **347.5** | 0.9447 |
+| 2 | Agglomerative (Ward) | 3 | 0% | 0.1808 | 1.5146 | 280.8 | 0.5198 |
+| 2 | BIRCH | 3 | 0% | 0.1951 | 1.5231 | 298.3 | 0.5017 |
+| 4 | Gaussian Mixture | 3 | 0% | 0.1409 | 1.6854 | 252.7 | **0.9953** |
+| 5 | DBSCAN | 4 | 7.7% | 0.1116 | 0.8546 † | 24.0 | 0.8974 |
+
+† DBSCAN (eps = 1.3, min_samples = 5, tuned by grid search): metrics exclude its 54 noise points. Its low Davies-Bouldin comes from one tiny isolated cluster, and its Calinski-Harabasz score is the worst. Ranking = mean rank across silhouette, Davies-Bouldin, Calinski-Harabasz, stability ARI and noise %. Stability ARI = agreement between full-data labels and labels re-fitted on 10 random 90% subsamples.
+
+**Why K-Means wins.**
+* **Ward and BIRCH** produce similar partitions, but they are unstable (ARI ≈ 0.5): removing 10% of the data moves the boundaries.
+* **Gaussian Mixture** is the most stable, but its full-covariance Gaussians overlap heavily, which gives the weakest silhouette among the k = 3 methods.
+* **DBSCAN** fails because the data has varying density: a dense midfield and a sparse tail of dominant seasons. One `eps` cannot fit both, so it labels the dominant seasons as noise.
+
+## 6.4 Champion Algorithm: K-Means (k = 3)
+
+K-Means++ initialisation, 10 restarts, Lloyd iterations (converged in 13). Objective (inertia / WCSS): **J = Σ_j Σ_{x ∈ C_j} ‖x − μ_j‖² = 3,174.8**. Cluster ids are ordered by centroid average finish and named afterwards; the algorithm never sees the names.
+
+*Table 6.3: Discovered tiers (centroids in original units).*
+| Tier | Size | Avg grid | Avg finish | Win % | Podium % | Points % | DNF % | Beat teammate (quali) |
+| :--- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| **Title Contenders** | 108 | 4.0 | 5.0 | 25.2% | 59.3% | 84.9% | 13.6% | 58.4% |
+| **Midfield Regulars** | 325 | 9.6 | 10.4 | 1.2% | 9.1% | 57.1% | 27.6% | 53.3% |
+| **Backmarkers** | 270 | 16.5 | 14.9 | 0.0% | 0.3% | 15.2% | 38.6% | 32.4% |
+
+**Case study: Lewis Hamilton.** 2007–08 Contender → 2009 Midfield (uncompetitive McLaren) → 2010–2022 Contender (13 consecutive seasons) → 2023–24 Midfield (Mercedes ground-effect slump). Without any labels, the clusters track real changes in car competitiveness. A 2-D PCA projection (68.4% of variance) shows the tiers separating along overall pace.
+
+## 6.5 Clustering Performance Metrics
+
+*Table 6.4: Internal validity, stability and external sanity check (`12_clustering_metrics/`).*
+| Family | Metric | Value | Reading |
+| :--- | :--- | :-: | :--- |
+| Internal | Silhouette | **0.2636** | Distinct but touching clusters, typical of a performance continuum. Only 2% of points have negative silhouette. |
+| Internal | Davies-Bouldin | **1.2759** | Cluster spread ≈ 1.3× the distance to the nearest other cluster |
+| Internal | Calinski-Harabasz | **347.5** | Between-cluster dispersion far exceeds within-cluster dispersion |
+| Stability | Seed ARI (30 initialisations) | **0.9235** (min 0.785) | The result does not depend on the random start |
+| Stability | Bootstrap ARI (30 × 80%) | **0.8704** ± 0.096 | Robust to resampling |
+| External | ARI / NMI vs. championship tier | 0.4518 / 0.5330 | Moderate by design (fixed-size standing tiers vs. natural gaps) |
+| External | Contenders finishing championship top-3 | **80.6%** | No Backmarker season ever finished top-3 |
+
+**Clusters → classifier (linking Dashboards 2 and 3).** Adding each driver's *previous-season* tier (K-Means refitted on 1994–2021 only, so it is leakage-safe) to the grid-only model lifts PR-AUC from 0.399 to 0.493. Added on top of the 16 engineered features, however, it is redundant (ROC-AUC 0.9629 → 0.9638, PR-AUC drops). The rolling-form features already capture tier, so the champion leaves it out.
+
+---
+*Footer: MITSOC, Department of Computer Engineering, 2025-26*
+
+<div style="page-break-after: always;"></div>
+
+# CHAPTER 7 : RESULTS, DASHBOARDS & REAL-WORLD VALIDATION
+
+## 7.1 Interactive Jury Evaluation Portal (Streamlit)
+
+All results are served by a Streamlit app (`streamlit_app.py`) whose sidebar mirrors the end-semester rubric. Every number is read from the module output files, so the dashboard, this report and the code always agree. `python3 run_all_modules.py` regenerates everything in about 20 seconds.
+
+| Section | Pages |
+| :--- | :--- |
+| **Jury Overview** | Rubric scorecard with live headline metrics and links to every rubric item |
+| **Dashboard 1 · Data Warehouse** | Warehouse Design (star & snowflake ER diagrams, 12 live OLAP queries) · Snowflake Deployment (7-step pipeline, 40-object manifest, live verification) · Snowflake Advanced Features · Pipeline Architecture |
+| **Dashboard 2 · Supervised Learning** | Dataset · Pattern Matching (FP-Growth vs. Apriori) · Classifier Comparison & Validation · Classification Algorithm (ROC/PR curves, threshold tuner, race explorer) |
+| **Dashboard 3 · Unsupervised Learning** | Dataset · Clustering Comparison (5 algorithms, elbow, dendrogram) · K-Means Clustering (PCA map, tiers by era, live tier classifier) · Clustering Metrics (silhouette plot, stability, championship check, clusters → classifier) |
+| **Extras** | SQL Playground · Warehouse Data Explorer · Race Predictor |
 
 ---
 
-## 6.2 Executive Power BI Telemetry Workspace
+## 7.2 Executive Power BI Telemetry Workspace
 
 To support C-suite stakeholders and pit wall engineers, an enterprise **Microsoft Power BI Master Package** (`F1_Race_Intelligence_PowerBI_Dataset.xlsx`) was engineered containing 12 pre-structured relational tables:
 * `Fact_Grand_Prix_Predictions`: 8,650 driver starts with 3-pillar features and win probabilities.
@@ -1103,47 +1165,44 @@ To support C-suite stakeholders and pit wall engineers, an enterprise **Microsof
 
 ---
 
-## 6.3 Real-World Case Study: 2024 British Grand Prix (Silverstone)
+## 7.3 Real-World Case Studies (2024 season, unseen during training)
 
-To demonstrate the superiority of our innovation layer over naive grid-only baselines, the model was evaluated on the **2024 British Grand Prix at Silverstone Circuit** (Round 12, July 7, 2024):
+**Where the model beats "pole-sitter wins": 2024 Canadian GP.**
+| Driver | Team | Grid | ApexIQ P(win) | Finish |
+| :--- | :--- | :-: | :-: | :-: |
+| **Max Verstappen** | Red Bull | P2 | **32.2% (predicted winner)** | **P1 ✓** |
+| George Russell | Mercedes | **P1** | 30.5% | P3 |
+| Lando Norris | McLaren | P3 | 12.2% | P2 |
 
-*Table 6.1: Real-World Predictions vs. Actual Classification: 2024 British GP.*
-| Driver Name | Constructor Team | Grid Slot | Naive Baseline Win Prob | ApexIQ Champion Prob | Actual Race Finish | Model Verdict |
-| :--- | :--- | :---: | :---: | :---: | :---: | :--- |
-| **George Russell** | Mercedes-AMG | **P1** | **68.4% (Predicted Win)** | 22.4% | DNF (Water Pressure) | Correctly Demoted |
-| **Lewis Hamilton** | Mercedes-AMG | **P2** | 18.2% | **38.6% (Predicted Win)** | **P1 (WINNER)** | **CORRECT HIT** |
-| **Max Verstappen** | Red Bull Racing | **P4** | 5.2% | 19.8% | **P2 (Podium)** | **CORRECT HIT** |
-| **Lando Norris** | McLaren F1 | **P3** | 6.1% | 14.1% | **P3 (Podium)** | **CORRECT HIT** |
+Verstappen's rolling form and career win rate outweighed Russell's pole. The same pattern (winner starting P2, picked by the model, missed by the pole heuristic) occurs in **8 holdout races**. The reverse happens in **3 races** (2022 British, 2024 Dutch, 2024 Mexico City), where the model over-trusted Verstappen's form. Net: **+5 races** over the baseline, which explains 40/68 vs. 35/68.
 
-### Strategic Insight:
-* **Baseline Failure:** Naive grid models assigned a 68.4% win probability to George Russell on pole. Russell retired on Lap 34 due to a terminal water system failure.
-* **ApexIQ Innovation Success:** By integrating Lewis Hamilton's track affinity (8 previous Silverstone victories), contemporary 5-race rolling form, and team qualifying pace delta, ApexIQ identified Hamilton ($P_2$) as the true favorite (38.6% probability), correctly forecasting his historic 104th Grand Prix victory.
+**Where it misses: 2024 British GP.** The model ranked pole-sitter George Russell first (30.9%) and Lewis Hamilton second (25.4%). Russell retired with a water-system failure and Hamilton won. The winner was in the model's top 2. This is a textbook in-race shock that no pre-race model can foresee (§5.6).
 
 ---
 *Footer: MITSOC, Department of Computer Engineering, 2025-26*
 
 <div style="page-break-after: always;"></div>
 
-# CHAPTER 7 : CONCLUSION & FUTURE WORK
+# CHAPTER 8 : CONCLUSION & FUTURE WORK
 
-## 7.1 Summary of Technical Contributions
+## 8.1 Summary of Technical Contributions
 
-The **ApexIQ** project successfully demonstrates the design, deployment, and validation of an enterprise predictive data warehouse and machine learning classification platform for Formula 1 motorsport:
-1. **Cloud Data Warehousing:** Architected an enterprise 5-tier Medallion architecture on Snowflake Data Cloud hosting Star and Snowflake dimensional schemas with Zero-Copy Cloning, Dynamic Tables (1-hour lag), and CDC Streams.
-2. **Algorithmic Equivalence & Acceleration:** Proved 100% mathematical equivalence between Apriori and FP-Growth over 7,940 frequent itemsets while achieving a **1.32× runtime speedup** via FP-Trees.
-3. **Statistical Superiority:** Evaluated nine classification models on an unseen chronological holdout (2022–2024 ground-effect era). The Champion XGBoost classifier achieved a **0.9635 ROC-AUC**, **80.88% Winner Recall**, and **57.35% Top-1 Grand Prix Winner Hit Rate**, disproving the null hypothesis with $p = 0.0012$.
-4. **Operationalization:** Serialized production models into Snowflake internal stages for in-database Python SQL scoring and delivered interactive portals in Streamlit and Microsoft Power BI.
+1. **Data warehouse (Dashboard 1):** star and snowflake dimensional models over 8,650 race results (2004–2024), 12 OLAP queries, and a 7-step automated Snowflake deployment (RAW → CLEAN → DW → ML → ANALYTICS) with clone, Time Travel, dynamic table, stream + task and Cortex AI.
+2. **Pattern mining (Dashboard 2):** Apriori and FP-Growth produce identical results (414 itemsets, 1,393 rules). Apriori's candidate count grows 11× as support drops while the FP-tree stays bounded, and FP-Growth overtakes Apriori at min_support = 0.005.
+3. **Classification (Dashboard 2):** among 7 classifiers on an unseen 2022–2024 holdout, cost-sensitive XGBoost with race softmax reaches **ROC-AUC 0.9629, PR-AUC 0.6433, winner recall 85.3%, top-1 winner hit 58.8%**. The gain over the baseline is significant (race-level bootstrap, p < 0.001).
+4. **Clustering (Dashboard 3):** among 5 clustering algorithms, K-Means (k = 3) best separates 703 driver-seasons into Title Contenders, Midfield Regulars and Backmarkers (silhouette 0.264, seed-stability ARI 0.92). 81% of Contender seasons finished in the championship top 3.
+5. **Reproducibility:** one command regenerates every number, and 61 automated tests check the results.
 
 ---
 
-## 7.2 Research Limitations
+## 8.2 Research Limitations
 
 1. **Unmodeled In-Race Shocks:** Pre-race models cannot anticipate first-corner multi-car collisions or unexpected mechanical power unit failures.
 2. **Wet Weather Qualifying Distortions:** Chaotic wet qualifying sessions occasionally produce anomalous front-row starters (e.g. Haas on pole in Brazil 2022) where the model may over-index on grid position.
 
 ---
 
-## 7.3 Future Research Directions
+## 8.3 Future Research Directions
 
 1. **Computer Vision Weather Radar:** Integrating real-time computer vision over Doppler weather radar scans to dynamically estimate rain intensity and tyre transition windows.
 2. **Reinforcement Learning Pit Strategy:** Extending pre-race classification into a Markov Decision Process (MDP) or Deep Q-Network (DQN) to recommend live pit lap triggers under virtual safety car deployments.
@@ -1181,7 +1240,7 @@ The **ApexIQ** project successfully demonstrates the design, deployment, and val
 2. **Patankar, A., Sakhare, D., & Alzende, N. (2026).**  
    *“Empirical Benchmark and Equivalence Proof of Apriori and FP-Growth Association Mining on High-Density Motorsport Telemetry.”*  
    Communicated to: *Springer International Conference on Data Warehousing and Knowledge Discovery (DaWaK 2026)*.  
-   — Focuses on the 12,358-transaction telemetry discretization protocol, proving bitwise 7,940-itemset equivalence and 1.32× algorithmic runtime speedup.
+   — Focuses on the 12,358-transaction telemetry discretization protocol, proving 414-itemset equivalence and measuring the candidate-generation vs. FP-tree scaling crossover.
 
 ---
 *Footer: MITSOC, Department of Computer Engineering, 2025-26*

@@ -1,0 +1,19 @@
+{
+  "algorithm": "K-Means",
+  "k": 3,
+  "n_profiles": 703,
+  "n_features": 9,
+  "silhouette": 0.2636,
+  "davies_bouldin": 1.2759,
+  "calinski_harabasz": 347.51,
+  "inertia_wcss": 3174.81,
+  "seed_stability_ari_mean": 0.9235,
+  "seed_stability_ari_min": 0.7846,
+  "bootstrap_stability_ari_mean": 0.8704,
+  "bootstrap_stability_ari_std": 0.0959,
+  "external_ari_vs_championship_tier": 0.4518,
+  "external_nmi_vs_championship_tier": 0.533,
+  "external_homogeneity": 0.5473,
+  "external_completeness": 0.5195,
+  "contenders_in_top3_standing_pct": 80.56
+}

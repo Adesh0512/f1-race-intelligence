@@ -7,11 +7,14 @@ Validates all Input and Output components of the Data Warehouse & Analytics Plat
 3. 12 OLAP Query Execution Outputs (Roll-up, Drill-down, Slice, Dice, Pivot, Window Functions)
 4. ML Prediction Output Payloads (Ranked driver probabilities, Top-1 and Podium predictions)
 5. WebSocket Real-Time Stream Output Payloads (Telemetry tick, lap progression, pit box alerts)
-6. Output BI Reports and Frontends (dashboard.html, showcase.html, powerbi_f1.html, grafana.html)
+6. Output BI Reports and Frontends (dashboard.html, showcase.html, powerbi_f1.html)
 """
 
 import unittest
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _paths import find
 import sqlite3
 import pandas as pd
 import json
@@ -21,11 +24,11 @@ class TestF1InputOutputQAEvaluation(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.db_path = "f1_warehouse.db"
-        cls.master_csv = "F1_Warehouse_Master_65_Columns_2004_2024.csv"
-        cls.ml_csv = "F1_ML_Winner_Prediction_Dataset.csv"
-        cls.model_path = "f1_winner_model.joblib"
-        cls.sql_file = "olap_queries.sql"
+        cls.db_path = find("f1_warehouse.db")
+        cls.master_csv = find("F1_Warehouse_Master_65_Columns_2004_2024.csv")
+        cls.ml_csv = find("F1_ML_Winner_Prediction_Dataset.csv")
+        cls.model_path = find("f1_winner_model.joblib")
+        cls.sql_file = find("olap_queries.sql")
 
     def test_01_input_data_sources_validity(self):
         """Verify all input data sources exist with expected row scale and schema."""
@@ -126,8 +129,8 @@ class TestF1InputOutputQAEvaluation(unittest.TestCase):
         self.assertGreater(parsed["drivers_count"], 0)
 
     def test_05_visual_and_bi_frontend_outputs_presence(self):
-        """Verify all 4 visual dashboard HTML frontend files exist and contain rendering code."""
-        dashboards = ["dashboard.html", "showcase.html", "powerbi_f1.html", "grafana.html"]
+        """Verify all 3 visual dashboard HTML frontend files exist and contain rendering code."""
+        dashboards = [find("dashboard.html"), find("showcase.html"), find("powerbi_f1.html")]
         for d in dashboards:
             self.assertTrue(os.path.exists(d), f"Frontend file {d} missing")
             with open(d, "r", encoding="utf-8") as f:

@@ -62,6 +62,6 @@ To systematically evaluate suitability, 7 distinct classification architectures 
 
 XGBoost Classifier was selected as the operational champion for deployment based on three critical empirical criteria:
 
-1. **Discriminative Capacity:** Achieves the highest ROC-AUC on unseen ground-effect era test races ($0.9635$), outperforming the linear baseline ($0.9198$) by $+4.37$ AUC points and Decision Trees ($0.9177$) by $+4.58$ AUC points.
-2. **Race-Level Top-1 Winner Precision:** Successfully identifies the exact race winner in **54.4% (37/68)** of unseen Grands Prix across 2022–2024, placing the true winner in the Top-3 predictions in **88.2% (60/68)** of Grands Prix.
-3. **Probability Calibration:** Maintains a low Brier score loss ($0.0678$), ensuring that predicted probabilities can be accurately mapped to calibrated race-day odds.
+1. **Discriminative Capacity:** Achieves the highest ROC-AUC on unseen ground-effect era test races ($0.9629$), outperforming the linear baseline ($0.9198$) by $+4.37$ AUC points and Decision Trees ($0.9177$) by $+4.58$ AUC points.
+2. **Race-Level Top-1 Winner Precision:** Successfully identifies the exact race winner in **58.8% (40/68)** of unseen Grands Prix across 2022–2024, placing the true winner in the Top-3 predictions in **86.8% (59/68)** of Grands Prix.
+3. **Probability Calibration:** Maintains a low Brier score loss ($0.0669$), ensuring that predicted probabilities can be accurately mapped to calibrated race-day odds.

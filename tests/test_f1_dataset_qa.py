@@ -13,6 +13,9 @@ Validates all technical criteria for production dataset:
 
 import unittest
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _paths import find
 import sqlite3
 import pandas as pd
 import numpy as np
@@ -21,11 +24,11 @@ class TestF1DatasetQAEvaluation(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.master_csv = "F1_Warehouse_Master_65_Columns_2004_2024.csv"
-        cls.ml_csv = "F1_ML_Winner_Prediction_Dataset.csv"
-        cls.db_path = "f1_warehouse.db"
-        cls.mapping_csv = "source_to_target_mapping.csv"
-        cls.dict_md = "data_dictionary.md"
+        cls.master_csv = find("F1_Warehouse_Master_65_Columns_2004_2024.csv")
+        cls.ml_csv = find("F1_ML_Winner_Prediction_Dataset.csv")
+        cls.db_path = find("f1_warehouse.db")
+        cls.mapping_csv = find("source_to_target_mapping.csv")
+        cls.dict_md = find("data_dictionary.md")
 
         cls.df_master = pd.read_csv(cls.master_csv, low_memory=False)
         cls.df_ml = pd.read_csv(cls.ml_csv, low_memory=False)

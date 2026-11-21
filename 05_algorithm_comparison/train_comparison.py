@@ -80,10 +80,11 @@ def run_comparison():
         "4. Random Forest Classifier": RandomForestClassifier(n_estimators=150, max_depth=6, class_weight="balanced", random_state=42),
         "5. Gradient Boosting (GBDT)": GradientBoostingClassifier(n_estimators=100, max_depth=3, learning_rate=0.05, random_state=42),
         "6. LightGBM Classifier": lgb.LGBMClassifier(n_estimators=100, max_depth=4, learning_rate=0.05, is_unbalance=True, random_state=42, verbose=-1),
-        "7. XGBoost Classifier (Champion)": xgb.XGBClassifier(n_estimators=100, max_depth=4, learning_rate=0.05, scale_pos_weight=15, random_state=42, eval_metric="logloss")
+        "7. XGBoost Classifier (Champion)": xgb.XGBClassifier(n_estimators=100, max_depth=4, learning_rate=0.05, scale_pos_weight=15, subsample=0.85, colsample_bytree=0.85, random_state=42, eval_metric="logloss")
     }
 
     results = []
+    probs_by_model = {}
     print("\n" + "-" * 115)
     print(f"{'Algorithm Name':<38} | {'ROC-AUC':<7} | {'PR-AUC':<7} | {'Acc %':<6} | {'BalAcc':<6} | {'Top-1 Hit %':<12} | {'Top-3 %':<8} | {'Brier':<6}")
     print("-" * 115)
@@ -104,6 +105,8 @@ def run_comparison():
             probs = clf.predict_proba(X_test)[:, 1]
             preds = clf.predict(X_test)
             inf_ms = (time.perf_counter() - t_inf_start) * 1000
+
+        probs_by_model[name] = probs
 
         # Calculate metrics
         roc_auc = roc_auc_score(y_test, probs)
@@ -148,6 +151,26 @@ def run_comparison():
         })
 
     res_df = pd.DataFrame(results)
+
+    # Paired race-level bootstrap: resample the 68 holdout Grands Prix, recompute the AUC gap each time
+    champ, base = "7. XGBoost Classifier (Champion)", "2. Baseline (Logistic Reg - Grid Only)"
+    rng = np.random.default_rng(42)
+    race_ids = test_df["race_id"].unique()
+    rows_by_race = test_df.reset_index(drop=True).groupby("race_id").indices
+    y_arr = y_test.to_numpy()
+    deltas = []
+    for _ in range(1000):
+        idx = np.concatenate([rows_by_race[r] for r in rng.choice(race_ids, len(race_ids), replace=True)])
+        deltas.append(roc_auc_score(y_arr[idx], probs_by_model[champ][idx]) - roc_auc_score(y_arr[idx], probs_by_model[base][idx]))
+    deltas = np.array(deltas)
+    lo, hi = np.percentile(deltas, [2.5, 97.5])
+    p_boot = float((deltas <= 0).mean())
+    print(f"\n[+] Race-level bootstrap (1,000 resamples of 68 GPs): XGBoost - Baseline ROC-AUC = {deltas.mean():+.4f} "
+          f"[95% CI {lo:+.4f}, {hi:+.4f}], one-sided p = {p_boot:.4f}")
+    pd.DataFrame([{"comparison": "XGBoost vs Grid-Only Baseline", "metric": "ROC-AUC", "mean_delta": round(deltas.mean(), 4),
+                   "ci_low": round(lo, 4), "ci_high": round(hi, 4), "p_value": round(p_boot, 4), "resamples": 1000}]).to_csv(
+        os.path.join(os.path.dirname(__file__), "significance_test.csv"), index=False)
+
     out_csv = os.path.join(os.path.dirname(__file__), "comparison_results.csv")
     res_df.to_csv(out_csv, index=False)
     print(f"\n[+] Results successfully exported to: {out_csv}")

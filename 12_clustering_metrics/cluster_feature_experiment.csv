@@ -1,0 +1,5 @@
+model,roc_auc,pr_auc,top1_winner_hit_pct
+Grid only,0.9206,0.3994,51.4706
+Grid + previous-season tier,0.9448,0.4926,51.4706
+16 features (champion),0.9629,0.6433,58.8235
+16 features + previous-season tier,0.9638,0.6138,55.8824

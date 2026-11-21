@@ -26,7 +26,7 @@ For dense matrices with very small vocabulary sizes ($N=24$ symbolic items), can
 
 ## 3. Discovered High-Lift Association Rules
 
-Association rules are exported in [association_rules.csv](file:///C:/Users/dhruv/.gemini/antigravity-ide/scratch/f1_dw/f1-race-intelligence/04_pattern_mining/association_rules.csv). Below are key domain-validated patterns discovered in the historical data:
+Association rules are exported in [association_rules.csv](association_rules.csv). Below are key domain-validated patterns discovered in the historical data:
 
 ### Top Rules Predicting Race Winners (`Outcome_Winner`)
 

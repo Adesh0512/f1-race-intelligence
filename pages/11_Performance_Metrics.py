@@ -100,7 +100,7 @@ with t1:
             color_continuous_scale=["#161B22", F1_RED],
             title=f"Live Confusion Matrix at Threshold {thresh:.2f}"
         )
-        st.plotly_chart(get_pbi_plotly_theme(fig_cm), use_container_width=True)
+        st.plotly_chart(get_pbi_plotly_theme(fig_cm), width="stretch")
 
 with t2:
     st.markdown("#### Feature Importance Tagged by the 3 Engineering Pillars")
@@ -118,7 +118,7 @@ with t2:
             labels={"importance": "Relative Importance", "feature": "Telemetry Feature", "group": "Pillar"}
         )
         fig_fi_pillar.update_layout(yaxis=dict(autorange="reversed"))
-        st.plotly_chart(get_pbi_plotly_theme(fig_fi_pillar), use_container_width=True)
+        st.plotly_chart(get_pbi_plotly_theme(fig_fi_pillar), width="stretch")
     else:
         st.info("Feature importance data unavailable.")
 
@@ -136,4 +136,4 @@ with t3:
         yaxis_title="Precision (Positive Predictive Value)",
         height=450
     )
-    st.plotly_chart(get_pbi_plotly_theme(fig_pr), use_container_width=True)
+    st.plotly_chart(get_pbi_plotly_theme(fig_pr), width="stretch")

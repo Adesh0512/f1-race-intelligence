@@ -1,0 +1,6 @@
+algorithm,n_clusters,noise_pct,silhouette,davies_bouldin,calinski_harabasz,stability_ari,runtime_ms,rank_score,champion
+K-Means,3,0.0,0.2636,1.2759,347.5,0.9447,11.95,1.7,True
+Agglomerative (Ward),3,0.0,0.1808,1.5146,280.8,0.5198,776.28,3.1,False
+BIRCH,3,0.0,0.1951,1.5231,298.3,0.5017,8.8,3.1,False
+Gaussian Mixture,3,0.0,0.1409,1.6854,252.7,0.9953,5.98,3.3,False
+DBSCAN,4,7.68,0.1116,0.8546,24.0,0.8974,3.79,3.8,False

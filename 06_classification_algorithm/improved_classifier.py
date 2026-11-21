@@ -135,6 +135,12 @@ def train_and_evaluate_champion():
             is_win = " [ACTUAL WINNER]" if r["target_is_win"] == 1 else ""
             print(f"  {i}. {r['driver_name']:<20} ({r['constructor_name']:<12}) | Grid: P{int(r['grid_position']):02d} | Calibrated Win Odds: {r['norm_prob']*100:5.2f}%{is_win}")
 
+    out_dir = os.path.dirname(__file__)
+    importance_df.to_csv(os.path.join(out_dir, "feature_importance.csv"), index=False)
+    test_slice[["race_id", "season", "round", "race_name", "driver_name", "constructor_name", "grid_position",
+                "target_is_win", "target_finish_position", "raw_prob", "norm_prob"]].to_csv(
+        os.path.join(out_dir, "holdout_predictions.csv"), index=False)
+    print("[+] Saved: feature_importance.csv, holdout_predictions.csv")
     return clf, importance_df
 
 if __name__ == "__main__":

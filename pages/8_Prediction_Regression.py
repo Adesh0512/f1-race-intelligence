@@ -35,7 +35,7 @@ t1, t2 = st.tabs(["📊 Regression Model Benchmark", "📈 Error Distribution & 
 with t1:
     st.markdown("#### Regression Algorithms Benchmark")
     if not reg_comp_df.empty:
-        st.dataframe(reg_comp_df, use_container_width=True)
+        st.dataframe(reg_comp_df, width="stretch")
 
         # Bar chart comparing MAE
         fig_mae = px.bar(
@@ -44,7 +44,7 @@ with t1:
             title="Model Comparison: Mean Absolute Error (Lower is Better)",
             labels={"mae": "MAE (Positions)", "model_name": "Regressor Algorithm"}
         )
-        st.plotly_chart(get_plotly_theme(fig_mae), use_container_width=True)
+        st.plotly_chart(get_plotly_theme(fig_mae), width="stretch")
     else:
         st.warning("regression_comparison.csv not found in reports.")
 
@@ -61,7 +61,7 @@ with t2:
                 labels={"importance": "Gini Importance", "feature": "Feature Signal"}
             )
             fig_fi.update_layout(yaxis=dict(autorange="reversed"))
-            st.plotly_chart(get_plotly_theme(fig_fi), use_container_width=True)
+            st.plotly_chart(get_plotly_theme(fig_fi), width="stretch")
         else:
             st.info("Feature importance data unavailable.")
 
@@ -83,4 +83,4 @@ with t2:
             labels={"x": "Position Error (Slots)", "y": "Probability Density"}
         )
         fig_res.update_traces(line_color=F1_RED)
-        st.plotly_chart(get_plotly_theme(fig_res), use_container_width=True)
+        st.plotly_chart(get_plotly_theme(fig_res), width="stretch")

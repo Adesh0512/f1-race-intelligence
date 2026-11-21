@@ -153,7 +153,7 @@ t1, t2, t3, t4 = st.tabs(["📊 Comprehensive Benchmark Table", "📈 Overlaid R
 with t1:
     st.markdown(f"#### Complete Benchmark Matrix (Sorted by {sort_metric})")
     if not filtered_comp_df.empty:
-        st.dataframe(filtered_comp_df.style.highlight_max(subset=["test_roc_auc", "test_pr_auc", "test_f1", "top1_winner_hit_pct"], color="#3B1C1D"), use_container_width=True)
+        st.dataframe(filtered_comp_df.style.highlight_max(subset=["test_roc_auc", "test_pr_auc", "test_f1", "top1_winner_hit_pct"], color="#3B1C1D"), width="stretch")
     else:
         st.warning("No models match active slicer selection.")
 
@@ -179,7 +179,7 @@ with t2:
             yaxis_title="True Positive Rate (Sensitivity / Recall)",
             height=500
         )
-        st.plotly_chart(get_plotly_theme(fig_roc), use_container_width=True)
+        st.plotly_chart(get_plotly_theme(fig_roc), width="stretch")
     else:
         st.info("ROC curves metadata not available.")
 
@@ -197,7 +197,7 @@ with t3:
             title="5-Fold Stratified Cross-Validation ROC-AUC Spread"
         )
         fig_box.update_layout(showlegend=False, xaxis_tickangle=-45)
-        st.plotly_chart(get_plotly_theme(fig_box), use_container_width=True)
+        st.plotly_chart(get_plotly_theme(fig_box), width="stretch")
     else:
         st.info("CV scores metadata not available.")
 
@@ -215,4 +215,4 @@ with t4:
             color_discrete_sequence=[F1_RED, "#00E5FF", "#00E676", "#FF9100"]
         )
         fig_grp.update_layout(xaxis_tickangle=-45)
-        st.plotly_chart(get_plotly_theme(fig_grp), use_container_width=True)
+        st.plotly_chart(get_plotly_theme(fig_grp), width="stretch")

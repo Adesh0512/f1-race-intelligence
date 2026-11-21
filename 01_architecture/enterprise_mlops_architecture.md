@@ -21,7 +21,7 @@ flowchart LR
     end
 
     subgraph P4 ["Monitor (Telemetry & Drift)"]
-        MON["Monitor\n• ROC-AUC 0.9635\n• Top-1 Hit 57.35%\n• Brier Calibration"]
+        MON["Monitor\n• ROC-AUC 0.9629\n• Top-1 Hit 58.82%\n• Brier Calibration"]
         ALARM["Alarm Manager\n(Imbalance & Drift)"]
         SCHED["Scheduler\n(CDC Streams & Tasks)"]
         LIN["Lineage Tracker\n(Zero-Leakage T0 Boundary)"]

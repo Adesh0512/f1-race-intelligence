@@ -1,40 +1,28 @@
 # 06. Classification Algorithm: Key Logic & Core Summary
 
-## 1. Production Champion Architecture: XGBoost
-- **Algorithm:** Extreme Gradient Boosted Trees (`XGBClassifier`)
-- **Hyperparameters:** `n_estimators=120`, `max_depth=4`, `learning_rate=0.05`, `subsample=0.85`, `colsample_bytree=0.80`, `reg_lambda=1.0`.
-- **Cost-Sensitive Loss:** `scale_pos_weight=15.0` to overcome 20.4:1 non-winner to winner class imbalance.
+## 1. Champion: Cost-Sensitive XGBoost
+- **Hyperparameters:** `n_estimators=100`, `max_depth=4`, `learning_rate=0.05`, `subsample=0.85`, `colsample_bytree=0.85`, `random_state=42`.
+- **Cost-sensitive loss:** `scale_pos_weight=15`. With a 20.4:1 class imbalance, a missed winner costs 15× more than a false alarm:
 $$\mathcal{L}(\theta) = -\sum_{i=1}^N \left[ 15 \cdot y_i \log \hat{p}_i + (1 - y_i) \log(1 - \hat{p}_i) \right] + \Omega(\text{trees})$$
 
-## 2. In-Race Group Softmax Normalization
-Raw per-driver sigmoid probabilities do not sum to 1 within a race. A temperature-scaled group softmax layer converts raw logits into mutually exclusive race probabilities:
+## 2. Race-Level Softmax
+Independent per-driver probabilities do not sum to 1 within a race. A temperature-scaled softmax over log-probabilities makes them mutually exclusive:
+$$P(\text{Win}_i \mid \text{Race } j) = \frac{\exp(\log \hat{p}_i / T)}{\sum_{k \in \text{Race } j} \exp(\log \hat{p}_k / T)}, \quad T = 0.8$$
+- The probabilities in every Grand Prix sum to exactly 1.
+- Predicted winner = argmax over the grid. T < 1 sharpens the distribution toward the favourite.
 
-$$P(\text{Win}_i \mid \text{Race } j) = \frac{\exp(\hat{z}_i / T)}{\sum_{k \in \text{Race } j} \exp(\hat{z}_k / T)}, \quad T = 1.0$$
+## 3. Holdout Results (2022–2024, 68 GPs)
+| ROC-AUC | PR-AUC | Winner recall | Winner precision | Top-1 winner hit | Brier |
+|---:|---:|---:|---:|---:|---:|
+| **0.9629** | **0.6433** | **85.3%** (58/68) | 32.2% | **58.8% (40/68)** | 0.0669 |
 
-Ensures:
-1. $\sum_{i \in \text{Race } j} P(\text{Win}_i) = 1.0000$ (Exclusivity constraint)
-2. $\text{Predicted Winner} = \arg\max_{i} P(\text{Win}_i \mid \text{Race } j)$
+**Top features (gain):** `grid_position` 47.5%, `driver_rolling_finish_5` 10.0%, `career_win_rate` 4.7%, `constructor_rolling_points_10` 4.0%, `grid_vs_form_gap` 3.9%.
 
-## 3. Minimal Production Training & Persistence Code
-```python
-import joblib, numpy as np
-from xgboost import XGBClassifier
+## 4. Persisted Artifacts
+- `models/champion_xgboost_classifier.joblib`
+- `06_classification_algorithm/holdout_predictions.csv`: every holdout entry with its raw and race-normalised probability (drives the ROC/PR curves, threshold tuner and race explorer)
+- `06_classification_algorithm/feature_importance.csv`
 
-# 1. Fit Cost-Sensitive Champion
-champion = XGBClassifier(
-    n_estimators=120, max_depth=4, learning_rate=0.05,
-    scale_pos_weight=15.0, subsample=0.85, random_state=42
-)
-champion.fit(X_train, y_train)
-
-# 2. Serialize Pipeline Artifacts
-joblib.dump(champion, "models/champion_xgboost_classifier.joblib")
-
-# 3. Group Softmax Inference Function
-def predict_race_probabilities(race_df, model, feature_cols, temp=1.0):
-    logits = model.predict(race_df[feature_cols], output_margin=True)
-    exp_logits = np.exp(logits / temp)
-    race_df["win_prob"] = exp_logits / np.sum(exp_logits)
-    race_df["predicted_win"] = (race_df["win_prob"] == race_df["win_prob"].max()).astype(int)
-    return race_df.sort_values(by="win_prob", ascending=False)
+```bash
+python3 06_classification_algorithm/improved_classifier.py
 ```

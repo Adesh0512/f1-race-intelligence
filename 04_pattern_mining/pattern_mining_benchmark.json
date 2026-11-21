@@ -1,0 +1,17 @@
+{
+  "transactions": 12358,
+  "items": 24,
+  "min_support": 0.02,
+  "min_confidence": 0.25,
+  "apriori_time_sec": 0.0112,
+  "fpgrowth_time_sec": 0.0281,
+  "speedup": 0.4,
+  "itemsets_count": 414,
+  "apriori_candidates": 770,
+  "fp_tree_nodes": 4230,
+  "apriori_db_scans": 5,
+  "fpgrowth_db_scans": 2,
+  "apriori_itemsets_count": 414,
+  "rules_count": 1393,
+  "is_equivalent": true
+}

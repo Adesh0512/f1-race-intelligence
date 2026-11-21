@@ -2,6 +2,7 @@
 .env.*
 !.env.example
 *.db
+!f1_warehouse.db
 *.sqlite
 *.zip
 .venv/
@@ -20,3 +21,6 @@ node_modules/
 spark-warehouse/
 metastore_db/
 derby.log
+# Pre-end-sem copies: the originals are in this repo's first commit
+*_JURY2_BACKUP.*
+00_data_warehouse/snowflake_streamlit_deployment/downloaded_stage/

@@ -139,7 +139,7 @@ with c1:
         opacity=0.7
     )
     fig_grid.add_shape(type="line", x0=1, y0=1, x1=24, y1=24, line=dict(color="#8B949E", dash="dash"))
-    st.plotly_chart(get_pbi_plotly_theme(fig_grid), use_container_width=True)
+    st.plotly_chart(get_pbi_plotly_theme(fig_grid), width="stretch")
 
 with c2:
     fig_pace = px.box(
@@ -148,7 +148,7 @@ with c2:
         labels={"driver_lap_record_delta_sec": "Delta to Track Record (s)", "constructor_name": "Constructor"}
     )
     fig_pace.update_layout(showlegend=False)
-    st.plotly_chart(get_pbi_plotly_theme(fig_pace), use_container_width=True)
+    st.plotly_chart(get_pbi_plotly_theme(fig_pace), width="stretch")
 
 # Charts Row 2
 c3, c4 = st.columns(2)
@@ -160,7 +160,7 @@ with c3:
         title="Pit Crew Efficiency vs. Average Pit Duration (sec)",
         labels={"pit_crew_efficiency_score": "DHL Efficiency Rating", "avg_pit_duration_sec": "Avg Pit Duration (s)"}
     )
-    st.plotly_chart(get_pbi_plotly_theme(fig_pit), use_container_width=True)
+    st.plotly_chart(get_pbi_plotly_theme(fig_pit), width="stretch")
 
 with c4:
     fig_power = px.histogram(
@@ -168,7 +168,7 @@ with c4:
         nbins=25, title="Engine Power Output Distribution (BHP)",
         labels={"car_estimated_power_bhp": "Engine Power (BHP)"}
     )
-    st.plotly_chart(get_pbi_plotly_theme(fig_power), use_container_width=True)
+    st.plotly_chart(get_pbi_plotly_theme(fig_power), width="stretch")
 
 # Tabular Preview
 with st.expander("📄 Filtered Telemetry Data Table", expanded=False):
@@ -176,4 +176,4 @@ with st.expander("📄 Filtered Telemetry Data Table", expanded=False):
         "season", "round", "race_name", "driver_name", "constructor_name",
         "grid_position", "finish_position", "is_win", "car_estimated_power_bhp",
         "circuit_lap_record_sec", "driver_lap_record_delta_sec", "avg_pit_duration_sec"
-    ]], use_container_width=True)
+    ]], width="stretch")

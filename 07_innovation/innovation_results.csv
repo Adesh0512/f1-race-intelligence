@@ -1,0 +1,10 @@
+metric,baseline,improved,delta
+ROC-AUC,0.9198,0.9629,0.0431
+PR-AUC,0.3994,0.6433,0.2439
+Accuracy %,94.9963,90.287,-4.7093
+Winner Precision,0.0,0.3222,0.3222
+Winner Recall,0.0,0.8529,0.8529
+Winner F1,0.0,0.4677,0.4677
+Brier Score,0.0345,0.0669,0.0324
+Top-1 Winner Hit %,51.4706,58.8235,7.3529
+Top-3 Winner Presence %,83.8235,86.7647,2.9412

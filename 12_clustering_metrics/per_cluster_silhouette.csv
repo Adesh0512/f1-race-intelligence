@@ -1,0 +1,4 @@
+cluster,cluster_name,size,mean_silhouette,negative_silhouette_pct
+0,Title Contenders,108,0.2783,2.78
+1,Midfield Regulars,325,0.2794,0.0
+2,Backmarkers,270,0.2388,4.07

@@ -2,7 +2,7 @@
 
 ## 1. Comparative Performance Summary
 
-The comparative experiment was executed using [baseline_vs_improved.py](file:///C:/Users/dhruv/.gemini/antigravity-ide/scratch/f1_dw/f1-race-intelligence/07_innovation/baseline_vs_improved.py) across identical chronological test partitions:
+The comparative experiment was executed using [baseline_vs_improved.py](baseline_vs_improved.py) across identical chronological test partitions:
 - **Training Period:** 1994–2021 (509 Grands Prix, 10,999 observations)
 - **Unseen Test Period:** 2022–2024 (68 Grands Prix, 1,359 observations)
 
@@ -10,12 +10,12 @@ Below are the empirical metrics recorded from actual model execution:
 
 | Evaluation Dimension | Baseline (Grid Only) | Improved Innovation Pipeline | Measured Delta |
 |---|---:|---:|---:|
-| **ROC-AUC** | 0.9198 | **0.9635** | **+0.0436 (+4.36 pts)** |
-| **PR-AUC (Average Precision)** | 0.3994 | **0.6009** | **+0.2015 (+20.15 pts)** |
-| **Winner Recall (Class 1)** | 0.0000 | **0.8088** | **+0.8088 (+80.88 pts)** |
-| **Winner F1-Score (Class 1)** | 0.0000 | **0.4527** | **+0.4527** |
-| **Top-1 Race Winner Hit Rate** | 51.47% (35/68 GPs) | **57.35% (39/68 GPs)** | **+5.88% (+4 GPs)** |
-| **Top-3 Podium Winner Presence** | 83.82% (57/68 GPs) | **88.24% (60/68 GPs)** | **+4.41% (+3 GPs)** |
+| **ROC-AUC** | 0.9198 | **0.9629** | **+0.0431 (+4.31 pts)** |
+| **PR-AUC (Average Precision)** | 0.3994 | **0.6433** | **+0.2439 (+24.39 pts)** |
+| **Winner Recall (Class 1)** | 0.0000 | **0.8088** | **+0.8529 (+85.29 pts)** |
+| **Winner F1-Score (Class 1)** | 0.0000 | **0.4677** | **+0.4677** |
+| **Top-1 Race Winner Hit Rate** | 51.47% (35/68 GPs) | **58.82% (40/68 GPs)** | **+7.35% (+5 GPs)** |
+| **Top-3 Podium Winner Presence** | 83.82% (57/68 GPs) | **86.76% (59/68 GPs)** | **+2.94% (+2 GPs)** |
 | **Probability Constraint** | Unconstrained ($\sum P \ne 1$) | Enforced ($\sum P = 1.0000$) | Domain Validated |
 
 ---
@@ -30,7 +30,7 @@ The baseline model is fundamentally incapable of predicting race winners who sta
 ### 2. Massive Surge in Precision-Recall Space (PR-AUC)
 In highly imbalanced classification ($4.67\%$ positive class), ROC-AUC can present an overly optimistic assessment due to the large true-negative volume. PR-AUC directly isolates performance on the minority winner class:
 - Baseline PR-AUC: $0.3994$
-- Improved PR-AUC: **$0.6009$** ($+50.5\%$ relative improvement)
+- Improved PR-AUC: **$0.6433$** ($+61.1\%$ relative improvement)
 - This confirms that the innovation substantially concentrates probability mass on the true contenders.
 
 ### 3. Resolution of Probability Calibration

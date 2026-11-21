@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaddockIQ — F1 Performance & Schema Explorer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Barlow Condensed, Inter, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Apache ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@6.1.0/dist/echarts.min.js"></script>
+    <!-- D3.js v5 -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- Dagre-D3 Layout Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.6.4/dagre-d3.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#0A0A0D',
+                            panel: '#141418',
+                            border: '#232429',
+                            red: '#E10600',
+                            blue: '#00D2FF',
+                            dimText: '#7C7D84'
+                        },
+                        team: {
+                            redbull: '#3671C6',
+                            mclaren: '#FF8000',
+                            ferrari: '#E8002D',
+                            mercedes: '#27F4D2',
+                            aston: '#229971'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0D;
+            color: #F3F4F6;
+            overflow-x: hidden;
+        }
+        .font-condensed {
+            font-family: 'Barlow Condensed', sans-serif;
+            letter-spacing: 0.05em;
+        }
+        .font-mono-f1 {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .glass-panel {
+            background-color: #141418;
+            border: 1px solid #232429;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0A0D;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E10600;
+            border-radius: 2px;
+        }
+        /* Dagre SVG custom styles */
+        .node rect, .node foreignObject {
+            fill: #111826;
+            stroke: #3A4A63;
+            stroke-width: 1.5px;
+        }
+        .node.node-fact foreignObject {
+            fill: #1a0f12;
+            stroke: #E10600;
+            stroke-width: 2px;
+        }
+        .node.node-sub-dim foreignObject {
+            fill: #0C1219;
+            stroke: #3A4A63;
+            stroke-width: 1.5px;
+        }
+        .edgePath path {
+            stroke: #4B5563;
+            stroke-width: 1.5px;
+            fill: none;
+            transition: stroke 0.2s, stroke-width 0.2s;
+        }
+        .edgePath path.active-edge {
+            stroke: #E10600 !important;
+            stroke-width: 2.5px !important;
+        }
+        .edgePath path.dashed-edge {
+            stroke-dasharray: 5,5;
+        }
+        .edgePath marker {
+            fill: #4B5563;
+        }
+        .edgePath.active-edge marker {
+            fill: #E10600 !important;
+        }
+        .edgeLabel rect {
+            fill: #0A0A0D;
+        }
+        .edgeLabel text {
+            fill: #7C7D84;
+            font-size: 10px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* D3 interactive states */
+        .dimmed {
+            opacity: 0.15 !important;
+            transition: opacity 0.25s;
+        }
+        .focused {
+            opacity: 1 !important;
+            stroke: #E10600 !important;
+            stroke-width: 2px !important;
+            box-shadow: 0 0 20px rgba(225, 6, 0, 0.4);
+            transition: stroke 0.25s, opacity 0.25s;
+        }
+        /* Grid pattern */
+        .grid-bg {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+            background-size: 16px 16px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+    <!-- Top Bar Navigation -->
+    <header class="glass-panel border-b border-brand-border py-3 px-6 z-40 shadow-xl">
+        <div class="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <!-- Logo Section -->
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <!-- Skewed red bar livery stripe (-12deg skew) -->
+                    <div class="w-2.5 h-7 bg-brand-red transform -skew-x-[12deg] shadow-lg shadow-brand-red/30"></div>
+                    <span class="text-2xl font-extrabold font-condensed tracking-tight text-white italic">
+                        PADDOCK<span class="text-brand-red">IQ</span>
+                    </span>
+                </div>
+                <div class="h-4 w-px bg-brand-border hidden md:block"></div>
+                <p class="text-brand-dimText text-xs font-medium tracking-wide uppercase hidden md:block font-condensed">Motorsport Data Suite</p>
+            </div>
+
+            <!-- View Switcher Tabs (Pill-style) -->
+            <div class="flex bg-black/60 p-1 rounded-full border border-brand-border">
+                <button id="tab-live-btn" onclick="setViewMode('live')" class="px-5 py-1.5 rounded-full text-xs font-bold font-condensed uppercase tracking-wider transition duration-200 bg-brand-red text-white">
+                    Live Performance
+                </button>
+                <button id="tab-schema-btn" onclick="setViewMode('schema')" class="px-5 py-1.5 rounded-full text-xs font-bold font-condensed uppercase tracking-wider transition duration-200 text-brand-dimText hover:text-white">
+                    Schema Explorer
+                </button>
+                <button id="tab-lineage-btn" onclick="setViewMode('lineage')" class="px-5 py-1.5 rounded-full text-xs font-bold font-condensed uppercase tracking-wider transition duration-200 text-brand-dimText hover:text-white">
+                    Lineage Mapper
+                </button>
+            </div>
+
+            <!-- Header Status Widgets -->
+            <div class="flex items-center gap-4">
+                <!-- Session Chip -->
+                <div class="bg-[#101014] border border-brand-border px-3 py-1.5 rounded flex items-center gap-2">
+                    <i data-lucide="flag" class="text-brand-red w-3.5 h-3.5"></i>
+                    <span class="text-[10px] font-mono-f1 uppercase font-semibold text-gray-300">MONZA GP &bull; Q3</span>
+                </div>
+                <!-- Weather Chip -->
+                <div class="bg-[#101014] border border-brand-border px-3 py-1.5 rounded flex items-center gap-3">
+                    <div class="flex items-center gap-1">
+                        <i data-lucide="thermometer" class="text-brand-blue w-3.5 h-3.5"></i>
+                        <span class="text-[10px] font-mono-f1 text-gray-300">28.4°C</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <i data-lucide="cloud" class="text-brand-dimText w-3.5 h-3.5"></i>
+                        <span class="text-[10px] font-mono-f1 text-gray-300">12%</span>
+                    </div>
+                </div>
+                <!-- Lap Counter -->
+                <div class="text-brand-blue font-mono-f1 text-xs font-bold uppercase tracking-wider">
+                    LAP <span id="lap-counter" class="text-sm">14</span>/53
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Dynamic Content Wrapper -->
+    <main class="flex-grow max-w-[1600px] w-full mx-auto p-4 md:p-6">
+
+        <!-- VIEW 1: LIVE PERFORMANCE VIEW -->
+        <section id="view-live" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Left Rail: Driver Standings -->
+            <div class="lg:col-span-3 glass-panel rounded-lg p-4 flex flex-col h-[650px] shadow-lg">
+                <h3 class="text-sm font-bold font-condensed uppercase tracking-wider text-gray-300 border-b border-brand-border pb-2.5 mb-3 flex items-center gap-2">
+                    <i data-lucide="list-ordered" class="w-4 h-4 text-brand-red"></i> Driver Standings
+                </h3>
+                
+                <div class="flex-grow overflow-y-auto space-y-2 pr-1" id="driver-list">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+
+            <!-- Center Pane: Lap-Time Trend Line & Abstract Track -->
+            <div class="lg:col-span-6 flex flex-col gap-6 h-[650px]">
+                <!-- Telemetry Line Chart -->
+                <div class="flex-grow glass-panel rounded-lg p-4 flex flex-col h-[60%]">
+                    <div class="flex items-center justify-between border-b border-brand-border pb-2 mb-3">
+                        <h3 class="text-sm font-bold font-condensed uppercase tracking-wider text-gray-300 flex items-center gap-2">
+                            <i data-lucide="activity" class="w-4 h-4 text-brand-blue"></i> Lap Time Trend (Top 3)
+                        </h3>
+                        <span class="text-[10px] font-mono-f1 text-brand-dimText">Laps 1 - 14</span>
+                    </div>
+                    <div id="chart-lap-trend" class="flex-grow w-full"></div>
+                </div>
+
+                <!-- Abstract Track Strip -->
+                <div class="glass-panel rounded-lg p-4 flex flex-col h-[40%]">
+                    <div class="flex items-center justify-between border-b border-brand-border pb-2 mb-2">
+                        <h3 class="text-sm font-bold font-condensed uppercase tracking-wider text-gray-300 flex items-center gap-2">
+                            <i data-lucide="navigation" class="w-4 h-4 text-brand-red"></i> Schematic Track Map (Monza)
+                        </h3>
+                        <span class="text-[10px] font-mono-f1 text-brand-blue">Live Car Tracking</span>
+                    </div>
+                    
+                    <!-- SVG Abstract Track -->
+                    <div class="flex-grow w-full flex items-center justify-center relative overflow-hidden bg-black/40 rounded border border-brand-border/30">
+                        <svg viewBox="0 0 600 120" class="w-full h-[90px]">
+                            <!-- Abstract layout line -->
+                            <path id="track-path" d="M 30,60 Q 150,15 300,60 T 570,60" fill="none" stroke="#232429" stroke-width="6" stroke-linecap="round"></path>
+                            <!-- Racing Line Overlay -->
+                            <path d="M 30,60 Q 150,15 300,60 T 570,60" fill="none" stroke="#3A3C45" stroke-width="2" stroke-linecap="round"></path>
+                            
+                            <!-- Track sectors text markers -->
+                            <text x="70" y="95" class="fill-brand-dimText font-mono-f1 text-[8px] uppercase">Sector 1</text>
+                            <text x="280" y="95" class="fill-brand-dimText font-mono-f1 text-[8px] uppercase">Sector 2</text>
+                            <text x="480" y="95" class="fill-brand-dimText font-mono-f1 text-[8px] uppercase">Sector 3</text>
+
+                            <!-- Live driver dots on path -->
+                            <!-- VER -->
+                            <circle id="dot-ver" cx="0" cy="0" r="5.5" class="fill-team-redbull stroke-black stroke-2" style="offset-path: path('M 30,60 Q 150,15 300,60 T 570,60'); offset-distance: 82%;"></circle>
+                            <!-- NOR -->
+                            <circle id="dot-nor" cx="0" cy="0" r="5.5" class="fill-team-mclaren stroke-black stroke-2" style="offset-path: path('M 30,60 Q 150,15 300,60 T 570,60'); offset-distance: 74%;"></circle>
+                            <!-- HAM -->
+                            <circle id="dot-ham" cx="0" cy="0" r="5.5" class="fill-team-mercedes stroke-black stroke-2" style="offset-path: path('M 30,60 Q 150,15 300,60 T 570,60'); offset-distance: 61%;"></circle>
+                        </svg>
+
+                        <!-- Legend overlay -->
+                        <div class="absolute bottom-1 right-2 flex gap-3 text-[8px] font-mono-f1 uppercase text-brand-dimText">
+                            <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-team-redbull"></span> VER</span>
+                            <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-team-mclaren"></span> NOR</span>
+                            <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-team-mercedes"></span> HAM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Rail: Selected Driver Card & Weather -->
+            <div class="lg:col-span-3 flex flex-col gap-6 h-[650px]">
+                <!-- Driver Details Panel -->
+                <div class="flex-grow glass-panel rounded-lg p-5 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <div class="flex items-start justify-between border-b border-brand-border pb-3 mb-4">
+                            <div>
+                                <span id="card-team-name" class="text-[10px] font-mono-f1 uppercase text-brand-dimText tracking-wider">McLaren F1 Team</span>
+                                <h2 id="card-driver-name" class="text-2xl font-extrabold font-condensed tracking-tight text-white mt-0.5">Lando Norris</h2>
+                            </div>
+                            <span id="card-position" class="text-3xl font-extrabold font-mono-f1 text-brand-blue tracking-tighter">P2</span>
+                        </div>
+
+                        <!-- Mini profile details -->
+                        <div class="space-y-4">
+                            <div class="flex justify-between text-xs font-mono-f1">
+                                <span class="text-brand-dimText">Interval to Leader:</span>
+                                <span id="card-gap-leader" class="text-white font-semibold">+1.432s</span>
+                            </div>
+                            <div class="flex justify-between text-xs font-mono-f1">
+                                <span class="text-brand-dimText">Last Lap Time:</span>
+                                <span id="card-last-lap" class="text-brand-blue font-semibold">1:21.842</span>
+                            </div>
+                            
+                            <!-- Compound age -->
+                            <div class="flex items-center justify-between text-xs font-mono-f1 border-t border-brand-border/40 pt-3">
+                                <span class="text-brand-dimText">Tyre Compound:</span>
+                                <div class="flex items-center gap-1.5">
+                                    <span id="card-compound-badge" class="w-2.5 h-2.5 rounded-full bg-brand-red"></span>
+                                    <span id="card-compound-text" class="text-white font-semibold">SOFT (5 Laps)</span>
+                                </div>
+                            </div>
+
+                            <!-- Tyre wear progress bar (6px, color shifting) -->
+                            <div class="space-y-1.5">
+                                <div class="flex justify-between text-[10px] font-mono-f1 uppercase text-brand-dimText">
+                                    <span>Calculated Wear</span>
+                                    <span id="card-wear-pct" class="text-white">23%</span>
+                                </div>
+                                <div class="w-full bg-[#1b1c24] h-1.5 rounded-full overflow-hidden">
+                                    <div id="card-wear-bar" class="h-full bg-brand-blue rounded-full transition-all duration-300" style="width: 23%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual layout details of driver telemetry inputs -->
+                    <div class="border-t border-brand-border/60 pt-4 mt-4 space-y-3">
+                        <h4 class="text-[10px] font-bold font-mono-f1 text-brand-dimText uppercase tracking-wider">Tyre Temperature Profile</h4>
+                        <div class="grid grid-cols-2 gap-2 text-center">
+                            <div class="bg-black/40 border border-brand-border p-2 rounded">
+                                <span class="text-[8px] font-mono-f1 text-brand-dimText uppercase">Front Left</span>
+                                <div class="text-xs font-mono-f1 font-bold text-[#10B981] mt-0.5">85°C</div>
+                            </div>
+                            <div class="bg-black/40 border border-brand-border p-2 rounded">
+                                <span class="text-[8px] font-mono-f1 text-brand-dimText uppercase">Front Right</span>
+                                <div class="text-xs font-mono-f1 font-bold text-[#10B981] mt-0.5">87°C</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Climate Panel -->
+                <div class="glass-panel rounded-lg p-4 h-[160px] shadow-lg flex flex-col justify-between">
+                    <h4 class="text-[10px] font-bold font-mono-f1 text-brand-dimText uppercase tracking-wider border-b border-brand-border pb-1.5">Sector Climate Conditions</h4>
+                    <div class="grid grid-cols-3 gap-2 py-1">
+                        <div class="text-center">
+                            <i data-lucide="sun" class="w-4 h-4 mx-auto text-yellow-500 mb-1"></i>
+                            <span class="text-[8px] font-mono-f1 text-brand-dimText block">Track Temp</span>
+                            <span class="text-xs font-mono-f1 font-bold text-white">41.2°C</span>
+                        </div>
+                        <div class="text-center border-x border-brand-border">
+                            <i data-lucide="wind" class="w-4 h-4 mx-auto text-brand-blue mb-1"></i>
+                            <span class="text-[8px] font-mono-f1 text-brand-dimText block">Wind Speed</span>
+                            <span class="text-xs font-mono-f1 font-bold text-white">2.4 m/s</span>
+                        </div>
+                        <div class="text-center">
+                            <i data-lucide="cloud-rain" class="w-4 h-4 mx-auto text-brand-dimText mb-1"></i>
+                            <span class="text-[8px] font-mono-f1 text-brand-dimText block">Rain Prob</span>
+                            <span class="text-xs font-mono-f1 font-bold text-white">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- VIEW 2: SCHEMA EXPLORER VIEW -->
+        <section id="view-schema" class="hidden flex flex-col h-[700px] relative overflow-hidden glass-panel rounded-lg border border-brand-border">
+            
+            <!-- Schema Header Controls -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-brand-border p-4 z-20 bg-[#0A0A0D]/90 backdrop-blur-md">
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="flex bg-black/60 p-1 rounded border border-brand-border">
+                        <button id="btn-star" onclick="setSchemaType('star')" class="px-4 py-1.5 rounded text-xs font-bold font-condensed uppercase tracking-wider transition duration-150 bg-brand-red text-white">
+                            Star Model
+                        </button>
+                        <button id="btn-snowflake" onclick="setSchemaType('snowflake')" class="px-4 py-1.5 rounded text-xs font-bold font-condensed uppercase tracking-wider transition duration-150 text-brand-dimText hover:text-white">
+                            Snowflake Model
+                        </button>
+                    </div>
+                    <span class="text-[10px] font-mono-f1 text-brand-dimText uppercase hidden sm:inline" id="schema-desc-pill">
+                        DIM_RACE incorporates Circuit Attributes (Denormalized)
+                    </span>
+                </div>
+
+                <!-- Controls & Search -->
+                <div class="flex items-center gap-3 w-full md:w-auto">
+                    <!-- Dotted Schema Search -->
+                    <div class="relative w-full sm:w-64">
+                        <input type="text" id="search-input" onkeyup="handleSearch()" placeholder="Search tables or columns..." 
+                               class="w-full bg-[#101014] border border-brand-border focus:border-brand-red rounded px-3 py-1.5 pl-9 text-xs text-white placeholder-brand-dimText focus:outline-none transition font-mono-f1">
+                        <i data-lucide="search" class="absolute left-3 top-2.5 text-brand-dimText w-3.5 h-3.5"></i>
+                        <button onclick="clearSearch()" class="absolute right-3 top-2 text-brand-dimText hover:text-white hidden" id="clear-search-btn">
+                            <i data-lucide="x-circle" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+
+                    <!-- Zoom Controls -->
+                    <div class="flex items-center bg-[#101014] border border-brand-border rounded p-0.5">
+                        <button onclick="zoomIn()" class="p-1.5 hover:bg-brand-border rounded text-brand-dimText hover:text-white transition">
+                            <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i>
+                        </button>
+                        <button onclick="zoomOut()" class="p-1.5 hover:bg-brand-border rounded text-brand-dimText hover:text-white transition">
+                            <i data-lucide="zoom-out" class="w-3.5 h-3.5"></i>
+                        </button>
+                        <button onclick="zoomFit()" class="p-1.5 hover:bg-brand-border rounded text-brand-dimText hover:text-white transition" title="Fit to Screen">
+                            <i data-lucide="maximize" class="w-3.5 h-3.5"></i>
+                        </button>
+                        <button onclick="zoomReset()" class="p-1.5 hover:bg-brand-border rounded text-brand-dimText hover:text-white transition" title="Reset Zoom">
+                            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+
+                    <span class="text-xs font-mono-f1 bg-black/60 border border-brand-border px-2 py-1.5 rounded text-brand-dimText" id="zoom-indicator">
+                        100%
+                    </span>
+                </div>
+            </div>
+
+            <!-- Focus Mode Indicator Banner -->
+            <div id="focus-banner" class="absolute top-20 left-4 bg-brand-red/10 border border-brand-red/40 text-brand-red text-xs px-3 py-2 rounded flex items-center gap-2 z-20 opacity-0 pointer-events-none transition duration-300 font-condensed uppercase tracking-wider">
+                <i data-lucide="eye" class="w-4 h-4"></i>
+                <span>Focus View Active. Click diagram canvas background to reset.</span>
+            </div>
+
+            <!-- Canvas Grid with Dotted Background -->
+            <div class="flex-grow w-full relative overflow-hidden bg-[#0A0A0E] grid-bg border-t border-brand-border" id="canvas-container">
+                <svg id="svg-canvas" class="w-full h-full cursor-grab active:cursor-grabbing">
+                    <g id="zoom-group"></g>
+                </svg>
+
+                <!-- Floating Legend Panel (Fixed Non-Scrolling) -->
+                <div class="absolute bottom-4 left-4 glass-panel border border-brand-border rounded p-2.5 shadow-2xl flex flex-col gap-1.5 pointer-events-none select-none z-10 w-36">
+                    <span class="text-[9px] font-bold font-condensed uppercase text-white border-b border-brand-border pb-1">Legend</span>
+                    <span class="text-[8px] font-mono-f1 uppercase text-brand-dimText flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-brand-red opacity-60"></span> Fact Table</span>
+                    <span class="text-[8px] font-mono-f1 uppercase text-brand-dimText flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-brand-blue opacity-60"></span> Dimension</span>
+                    <span class="text-[8px] font-mono-f1 uppercase text-brand-dimText flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-purple-500 opacity-60"></span> Snowflake Sub</span>
+                </div>
+
+                <!-- Floating Mini-Map Panel (Fixed Non-Scrolling) -->
+                <div class="absolute bottom-4 right-4 w-44 h-28 glass-panel border border-brand-border rounded p-1.5 shadow-2xl pointer-events-none overflow-hidden select-none z-10 bg-brand-bg/80 backdrop-blur-sm">
+                    <span class="text-[9px] font-bold font-condensed uppercase text-brand-dimText absolute top-1 left-2">Schema Minimap</span>
+                    <svg id="svg-minimap" class="w-full h-full opacity-50"></svg>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- VIEW 3: LINEAGE MAPPER VIEW (Interactive Source-to-Target Dictionary) -->
+        <section id="view-lineage" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 h-[700px]">
+            
+            <!-- Left Column: Source CSV Fields -->
+            <div class="lg:col-span-4 glass-panel rounded-lg p-4 flex flex-col h-full overflow-hidden">
+                <div class="border-b border-brand-border pb-3 mb-3">
+                    <h3 class="text-sm font-bold font-condensed uppercase tracking-wider text-gray-300 flex items-center gap-2">
+                        <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-500"></i> Source CSV Columns
+                    </h3>
+                    <!-- Search Box -->
+                    <div class="relative mt-2">
+                        <input type="text" id="lineage-search" onkeyup="filterSourceFields()" placeholder="Search source column..." 
+                               class="w-full bg-[#101014] border border-brand-border focus:border-brand-red rounded px-3 py-1.5 pl-9 text-xs text-white placeholder-brand-dimText focus:outline-none transition font-mono-f1">
+                        <i data-lucide="search" class="absolute left-3 top-2.5 text-brand-dimText w-3.5 h-3.5"></i>
+                    </div>
+                </div>
+
+                <!-- Source Fields List -->
+                <div id="source-fields-list" class="flex-grow overflow-y-auto space-y-1.5 pr-1">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+
+            <!-- Center Column: Visual Mapping & Transformation details -->
+            <div class="lg:col-span-4 flex flex-col gap-6 h-full justify-center">
+                <div class="glass-panel rounded-lg p-6 shadow-2xl flex flex-col items-center text-center justify-between min-h-[350px]">
+                    <div class="w-full">
+                        <h4 class="text-xs font-bold font-condensed uppercase tracking-wider text-brand-dimText border-b border-brand-border pb-2.5 mb-6">
+                            Active Transformation Lineage
+                        </h4>
+
+                        <!-- Visual flow cards -->
+                        <div class="space-y-6 w-full px-2">
+                            <!-- Source Field Box -->
+                            <div class="bg-[#101815] border border-emerald-900/50 rounded p-3 text-left">
+                                <span class="text-[8px] font-mono-f1 uppercase text-emerald-400 font-semibold">CSV Column Source</span>
+                                <div id="lineage-flow-source" class="text-sm font-mono-f1 font-bold text-white mt-1">driver_nationality</div>
+                            </div>
+
+                            <!-- Flow arrow and rule indicator -->
+                            <div class="flex flex-col items-center">
+                                <i data-lucide="arrow-down-to-dot" class="w-6 h-6 text-brand-blue animate-bounce"></i>
+                                <span id="lineage-flow-rule" class="text-[9px] font-mono-f1 text-brand-blue bg-brand-blue/10 border border-brand-blue/20 rounded px-2.5 py-1 mt-2.5 text-center max-w-[260px]">
+                                    Direct Mapping (VARCHAR)
+                                </span>
+                            </div>
+
+                            <!-- Target Table/Col Box -->
+                            <div class="bg-[#0f1424] border border-blue-900/50 rounded p-3 text-left">
+                                <span class="text-[8px] font-mono-f1 uppercase text-brand-blue font-semibold">Data Warehouse Target</span>
+                                <div id="lineage-flow-target" class="text-sm font-mono-f1 font-bold text-white mt-1">DIM_DRIVER.driver_nationality</div>
+                                <span id="lineage-flow-type" class="text-[8px] font-mono-f1 text-brand-dimText mt-1 block">Data Type: VARCHAR(50)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-[9px] font-mono-f1 text-brand-dimText uppercase tracking-wider">
+                        PaddockIQ Mapping System
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Target Database Tables -->
+            <div class="lg:col-span-4 glass-panel rounded-lg p-4 flex flex-col h-full overflow-hidden">
+                <h3 class="text-sm font-bold font-condensed uppercase tracking-wider text-gray-300 border-b border-brand-border pb-2.5 mb-3 flex items-center gap-2">
+                    <i data-lucide="database" class="w-4 h-4 text-brand-blue"></i> Database Target Schema
+                </h3>
+
+                <!-- Tables List -->
+                <div id="target-tables-list" class="flex-grow overflow-y-auto space-y-4 pr-1">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- JS Logic Core -->
+    <script>
+        // --- 1. LIVE DRIVER CONFIGURATION & LIST ---
+        const drivers = [
+            { id: 'ver', initials: 'VER', name: 'Max Verstappen', team: 'Red Bull Racing', teamColor: '#3671C6', position: 'P1', gap: 'LEADER', lastLap: '1:21.410', tyre: 'MEDIUM (12 Laps)', wear: 34, trackDist: '82%' },
+            { id: 'nor', initials: 'NOR', name: 'Lando Norris', team: 'McLaren F1 Team', teamColor: '#FF8000', position: 'P2', gap: '+1.432s', lastLap: '1:21.842', tyre: 'SOFT (5 Laps)', wear: 23, trackDist: '74%' },
+            { id: 'ham', initials: 'HAM', name: 'Lewis Hamilton', team: 'Mercedes-AMG F1', teamColor: '#27F4D2', position: 'P3', gap: '+4.810s', lastLap: '1:22.012', tyre: 'SOFT (6 Laps)', wear: 26, trackDist: '61%' },
+            { id: 'lec', initials: 'LEC', name: 'Charles Leclerc', team: 'Scuderia Ferrari', teamColor: '#E8002D', position: 'P4', gap: '+5.922s', lastLap: '1:21.905', tyre: 'MEDIUM (14 Laps)', wear: 41, trackDist: '54%' },
+            { id: 'alo', initials: 'ALO', name: 'Fernando Alonso', team: 'Aston Martin F1', teamColor: '#229971', position: 'P5', gap: '+12.441s', lastLap: '1:22.610', tyre: 'HARD (20 Laps)', wear: 18, trackDist: '42%' }
+        ];
+
+        let selectedDriverId = 'nor';
+
+        function buildDriverStandings() {
+            const container = document.getElementById('driver-list');
+            container.innerHTML = '';
+
+            drivers.forEach(d => {
+                const isSelected = d.id === selectedDriverId;
+                const activeBg = isSelected ? 'bg-brand-border/40 border-brand-red/80' : 'bg-black/20 border-transparent hover:bg-brand-border/20';
+                
+                const div = document.createElement('div');
+                div.className = `border rounded p-2.5 transition duration-150 cursor-pointer ${activeBg} flex items-center justify-between`;
+                div.onclick = () => selectDriver(d.id);
+                
+                div.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-mono-f1 font-bold text-brand-dimText w-5">${d.position}</span>
+                        <!-- Team vertical color chip -->
+                        <div class="w-1 h-5 rounded-full" style="background-color: ${d.teamColor}"></div>
+                        <div>
+                            <span class="text-xs font-mono-f1 font-semibold text-white">${d.initials}</span>
+                            <span class="text-[9px] font-mono-f1 text-brand-dimText block truncate max-w-[120px]">${d.name}</span>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-mono-f1 font-medium ${d.gap === 'LEADER' ? 'text-brand-red' : 'text-gray-300'}">${d.gap}</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function selectDriver(driverId) {
+            selectedDriverId = driverId;
+            buildDriverStandings();
+
+            const d = drivers.find(drv => drv.id === driverId);
+            if (d) {
+                // Update Driver Card details
+                document.getElementById('card-team-name').textContent = d.team;
+                document.getElementById('card-driver-name').textContent = d.name;
+                document.getElementById('card-position').textContent = d.position;
+                document.getElementById('card-gap-leader').textContent = d.gap;
+                document.getElementById('card-last-lap').textContent = d.lastLap;
+                
+                const compoundNode = document.getElementById('card-compound-text');
+                const badgeNode = document.getElementById('card-compound-badge');
+                
+                if (compoundNode) compoundNode.textContent = d.tyre;
+                if (badgeNode) badgeNode.style.backgroundColor = d.tyre.includes('SOFT') ? '#E10600' : (d.tyre.includes('MEDIUM') ? '#FF8000' : '#FFFFFF');
+
+                document.getElementById('card-wear-pct').textContent = `${d.wear}%`;
+                const wearBar = document.getElementById('card-wear-bar');
+                wearBar.style.width = `${d.wear}%`;
+                
+                // Color shift progress bar: Cyan/Blue to Red based on wear percentage
+                if (d.wear > 50) {
+                    wearBar.style.backgroundColor = '#E10600';
+                } else if (d.wear > 30) {
+                    wearBar.style.backgroundColor = '#f59e0b';
+                } else {
+                    wearBar.style.backgroundColor = '#00D2FF';
+                }
+            }
+        }
+
+
+        // --- 2. TELEMETRY LINE CHART (ECharts) ---
+        let lapTrendChart;
+
+        function initLapTrendChart() {
+            const chartDom = document.getElementById('chart-lap-trend');
+            lapTrendChart = echarts.init(chartDom, 'dark', { backgroundColor: 'transparent' });
+            lapTrendChart.setOption({
+                tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
+                legend: { data: ['VER', 'NOR', 'HAM'], right: 10, textStyle: { color: '#7C7D84', fontFamily: 'JetBrains Mono' } },
+                grid: { left: '3%', right: '4%', bottom: '5%', top: '10%', containLabel: true },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: Array.from({length: 14}, (_, i) => `L${i+1}`),
+                    axisLabel: { color: '#7C7D84', fontFamily: 'JetBrains Mono' },
+                    axisLine: { lineStyle: { color: '#232429' } }
+                },
+                yAxis: {
+                    type: 'value',
+                    scale: true,
+                    axisLabel: { 
+                        color: '#7C7D84', 
+                        fontFamily: 'JetBrains Mono',
+                        formatter: (val) => {
+                            const min = Math.floor(val / 60);
+                            const sec = (val % 60).toFixed(1);
+                            return `${min}:${sec.padStart(4, '0')}`;
+                        }
+                    },
+                    splitLine: { lineStyle: { color: '#141418' } }
+                },
+                series: [
+                    {
+                        name: 'VER',
+                        type: 'line',
+                        smooth: true,
+                        data: [82.4, 82.1, 81.9, 81.8, 81.6, 81.5, 81.4, 81.5, 81.3, 81.4, 81.5, 81.3, 81.2, 81.4],
+                        lineStyle: { color: '#3671C6', width: 2 },
+                        showSymbol: false
+                    },
+                    {
+                        name: 'NOR',
+                        type: 'line',
+                        smooth: true,
+                        data: [83.0, 82.5, 82.2, 82.0, 81.9, 81.7, 81.8, 81.6, 81.5, 81.7, 81.8, 81.9, 81.6, 81.8],
+                        lineStyle: { color: '#FF8000', width: 2 },
+                        showSymbol: false
+                    },
+                    {
+                        name: 'HAM',
+                        type: 'line',
+                        smooth: true,
+                        data: [83.5, 83.1, 82.8, 82.4, 82.3, 82.1, 82.2, 82.0, 82.1, 82.3, 82.5, 82.4, 82.2, 82.0],
+                        lineStyle: { color: '#27F4D2', width: 2 },
+                        showSymbol: false
+                    }
+                ]
+            });
+        }
+
+
+        // --- 3. VIEW MODE CONTROLLERS ---
+        let currentViewMode = 'live';
+
+        function setViewMode(mode) {
+            currentViewMode = mode;
+            const liveSec = document.getElementById('view-live');
+            const schemaSec = document.getElementById('view-schema');
+            const lineageSec = document.getElementById('view-lineage');
+            
+            const liveBtn = document.getElementById('tab-live-btn');
+            const schemaBtn = document.getElementById('tab-schema-btn');
+            const lineageBtn = document.getElementById('tab-lineage-btn');
+
+            // Reset tab button states
+            [liveBtn, schemaBtn, lineageBtn].forEach(b => {
+                b.className = "px-5 py-1.5 rounded-full text-xs font-bold font-condensed uppercase tracking-wider transition duration-200 text-brand-dimText hover:text-white";
+            });
+
+            // Show active section
+            liveSec.classList.add('hidden');
+            schemaSec.classList.add('hidden');
+            lineageSec.classList.add('hidden');
+
+            if (mode === 'live') {
+                liveSec.classList.remove('hidden');
+                liveBtn.className = "px-5 py-1.5 rounded-full text-xs font-bold font-condensed uppercase tracking-wider transition duration-200 bg-brand-red text-white";
+                setTimeout(() => { if (lapTrendChart) lapTrendChart.resize(); }, 50);
+            } else if (mode === 'schema') {
+                schemaSec.classList.remove('hidden');
+                schemaBtn.className = "px-5 py-1.5 rounded-full text-xs font-bold font-condensed uppercase tracking-wider transition duration-200 bg-brand-red text-white";
+                setTimeout(() => {
+                    if (!svg) initSchemaGraph();
+                    zoomFit();
+                }, 50);
+            } else if (mode === 'lineage') {
+                lineageSec.classList.remove('hidden');
+                lineageBtn.className = "px-5 py-1.5 rounded-full text-xs font-bold font-condensed uppercase tracking-wider transition duration-200 bg-brand-red text-white";
+                
+                // Initialize Data Lineage tables
+                setTimeout(() => {
+                    buildLineageLayout();
+                    selectSourceField('driver_nationality');
+                }, 50);
+            }
+        }
+
+
+        // --- 4. SCHEMA CANVAS CONTROLLER (D3 + Dagre-D3) ---
+        let currentSchemaType = 'star';
+        let svg, zoomGroup, inner, d3Zoom, activeNodeFocus = null;
+
+        // Expanded/Collapsed node states
+        const tableCollapseStates = {
+            'FACT_RACE_RESULTS': false,
+            'DIM_DRIVER': true,
+            'DIM_CONSTRUCTOR': true,
+            'DIM_RACE': true,
+            'DIM_CIRCUIT': true,
+            'DIM_STATUS': true,
+            'DIM_DATE': true
+        };
+
+        const schemasData = {
+            tables: {
+                'FACT_RACE_RESULTS': {
+                    title: 'FACT_RACE_RESULTS',
+                    type: 'fact',
+                    columns: [
+                        { name: 'result_id', type: 'SERIAL', key: 'PK' },
+                        { name: 'race_id', type: 'INT', key: 'FK' },
+                        { name: 'driver_id', type: 'INT', key: 'FK' },
+                        { name: 'constructor_id', type: 'INT', key: 'FK' },
+                        { name: 'date_id', type: 'INT', key: 'FK' },
+                        { name: 'status_id', type: 'INT', key: 'FK' },
+                        { name: 'car_number', type: 'INT' },
+                        { name: 'grid_position', type: 'INT' },
+                        { name: 'qualifying_position', type: 'INT' },
+                        { name: 'qualifying_best_time_sec', type: 'DECIMAL(6,3)' },
+                        { name: 'finish_position', type: 'INT' },
+                        { name: 'finish_position_text', type: 'VARCHAR(10)' },
+                        { name: 'race_points', type: 'DECIMAL(5,2)' },
+                        { name: 'race_laps', type: 'INT' },
+                        { name: 'race_time', type: 'VARCHAR(20)' },
+                        { name: 'race_milliseconds', type: 'BIGINT' },
+                        { name: 'fastest_lap_number', type: 'INT' },
+                        { name: 'fastest_lap_rank', type: 'INT' },
+                        { name: 'fastest_lap_time', type: 'VARCHAR(20)' },
+                        { name: 'fastest_lap_speed', type: 'DECIMAL(6,3)' },
+                        { name: 'pit_stop_count', type: 'INT' },
+                        { name: 'total_pit_duration_sec', type: 'DECIMAL(7,3)' },
+                        { name: 'avg_pit_duration_sec', type: 'DECIMAL(6,3)' },
+                        { name: 'fastest_pit_duration_sec', type: 'DECIMAL(6,3)' },
+                        { name: 'last_pit_lap', type: 'INT' },
+                        { name: 'laps_recorded', type: 'INT' },
+                        { name: 'fastest_recorded_lap_ms', type: 'INT' },
+                        { name: 'average_lap_ms', type: 'INT' },
+                        { name: 'sprint_position', type: 'INT' },
+                        { name: 'sprint_points', type: 'DECIMAL(5,2)' },
+                        { name: 'driver_standing_points', type: 'DECIMAL(7,2)' },
+                        { name: 'driver_championship_position', type: 'INT' },
+                        { name: 'driver_championship_wins', type: 'INT' },
+                        { name: 'constructor_standing_points', type: 'DECIMAL(7,2)' },
+                        { name: 'constructor_championship_position', type: 'INT' },
+                        { name: 'constructor_championship_wins', type: 'INT' },
+                        { name: 'constructor_race_points', type: 'DECIMAL(7,2)' },
+                        { name: 'position_gain', type: 'INT' },
+                        { name: 'qualifying_to_finish_delta', type: 'INT' },
+                        { name: 'is_pole', type: 'INT' },
+                        { name: 'is_podium', type: 'INT' },
+                        { name: 'is_win', type: 'INT' },
+                        { name: 'is_top_10', type: 'INT' },
+                        { name: 'is_dnf', type: 'INT' },
+                        { name: 'points_per_lap', type: 'DECIMAL(6,4)' },
+                        { name: 'race_completion_pct', type: 'DECIMAL(5,4)' },
+                        { name: 'driver_age_years', type: 'DECIMAL(5,2)' },
+                        { name: 'driver_standing_gap_to_leader', type: 'DECIMAL(7,2)' },
+                        { name: 'constructor_standing_gap_to_leader', type: 'DECIMAL(7,2)' }
+                    ]
+                },
+                'DIM_DRIVER': {
+                    title: 'DIM_DRIVER',
+                    type: 'dim',
+                    columns: [
+                        { name: 'driver_id', type: 'INT', key: 'PK' },
+                        { name: 'driver_ref', type: 'VARCHAR(50)', key: 'Unique' },
+                        { name: 'driver_code', type: 'VARCHAR(3)' },
+                        { name: 'driver_name', type: 'VARCHAR(100)' },
+                        { name: 'driver_dob', type: 'DATE' },
+                        { name: 'driver_nationality', type: 'VARCHAR(50)' }
+                    ]
+                },
+                'DIM_CONSTRUCTOR': {
+                    title: 'DIM_CONSTRUCTOR',
+                    type: 'dim',
+                    columns: [
+                        { name: 'constructor_id', type: 'INT', key: 'PK' },
+                        { name: 'constructor_ref', type: 'VARCHAR(50)', key: 'Unique' },
+                        { name: 'constructor_name', type: 'VARCHAR(100)' },
+                        { name: 'constructor_nationality', type: 'VARCHAR(50)' }
+                    ]
+                },
+                'DIM_STATUS': {
+                    title: 'DIM_STATUS',
+                    type: 'dim',
+                    columns: [
+                        { name: 'status_id', type: 'SERIAL', key: 'PK' },
+                        { name: 'status_description', type: 'VARCHAR(100)', key: 'Unique' }
+                    ]
+                },
+                'DIM_DATE': {
+                    title: 'DIM_DATE',
+                    type: 'dim',
+                    columns: [
+                        { name: 'date_id', type: 'INT', key: 'PK' },
+                        { name: 'full_date', type: 'DATE', key: 'Unique' },
+                        { name: 'year', type: 'INT' },
+                        { name: 'quarter', type: 'INT' },
+                        { name: 'month', type: 'INT' },
+                        { name: 'month_name', type: 'VARCHAR(20)' },
+                        { name: 'day_of_week', type: 'INT' },
+                        { name: 'day_name', type: 'VARCHAR(20)' }
+                    ]
+                },
+                'DIM_RACE': {
+                    title: 'DIM_RACE',
+                    type: 'dim',
+                    columns: {
+                        star: [
+                            { name: 'race_id', type: 'INT', key: 'PK' },
+                            { name: 'season_year', type: 'INT' },
+                            { name: 'round', type: 'INT' },
+                            { name: 'race_name', type: 'VARCHAR(100)' },
+                            { name: 'race_date', type: 'DATE' },
+                            { name: 'race_start_time', type: 'TIME' },
+                            { name: 'circuit_id', type: 'INT' },
+                            { name: 'circuit_name', type: 'VARCHAR(150)' },
+                            { name: 'circuit_location', type: 'VARCHAR(100)' },
+                            { name: 'circuit_country', type: 'VARCHAR(100)' },
+                            { name: 'circuit_latitude', type: 'DECIMAL(9,6)' },
+                            { name: 'circuit_longitude', type: 'DECIMAL(9,6)' },
+                            { name: 'circuit_altitude_m', type: 'INT' }
+                        ],
+                        snowflake: [
+                            { name: 'race_id', type: 'INT', key: 'PK' },
+                            { name: 'season_year', type: 'INT' },
+                            { name: 'round', type: 'INT' },
+                            { name: 'race_name', type: 'VARCHAR(100)' },
+                            { name: 'circuit_id', type: 'INT', key: 'FK' },
+                            { name: 'race_date', type: 'DATE' },
+                            { name: 'race_start_time', type: 'TIME' }
+                        ]
+                    }
+                },
+                'DIM_CIRCUIT': {
+                    title: 'DIM_CIRCUIT',
+                    type: 'sub-dim',
+                    columns: [
+                        { name: 'circuit_id', type: 'INT', key: 'PK' },
+                        { name: 'circuit_name', type: 'VARCHAR(150)' },
+                        { name: 'circuit_location', type: 'VARCHAR(100)' },
+                        { name: 'circuit_country', type: 'VARCHAR(100)' },
+                        { name: 'circuit_latitude', type: 'DECIMAL(9,6)' },
+                        { name: 'circuit_longitude', type: 'DECIMAL(9,6)' },
+                        { name: 'circuit_altitude_m', type: 'INT' }
+                    ]
+                }
+            },
+            relationships: {
+                star: [
+                    { from: 'DIM_DRIVER', to: 'FACT_RACE_RESULTS', label: '1:N' },
+                    { from: 'DIM_CONSTRUCTOR', to: 'FACT_RACE_RESULTS', label: '1:N' },
+                    { from: 'DIM_RACE', to: 'FACT_RACE_RESULTS', label: '1:N' },
+                    { from: 'DIM_STATUS', to: 'FACT_RACE_RESULTS', label: '1:N' },
+                    { from: 'DIM_DATE', to: 'FACT_RACE_RESULTS', label: '1:N' }
+                ],
+                snowflake: [
+                    { from: 'DIM_DRIVER', to: 'FACT_RACE_RESULTS', label: '1:N' },
+                    { from: 'DIM_CONSTRUCTOR', to: 'FACT_RACE_RESULTS', label: '1:N' },
+                    { from: 'DIM_RACE', to: 'FACT_RACE_RESULTS', label: '1:N' },
+                    { from: 'DIM_STATUS', to: 'FACT_RACE_RESULTS', label: '1:N' },
+                    { from: 'DIM_DATE', to: 'FACT_RACE_RESULTS', label: '1:N' },
+                    { from: 'DIM_CIRCUIT', to: 'DIM_RACE', label: '1:N', isSnowflakeLink: true }
+                ]
+            }
+        };
+
+        function initSchemaGraph() {
+            svg = d3.select("#svg-canvas");
+            zoomGroup = d3.select("#zoom-group");
+            inner = zoomGroup.append("g");
+
+            // Define Zoom behavior bounds
+            d3Zoom = d3.zoom()
+                .scaleExtent([0.25, 2.0])
+                .on("zoom", () => {
+                    const t = d3.event.transform;
+                    inner.attr("transform", t);
+                    document.getElementById('zoom-indicator').textContent = `${Math.round(t.k * 100)}%`;
+                    updateMinimap(t);
+                });
+
+            svg.call(d3Zoom);
+
+            // Close focus on SVG background click
+            svg.on("click", function() {
+                if (d3.event.target === this) {
+                    clearFocus();
+                }
+            });
+
+            renderDiagram();
+        }
+
+        // Toggle Table Expand/Collapse
+        function toggleTable(tableName) {
+            tableCollapseStates[tableName] = !tableCollapseStates[tableName];
+            renderDiagram();
+        }
+
+        function clearFocus() {
+            activeNodeFocus = null;
+            d3.selectAll(".node foreignObject").classed("dimmed", false).classed("focused", false);
+            d3.selectAll(".edgePath path").classed("dimmed", false).classed("active-edge", false);
+            d3.select("#focus-banner").style("opacity", "0");
+        }
+
+        // Highlight selection mode
+        function toggleFocusMode(tableName) {
+            d3.event.stopPropagation();
+            if (activeNodeFocus === tableName) {
+                clearFocus();
+                return;
+            }
+            activeNodeFocus = tableName;
+            d3.select("#focus-banner").style("opacity", "1");
+
+            // Filter nodes
+            d3.selectAll(".node foreignObject").each(function() {
+                const nodeName = d3.select(this).attr("data-name");
+                const isMatch = (nodeName === tableName);
+                d3.select(this).classed("dimmed", !isMatch).classed("focused", isMatch);
+            });
+
+            // Find related connections
+            const connectedTables = new Set([tableName]);
+            const schemaRels = schemasData.relationships[currentSchemaType];
+            
+            schemaRels.forEach(rel => {
+                if (rel.from === tableName) connectedTables.add(rel.to);
+                if (rel.to === tableName) connectedTables.add(rel.from);
+            });
+
+            d3.selectAll(".node foreignObject").each(function() {
+                const nodeName = d3.select(this).attr("data-name");
+                if (connectedTables.has(nodeName)) {
+                    d3.select(this).classed("dimmed", false);
+                }
+            });
+
+            // Highlight lines
+            d3.selectAll(".edgePath").each(function() {
+                const edge = d3.select(this);
+                const path = edge.select("path");
+                const edgeId = edge.attr("id");
+                const parts = edgeId.replace("edge-", "").split("-");
+                
+                const isConnected = (parts[0] === tableName || parts[1] === tableName);
+                path.classed("active-edge", isConnected).classed("dimmed", !isConnected);
+            });
+        }
+
+        // Switch schema layout
+        function setSchemaType(type) {
+            currentSchemaType = type;
+            document.getElementById('btn-star').className = type === 'star' 
+                ? "px-4 py-1.5 rounded text-xs font-bold font-condensed uppercase tracking-wider transition duration-150 bg-brand-red text-white"
+                : "px-4 py-1.5 rounded text-xs font-bold font-condensed uppercase tracking-wider transition duration-150 text-brand-dimText hover:text-white";
+            
+            document.getElementById('btn-snowflake').className = type === 'snowflake' 
+                ? "px-4 py-1.5 rounded text-xs font-bold font-condensed uppercase tracking-wider transition duration-150 bg-brand-red text-white"
+                : "px-4 py-1.5 rounded text-xs font-bold font-condensed uppercase tracking-wider transition duration-150 text-brand-dimText hover:text-white";
+
+            document.getElementById('schema-desc-pill').textContent = type === 'star'
+                ? "DIM_RACE incorporates Circuit Attributes (Denormalized)"
+                : "DIM_CIRCUIT is isolated as a normalized sub-dimension.";
+
+            clearSearch();
+            renderDiagram();
+            zoomFit();
+        }
+
+        // D3 custom HTML node template builder
+        function generateHTMLNode(id, info) {
+            const isCollapsed = tableCollapseStates[id] || false;
+            
+            // Build columns lists
+            let cols = info.columns;
+            if (!Array.isArray(cols)) {
+                cols = cols[currentSchemaType];
+            }
+
+            const totalCols = cols.length;
+            const factColor = 'border-brand-red/70 bg-[#140b0d]';
+            const dimColor = 'border-[#3A4A63] bg-[#111826]';
+            const subColor = 'border-[#3A4A63] bg-[#0C1219]';
+            
+            const cardTheme = info.type === 'fact' ? factColor : (info.type === 'dim' ? dimColor : subColor);
+            const badgeTheme = info.type === 'fact' ? 'bg-brand-red/20 text-brand-red border-brand-red/30' : (info.type === 'dim' ? 'bg-brand-blue/20 text-brand-blue border-brand-blue/30' : 'bg-purple-950/60 text-purple-400 border-purple-900/30');
+            const typeLabel = info.type === 'fact' ? 'Fact' : (info.type === 'dim' ? 'Dim' : 'Sub-Dim');
+            
+            let html = `
+                <div class="glass-panel ${cardTheme} border rounded overflow-hidden w-[240px] text-left transition select-none flex flex-col h-full shadow-lg" style="pointer-events: auto;">
+                    <!-- Card Header -->
+                    <div class="px-3 py-2 bg-black/40 border-b border-brand-border flex items-center justify-between cursor-pointer" onclick="toggleTable('${id}')">
+                        <div class="flex items-center gap-1.5 truncate">
+                            <span class="text-[8px] font-mono-f1 uppercase font-bold border px-1.5 py-0.5 rounded ${badgeTheme}">${typeLabel}</span>
+                            <span class="text-xs font-bold tracking-tight text-white font-condensed truncate" title="${info.title}">${info.title}</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-brand-dimText hover:text-white">
+                            <span class="text-[9px] font-mono-f1 px-1 bg-white/5 rounded border border-brand-border">${totalCols}</span>
+                            <i data-lucide="${isCollapsed ? 'chevron-down' : 'chevron-up'}" class="w-3 h-3"></i>
+                        </div>
+                    </div>
+            `;
+
+            if (!isCollapsed) {
+                html += `<div class="p-1.5 max-h-[160px] overflow-y-auto bg-black/10">
+                            <table class="w-full text-[10px] font-mono-f1 text-gray-300">
+                                <tbody>`;
+                cols.forEach(col => {
+                    let keyIcon = '';
+                    if (col.key === 'PK') {
+                        keyIcon = '<i data-lucide="key" class="text-amber-400 w-3 h-3" title="Primary Key"></i>';
+                    } else if (col.key === 'FK') {
+                        keyIcon = '<i data-lucide="link" class="text-brand-blue w-3 h-3" title="Foreign Key"></i>';
+                    } else if (col.key === 'Unique') {
+                        keyIcon = '<span class="text-emerald-400 font-bold text-[7px]" title="Unique">UQ</span>';
+                    }
+                    
+                    html += `
+                        <tr class="hover:bg-white/5 transition rounded-sm col-row" data-col="${col.name}">
+                            <td class="py-1 px-1.5 text-left flex items-center gap-1.5 truncate">
+                                <span class="w-3 flex items-center justify-center">${keyIcon}</span>
+                                <span class="truncate text-gray-200 font-semibold font-row" title="${col.name}">${col.name}</span>
+                            </td>
+                            <td class="py-1 px-1.5 text-right text-brand-dimText font-normal text-[9px]">${col.type}</td>
+                        </tr>
+                    `;
+                });
+                html += `</tbody></table></div>`;
+            }
+
+            // Footer focus action buttons
+            html += `
+                <div class="px-2 py-1.5 bg-black/20 border-t border-brand-border flex items-center justify-between">
+                    <button class="text-[9px] text-brand-dimText hover:text-white flex items-center gap-1 transition" onclick="toggleFocusMode('${id}')">
+                        <i data-lucide="eye" class="w-3 h-3 text-brand-red"></i> Focus Mode
+                    </button>
+                    <span class="text-[9px] text-brand-dimText font-mono-f1">PaddockIQ</span>
+                </div>
+            </div>
+            `;
+
+            return html;
+        }
+
+        // Render diagram using Dagre-D3 engine
+        function renderDiagram() {
+            // 1. Clear SVG Canvas
+            inner.selectAll("*").remove();
+
+            // 2. Initialize Dagre Graph Layout configuration
+            const g = new dagreD3.graphlib.Graph()
+                .setGraph({
+                    nodesep: 40,
+                    ranksep: 90,
+                    rankdir: "LR"
+                })
+                .setDefaultEdgeLabel(() => ({}));
+
+            // 3. Populate Nodes
+            const tables = schemasData.tables;
+            Object.keys(tables).forEach(id => {
+                if (currentSchemaType === 'star' && id === 'DIM_CIRCUIT') return;
+
+                const info = tables[id];
+                const isCollapsed = tableCollapseStates[id] || false;
+                const nodeHeight = isCollapsed ? 65 : 215;
+                const nodeWidth = 240;
+
+                g.setNode(id, {
+                    labelType: "html",
+                    label: generateHTMLNode(id, info),
+                    rx: 4,
+                    ry: 4,
+                    width: nodeWidth,
+                    height: nodeHeight,
+                    class: info.type === 'fact' ? 'node-fact' : (info.type === 'dim' ? 'node-dim' : 'node-sub-dim')
+                });
+            });
+
+            // 4. Populate Edges
+            const rels = schemasData.relationships[currentSchemaType];
+            rels.forEach(rel => {
+                g.setEdge(rel.from, rel.to, {
+                    label: rel.label,
+                    arrowhead: "normal",
+                    arrowheadStyle: "fill: #4B5563;",
+                    curve: d3.curveBasis,
+                    id: `edge-${rel.from}-${rel.to}`,
+                    class: rel.isSnowflakeLink ? 'dashed-edge' : ''
+                });
+            });
+
+            // 5. Render
+            const render = new dagreD3.render();
+            render(inner, g);
+
+            // Bind mouse drag blocker so click events bubble correctly inside foreignObject
+            inner.selectAll(".node foreignObject")
+                .attr("data-name", d => d)
+                .on("mousedown", () => d3.event.stopPropagation());
+
+            // Run Lucide icon creation inside D3 foreignObject
+            setTimeout(() => lucide.createIcons(), 50);
+
+            // Build minimap overview
+            zoomFit();
+        }
+
+        // --- 5. DIAGRAM VIEWPORT CONTROLS ---
+
+        function zoomIn() {
+            svg.transition().duration(250).call(d3Zoom.scaleBy, 1.25);
+        }
+
+        function zoomOut() {
+            svg.transition().duration(250).call(d3Zoom.scaleBy, 0.8);
+        }
+
+        function zoomReset() {
+            svg.transition().duration(250).call(d3Zoom.transform, d3.zoomIdentity);
+        }
+
+        function zoomFit() {
+            const svgWidth = svg.node().clientWidth || 1000;
+            const svgHeight = svg.node().clientHeight || 500;
+            const graphWidth = inner.node().getBBox().width;
+            const graphHeight = inner.node().getBBox().height;
+
+            if (graphWidth === 0 || graphHeight === 0) return;
+
+            const scale = Math.min(
+                (svgWidth - 60) / graphWidth,
+                (svgHeight - 60) / graphHeight,
+                1.0
+            );
+
+            const tx = (svgWidth - graphWidth * scale) / 2;
+            const ty = (svgHeight - graphHeight * scale) / 2;
+
+            const t = d3.zoomIdentity.translate(tx, ty).scale(scale);
+            svg.transition().duration(300).call(d3Zoom.transform, t);
+        }
+
+        // Update Overview Minimap
+        function updateMinimap(transform) {
+            const miniSvg = d3.select("#svg-minimap");
+            miniSvg.selectAll("*").remove();
+
+            const miniWidth = miniSvg.node().clientWidth || 170;
+            const miniHeight = miniSvg.node().clientHeight || 110;
+
+            const bounds = inner.node().getBBox();
+            if (bounds.width === 0 || bounds.height === 0) return;
+
+            // Draw miniature scale nodes
+            const scale = Math.min(miniWidth / bounds.width, miniHeight / bounds.height) * 0.8;
+            const tx = (miniWidth - bounds.width * scale) / 2;
+            const ty = (miniHeight - bounds.height * scale) / 2;
+
+            const miniG = miniSvg.append("g")
+                .attr("transform", `translate(${tx}, ${ty}) scale(${scale})`);
+
+            // Re-render simplified nodes representation
+            inner.selectAll(".node").each(function() {
+                const node = d3.select(this);
+                const transform = node.attr("transform");
+                const rect = node.select("rect");
+                const w = parseFloat(rect.attr("width"));
+                const h = parseFloat(rect.attr("height"));
+
+                const fill = node.datum() === 'FACT_RACE_RESULTS' ? 'rgba(225, 6, 0, 0.4)' : 'rgba(17, 24, 38, 0.6)';
+                const stroke = node.datum() === 'FACT_RACE_RESULTS' ? '#E10600' : '#3A4A63';
+
+                miniG.append("rect")
+                    .attr("transform", transform)
+                    .attr("x", rect.attr("x"))
+                    .attr("y", rect.attr("y"))
+                    .attr("width", w)
+                    .attr("height", h)
+                    .attr("rx", 2)
+                    .attr("ry", 2)
+                    .attr("fill", fill)
+                    .attr("stroke", stroke)
+                    .attr("stroke-width", 2);
+            });
+
+            // Viewport tracker rectangle
+            const viewScale = scale / transform.k;
+            const viewWidth = svg.node().clientWidth || 1000;
+            const viewHeight = svg.node().clientHeight || 500;
+
+            const vx = tx - (transform.x * viewScale);
+            const vy = ty - (transform.y * viewScale);
+            const vw = viewWidth * viewScale;
+            const vh = viewHeight * viewScale;
+
+            miniSvg.append("rect")
+                .attr("x", vx)
+                .attr("y", vy)
+                .attr("width", vw)
+                .attr("height", vh)
+                .attr("fill", "rgba(225, 6, 0, 0.05)")
+                .attr("stroke", "#E10600")
+                .attr("stroke-width", 1)
+                .attr("stroke-dasharray", "2,2");
+        }
+
+
+        // --- 6. IN-DIAGRAM SEARCH & HIGHLIGHT ---
+
+        function handleSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const clearBtn = document.getElementById('clear-search-btn');
+            
+            if (query.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+                clearSearch();
+                return;
+            }
+
+            let foundNodeId = null;
+
+            const tables = schemasData.tables;
+            const matchingNodes = new Set();
+            const matchingCols = new Set();
+
+            Object.keys(tables).forEach(nodeId => {
+                if (currentSchemaType === 'star' && nodeId === 'DIM_CIRCUIT') return;
+
+                const info = tables[nodeId];
+                const matchesTableName = nodeId.toLowerCase().includes(query);
+                let matchesColumn = false;
+
+                let cols = info.columns;
+                if (!Array.isArray(cols)) cols = cols[currentSchemaType];
+
+                cols.forEach(col => {
+                    if (col.name.toLowerCase().includes(query)) {
+                        matchesColumn = true;
+                        matchingCols.add(`${nodeId}-${col.name}`);
+                    }
+                });
+
+                if (matchesTableName || matchesColumn) {
+                    matchingNodes.add(nodeId);
+                    if (!foundNodeId) foundNodeId = nodeId;
+                }
+            });
+
+            // Highlight matches
+            d3.selectAll(".node").each(function(nodeId) {
+                const node = d3.select(this);
+                const fo = node.select("foreignObject");
+                
+                if (matchingNodes.has(nodeId)) {
+                    fo.classed("dimmed", false).classed("focused", true);
+                    fo.style("box-shadow", "0 0 20px rgba(225, 6, 0, 0.7)");
+                    
+                    // Highlight specific columns if matched
+                    fo.selectAll(".col-row").each(function() {
+                        const row = d3.select(this);
+                        const colName = row.attr("data-col");
+                        if (matchingCols.has(`${nodeId}-${colName}`)) {
+                            row.style("background-color", "rgba(225, 6, 0, 0.3)");
+                            row.style("color", "#ffffff");
+                        } else {
+                            row.style("background-color", null).style("color", null);
+                        }
+                    });
+                } else {
+                    fo.classed("dimmed", true).classed("focused", false);
+                    fo.style("box-shadow", null);
+                    fo.selectAll(".col-row").style("background-color", null).style("color", null);
+                }
+            });
+
+            // Auto-pan/zoom to center the first found node
+            if (foundNodeId) {
+                const nodeData = d3.selectAll(".node").filter(function(d) { return d === foundNodeId; });
+                if (!nodeData.empty()) {
+                    const transformAttr = nodeData.attr("transform");
+                    const coords = transformAttr.replace("translate(", "").replace(")", "").split(",");
+                    const nx = parseFloat(coords[0]);
+                    const ny = parseFloat(coords[1]);
+
+                    const svgWidth = svg.node().clientWidth || 1000;
+                    const svgHeight = svg.node().clientHeight || 500;
+                    const targetScale = 1.0;
+
+                    const tx = (svgWidth / 2) - nx * targetScale;
+                    const ty = (svgHeight / 2) - ny * targetScale;
+
+                    const t = d3.zoomIdentity.translate(tx, ty).scale(targetScale);
+                    svg.transition().duration(400).call(d3Zoom.transform, t);
+                }
+            }
+        }
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('clear-search-btn').classList.add('hidden');
+            
+            d3.selectAll(".col-row").style("background-color", null).style("color", null);
+            clearFocus();
+        }
+
+
+        // --- 7. LINEAGE DATA MAPPER ENGINE ---
+        let selectedSourceFieldId = 'driver_nationality';
+
+        // Complete 68 Columns Mapping Array
+        const mappingsList = [
+            { s: 'race_id', t_table: 'DIM_RACE', t_col: 'race_id', rule: 'Direct mapping (Cast to INT PK)', type: 'INT' },
+            { s: 'season', t_table: 'DIM_RACE', t_col: 'season_year', rule: 'Direct mapping (Cast to INT)', type: 'INT' },
+            { s: 'round', t_table: 'DIM_RACE', t_col: 'round', rule: 'Direct mapping (Cast to INT)', type: 'INT' },
+            { s: 'race_name', t_table: 'DIM_RACE', t_col: 'race_name', rule: 'Direct mapping', type: 'VARCHAR(100)' },
+            { s: 'race_date', t_table: 'DIM_RACE', t_col: 'race_date', rule: 'Direct mapping (Parse as Date)', type: 'DATE' },
+            { s: 'race_start_time', t_table: 'DIM_RACE', t_col: 'race_start_time', rule: 'Cast to TIME (replace \'\\N\' with NULL)', type: 'TIME' },
+            { s: 'circuit_id', t_table: { star: 'DIM_RACE', snowflake: 'DIM_CIRCUIT' }, t_col: 'circuit_id', rule: { star: 'Direct mapping (Cast to INT Attribute)', snowflake: 'Direct mapping (Cast to INT PK)' }, type: 'INT' },
+            { s: 'circuit_name', t_table: { star: 'DIM_RACE', snowflake: 'DIM_CIRCUIT' }, t_col: 'circuit_name', rule: 'Direct mapping', type: 'VARCHAR(150)' },
+            { s: 'circuit_location', t_table: { star: 'DIM_RACE', snowflake: 'DIM_CIRCUIT' }, t_col: 'circuit_location', rule: 'Direct mapping', type: 'VARCHAR(100)' },
+            { s: 'circuit_country', t_table: { star: 'DIM_RACE', snowflake: 'DIM_CIRCUIT' }, t_col: 'circuit_country', rule: 'Direct mapping', type: 'VARCHAR(100)' },
+            { s: 'circuit_latitude', t_table: { star: 'DIM_RACE', snowflake: 'DIM_CIRCUIT' }, t_col: 'circuit_latitude', rule: 'Cast to DECIMAL(9,6)', type: 'DECIMAL(9,6)' },
+            { s: 'circuit_longitude', t_table: { star: 'DIM_RACE', snowflake: 'DIM_CIRCUIT' }, t_col: 'circuit_longitude', rule: 'Cast to DECIMAL(9,6)', type: 'DECIMAL(9,6)' },
+            { s: 'circuit_altitude_m', t_table: { star: 'DIM_RACE', snowflake: 'DIM_CIRCUIT' }, t_col: 'circuit_altitude_m', rule: 'Cast to INT (replace \'\\N\' with NULL)', type: 'INT' },
+            { s: 'driver_id', t_table: 'DIM_DRIVER', t_col: 'driver_id', rule: 'Direct mapping (Cast to INT PK)', type: 'INT' },
+            { s: 'driver_ref', t_table: 'DIM_DRIVER', t_col: 'driver_ref', rule: 'Direct mapping', type: 'VARCHAR(50)' },
+            { s: 'driver_code', t_table: 'DIM_DRIVER', t_col: 'driver_code', rule: 'Direct mapping (replace \'\\N\' with NULL)', type: 'VARCHAR(3)' },
+            { s: 'driver_name', t_table: 'DIM_DRIVER', t_col: 'driver_name', rule: 'Direct mapping', type: 'VARCHAR(100)' },
+            { s: 'driver_dob', t_table: 'DIM_DRIVER', t_col: 'driver_dob', rule: 'Direct mapping (Parse as Date)', type: 'DATE' },
+            { s: 'driver_nationality', t_table: 'DIM_DRIVER', t_col: 'driver_nationality', rule: 'Direct mapping', type: 'VARCHAR(50)' },
+            { s: 'constructor_id', t_table: 'DIM_CONSTRUCTOR', t_col: 'constructor_id', rule: 'Direct mapping (Cast to INT PK)', type: 'INT' },
+            { s: 'constructor_ref', t_table: 'DIM_CONSTRUCTOR', t_col: 'constructor_ref', rule: 'Direct mapping', type: 'VARCHAR(50)' },
+            { s: 'constructor_name', t_table: 'DIM_CONSTRUCTOR', t_col: 'constructor_name', rule: 'Direct mapping', type: 'VARCHAR(100)' },
+            { s: 'constructor_nationality', t_table: 'DIM_CONSTRUCTOR', t_col: 'constructor_nationality', rule: 'Direct mapping', type: 'VARCHAR(50)' },
+            { s: 'car_number', t_table: 'FACT_RACE_RESULTS', t_col: 'car_number', rule: 'Cast to INT (replace \'\\N\' with NULL)', type: 'INT' },
+            { s: 'grid_position', t_table: 'FACT_RACE_RESULTS', t_col: 'grid_position', rule: 'Direct mapping (Cast to INT)', type: 'INT' },
+            { s: 'qualifying_position', t_table: 'FACT_RACE_RESULTS', t_col: 'qualifying_position', rule: 'Cast to INT (replace \'\\N\' with NULL)', type: 'INT' },
+            { s: 'qualifying_best_time_sec', t_table: 'FACT_RACE_RESULTS', t_col: 'qualifying_best_time_sec', rule: 'Cast to DECIMAL (replace \'\\N\' with NULL)', type: 'DECIMAL(6,3)' },
+            { s: 'finish_position', t_table: 'FACT_RACE_RESULTS', t_col: 'finish_position', rule: 'Cast to INT (replace \'\\N\' with NULL)', type: 'INT' },
+            { s: 'finish_position_text', t_table: 'FACT_RACE_RESULTS', t_col: 'finish_position_text', rule: 'Direct mapping', type: 'VARCHAR(10)' },
+            { s: 'race_points', t_table: 'FACT_RACE_RESULTS', t_col: 'race_points', rule: 'Cast to DECIMAL(5,2)', type: 'DECIMAL(5,2)' },
+            { s: 'race_laps', t_table: 'FACT_RACE_RESULTS', t_col: 'race_laps', rule: 'Direct mapping (Cast to INT)', type: 'INT' },
+            { s: 'race_time', t_table: 'FACT_RACE_RESULTS', t_col: 'race_time', rule: 'Direct mapping (replace \'\\N\' with NULL)', type: 'VARCHAR(20)' },
+            { s: 'race_milliseconds', t_table: 'FACT_RACE_RESULTS', t_col: 'race_milliseconds', rule: 'Cast to BIGINT (replace \'\\N\' with NULL)', type: 'BIGINT' },
+            { s: 'race_status', t_table: 'DIM_STATUS', t_col: 'status_description', rule: 'Lookup and insert distinct status value', type: 'VARCHAR(100)' },
+            { s: 'fastest_lap_number', t_table: 'FACT_RACE_RESULTS', t_col: 'fastest_lap_number', rule: 'Cast to INT (replace \'\\N\' with NULL)', type: 'INT' },
+            { s: 'fastest_lap_rank', t_table: 'FACT_RACE_RESULTS', t_col: 'fastest_lap_rank', rule: 'Cast to INT (replace \'\\N\' with NULL)', type: 'INT' },
+            { s: 'fastest_lap_time', t_table: 'FACT_RACE_RESULTS', t_col: 'fastest_lap_time', rule: 'Direct mapping (replace \'\\N\' with NULL)', type: 'VARCHAR(20)' },
+            { s: 'fastest_lap_speed', t_table: 'FACT_RACE_RESULTS', t_col: 'fastest_lap_speed', rule: 'Cast to DECIMAL (replace \'\\N\' with NULL)', type: 'DECIMAL(6,3)' },
+            { s: 'pit_stop_count', t_table: 'FACT_RACE_RESULTS', t_col: 'pit_stop_count', rule: 'Cast to INT (replace \'\\N\' with 0)', type: 'INT' },
+            { s: 'total_pit_duration_sec', t_table: 'FACT_RACE_RESULTS', t_col: 'total_pit_duration_sec', rule: 'Cast to DECIMAL (replace \'\\N\' with 0.0)', type: 'DECIMAL(7,3)' },
+            { s: 'avg_pit_duration_sec', t_table: 'FACT_RACE_RESULTS', t_col: 'avg_pit_duration_sec', rule: 'Cast to DECIMAL (replace \'\\N\' with 0.0)', type: 'DECIMAL(6,3)' },
+            { s: 'fastest_pit_duration_sec', t_table: 'FACT_RACE_RESULTS', t_col: 'fastest_pit_duration_sec', rule: 'Cast to DECIMAL (replace \'\\N\' with 0.0)', type: 'DECIMAL(6,3)' },
+            { s: 'last_pit_lap', t_table: 'FACT_RACE_RESULTS', t_col: 'last_pit_lap', rule: 'Cast to INT (replace \'\\N\' with 0)', type: 'INT' },
+            { s: 'laps_recorded', t_table: 'FACT_RACE_RESULTS', t_col: 'laps_recorded', rule: 'Cast to INT', type: 'INT' },
+            { s: 'fastest_recorded_lap_ms', t_table: 'FACT_RACE_RESULTS', t_col: 'fastest_recorded_lap_ms', rule: 'Cast to INT (replace \'\\N\' with NULL)', type: 'INT' },
+            { s: 'average_lap_ms', t_table: 'FACT_RACE_RESULTS', t_col: 'average_lap_ms', rule: 'Cast to INT (replace \'\\N\' with NULL)', type: 'INT' },
+            { s: 'sprint_position', t_table: 'FACT_RACE_RESULTS', t_col: 'sprint_position', rule: 'Cast to INT (replace \'\\N\' with NULL)', type: 'INT' },
+            { s: 'sprint_points', t_table: 'FACT_RACE_RESULTS', t_col: 'sprint_points', rule: 'Cast to DECIMAL (replace \'\\N\' with 0.0)', type: 'DECIMAL(5,2)' },
+            { s: 'driver_standing_points', t_table: 'FACT_RACE_RESULTS', t_col: 'driver_standing_points', rule: 'Cast to DECIMAL', type: 'DECIMAL(7,2)' },
+            { s: 'driver_championship_position', t_table: 'FACT_RACE_RESULTS', t_col: 'driver_championship_position', rule: 'Cast to INT', type: 'INT' },
+            { s: 'driver_championship_wins', t_table: 'FACT_RACE_RESULTS', t_col: 'driver_championship_wins', rule: 'Cast to INT', type: 'INT' },
+            { s: 'constructor_standing_points', t_table: 'FACT_RACE_RESULTS', t_col: 'constructor_standing_points', rule: 'Cast to DECIMAL', type: 'DECIMAL(7,2)' },
+            { s: 'constructor_championship_position', t_table: 'FACT_RACE_RESULTS', t_col: 'constructor_championship_position', rule: 'Cast to INT', type: 'INT' },
+            { s: 'constructor_championship_wins', t_table: 'FACT_RACE_RESULTS', t_col: 'constructor_championship_wins', rule: 'Cast to INT', type: 'INT' },
+            { s: 'constructor_race_points', t_table: 'FACT_RACE_RESULTS', t_col: 'constructor_race_points', rule: 'Cast to DECIMAL', type: 'DECIMAL(7,2)' },
+            { s: 'position_gain', t_table: 'FACT_RACE_RESULTS', t_col: 'position_gain', rule: 'Cast to INT', type: 'INT' },
+            { s: 'qualifying_to_finish_delta', t_table: 'FACT_RACE_RESULTS', t_col: 'qualifying_to_finish_delta', rule: 'Cast to INT', type: 'INT' },
+            { s: 'is_pole', t_table: 'FACT_RACE_RESULTS', t_col: 'is_pole', rule: 'Cast to INT (0 or 1)', type: 'INT' },
+            { s: 'is_podium', t_table: 'FACT_RACE_RESULTS', t_col: 'is_podium', rule: 'Cast to INT (0 or 1)', type: 'INT' },
+            { s: 'is_win', t_table: 'FACT_RACE_RESULTS', t_col: 'is_win', rule: 'Cast to INT (0 or 1)', type: 'INT' },
+            { s: 'is_top_10', t_table: 'FACT_RACE_RESULTS', t_col: 'is_top_10', rule: 'Cast to INT (0 or 1)', type: 'INT' },
+            { s: 'is_dnf', t_table: 'FACT_RACE_RESULTS', t_col: 'is_dnf', rule: 'Cast to INT (0 or 1)', type: 'INT' },
+            { s: 'points_per_lap', t_table: 'FACT_RACE_RESULTS', t_col: 'points_per_lap', rule: 'Cast to DECIMAL', type: 'DECIMAL(6,4)' },
+            { s: 'race_completion_pct', t_table: 'FACT_RACE_RESULTS', t_col: 'race_completion_pct', rule: 'Cast to DECIMAL', type: 'DECIMAL(5,4)' },
+            { s: 'driver_age_years', t_table: 'FACT_RACE_RESULTS', t_col: 'driver_age_years', rule: 'Cast to DECIMAL', type: 'DECIMAL(5,2)' },
+            { s: 'driver_age_at_race', t_table: 'n/a', t_col: 'n/a', rule: 'Duplicate of driver_age_years (Ignore)', type: 'n/a' },
+            { s: 'driver_standing_gap_to_leader', t_table: 'FACT_RACE_RESULTS', t_col: 'driver_standing_gap_to_leader', rule: 'Cast to DECIMAL', type: 'DECIMAL(7,2)' },
+            { s: 'constructor_standing_gap_to_leader', t_table: 'FACT_RACE_RESULTS', t_col: 'constructor_standing_gap_to_leader', rule: 'Cast to DECIMAL', type: 'DECIMAL(7,2)' },
+            
+            // Derived calendar mapping
+            { s: 'race_date (derived)', t_table: 'DIM_DATE', t_col: 'date_id', rule: 'Convert race_date format YYYY-MM-DD to YYYYMMDD', type: 'INT' },
+            { s: 'race_date (derived)', t_table: 'DIM_DATE', t_col: 'full_date', rule: 'Parse as date', type: 'DATE' },
+            { s: 'race_date (derived)', t_table: 'DIM_DATE', t_col: 'year', rule: 'Extract year', type: 'INT' },
+            { s: 'race_date (derived)', t_table: 'DIM_DATE', t_col: 'quarter', rule: 'Calculate quarter (1-4)', type: 'INT' },
+            { s: 'race_date (derived)', t_table: 'DIM_DATE', t_col: 'month', rule: 'Extract month number (1-12)', type: 'INT' },
+            { s: 'race_date (derived)', t_table: 'DIM_DATE', t_col: 'month_name', rule: 'Extract month name text', type: 'VARCHAR(20)' },
+            { s: 'race_date (derived)', t_table: 'DIM_DATE', t_col: 'day_of_week', rule: 'Calculate day index (1-7)', type: 'INT' },
+            { s: 'race_date (derived)', t_table: 'DIM_DATE', t_col: 'day_name', rule: 'Extract day name text', type: 'VARCHAR(20)' },
+            { s: 'race_date (derived)', t_table: 'FACT_RACE_RESULTS', t_col: 'date_id', rule: 'Lookup date_id in DIM_DATE', type: 'INT' },
+            { s: 'race_status (derived)', t_table: 'FACT_RACE_RESULTS', t_col: 'status_id', rule: 'Lookup status_id in DIM_STATUS', type: 'INT' }
+        ];
+
+        // Build HTML lists in Lineage tab
+        function buildLineageLayout() {
+            // 1. Populate Source list
+            const srcList = document.getElementById('source-fields-list');
+            srcList.innerHTML = '';
+
+            mappingsList.forEach(m => {
+                const isSelected = m.s === selectedSourceFieldId;
+                const activeStyle = isSelected ? 'bg-brand-border/40 border-brand-red/80' : 'bg-black/20 border-transparent hover:bg-brand-border/20';
+
+                const div = document.createElement('div');
+                div.className = `border rounded p-2 transition cursor-pointer flex items-center justify-between ${activeStyle}`;
+                div.setAttribute('data-field', m.s);
+                div.onclick = () => selectSourceField(m.s);
+
+                div.innerHTML = `
+                    <div class="flex items-center gap-2 truncate">
+                        <i data-lucide="file-text" class="w-3.5 h-3.5 text-brand-dimText"></i>
+                        <span class="text-[11px] font-mono-f1 font-semibold text-gray-200 truncate">${m.s}</span>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-3 h-3 text-brand-dimText"></i>
+                `;
+                srcList.appendChild(div);
+            });
+
+            // 2. Populate Target Tables & Columns
+            const targetList = document.getElementById('target-tables-list');
+            targetList.innerHTML = '';
+
+            const tables = schemasData.tables;
+            Object.keys(tables).forEach(tName => {
+                const info = tables[tName];
+                const isFact = info.type === 'fact';
+                const badgeColor = isFact ? 'bg-brand-red/10 text-brand-red border-brand-red/20' : 'bg-brand-blue/10 text-brand-blue border-brand-blue/20';
+
+                const div = document.createElement('div');
+                div.className = 'glass-panel rounded border border-brand-border p-3 space-y-2';
+                
+                let colsHtml = '';
+                let cols = info.columns;
+                if (!Array.isArray(cols)) cols = cols.star; // star covers all columns conceptually
+
+                cols.forEach(c => {
+                    colsHtml += `
+                        <div class="flex items-center justify-between py-1 px-1.5 hover:bg-white/5 rounded border border-transparent font-mono-f1 text-[10px] text-gray-300 col-target-row" 
+                             id="lineage-target-${tName}-${c.name}" onclick="selectTargetField('${tName}', '${c.name}')">
+                            <span class="font-semibold text-gray-200">${c.name}</span>
+                            <span class="text-[9px] text-brand-dimText">${c.type}</span>
+                        </div>
+                    `;
+                });
+
+                div.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-brand-border pb-1.5">
+                        <span class="text-[11px] font-extrabold font-condensed uppercase tracking-wider text-white">${tName}</span>
+                        <span class="text-[8px] font-mono-f1 border px-1.5 py-0.5 rounded ${badgeColor}">${info.type.toUpperCase()}</span>
+                    </div>
+                    <div class="space-y-1 max-h-[220px] overflow-y-auto pr-1">
+                        ${colsHtml}
+                    </div>
+                `;
+                targetList.appendChild(div);
+            });
+
+            lucide.createIcons();
+        }
+
+        // Selection Handlers
+        function selectSourceField(sourceId) {
+            selectedSourceFieldId = sourceId;
+            buildLineageLayout();
+
+            // Find matching mapping
+            const map = mappingsList.find(m => m.s === sourceId);
+            if (map) {
+                // Resolve conditional target tables / rules depending on schema switcher state
+                let targetTable = typeof map.t_table === 'object' ? map.t_table[currentSchemaType] : map.t_table;
+                let ruleText = typeof map.rule === 'object' ? map.rule[currentSchemaType] : map.rule;
+
+                // Update center view
+                document.getElementById('lineage-flow-source').textContent = map.s;
+                document.getElementById('lineage-flow-rule').textContent = ruleText;
+                document.getElementById('lineage-flow-target').textContent = `${targetTable}.${map.t_col}`;
+                document.getElementById('lineage-flow-type').textContent = `Target Data Type: ${map.type}`;
+
+                // Highlight corresponding row in Target List (right column)
+                d3.selectAll('.col-target-row').style('border-color', 'transparent').style('background-color', null);
+                
+                const targetRow = document.getElementById(`lineage-target-${targetTable}-${map.t_col}`);
+                if (targetRow) {
+                    targetRow.style.borderColor = '#E10600';
+                    targetRow.style.backgroundColor = 'rgba(225, 6, 0, 0.1)';
+                    targetRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+        }
+
+        function selectTargetField(tableName, colName) {
+            // Find mapping that resolves to this target column
+            const map = mappingsList.find(m => {
+                let tTable = typeof m.t_table === 'object' ? m.t_table[currentSchemaType] : m.t_table;
+                return (tTable === tableName && m.t_col === colName);
+            });
+
+            if (map) {
+                selectedSourceFieldId = map.s;
+                buildLineageLayout();
+                
+                // Scroll source item into view
+                const srcItem = document.querySelector(`[data-field="${map.s}"]`);
+                if (srcItem) {
+                    srcItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+
+                // Update flow details
+                let ruleText = typeof map.rule === 'object' ? map.rule[currentSchemaType] : map.rule;
+                document.getElementById('lineage-flow-source').textContent = map.s;
+                document.getElementById('lineage-flow-rule').textContent = ruleText;
+                document.getElementById('lineage-flow-target').textContent = `${tableName}.${colName}`;
+                document.getElementById('lineage-flow-type').textContent = `Target Data Type: ${map.type}`;
+
+                const targetRow = document.getElementById(`lineage-target-${tableName}-${colName}`);
+                if (targetRow) {
+                    targetRow.style.borderColor = '#E10600';
+                    targetRow.style.backgroundColor = 'rgba(225, 6, 0, 0.1)';
+                }
+            }
+        }
+
+        function filterSourceFields() {
+            const query = document.getElementById('lineage-search').value.toLowerCase().trim();
+            const rows = document.querySelectorAll('#source-fields-list [data-field]');
+
+            rows.forEach(row => {
+                const name = row.getAttribute('data-field').toLowerCase();
+                if (name.includes(query)) {
+                    row.classList.remove('hidden');
+                } else {
+                    row.classList.add('hidden');
+                }
+            });
+        }
+
+        // Automatic Initialization on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+            initLapTrendChart();
+            buildDriverStandings();
+            selectDriver('nor');
+        });
+    </script>
+</body>
+</html>

@@ -62,7 +62,7 @@ with t1:
         {"Column Name": "is_win", "Type": "INT", "Group": "PRIMARY TARGET", "Description": "Binary classification target: 1 = Winner, 0 = Non-Winner"},
         {"Column Name": "finish_position", "Type": "FLOAT", "Group": "SECONDARY TARGET", "Description": "Numeric classification/regression target (1.0 to 24.0)"}
     ]
-    st.dataframe(pd.DataFrame(dict_data), use_container_width=True, height=400)
+    st.dataframe(pd.DataFrame(dict_data), width="stretch", height=400)
 
 with t2:
     st.markdown("#### Severe Class Imbalance (19:1 Ratio)")
@@ -78,7 +78,7 @@ with t2:
             color="Label", color_discrete_map={"Winner (Class 1)": F1_RED, "Not Winner (Class 0)": "#2A323D"},
             hole=0.4, title="Class Prevalence: 4.76% Winners vs. 95.24% Non-Winners"
         )
-        st.plotly_chart(get_plotly_theme(fig_pie), use_container_width=True)
+        st.plotly_chart(get_plotly_theme(fig_pie), width="stretch")
 
     with col_dist2:
         st.markdown(r"""
@@ -122,4 +122,4 @@ with t4:
         {"Schema": "ML", "Table Name": "ASSOCIATION_RULES", "Role": "Discovered association rules", "Validated Rows": "141,763"},
         {"Schema": "ML", "Table Name": "FREQUENT_ITEMSETS", "Role": "Frequent pattern itemsets", "Validated Rows": "7,940"}
     ])
-    st.dataframe(tbl_counts, use_container_width=True)
+    st.dataframe(tbl_counts, width="stretch")

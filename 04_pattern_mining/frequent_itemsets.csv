@@ -1,0 +1,415 @@
+support,itemsets,length
+0.6233209257161353,Driver_Form_Midfield,1
+0.6068943194691697,Team_Midfield_Customer,1
+0.5335005664346981,Grid_Backmarker,1
+0.48583913254571937,"Driver_Form_Midfield, Team_Midfield_Customer",2
+0.47192102281922643,Beat_Teammate_In_Quali,1
+0.46690402977828127,Outcome_Points,1
+0.45128661595727465,"Driver_Form_Midfield, Grid_Backmarker",2
+0.4266871662081243,"Grid_Backmarker, Team_Midfield_Customer",2
+0.3796730862599126,"Driver_Form_Midfield, Grid_Backmarker, Team_Midfield_Customer",3
+0.28629228030425635,Circuit_Veteran_5Plus,1
+0.2805470140799482,Outcome_DNF,1
+0.2798996601391811,Grid_Top10,1
+0.27577277876679074,"Beat_Teammate_In_Quali, Team_Midfield_Customer",2
+0.26881372390354424,"Beat_Teammate_In_Quali, Driver_Form_Midfield",2
+0.25619032205858555,"Beat_Teammate_In_Quali, Outcome_Points",2
+0.2300534067001133,Driver_Form_Points_P7_P10,1
+0.20852888816960674,"Outcome_Points, Team_Midfield_Customer",2
+0.20682958407509305,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Team_Midfield_Customer",3
+0.20302637967308626,"Driver_Form_Midfield, Outcome_DNF",2
+0.2004369639100178,"Outcome_DNF, Team_Midfield_Customer",2
+0.1959864055672439,"Driver_Form_Midfield, Outcome_Points",2
+0.1882181582780385,Team_Form_Competitive,1
+0.18061174947402492,"Grid_Top10, Outcome_Points",2
+0.17972163780547015,"Grid_Backmarker, Outcome_DNF",2
+0.17664670658682635,"Beat_Teammate_In_Quali, Grid_Backmarker",2
+0.17454280627933322,"Circuit_Veteran_5Plus, Outcome_Points",2
+0.1679883476290662,"Driver_Form_Midfield, Outcome_DNF, Team_Midfield_Customer",3
+0.16378054701407996,"Beat_Teammate_In_Quali, Grid_Top10",2
+0.15682149215083346,"Driver_Form_Midfield, Grid_Backmarker, Outcome_DNF",3
+0.15390839941738146,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Grid_Backmarker",3
+0.15237093380805955,"Grid_Backmarker, Outcome_DNF, Team_Midfield_Customer",3
+0.1512380644117171,"Grid_Top10, Team_Midfield_Customer",2
+0.1512380644117171,"Driver_Form_Points_P7_P10, Outcome_Points",2
+0.14913416410422398,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus",2
+0.1467875060689432,"Beat_Teammate_In_Quali, Grid_Backmarker, Team_Midfield_Customer",3
+0.14484544424664186,"Outcome_Points, Team_Form_Competitive",2
+0.14039488590386795,"Driver_Form_Midfield, Grid_Top10",2
+0.14007120893348438,"Outcome_Podium, Outcome_Points",2
+0.14007120893348438,Outcome_Podium,1
+0.1376436316556077,"Driver_Form_Midfield, Grid_Backmarker, Outcome_DNF, Team_Midfield_Customer",4
+0.13416410422398448,"Driver_Form_Midfield, Outcome_Points, Team_Midfield_Customer",3
+0.13375950801100503,"Grid_Backmarker, Outcome_Points",2
+0.13044181906457356,"Circuit_Veteran_5Plus, Team_Midfield_Customer",2
+0.13011814209419,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Grid_Backmarker, Team_Midfield_Customer",4
+0.12728596860333388,"Circuit_Veteran_5Plus, Driver_Form_Midfield",2
+0.11935588282893672,"Beat_Teammate_In_Quali, Outcome_Points, Team_Midfield_Customer",3
+0.11846577116038194,"Beat_Teammate_In_Quali, Outcome_DNF",2
+0.11814209418999838,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10",2
+0.1036575497653342,"Circuit_Veteran_5Plus, Grid_Backmarker",2
+0.10357663052273831,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Outcome_Points",3
+0.10357663052273831,"Beat_Teammate_In_Quali, Grid_Top10, Team_Midfield_Customer",3
+0.10325295355235475,"Beat_Teammate_In_Quali, Grid_Top10, Outcome_Points",3
+0.10203916491341641,Driver_Form_Front_P4_P6,1
+0.10082537627447807,"Driver_Form_Points_P7_P10, Team_Midfield_Customer",2
+0.0983168797540055,"Driver_Form_Points_P7_P10, Grid_Top10",2
+0.09815504126881372,"Circuit_Veteran_5Plus, Grid_Top10",2
+0.09669849490208772,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Outcome_Points",3
+0.09629389868910827,"Grid_Backmarker, Outcome_Points, Team_Midfield_Customer",3
+0.0952419485353617,"Driver_Form_Midfield, Grid_Top10, Team_Midfield_Customer",3
+0.09386632141123159,"Beat_Teammate_In_Quali, Team_Form_Competitive",2
+0.09338080595565626,Team_McLaren,1
+0.09338080595565626,Grid_Top4,1
+0.09338080595565626,Team_Ferrari,1
+0.09321896747046447,Team_Williams,1
+0.09168150186114259,"Driver_Form_Midfield, Grid_Backmarker, Outcome_Points",3
+0.0915196633759508,"Circuit_Veteran_5Plus, Driver_Form_Midfield, Team_Midfield_Customer",3
+0.09127690564816314,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Grid_Top10",3
+0.09022495549441657,"Grid_Top10, Outcome_Points, Team_Midfield_Customer",3
+0.08957760155364945,"Beat_Teammate_In_Quali, Outcome_Podium, Outcome_Points",3
+0.08957760155364945,"Beat_Teammate_In_Quali, Outcome_Podium",2
+0.08561255866645089,"Driver_Form_Points_P7_P10, Team_Form_Competitive",2
+0.08447968927010843,"Circuit_Veteran_5Plus, Team_Form_Competitive",2
+0.08269946593299887,"Circuit_Veteran_5Plus, Driver_Form_Points_P7_P10",2
+0.08197119274963587,"Driver_Form_Front_P4_P6, Outcome_Points",2
+0.08156659653665642,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Outcome_Points",3
+0.0801909694125263,"Driver_Form_Midfield, Grid_Top10, Outcome_Points",3
+0.0801909694125263,"Beat_Teammate_In_Quali, Outcome_DNF, Team_Midfield_Customer",3
+0.07921993850137563,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Outcome_DNF",3
+0.07598316879754005,"Beat_Teammate_In_Quali, Outcome_Points, Team_Form_Competitive",3
+0.07549765334196472,"Circuit_Veteran_5Plus, Driver_Form_Midfield, Grid_Backmarker",3
+0.0748502994011976,"Grid_Top4, Outcome_Points",2
+0.07436478394562226,"Driver_Form_Midfield, Grid_Backmarker, Outcome_Points, Team_Midfield_Customer",4
+0.07363651076225927,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Outcome_Points, Team_Midfield_Customer",4
+0.07242272212332093,"Outcome_Points, Team_Ferrari",2
+0.07193720666774558,"Circuit_Veteran_5Plus, Grid_Backmarker, Team_Midfield_Customer",3
+0.07161352969736204,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Team_Midfield_Customer",3
+0.07007606408804014,"Outcome_Podium, Outcome_Points, Team_Form_Competitive",3
+0.07007606408804014,"Outcome_Podium, Team_Form_Competitive",2
+0.06902411393429357,"Driver_Form_Points_P7_P10, Grid_Backmarker",2
+0.06902411393429357,"Grid_Top10, Team_Form_Competitive",2
+0.0688622754491018,"Driver_Form_Front_P4_P6, Team_Form_Competitive",2
+0.06853859847871824,"Grid_Top10, Outcome_DNF",2
+0.06789124453795113,"Circuit_Veteran_5Plus, Outcome_Points, Team_Form_Competitive",3
+0.06740572908237578,"Circuit_Veteran_5Plus, Grid_Top10, Outcome_Points",3
+0.06716297135458812,"Driver_Form_Points_P7_P10, Grid_Top10, Outcome_Points",3
+0.06700113286939634,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Grid_Top10, Team_Midfield_Customer",4
+0.06530182877488266,Circuit_Prior_Multi_Winner,1
+0.06449263634892377,"Circuit_Veteran_5Plus, Outcome_Podium, Outcome_Points",3
+0.06449263634892377,"Circuit_Veteran_5Plus, Outcome_Podium",2
+0.06416895937854021,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Driver_Form_Midfield",3
+0.06376436316556076,Team_RedBull,1
+0.06335976695258132,"Driver_Form_Points_P7_P10, Outcome_Points, Team_Form_Competitive",3
+0.06335976695258132,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Outcome_DNF, Team_Midfield_Customer",4
+0.06222689755623887,"Beat_Teammate_In_Quali, Grid_Top10, Outcome_Points, Team_Midfield_Customer",4
+0.060770351189512864,"Driver_Form_Midfield, Team_Williams",2
+0.059556562550574524,"Circuit_Veteran_5Plus, Driver_Form_Midfield, Grid_Backmarker, Team_Midfield_Customer",4
+0.05890920860980741,"Driver_Form_Points_P7_P10, Outcome_Points, Team_Midfield_Customer",3
+0.058828289367211524,"Circuit_Veteran_5Plus, Outcome_DNF",2
+0.05858553163942386,"Outcome_Points, Team_McLaren",2
+0.058504612396827964,"Circuit_Veteran_5Plus, Driver_Form_Points_P7_P10, Outcome_Points",3
+0.05769541997086907,"Circuit_Veteran_5Plus, Outcome_Points, Team_Midfield_Customer",3
+0.057290823757889624,"Team_Ferrari, Team_Form_Competitive",2
+0.056724389059718404,"Beat_Teammate_In_Quali, Driver_Form_Front_P4_P6",2
+0.056077035118951284,"Driver_Form_Front_P4_P6, Outcome_Points, Team_Form_Competitive",3
+0.05591519663375951,"Beat_Teammate_In_Quali, Grid_Top4",2
+0.05567243890597184,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Team_Midfield_Customer",3
+0.055510600420780064,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Grid_Top10",3
+0.05437773102443761,"Beat_Teammate_In_Quali, Grid_Backmarker, Outcome_DNF",3
+0.05421589253924583,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Grid_Top10",3
+0.05389221556886228,"Driver_Form_Points_P7_P10, Outcome_DNF",2
+0.05300210390030749,"Circuit_Veteran_5Plus, Team_Ferrari",2
+0.052031072989156824,"Driver_Form_Midfield, Grid_Top10, Outcome_Points, Team_Midfield_Customer",4
+0.051869234503965043,"Grid_Top10, Outcome_Points, Team_Form_Competitive",3
+0.05162647677617738,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Grid_Top10, Outcome_Points",4
+0.05154555753358148,"Circuit_Veteran_5Plus, Driver_Form_Midfield, Outcome_Points",3
+0.05130279980579382,"Circuit_Veteran_5Plus, Driver_Form_Front_P4_P6",2
+0.04936073798349248,Team_Mercedes,1
+0.0491988994983007,"Circuit_Prior_Multi_Winner, Outcome_Points",2
+0.04871338404272536,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Driver_Form_Midfield, Team_Midfield_Customer",4
+0.04822786858715002,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Grid_Backmarker, Outcome_DNF",4
+0.04790419161676647,"Circuit_Veteran_5Plus, Grid_Top10, Team_Midfield_Customer",3
+0.04749959540378702,"Outcome_Points, Team_RedBull",2
+0.04741867616119113,"Grid_Backmarker, Team_Williams",2
+0.04669040297782813,"Beat_Teammate_In_Quali, Grid_Pole_P1",2
+0.04669040297782813,"Outcome_Podium, Outcome_Points, Outcome_Winner",3
+0.04669040297782813,"Beat_Teammate_In_Quali, Team_McLaren",2
+0.04669040297782813,"Outcome_Points, Outcome_Winner",2
+0.04669040297782813,Outcome_Winner,1
+0.04669040297782813,Grid_Pole_P1,1
+0.04669040297782813,"Outcome_Podium, Outcome_Winner",2
+0.04652856449263635,"Beat_Teammate_In_Quali, Driver_Form_Front_P4_P6, Outcome_Points",3
+0.04652856449263635,"Beat_Teammate_In_Quali, Team_Ferrari",2
+0.04652856449263635,Grid_FrontRow_P2,1
+0.046447645250040456,"Beat_Teammate_In_Quali, Grid_Backmarker, Outcome_DNF, Team_Midfield_Customer",4
+0.04636672600744457,"Beat_Teammate_In_Quali, Team_Williams",2
+0.04596212979446512,"Grid_Top4, Team_Form_Competitive",2
+0.045881210551869236,"Driver_Form_Points_P7_P10, Grid_Top10, Team_Midfield_Customer",3
+0.04547661433888979,"Outcome_Points, Team_Ferrari, Team_Form_Competitive",3
+0.04523385661110212,"Beat_Teammate_In_Quali, Grid_Top4, Outcome_Points",3
+0.04507201812591034,"Driver_Form_Points_P7_P10, Outcome_Podium, Outcome_Points",3
+0.04507201812591034,"Beat_Teammate_In_Quali, Outcome_Podium, Team_Form_Competitive",3
+0.04507201812591034,"Beat_Teammate_In_Quali, Outcome_Podium, Outcome_Points, Team_Form_Competitive",4
+0.04507201812591034,"Driver_Form_Points_P7_P10, Outcome_Podium",2
+0.04491017964071856,"Beat_Teammate_In_Quali, Grid_Backmarker, Outcome_Points",3
+0.044586502670335,Driver_Form_Elite_P1_P3,1
+0.04442466418514323,"Driver_Form_Front_P4_P6, Outcome_Podium",2
+0.04442466418514323,"Driver_Form_Front_P4_P6, Outcome_Podium, Outcome_Points",3
+0.044343744942547336,Team_Form_Elite_Top4,1
+0.04402006797216378,"Driver_Form_Points_P7_P10, Grid_Backmarker, Team_Midfield_Customer",3
+0.04296811781841722,"Circuit_Veteran_5Plus, Driver_Form_Front_P4_P6, Outcome_Points",3
+0.04272536009062955,"Circuit_Veteran_5Plus, Outcome_Points, Team_Ferrari",3
+0.04183524842207477,"Beat_Teammate_In_Quali, Grid_Top10, Outcome_DNF",3
+0.0415924906942871,"Driver_Form_Midfield, Grid_Backmarker, Team_Williams",3
+0.0415924906942871,"Grid_Top10, Outcome_DNF, Team_Midfield_Customer",3
+0.0415924906942871,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Team_Form_Competitive",3
+0.04151157145169121,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Grid_Backmarker, Outcome_DNF, Team_Midfield_Customer",5
+0.041349732966499436,"Outcome_Points, Team_Mercedes",2
+0.040864217510924096,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Driver_Form_Points_P7_P10",3
+0.04078329826832821,"Beat_Teammate_In_Quali, Circuit_Prior_Multi_Winner",2
+0.040702379025732316,"Circuit_Veteran_5Plus, Driver_Form_Midfield, Grid_Top10",3
+0.04037870205534876,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Outcome_Podium, Outcome_Points",4
+0.04037870205534876,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Outcome_Podium",3
+0.04021686357015698,"Circuit_Veteran_5Plus, Grid_Top4",2
+0.03973134811458165,"Grid_Top4, Outcome_Podium",2
+0.03973134811458165,"Grid_Top4, Outcome_Podium, Outcome_Points",3
+0.03940767114419809,"Beat_Teammate_In_Quali, Driver_Form_Front_P4_P6, Team_Form_Competitive",3
+0.03916491341641042,"Beat_Teammate_In_Quali, Grid_Pole_P1, Outcome_Points",3
+0.03916491341641042,"Grid_Pole_P1, Outcome_Points",2
+0.03884123644602686,"Driver_Form_Midfield, Grid_Top10, Outcome_DNF",3
+0.03851755947564331,"Outcome_Points, Team_Williams",2
+0.03851755947564331,"Grid_FrontRow_P2, Outcome_Points",2
+0.038436640233047416,"Outcome_Points, Team_Form_Elite_Top4",2
+0.038436640233047416,"Beat_Teammate_In_Quali, Outcome_Points, Team_Ferrari",3
+0.03827480174785564,"Outcome_Podium, Outcome_Points, Team_Ferrari",3
+0.03827480174785564,"Outcome_Podium, Team_Ferrari",2
+0.037708367049684416,"Driver_Form_Elite_P1_P3, Outcome_Points",2
+0.037708367049684416,"Grid_Top4, Outcome_Points, Team_Form_Competitive",3
+0.03746560932189675,"Beat_Teammate_In_Quali, Grid_Backmarker, Outcome_Points, Team_Midfield_Customer",4
+0.037384690079300856,"Beat_Teammate_In_Quali, Outcome_Points, Outcome_Winner",3
+0.037384690079300856,"Driver_Form_Midfield, Team_McLaren",2
+0.037384690079300856,"Beat_Teammate_In_Quali, Outcome_Podium, Outcome_Points, Outcome_Winner",4
+0.037384690079300856,"Beat_Teammate_In_Quali, Outcome_Winner",2
+0.037384690079300856,"Beat_Teammate_In_Quali, Outcome_Podium, Outcome_Winner",3
+0.03730377083670497,"Grid_Top10, Team_McLaren",2
+0.037222851594109076,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Grid_Top10, Outcome_Points",4
+0.03714193235151319,"Driver_Form_Points_P7_P10, Team_Ferrari",2
+0.03698009386632141,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Grid_Top10, Outcome_Points, Team_Midfield_Customer",5
+0.036818255381129636,"Circuit_Veteran_5Plus, Driver_Form_Points_P7_P10, Grid_Top10",3
+0.036818255381129636,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Grid_Backmarker",3
+0.03657549765334196,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Team_Form_Competitive",3
+0.03641365916815019,"Driver_Form_Points_P7_P10, Grid_Top4",2
+0.036170901440362516,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Grid_Top10, Outcome_Points",4
+0.03592814371257485,"Circuit_Prior_Multi_Winner, Circuit_Veteran_5Plus",2
+0.03576630522738307,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Outcome_Points, Team_Midfield_Customer",4
+0.035442628256999516,"Circuit_Veteran_5Plus, Driver_Form_Points_P7_P10, Team_Form_Competitive",3
+0.035280789771807736,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Outcome_Points, Team_Form_Competitive",4
+0.035118951286615956,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Outcome_Points, Team_Midfield_Customer",4
+0.034957112801424176,"Driver_Form_Points_P7_P10, Grid_Top10, Team_Form_Competitive",3
+0.03487619355882829,"Grid_Pole_P1, Outcome_Podium, Outcome_Points",3
+0.03487619355882829,"Beat_Teammate_In_Quali, Grid_Pole_P1, Outcome_Podium",3
+0.03487619355882829,"Grid_Pole_P1, Outcome_Podium",2
+0.03487619355882829,"Beat_Teammate_In_Quali, Grid_Pole_P1, Outcome_Podium, Outcome_Points",4
+0.0347952743162324,"Driver_Form_Points_P7_P10, Team_McLaren",2
+0.034390678103252956,"Circuit_Veteran_5Plus, Driver_Form_Front_P4_P6, Team_Form_Competitive",3
+0.03430975886065706,"Circuit_Veteran_5Plus, Team_Ferrari, Team_Form_Competitive",3
+0.03414792037546529,"Circuit_Veteran_5Plus, Grid_Backmarker, Outcome_Points",3
+0.034067001132869396,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Grid_Top10, Team_Midfield_Customer",4
+0.033905162647677616,"Circuit_Veteran_5Plus, Driver_Form_Midfield, Outcome_DNF",3
+0.033905162647677616,"Circuit_Veteran_5Plus, Outcome_DNF, Team_Midfield_Customer",3
+0.033905162647677616,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Grid_Backmarker, Outcome_Points",4
+0.03382424340508173,"Outcome_DNF, Team_Form_Competitive",2
+0.03374332416248584,"Circuit_Veteran_5Plus, Grid_Top4, Outcome_Points",3
+0.03366240491988995,"Driver_Form_Points_P7_P10, Grid_Backmarker, Outcome_Points",3
+0.0332578087069105,"Driver_Form_Front_P4_P6, Grid_Top10",2
+0.03309597022171872,"Beat_Teammate_In_Quali, Driver_Form_Front_P4_P6, Outcome_Points, Team_Form_Competitive",4
+0.032853212493931055,"Team_Form_Competitive, Team_Midfield_Customer",2
+0.03236769703835572,"Grid_Top10, Team_Ferrari",2
+0.03204402006797216,"Beat_Teammate_In_Quali, Circuit_Prior_Multi_Winner, Outcome_Points",3
+0.03204402006797216,"Circuit_Veteran_5Plus, Driver_Form_Midfield, Outcome_Points, Team_Midfield_Customer",4
+0.03188218158278038,"Beat_Teammate_In_Quali, Team_RedBull",2
+0.03172034309758861,"Circuit_Veteran_5Plus, Outcome_Podium, Team_Form_Competitive",3
+0.03172034309758861,"Circuit_Veteran_5Plus, Outcome_Podium, Outcome_Points, Team_Form_Competitive",4
+0.03155850461239683,"Circuit_Veteran_5Plus, Driver_Form_Points_P7_P10, Team_Midfield_Customer",3
+0.031234827642013272,"Team_Form_Competitive, Team_RedBull",2
+0.031234827642013272,"Circuit_Veteran_5Plus, Team_McLaren",2
+0.030749312186437935,"Circuit_Prior_Multi_Winner, Team_Form_Competitive",2
+0.030587473701246155,"Driver_Form_Front_P4_P6, Outcome_Podium, Outcome_Points, Team_Form_Competitive",4
+0.030587473701246155,"Beat_Teammate_In_Quali, Outcome_Points, Team_McLaren",3
+0.030587473701246155,"Driver_Form_Front_P4_P6, Outcome_Podium, Team_Form_Competitive",3
+0.03042563521605438,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Grid_Top10, Team_Midfield_Customer",4
+0.03042563521605438,"Circuit_Veteran_5Plus, Team_Mercedes",2
+0.0302637967308626,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Driver_Form_Midfield, Grid_Backmarker",4
+0.03018287748826671,"Circuit_Veteran_5Plus, Grid_Top10, Team_Form_Competitive",3
+0.030101958245670822,"Driver_Form_Points_P7_P10, Grid_Top10, Outcome_Points, Team_Midfield_Customer",4
+0.029697362032691375,"Circuit_Veteran_5Plus, Grid_Top10, Outcome_Points, Team_Midfield_Customer",4
+0.029616442790095485,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Driver_Form_Midfield, Outcome_Points",4
+0.029535523547499595,"Driver_Form_Front_P4_P6, Team_Ferrari",2
+0.029454604304903705,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Grid_Backmarker, Outcome_Points, Team_Midfield_Customer",5
+0.029454604304903705,"Circuit_Veteran_5Plus, Team_RedBull",2
+0.02929276581971193,"Grid_FrontRow_P2, Outcome_Podium",2
+0.02929276581971193,"Grid_FrontRow_P2, Outcome_Podium, Outcome_Points",3
+0.02929276581971193,"Circuit_Veteran_5Plus, Driver_Form_Front_P4_P6, Outcome_Points, Team_Form_Competitive",4
+0.02921184657711604,"Grid_Top10, Outcome_Podium, Outcome_Points",3
+0.02921184657711604,"Grid_Top10, Outcome_Podium",2
+0.02913092733452015,"Driver_Form_Points_P7_P10, Grid_Top4, Outcome_Points",3
+0.028969088849328372,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Outcome_DNF",3
+0.028888169606732482,"Beat_Teammate_In_Quali, Grid_FrontRow_P2",2
+0.028807250364136592,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Driver_Form_Points_P7_P10, Outcome_Points",4
+0.028807250364136592,"Circuit_Prior_Multi_Winner, Circuit_Veteran_5Plus, Outcome_Points",3
+0.028645411878944812,"Circuit_Prior_Multi_Winner, Outcome_Podium, Outcome_Points",3
+0.028645411878944812,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Grid_Backmarker, Team_Midfield_Customer",4
+0.028645411878944812,"Circuit_Prior_Multi_Winner, Outcome_Podium",2
+0.028564492636348925,"Circuit_Veteran_5Plus, Team_Form_Elite_Top4",2
+0.028483573393753035,"Circuit_Veteran_5Plus, Grid_Backmarker, Outcome_DNF",3
+0.028483573393753035,"Beat_Teammate_In_Quali, Team_Ferrari, Team_Form_Competitive",3
+0.028321734908561255,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Outcome_Points, Team_Form_Competitive",4
+0.028321734908561255,"Beat_Teammate_In_Quali, Grid_Top10, Outcome_DNF, Team_Midfield_Customer",4
+0.028240815665965365,"Outcome_Podium, Outcome_Points, Team_Form_Elite_Top4",3
+0.028240815665965365,"Outcome_Podium, Team_Form_Elite_Top4",2
+0.028240815665965365,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Driver_Form_Front_P4_P6",3
+0.028240815665965365,"Beat_Teammate_In_Quali, Driver_Form_Elite_P1_P3",2
+0.02807897718077359,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Outcome_Podium",3
+0.02807897718077359,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Outcome_Podium, Outcome_Points",4
+0.02807897718077359,"Driver_Form_Points_P7_P10, Outcome_DNF, Team_Midfield_Customer",3
+0.0279980579381777,"Driver_Form_Elite_P1_P3, Outcome_Podium, Outcome_Points",3
+0.0279980579381777,"Driver_Form_Elite_P1_P3, Outcome_Podium",2
+0.0279980579381777,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Team_Williams",3
+0.0279980579381777,"Team_Form_Competitive, Team_McLaren",2
+0.02791713869558181,"Beat_Teammate_In_Quali, Driver_Form_Front_P4_P6, Outcome_Podium",3
+0.02791713869558181,"Beat_Teammate_In_Quali, Driver_Form_Front_P4_P6, Outcome_Podium, Outcome_Points",4
+0.02783621945298592,"Driver_Form_Points_P7_P10, Outcome_Points, Team_Ferrari",3
+0.027593461725198252,"Circuit_Veteran_5Plus, Driver_Form_Midfield, Grid_Top10, Team_Midfield_Customer",4
+0.027593461725198252,"Circuit_Veteran_5Plus, Outcome_Points, Team_Ferrari, Team_Form_Competitive",4
+0.027350703997410585,"Beat_Teammate_In_Quali, Grid_Top10, Team_Form_Competitive",3
+0.027350703997410585,"Driver_Form_Midfield, Grid_Top10, Outcome_DNF, Team_Midfield_Customer",4
+0.027107946269622915,"Circuit_Veteran_5Plus, Driver_Form_Points_P7_P10, Outcome_Points, Team_Form_Competitive",4
+0.02686518854183525,"Driver_Form_Front_P4_P6, Grid_Top10, Outcome_Points",3
+0.02686518854183525,"Driver_Form_Front_P4_P6, Grid_Top4",2
+0.026541511571451692,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Outcome_DNF",3
+0.026460592328855802,"Grid_Top4, Team_Ferrari",2
+0.026460592328855802,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Driver_Form_Midfield, Grid_Top10",4
+0.02629875384366402,"Driver_Form_Points_P7_P10, Outcome_Podium, Outcome_Points, Team_Form_Competitive",4
+0.02629875384366402,"Grid_Backmarker, Team_Form_Competitive",2
+0.02629875384366402,"Driver_Form_Points_P7_P10, Outcome_Podium, Team_Form_Competitive",3
+0.026217834601068135,"Circuit_Veteran_5Plus, Driver_Form_Points_P7_P10, Grid_Top10, Outcome_Points",4
+0.026136915358472245,"Circuit_Veteran_5Plus, Outcome_Points, Team_Mercedes",3
+0.026055996115876355,"Grid_Backmarker, Team_McLaren",2
+0.025975076873280465,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Team_Ferrari",3
+0.02581323838808869,"Circuit_Veteran_5Plus, Driver_Form_Midfield, Outcome_DNF, Team_Midfield_Customer",4
+0.025489561417705132,"Outcome_Points, Team_Form_Competitive, Team_RedBull",3
+0.025489561417705132,"Beat_Teammate_In_Quali, Driver_Form_Midfield, Grid_Top10, Outcome_DNF",4
+0.02540864217510924,"Circuit_Prior_Multi_Winner, Outcome_Points, Team_Form_Competitive",3
+0.02516588444732157,"Beat_Teammate_In_Quali, Outcome_Points, Team_RedBull",3
+0.02516588444732157,"Beat_Teammate_In_Quali, Grid_Top4, Team_Form_Competitive",3
+0.025004045962129795,"Driver_Form_Points_P7_P10, Grid_Top10, Outcome_Points, Team_Form_Competitive",4
+0.025004045962129795,"Beat_Teammate_In_Quali, Outcome_Podium, Team_Ferrari",3
+0.025004045962129795,"Grid_Top10, Team_Williams",2
+0.025004045962129795,"Beat_Teammate_In_Quali, Outcome_Podium, Outcome_Points, Team_Ferrari",4
+0.025004045962129795,"Circuit_Veteran_5Plus, Driver_Form_Elite_P1_P3",2
+0.025004045962129795,"Grid_Top10, Outcome_Points, Team_Ferrari",3
+0.025004045962129795,"Circuit_Veteran_5Plus, Outcome_Points, Team_Form_Elite_Top4",3
+0.024923126719533905,"Driver_Form_Points_P7_P10, Team_Ferrari, Team_Form_Competitive",3
+0.024842207476938015,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Driver_Form_Midfield, Grid_Backmarker, Team_Midfield_Customer",5
+0.024761288234342125,"Grid_Top10, Outcome_Points, Team_McLaren",3
+0.02468036899174624,"Beat_Teammate_In_Quali, Team_Mercedes",2
+0.02451853050655446,"Beat_Teammate_In_Quali, Driver_Form_Elite_P1_P3, Outcome_Points",3
+0.024437611263958568,"Outcome_DNF, Team_Williams",2
+0.024437611263958568,"Driver_Form_Elite_P1_P3, Team_Form_Elite_Top4",2
+0.02427577277876679,"Beat_Teammate_In_Quali, Outcome_Points, Team_Ferrari, Team_Form_Competitive",4
+0.0241948535361709,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Driver_Form_Front_P4_P6, Outcome_Points",4
+0.02411393429357501,"Driver_Form_Front_P4_P6, Outcome_Points, Team_Ferrari",3
+0.02403301505097912,"Circuit_Veteran_5Plus, Driver_Form_Front_P4_P6, Outcome_Podium, Outcome_Points",4
+0.02403301505097912,"Circuit_Veteran_5Plus, Driver_Form_Front_P4_P6, Outcome_Podium",3
+0.023952095808383235,"Circuit_Veteran_5Plus, Grid_Top10, Outcome_Points, Team_Form_Competitive",4
+0.023871176565787345,"Circuit_Veteran_5Plus, Driver_Form_Midfield, Grid_Top10, Outcome_Points",4
+0.023871176565787345,"Outcome_Podium, Team_Ferrari, Team_Form_Competitive",3
+0.023871176565787345,"Outcome_Podium, Outcome_Points, Team_Ferrari, Team_Form_Competitive",4
+0.023790257323191455,"Driver_Form_Points_P7_P10, Outcome_Points, Team_McLaren",3
+0.023709338080595565,"Outcome_Points, Outcome_Winner, Team_Form_Competitive",3
+0.023709338080595565,"Outcome_Podium, Outcome_Winner, Team_Form_Competitive",3
+0.023709338080595565,"Outcome_Podium, Outcome_Points, Outcome_Winner, Team_Form_Competitive",4
+0.023709338080595565,"Outcome_Winner, Team_Form_Competitive",2
+0.023628418837999675,"Beat_Teammate_In_Quali, Grid_FrontRow_P2, Outcome_Points",3
+0.02354749959540379,"Circuit_Veteran_5Plus, Outcome_Podium, Outcome_Points, Outcome_Winner",4
+0.02354749959540379,"Circuit_Veteran_5Plus, Outcome_Podium, Outcome_Winner",3
+0.02354749959540379,"Grid_Pole_P1, Team_Form_Competitive",2
+0.02354749959540379,"Circuit_Veteran_5Plus, Outcome_Winner",2
+0.02354749959540379,"Circuit_Veteran_5Plus, Outcome_Points, Outcome_Winner",3
+0.02354749959540379,"Beat_Teammate_In_Quali, Grid_Pole_P1, Team_Form_Competitive",3
+0.023385661110212008,"Grid_FrontRow_P2, Team_Form_Competitive",2
+0.023304741867616118,"Team_Form_Competitive, Team_Mercedes",2
+0.02306198413982845,"Driver_Form_Points_P7_P10, Grid_Top10, Outcome_DNF",3
+0.02298106489723256,"Driver_Form_Points_P7_P10, Team_Williams",2
+0.022819226412040785,"Outcome_Podium, Outcome_Points, Team_RedBull",3
+0.022819226412040785,"Outcome_DNF, Team_McLaren",2
+0.022819226412040785,"Outcome_Podium, Team_RedBull",2
+0.022738307169444895,"Outcome_Podium, Team_Mercedes",2
+0.022738307169444895,"Outcome_Podium, Outcome_Points, Team_Mercedes",3
+0.022657387926849005,"Outcome_Podium, Team_Midfield_Customer",2
+0.022657387926849005,"Outcome_Podium, Outcome_Points, Team_Midfield_Customer",3
+0.022576468684253115,"Driver_Form_Midfield, Outcome_Podium",2
+0.022576468684253115,"Outcome_Points, Team_Form_Competitive, Team_Midfield_Customer",3
+0.022576468684253115,"Driver_Form_Midfield, Outcome_Podium, Outcome_Points",3
+0.022576468684253115,"Beat_Teammate_In_Quali, Grid_Top4, Outcome_Podium",3
+0.022576468684253115,"Beat_Teammate_In_Quali, Grid_Top4, Outcome_Podium, Outcome_Points",4
+0.022495549441657225,"Circuit_Veteran_5Plus, Outcome_Podium, Team_Ferrari",3
+0.022495549441657225,"Outcome_Podium, Team_McLaren",2
+0.022495549441657225,"Circuit_Veteran_5Plus, Outcome_Podium, Outcome_Points, Team_Ferrari",4
+0.022495549441657225,"Outcome_Podium, Outcome_Points, Team_McLaren",3
+0.022495549441657225,"Driver_Form_Front_P4_P6, Grid_Top10, Team_Form_Competitive",3
+0.022414630199061338,"Circuit_Veteran_5Plus, Grid_Top4, Team_Form_Competitive",3
+0.022414630199061338,"Driver_Form_Front_P4_P6, Grid_Top4, Outcome_Points",3
+0.022414630199061338,"Grid_Pole_P1, Outcome_Points, Outcome_Winner",3
+0.022414630199061338,"Beat_Teammate_In_Quali, Grid_Pole_P1, Outcome_Podium, Outcome_Winner",4
+0.022414630199061338,"Beat_Teammate_In_Quali, Grid_Pole_P1, Outcome_Points, Outcome_Winner",4
+0.022414630199061338,"Grid_Pole_P1, Outcome_Winner",2
+0.022414630199061338,"Beat_Teammate_In_Quali, Grid_Pole_P1, Outcome_Podium, Outcome_Points, Outcome_Winner",5
+0.022414630199061338,"Grid_Pole_P1, Outcome_Podium, Outcome_Winner",3
+0.022414630199061338,"Beat_Teammate_In_Quali, Grid_Pole_P1, Outcome_Winner",3
+0.022414630199061338,"Grid_Pole_P1, Outcome_Podium, Outcome_Points, Outcome_Winner",4
+0.022333710956465448,"Circuit_Veteran_5Plus, Driver_Form_Midfield, Grid_Backmarker, Outcome_DNF",4
+0.022252791713869558,"Circuit_Veteran_5Plus, Grid_FrontRow_P2",2
+0.022252791713869558,"Beat_Teammate_In_Quali, Circuit_Prior_Multi_Winner, Circuit_Veteran_5Plus",3
+0.022252791713869558,"Driver_Form_Front_P4_P6, Team_Ferrari, Team_Form_Competitive",3
+0.022252791713869558,"Circuit_Veteran_5Plus, Driver_Form_Points_P7_P10, Grid_Backmarker",3
+0.022171872471273668,"Beat_Teammate_In_Quali, Team_Form_Elite_Top4",2
+0.022090953228677778,"Circuit_Veteran_5Plus, Outcome_Points, Team_RedBull",3
+0.02201003398608189,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Grid_Pole_P1",3
+0.02201003398608189,"Circuit_Veteran_5Plus, Grid_Pole_P1",2
+0.02201003398608189,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Outcome_Points, Team_Ferrari",4
+0.021929114743486,"Grid_Top4, Outcome_Points, Team_Ferrari",3
+0.02184819550089011,"Grid_Top4, Outcome_Podium, Outcome_Points, Team_Form_Competitive",4
+0.02184819550089011,"Grid_Top4, Outcome_Podium, Team_Form_Competitive",3
+0.02176727625829422,"Beat_Teammate_In_Quali, Circuit_Prior_Multi_Winner, Outcome_Podium, Outcome_Points",4
+0.02176727625829422,"Beat_Teammate_In_Quali, Circuit_Prior_Multi_Winner, Outcome_Podium",3
+0.021524518530506555,"Beat_Teammate_In_Quali, Outcome_Points, Team_Mercedes",3
+0.021524518530506555,"Circuit_Veteran_5Plus, Driver_Form_Elite_P1_P3, Outcome_Points",3
+0.021443599287910665,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Grid_Top4",3
+0.021443599287910665,"Driver_Form_Elite_P1_P3, Outcome_Points, Team_Form_Elite_Top4",3
+0.021362680045314775,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Grid_Top4",3
+0.021119922317527108,"Beat_Teammate_In_Quali, Grid_Top4, Outcome_Points, Team_Form_Competitive",4
+0.021119922317527108,"Beat_Teammate_In_Quali, Outcome_Points, Team_Williams",3
+0.021119922317527108,"Beat_Teammate_In_Quali, Grid_Top10, Outcome_Points, Team_Form_Competitive",4
+0.02079624534714355,"Circuit_Veteran_5Plus, Grid_Backmarker, Outcome_DNF, Team_Midfield_Customer",4
+0.02071532610454766,"Circuit_Prior_Multi_Winner, Team_Ferrari",2
+0.02063440686195177,"Beat_Teammate_In_Quali, Driver_Form_Front_P4_P6, Outcome_Podium, Outcome_Points, Team_Form_Competitive",5
+0.02063440686195177,"Beat_Teammate_In_Quali, Driver_Form_Front_P4_P6, Outcome_Podium, Team_Form_Competitive",4
+0.02055348761935588,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Driver_Form_Midfield, Outcome_Points, Team_Midfield_Customer",5
+0.020472568376759995,"Outcome_Points, Team_Form_Competitive, Team_McLaren",3
+0.020472568376759995,"Driver_Form_Midfield, Grid_Top4",2
+0.020472568376759995,"Driver_Form_Points_P7_P10, Grid_Backmarker, Outcome_Points, Team_Midfield_Customer",4
+0.020472568376759995,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Driver_Form_Front_P4_P6, Team_Form_Competitive",4
+0.020472568376759995,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Grid_Backmarker",3
+0.020391649134164105,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Grid_Top10, Outcome_Points, Team_Midfield_Customer",5
+0.020391649134164105,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Outcome_Podium, Outcome_Points, Team_Form_Competitive",5
+0.020391649134164105,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Outcome_Podium, Team_Form_Competitive",4
+0.020391649134164105,"Beat_Teammate_In_Quali, Driver_Form_Points_P7_P10, Grid_Top10, Outcome_Points, Team_Midfield_Customer",5
+0.020310729891568215,"Driver_Form_Points_P7_P10, Team_RedBull",2
+0.020310729891568215,"Grid_Top10, Team_Ferrari, Team_Form_Competitive",3
+0.020229810648972325,"Circuit_Veteran_5Plus, Driver_Form_Points_P7_P10, Team_Ferrari",3
+0.020229810648972325,"Beat_Teammate_In_Quali, Circuit_Veteran_5Plus, Driver_Form_Midfield, Grid_Top10, Team_Midfield_Customer",5
+0.020148891406376435,"Outcome_Points, Team_Form_Competitive, Team_Mercedes",3
+0.020067972163780548,"Beat_Teammate_In_Quali, Driver_Form_Elite_P1_P3, Outcome_Podium",3
+0.020067972163780548,"Beat_Teammate_In_Quali, Driver_Form_Elite_P1_P3, Outcome_Podium, Outcome_Points",4

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ApexIQ — F1 Race Intelligence & Predictive Data Warehouse Poster</title>
+  <title>ApexIQ — End-Semester DWDM Jury Poster</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     @page { size: landscape; margin: 0.5cm; }
@@ -85,542 +85,310 @@
 
 <div class="poster-container">
 
-  <!-- ========================================== -->
-  <!-- POSTER HEADER                              -->
-  <!-- ========================================== -->
+  <!-- HEADER -->
   <header class="border-b border-[#30363D] pb-4 mb-4">
     <div class="flex flex-wrap items-center justify-between gap-4">
       <div class="flex items-center gap-4">
-        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-[#E10600] to-[#800000] flex items-center justify-center font-black text-2xl text-white shadow-lg shadow-red-900/50">
-          🏎️
-        </div>
+        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-[#E10600] to-[#800000] flex items-center justify-center font-black text-2xl text-white shadow-lg shadow-red-900/50">🏎️</div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="section-badge badge-red">ACADEMIC CAPSTONE JURY DEFENSE</span>
-            <span class="section-badge badge-cyan">DATA WAREHOUSING & DATA MINING</span>
-            <span class="text-xs text-slate-400">FIA Seasons 1994–2024 (31 Years)</span>
+            <span class="section-badge badge-red">END-SEMESTER JURY</span>
+            <span class="section-badge badge-cyan">DATA WAREHOUSING &amp; DATA MINING</span>
+            <span class="text-xs text-slate-400">FIA Seasons 1994–2024</span>
           </div>
           <h1 class="text-3xl font-black tracking-tight text-white mt-1">
-            <span class="neon-red">ApexIQ:</span> Formula 1 Predictive Data Warehouse & Race Winner Classification Engine
+            <span class="neon-red">ApexIQ:</span> Formula 1 Data Warehouse, Race-Winner Classification &amp; Driver-Tier Clustering
           </h1>
           <p class="text-xs text-slate-300">
-            Enterprise Snowflake Medallion Architecture &bull; 3-Pillar Telemetry Ingestion &bull; Apriori vs. FP-Growth Pattern Mining &bull; Cost-Sensitive Champion XGBoost with Race-Level Group Softmax
+            Dashboard 1: Star / Snowflake warehouse on Snowflake &bull; Dashboard 2: FP-Growth vs Apriori + cost-sensitive XGBoost &bull; Dashboard 3: 5-algorithm clustering comparison + K-Means tiers
           </p>
         </div>
       </div>
       <div class="flex items-center gap-4 bg-[#161B22] border border-[#30363D] px-4 py-2.5 rounded-xl text-right">
         <div>
           <div class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">Institutional Review</div>
-          <div class="text-sm font-bold text-white">Department of Computer Science & Engineering</div>
-          <div class="text-xs text-[#00BDAE] font-medium">B.Tech Capstone Project Jury &bull; October 2026</div>
+          <div class="text-sm font-bold text-white">Department of Computer Science &amp; Engineering</div>
+          <div class="text-xs text-[#00BDAE] font-medium">B.Tech End-Semester Jury &bull; 2026</div>
         </div>
         <div class="h-9 w-px bg-slate-700"></div>
         <div class="text-left">
-          <div class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">Evaluation Status</div>
+          <div class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">Reproducibility</div>
           <div class="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            100% PRODUCTION VERIFIED
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            1 command &bull; 61 tests passing
           </div>
-          <div class="text-[11px] text-slate-400">Strict Zero-Data Leakage</div>
+          <div class="text-[11px] text-slate-400">Zero future-data leakage</div>
         </div>
       </div>
     </div>
 
     <!-- KPI STRIP -->
     <div class="grid grid-cols-7 gap-3 mt-4">
-      <div class="kpi-box border-l-4 border-l-[#E10600]">
-        <div class="kpi-value text-white">12,358</div>
-        <div class="kpi-label">Driver Race Records</div>
-      </div>
-      <div class="kpi-box border-l-4 border-l-[#00BDAE]">
-        <div class="kpi-value text-[#00BDAE]">577</div>
-        <div class="kpi-label">Grands Prix Evaluated</div>
-      </div>
-      <div class="kpi-box border-l-4 border-l-amber-500">
-        <div class="kpi-value text-amber-400">19:1</div>
-        <div class="kpi-label">Class Imbalance (4.76% Win)</div>
-      </div>
-      <div class="kpi-box border-l-4 border-l-emerald-500">
-        <div class="kpi-value text-emerald-400">0.9635</div>
-        <div class="kpi-label">Holdout ROC-AUC</div>
-      </div>
-      <div class="kpi-box border-l-4 border-l-purple-500">
-        <div class="kpi-value text-purple-300">80.88%</div>
-        <div class="kpi-label">Winner Class Recall</div>
-      </div>
-      <div class="kpi-box border-l-4 border-l-blue-500">
-        <div class="kpi-value text-blue-400">57.35%</div>
-        <div class="kpi-label">Top-1 GP Winner Hit Rate</div>
-      </div>
-      <div class="kpi-box border-l-4 border-l-rose-500">
-        <div class="kpi-value text-rose-400">1.32×</div>
-        <div class="kpi-label">FP-Growth Acceleration</div>
-      </div>
+      <div class="kpi-box border-l-4 border-l-[#E10600]"><div class="kpi-value text-white">8,650</div><div class="kpi-label">Warehouse Fact Rows</div></div>
+      <div class="kpi-box border-l-4 border-l-[#00BDAE]"><div class="kpi-value text-[#00BDAE]">12,358</div><div class="kpi-label">Labelled Race Entries</div></div>
+      <div class="kpi-box border-l-4 border-l-amber-500"><div class="kpi-value text-amber-400">20.4 : 1</div><div class="kpi-label">Class Imbalance (4.67% Win)</div></div>
+      <div class="kpi-box border-l-4 border-l-emerald-500"><div class="kpi-value text-emerald-400">0.9629</div><div class="kpi-label">Holdout ROC-AUC</div></div>
+      <div class="kpi-box border-l-4 border-l-blue-500"><div class="kpi-value text-blue-400">58.8%</div><div class="kpi-label">Race Winner Picked (40/68)</div></div>
+      <div class="kpi-box border-l-4 border-l-purple-500"><div class="kpi-value text-purple-300">703</div><div class="kpi-label">Driver-Seasons Clustered</div></div>
+      <div class="kpi-box border-l-4 border-l-rose-500"><div class="kpi-value text-rose-400">3 tiers</div><div class="kpi-label">K-Means &bull; Silhouette 0.264</div></div>
     </div>
   </header>
 
-  <!-- ========================================== -->
-  <!-- 4 HORIZONTAL COLUMNS                       -->
-  <!-- ========================================== -->
   <main class="grid grid-cols-12 gap-4">
 
-    <!-- ---------------------------------------------------- -->
-    <!-- COLUMN 1: DATA WAREHOUSING & 3-PILLAR TELEMETRY (3 COLS) -->
-    <!-- ---------------------------------------------------- -->
+    <!-- COLUMN 1: DASHBOARD 1 — DATA WAREHOUSE -->
     <div class="col-span-3 flex flex-col gap-4">
-      
-      <!-- Panel 1.1: Snowflake Medallion Pipeline -->
       <section class="card-panel">
         <div class="flex items-center justify-between">
-          <span class="section-badge badge-red">JURY DELIVERABLE 1</span>
-          <span class="text-xs font-semibold text-slate-400">Snowflake Cloud DW</span>
+          <span class="section-badge badge-red">DASHBOARD 1</span>
+          <span class="text-xs font-semibold text-slate-400">Data Warehouse Design</span>
         </div>
-        <h2 class="text-base font-bold text-white">5-Tier Medallion Data Warehouse</h2>
-        <p class="text-xs text-slate-300">
-          Implemented on <b>Snowflake Data Cloud</b> (`F1_PREDICTION_DB`) and local relational cache (`f1_warehouse.db`).
-        </p>
-
-        <!-- Mini Diagram SVG -->
+        <h2 class="text-base font-bold text-white">Star &amp; Snowflake Dimensional Model</h2>
+        <p class="text-xs text-slate-300"><b>Grain:</b> 1 row = 1 driver × 1 Grand Prix &bull; 8,650 facts (2004–2024) &bull; 33 tables &bull; 296,727 lap-time facts.</p>
         <div class="bg-[#090D13] p-3 rounded-lg border border-[#21262D]">
-          <svg viewBox="0 0 340 130" class="w-full h-auto text-xs">
-            <!-- RAW -->
-            <rect x="5" y="10" width="95" height="40" rx="5" fill="#161B22" stroke="#E10600" stroke-width="1.5"/>
-            <text x="52" y="27" fill="#FFF" font-weight="bold" text-anchor="middle" font-size="10">RAW Schema</text>
-            <text x="52" y="42" fill="#8B949E" text-anchor="middle" font-size="8">CSVs & @RAW.STAGE</text>
-
-            <line x1="100" y1="30" x2="120" y2="30" stroke="#E10600" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-            <!-- CLEAN -->
-            <rect x="122" y="10" width="100" height="40" rx="5" fill="#161B22" stroke="#00BDAE" stroke-width="1.5"/>
-            <text x="172" y="27" fill="#FFF" font-weight="bold" text-anchor="middle" font-size="10">CLEAN Schema</text>
-            <text x="172" y="42" fill="#8B949E" text-anchor="middle" font-size="8">F1_MODELING_MASTER</text>
-
-            <line x1="222" y1="30" x2="242" y2="30" stroke="#00BDAE" stroke-width="1.5"/>
-
-            <!-- ML / ANALYTICS -->
-            <rect x="244" y="5" width="90" height="26" rx="4" fill="#161B22" stroke="#A371F7" stroke-width="1"/>
-            <text x="289" y="21" fill="#D2A8FF" font-weight="bold" text-anchor="middle" font-size="9">ML Schema</text>
-
-            <rect x="244" y="36" width="90" height="26" rx="4" fill="#161B22" stroke="#F2C811" stroke-width="1"/>
-            <text x="289" y="52" fill="#F2C811" font-weight="bold" text-anchor="middle" font-size="9">ANALYTICS</text>
-
-            <!-- Bottom features -->
-            <rect x="5" y="65" width="330" height="58" rx="5" fill="#0D1117" stroke="#30363D"/>
-            <text x="15" y="80" fill="#00BDAE" font-weight="bold" font-size="9.5">Snowflake Enterprise Capabilities Activated:</text>
-            <text x="15" y="96" fill="#C9D1D9" font-size="8.5">• Zero-Copy Cloning for risk-free modeling experiments</text>
-            <text x="15" y="108" fill="#C9D1D9" font-size="8.5">• Dynamic Tables (DT_DRIVER_SEASON_FORM) w/ 1-hr lag</text>
-            <text x="15" y="120" fill="#C9D1D9" font-size="8.5">• Change Data Capture (CDC Streams) + Cortex AI debriefs</text>
+          <svg viewBox="0 0 340 150" class="w-full h-auto">
+            <rect x="120" y="58" width="100" height="34" rx="5" fill="#3A0A08" stroke="#E10600" stroke-width="1.5"/>
+            <text x="170" y="73" fill="#FFF" font-weight="bold" text-anchor="middle" font-size="9">FACT_RACE_RESULTS</text>
+            <text x="170" y="85" fill="#FF9B95" text-anchor="middle" font-size="7.5">grid · finish · points · pits</text>
+            <g font-size="8.5" font-weight="bold" text-anchor="middle" fill="#79C0FF">
+              <rect x="10" y="10" width="80" height="22" rx="4" fill="#0D1F3A" stroke="#1F6FEB"/><text x="50" y="25">DIM_DRIVER</text>
+              <rect x="232" y="10" width="104" height="22" rx="4" fill="#0D1F3A" stroke="#1F6FEB"/><text x="284" y="25">DIM_CONSTRUCTOR</text>
+              <rect x="10" y="64" width="80" height="22" rx="4" fill="#0D1F3A" stroke="#1F6FEB"/><text x="50" y="79">DIM_DATE</text>
+              <rect x="250" y="64" width="80" height="22" rx="4" fill="#0D1F3A" stroke="#1F6FEB"/><text x="290" y="79">DIM_STATUS</text>
+              <rect x="130" y="118" width="80" height="22" rx="4" fill="#0D1F3A" stroke="#1F6FEB"/><text x="170" y="133">DIM_RACE</text>
+              <rect x="250" y="118" width="80" height="22" rx="4" fill="#0D1F3A" stroke="#00BDAE" stroke-dasharray="3 2"/><text x="290" y="133" fill="#00BDAE">DIM_CIRCUIT</text>
+            </g>
+            <g stroke="#E10600" stroke-width="1.2">
+              <line x1="90" y1="21" x2="130" y2="58"/><line x1="232" y1="21" x2="210" y2="58"/>
+              <line x1="90" y1="75" x2="120" y2="75"/><line x1="250" y1="75" x2="220" y2="75"/>
+              <line x1="170" y1="92" x2="170" y2="118"/>
+            </g>
+            <line x1="210" y1="129" x2="250" y2="129" stroke="#00BDAE" stroke-width="1.2" stroke-dasharray="3 2"/>
+            <text x="230" y="112" fill="#00BDAE" font-size="7" text-anchor="middle">snowflake</text>
           </svg>
         </div>
-
-        <div class="code-box text-[10px]">
-          <span class="text-emerald-400">CREATE OR REPLACE TABLE</span> CLEAN.F1_MODELING_MASTER<br>
-          <span class="text-purple-400">CLUSTER BY</span> (season, circuit_id);<br>
-          <span class="text-slate-400">-- Grain: 1 record per driver per race (8,650 rows)</span>
-        </div>
+        <table class="border border-[#21262D]">
+          <thead><tr><th></th><th>Star</th><th>Snowflake</th></tr></thead>
+          <tbody>
+            <tr><td class="text-slate-300">Dimensions</td><td>Denormalised</td><td>Normalised (Race→Circuit→Country)</td></tr>
+            <tr><td class="text-slate-300">Joins / query</td><td class="text-emerald-400 font-bold">1 hop</td><td>2–3 hops</td></tr>
+            <tr><td class="text-slate-300">Best for</td><td>OLAP, dashboards</td><td class="text-emerald-400 font-bold">Integrity, storage</td></tr>
+          </tbody>
+        </table>
+        <div class="text-[10px] text-slate-400"><b class="text-slate-200">12 live OLAP queries:</b> roll-up (day→month→quarter→season), drill-down, slice, dice, pivot, window ranking.</div>
       </section>
 
-      <!-- Panel 1.2: 3 Engineering Telemetry Pillars -->
-      <section class="card-panel">
-        <span class="section-badge badge-cyan">SIGNAL TAXONOMY</span>
-        <h2 class="text-base font-bold text-white">The 3 Telemetry Pillars ($T_0$)</h2>
-        <p class="text-xs text-slate-300">
-          Strict pre-race boundary: only signals available <b>30 min before lights-out</b> are permitted. Zero in-race leakage.
-        </p>
-
-        <div class="space-y-2 text-xs">
-          <div class="p-2.5 rounded-lg bg-[#0D1117] border border-[#21262D]">
-            <div class="flex items-center gap-1.5 font-bold text-rose-400">
-              <span>🏎️ PILLAR A:</span> Car Specifications
-            </div>
-            <div class="text-[11px] text-slate-300 mt-1">
-              BHP (750–1,050), Power/Weight ratio (1.20–1.32), Mechanical reliability index, Starting grid slot (P1–P20).
-            </div>
-          </div>
-
-          <div class="p-2.5 rounded-lg bg-[#0D1117] border border-[#21262D]">
-            <div class="flex items-center gap-1.5 font-bold text-[#00BDAE]">
-              <span>⏱️ PILLAR B:</span> Lap Record Benchmarks
-            </div>
-            <div class="text-[11px] text-slate-300 mt-1">
-              Official FIA circuit race lap records, Qualifying delta to track record, Speed trap velocity, Pace ratio.
-            </div>
-          </div>
-
-          <div class="p-2.5 rounded-lg bg-[#0D1117] border border-[#21262D]">
-            <div class="flex items-center gap-1.5 font-bold text-amber-400">
-              <span>🔧 PILLAR C:</span> Pit Stop Strategy
-            </div>
-            <div class="text-[11px] text-slate-300 mt-1">
-              Track pit lane transit penalty (sec), Sub-2.5s stationary duration, DHL Fastest Pit Stop crew efficiency (0–100).
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </div>
-
-    <!-- ---------------------------------------------------- -->
-    <!-- COLUMN 2: PATTERN MINING (APRIORI VS FP-GROWTH) (3 COLS) -->
-    <!-- ---------------------------------------------------- -->
-    <div class="col-span-3 flex flex-col gap-4">
-      
-      <!-- Panel 2.1: Pattern Mining Benchmark -->
       <section class="card-panel">
         <div class="flex items-center justify-between">
-          <span class="section-badge badge-gold">JURY DELIVERABLE 1 (CONT)</span>
+          <span class="section-badge badge-cyan">DASHBOARD 1</span>
+          <span class="text-xs font-semibold text-slate-400">Snowflake Deployment</span>
+        </div>
+        <h2 class="text-base font-bold text-white">7-Step Automated Deployment</h2>
+        <div class="bg-[#090D13] p-3 rounded-lg border border-[#21262D]">
+          <svg viewBox="0 0 340 50" class="w-full h-auto">
+            <g font-size="8.5" font-weight="bold" text-anchor="middle">
+              <rect x="2" y="12" width="58" height="26" rx="4" fill="#161B22" stroke="#E10600"/><text x="31" y="29" fill="#FFF">RAW</text>
+              <rect x="70" y="12" width="58" height="26" rx="4" fill="#161B22" stroke="#00BDAE"/><text x="99" y="29" fill="#FFF">CLEAN</text>
+              <rect x="138" y="12" width="58" height="26" rx="4" fill="#161B22" stroke="#1F6FEB"/><text x="167" y="29" fill="#79C0FF">DW</text>
+              <rect x="206" y="12" width="58" height="26" rx="4" fill="#161B22" stroke="#A371F7"/><text x="235" y="29" fill="#D2A8FF">ML</text>
+              <rect x="274" y="12" width="64" height="26" rx="4" fill="#161B22" stroke="#F2C811"/><text x="306" y="29" fill="#F2C811">ANALYTICS</text>
+            </g>
+            <g stroke="#8B949E"><line x1="60" y1="25" x2="70" y2="25"/><line x1="128" y1="25" x2="138" y2="25"/><line x1="196" y1="25" x2="206" y2="25"/><line x1="264" y1="25" x2="274" y2="25"/></g>
+          </svg>
+        </div>
+        <ul class="text-[11px] text-slate-300 space-y-1">
+          <li>• <b>40 objects</b> across 5 schemas from <code>MASTER_SNOWFLAKE_DEPLOYMENT.sql</code></li>
+          <li>• PUT → stage → bulk <code>COPY INTO</code> → ELT to CLEAN</li>
+          <li>• DW star + snowflake schemas and clustering output (step 6b)</li>
+          <li>• Zero-copy clone &bull; Time Travel &bull; Dynamic Table &bull; Stream + Task (CDC) &bull; Secure View &bull; Cortex AI</li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- COLUMN 2: DASHBOARD 2 — DATASET + PATTERN MINING -->
+    <div class="col-span-3 flex flex-col gap-4">
+      <section class="card-panel">
+        <div class="flex items-center justify-between">
+          <span class="section-badge badge-gold">DASHBOARD 2</span>
+          <span class="text-xs font-semibold text-slate-400">Supervised Dataset</span>
+        </div>
+        <h2 class="text-base font-bold text-white">12,358 Labelled Entries &bull; 577 GPs</h2>
+        <p class="text-[11px] text-slate-300"><b>Target:</b> <code>target_is_win</code> (exactly 1 per race, 0 missing). <b>16 pre-race features:</b> grid, 5-race driver form, 10-race constructor form, circuit affinity, career rates, teammate quali delta, age, grid-vs-form gap. All computed with <code>shift(1)</code>: past races only.</p>
+        <div class="code-box text-[10px]">
+          Train <span class="text-emerald-400">1994–2021</span> (10,999 rows) &nbsp;|&nbsp; Test <span class="text-rose-400">2022–2024</span> (1,359 rows, 68 GPs)<br>
+          <span class="text-slate-400">assert max(train.season) &lt; min(test.season)</span>
+        </div>
+      </section>
+
+      <section class="card-panel">
+        <div class="flex items-center justify-between">
+          <span class="section-badge badge-gold">DASHBOARD 2</span>
+          <span class="text-xs font-semibold text-slate-400">Pattern Matching</span>
+        </div>
+        <h2 class="text-base font-bold text-white">FP-Growth vs. Apriori</h2>
+        <p class="text-xs text-slate-300">12,358 transactions × 24 items &bull; min_sup 0.02 &bull; min_conf 0.25</p>
+        <table class="border border-[#21262D]">
+          <thead><tr><th>Measure</th><th>Apriori</th><th>FP-Growth</th></tr></thead>
+          <tbody>
+            <tr><td class="text-slate-300">Database scans</td><td>5</td><td class="text-emerald-400 font-bold">2</td></tr>
+            <tr><td class="text-slate-300">Search structure</td><td>770 candidates</td><td class="text-cyan-400 font-bold">4,230-node tree</td></tr>
+            <tr><td class="text-slate-300">Frequent itemsets</td><td class="font-bold text-white">414</td><td class="font-bold text-white">414 (identical)</td></tr>
+            <tr><td class="text-slate-300">Rules (conf ≥ 0.25)</td><td class="font-bold text-white">1,393</td><td class="font-bold text-white">1,393 (identical)</td></tr>
+          </tbody>
+        </table>
+        <div class="bg-[#090D13] p-2.5 rounded-lg border border-[#21262D]">
+          <div class="text-[10px] font-bold text-slate-200 mb-1">Scaling as min_support drops</div>
+          <svg viewBox="0 0 280 80" class="w-full h-auto">
+            <line x1="30" y1="65" x2="270" y2="65" stroke="#484F58"/><line x1="30" y1="8" x2="30" y2="65" stroke="#484F58"/>
+            <polyline points="50,61.4 120,55.0 190,44.6 260,24.8" fill="none" stroke="#8B949E" stroke-width="2"/>
+            <polyline points="50,34.3 120,10.0 190,10.0 260,10.0" fill="none" stroke="#E10600" stroke-width="2"/>
+            <g font-size="7.5" fill="#8B949E" text-anchor="middle"><text x="50" y="75">0.05</text><text x="120" y="75">0.02</text><text x="190" y="75">0.01</text><text x="260" y="75">0.005</text></g>
+            <text x="125" y="58" font-size="7.5" fill="#C9D1D9">Apriori candidates 280 → 3,089 (11×)</text>
+            <text x="125" y="20" font-size="7.5" fill="#FF7B72">FP-tree nodes plateau at 4,230</text>
+          </svg>
+          <div class="text-[10px] text-emerald-300">✓ At min_sup = 0.005 FP-Growth overtakes Apriori on runtime (0.042 s vs 0.046 s).</div>
+        </div>
+        <div class="space-y-1.5 text-[10px]">
+          <div class="p-2 rounded bg-[#0D1117] border-l-4 border-l-[#E10600]"><b class="text-white">{Pole, Podium} ⇒ {Winner}</b> &nbsp; conf 64.3% &nbsp; <span class="text-amber-400 font-bold">lift 13.8×</span></div>
+          <div class="p-2 rounded bg-[#0D1117] border-l-4 border-l-[#00BDAE]"><b class="text-white">{Pole} ⇒ {Beat teammate, Winner}</b> &nbsp; conf 48.0% &nbsp; <span class="text-amber-400 font-bold">lift 12.8×</span></div>
+          <div class="p-2 rounded bg-[#0D1117] border-l-4 border-l-purple-500"><b class="text-white">{Backmarker grid, Customer team} ⇒ {DNF}</b> &nbsp; conf 35.7% &nbsp; <span class="text-amber-400 font-bold">lift 1.27×</span></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- COLUMN 3: DASHBOARD 2 — CLASSIFICATION -->
+    <div class="col-span-3 flex flex-col gap-4">
+      <section class="card-panel">
+        <div class="flex items-center justify-between">
+          <span class="section-badge badge-red">DASHBOARD 2</span>
+          <span class="text-xs font-semibold text-slate-400">Comparison &amp; Validation</span>
+        </div>
+        <h2 class="text-base font-bold text-white">7 Classifiers on 68 Unseen GPs</h2>
+        <table class="border border-[#21262D]">
+          <thead><tr><th>Model</th><th>ROC-AUC</th><th>PR-AUC</th><th>Recall</th><th>Winner picked</th></tr></thead>
+          <tbody>
+            <tr><td>Dummy</td><td>0.5000</td><td>0.0500</td><td>48.5%</td><td>23/68</td></tr>
+            <tr><td>Logistic (grid only)</td><td>0.9198</td><td>0.3994</td><td>0.0%</td><td>35/68</td></tr>
+            <tr><td>Decision Tree</td><td>0.9177</td><td>0.4715</td><td>83.8%</td><td>36/68</td></tr>
+            <tr><td>Random Forest</td><td>0.9561</td><td>0.5866</td><td class="text-emerald-400 font-bold">89.7%</td><td>35/68</td></tr>
+            <tr><td>Gradient Boosting</td><td>0.9622</td><td>0.5994</td><td>41.2%</td><td>36/68</td></tr>
+            <tr><td>LightGBM</td><td>0.9586</td><td>0.6152</td><td>83.8%</td><td>35/68</td></tr>
+            <tr class="bg-red-950/30"><td class="font-bold text-white">XGBoost (champion)</td><td class="font-bold text-emerald-400">0.9629</td><td class="font-bold text-cyan-400">0.6433</td><td class="font-bold text-white">85.3%</td><td class="font-bold text-amber-400">40/68</td></tr>
+          </tbody>
+        </table>
+        <div class="p-2 rounded bg-[#090D13] border border-[#30363D] text-[10px] text-slate-300">
+          <div class="font-bold text-amber-400">Significance (XGBoost vs grid-only baseline)</div>
+          Race-level bootstrap, 1,000 resamples of 68 GPs: <b class="text-white">ΔAUC +0.042, 95% CI [+0.018, +0.073], p &lt; 0.001</b>.<br>
+          6-fold expanding window: mean AUC <b class="text-white">0.9453</b> vs 0.9264 (Wilcoxon p = 0.078, 6 folds = low power).
+        </div>
+        <div class="bg-[#090D13] p-2.5 rounded-lg border border-[#21262D]">
+          <svg viewBox="0 0 280 80" class="w-full h-auto">
+            <line x1="30" y1="65" x2="270" y2="65" stroke="#484F58"/>
+            <g font-size="7.5" fill="#8B949E"><text x="4" y="12">0.99</text><text x="4" y="66">0.89</text></g>
+            <!-- bars: y = 65 - (auc-0.89)*540 -->
+            <rect x="40" y="33" width="16" height="32" fill="#E10600"/><rect x="57" y="29" width="16" height="36" fill="#484F58"/>
+            <rect x="80" y="52" width="16" height="13" fill="#E10600"/><rect x="97" y="47" width="16" height="18" fill="#484F58"/>
+            <rect x="120" y="41" width="16" height="24" fill="#E10600"/><rect x="137" y="48" width="16" height="17" fill="#484F58"/>
+            <rect x="160" y="27" width="16" height="38" fill="#E10600"/><rect x="177" y="60" width="16" height="5" fill="#484F58"/>
+            <rect x="200" y="15" width="16" height="50" fill="#E10600"/><rect x="217" y="38" width="16" height="27" fill="#484F58"/>
+            <rect x="240" y="43" width="16" height="22" fill="#E10600"/><rect x="257" y="49" width="13" height="16" fill="#484F58"/>
+            <g font-size="7.5" fill="#8B949E" text-anchor="middle"><text x="57" y="75">2019</text><text x="97" y="75">2020</text><text x="137" y="75">2021</text><text x="177" y="75">2022</text><text x="217" y="75">2023</text><text x="257" y="75">2024</text></g>
+          </svg>
+          <div class="text-[10px] text-slate-400 text-center"><span class="text-[#E10600] font-bold">■ XGBoost</span> vs <span class="text-slate-300 font-bold">■ baseline</span>: ROC-AUC per unseen season</div>
+        </div>
+      </section>
+
+      <section class="card-panel">
+        <div class="flex items-center justify-between">
+          <span class="section-badge badge-gold">DASHBOARD 2</span>
+          <span class="text-xs font-semibold text-slate-400">Classification Algorithm</span>
+        </div>
+        <h2 class="text-base font-bold text-white">Cost-Sensitive XGBoost + Race Softmax</h2>
+        <div class="code-box text-[9.5px]">
+          L = −Σ [ 15·y<sub>i</sub> log p̂<sub>i</sub> + (1−y<sub>i</sub>) log(1−p̂<sub>i</sub>) ] + Ω<br>
+          P(win<sub>i</sub>|race) = exp(log p̂<sub>i</sub>/T) / Σ<sub>k</sub> exp(log p̂<sub>k</sub>/T), T = 0.8 &nbsp;<span class="text-emerald-400">⇒ Σ = 1</span>
+        </div>
+        <div class="grid grid-cols-3 gap-1 text-center text-xs">
+          <div></div><div class="text-[10px] text-slate-400 font-bold">Pred 0</div><div class="text-[10px] text-slate-400 font-bold">Pred 1</div>
+          <div class="text-[10px] text-slate-400 font-bold text-right pr-1">Actual 0</div>
+          <div class="p-1.5 bg-slate-800/60 rounded border border-slate-700"><b class="text-white">1,169</b><div class="text-[9px] text-slate-400">TN</div></div>
+          <div class="p-1.5 bg-rose-950/40 rounded border border-rose-800"><b class="text-rose-300">122</b><div class="text-[9px] text-rose-400">FP</div></div>
+          <div class="text-[10px] text-slate-400 font-bold text-right pr-1">Actual 1</div>
+          <div class="p-1.5 bg-amber-950/40 rounded border border-amber-800"><b class="text-amber-300">10</b><div class="text-[9px] text-amber-400">FN</div></div>
+          <div class="p-1.5 bg-emerald-950/50 rounded border border-emerald-600"><b class="text-emerald-300">58</b><div class="text-[9px] text-emerald-400">TP</div></div>
+        </div>
+        <div class="text-[10px] text-slate-300">Recall <b class="text-white">85.3%</b> &bull; Precision 32.2% &bull; Top-3 presence <b class="text-white">86.8%</b> &bull; Brier 0.0669 &bull; Train/test AUC 0.973 / 0.963. Top feature: grid position (47.5% gain).</div>
+        <div class="p-2 rounded bg-[#0D1117] border-l-2 border-l-[#00BDAE] text-[10px] text-slate-300">
+          <b class="text-white">2024 Canadian GP:</b> Russell on pole, but the model picked <b>Verstappen (P2, 32.2%)</b>, who won. The model beats "pole wins" in 8 races and loses in 3, a net +5 (40 vs 35 of 68).
+        </div>
+      </section>
+    </div>
+
+    <!-- COLUMN 4: DASHBOARD 3 — CLUSTERING -->
+    <div class="col-span-3 flex flex-col gap-4">
+      <section class="card-panel">
+        <div class="flex items-center justify-between">
+          <span class="section-badge badge-purple">DASHBOARD 3</span>
           <span class="text-xs font-semibold text-slate-400">Unsupervised</span>
         </div>
-        <h2 class="text-base font-bold text-white">Pattern Matching: Apriori vs FP-Growth</h2>
-        <p class="text-xs text-slate-300">
-          Discovers co-occurring pre-race conditions leading to victory across <b>12,358 race transactions</b> (min_sup = 0.02, min_conf = 0.25).
-        </p>
-
-        <!-- Benchmark Table -->
-        <table class="border border-[#21262D] rounded">
-          <thead>
-            <tr>
-              <th>Algorithmic Parameter</th>
-              <th>Apriori</th>
-              <th>FP-Growth</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="font-medium text-slate-300">Execution Runtime</td>
-              <td class="text-rose-400">0.7028 s</td>
-              <td class="text-emerald-400 font-bold">0.5312 s (1.32×)</td>
-            </tr>
-            <tr>
-              <td class="font-medium text-slate-300">Database Passes</td>
-              <td>Multiple ($k$ passes)</td>
-              <td class="text-cyan-400 font-bold">Exactly 2 Passes</td>
-            </tr>
-            <tr>
-              <td class="font-medium text-slate-300">Candidate Generation</td>
-              <td>$O(2^d)$ Candidate Sets</td>
-              <td class="text-emerald-400 font-bold">Zero Candidates (Tree)</td>
-            </tr>
-            <tr>
-              <td class="font-medium text-slate-300">Frequent Itemsets</td>
-              <td class="font-bold text-white">7,940 sets</td>
-              <td class="font-bold text-white">7,940 sets (0% Error)</td>
-            </tr>
-            <tr>
-              <td class="font-medium text-slate-300">Total Association Rules</td>
-              <td class="font-bold text-white">141,763 rules</td>
-              <td class="font-bold text-white">141,763 rules (Identical)</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- Mathematical Proof callout -->
-        <div class="p-2.5 rounded-lg bg-[#090D13] border border-emerald-800/40 text-[11px] text-emerald-300 flex items-start gap-2">
-          <span>✓</span>
-          <div>
-            <b>Equivalence Verified:</b> Both algorithms yielded identical support, confidence, and lift values, proving mathematical correctness.
-          </div>
-        </div>
-      </section>
-
-      <!-- Panel 2.2: High-Lift Association Rules -->
-      <section class="card-panel">
-        <span class="section-badge badge-purple">KNOWLEDGE DISCOVERY</span>
-        <h2 class="text-base font-bold text-white">Discovered High-Lift Rules</h2>
-        
-        <div class="space-y-2 text-xs">
-          <!-- Rule 1 -->
-          <div class="p-2.5 rounded-lg bg-[#0D1117] border-l-4 border-l-[#E10600]">
-            <div class="font-bold text-white text-[11px]">
-              {GRID=FrontRow, PIT=Sub2.5s, PODIUM_STREAK} &rArr; {Winner}
-            </div>
-            <div class="flex items-center gap-3 text-[10px] mt-1 text-slate-300">
-              <span>Support: <b>2.15%</b></span>
-              <span>Confidence: <b>58.42%</b></span>
-              <span class="text-amber-400 font-bold">Lift: 19.47×</span>
-            </div>
-          </div>
-
-          <!-- Rule 2 -->
-          <div class="p-2.5 rounded-lg bg-[#0D1117] border-l-4 border-l-[#00BDAE]">
-            <div class="font-bold text-white text-[11px]">
-              {GRID=FrontRow, PACE=Dominant, RELIABILITY=High} &rArr; {Winner}
-            </div>
-            <div class="flex items-center gap-3 text-[10px] mt-1 text-slate-300">
-              <span>Support: <b>2.84%</b></span>
-              <span>Confidence: <b>52.10%</b></span>
-              <span class="text-amber-400 font-bold">Lift: 17.37×</span>
-            </div>
-          </div>
-
-          <!-- Rule 3 -->
-          <div class="p-2.5 rounded-lg bg-[#0D1117] border-l-4 border-l-purple-500">
-            <div class="font-bold text-white text-[11px]">
-              {GRID=Top5, OVERTAKE_DELTA=+3, PIT=Sub2.5s} &rArr; {Winner}
-            </div>
-            <div class="flex items-center gap-3 text-[10px] mt-1 text-slate-300">
-              <span>Support: <b>1.42%</b></span>
-              <span>Confidence: <b>38.15%</b></span>
-              <span class="text-amber-400 font-bold">Lift: 12.72×</span>
-            </div>
-          </div>
-        </div>
-
-        <p class="text-[10px] text-slate-400 italic">
-          *High-lift association patterns are injected directly into the supervised classifier feature store as binary rule augmentations.
-        </p>
-      </section>
-
-    </div>
-
-    <!-- ---------------------------------------------------- -->
-    <!-- COLUMN 3: MULTI-MODEL BENCHMARK & EXPERIMENTAL RIGOR (3 COLS) -->
-    <!-- ---------------------------------------------------- -->
-    <div class="col-span-3 flex flex-col gap-4">
-      
-      <!-- Panel 3.1: 9-Model Benchmark Table -->
-      <section class="card-panel">
-        <div class="flex items-center justify-between">
-          <span class="section-badge badge-red">JURY DELIVERABLE 2</span>
-          <span class="text-xs font-semibold text-slate-400">Empirical Benchmark</span>
-        </div>
-        <h2 class="text-base font-bold text-white">9-Model Classification Comparison</h2>
-        <p class="text-xs text-slate-300">
-          Strict chronological holdout: <b>Train (1994–2021: 10,999 rows)</b> vs. <b>Unseen Test (2022–2024: 1,359 rows / 68 modern GPs)</b>.
-        </p>
-
-        <!-- Benchmark Table -->
+        <h2 class="text-base font-bold text-white">Dataset &amp; 5-Algorithm Clustering Comparison</h2>
+        <p class="text-[11px] text-slate-300"><b>703 driver-season profiles</b> (153 drivers, ≥ 5 starts), <b>9 standardised features</b>, no label: avg grid, avg finish, finish std, win / podium / points / DNF rate, teammate-quali rate, starts.</p>
         <table class="border border-[#21262D]">
-          <thead>
-            <tr>
-              <th>Model Architecture</th>
-              <th>ROC-AUC</th>
-              <th>PR-AUC</th>
-              <th>Recall</th>
-              <th>Top-1 Hit</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Algorithm</th><th>Silh ↑</th><th>DB ↓</th><th>CH ↑</th><th>ARI ↑</th></tr></thead>
           <tbody>
-            <tr>
-              <td>Dummy Baseline</td>
-              <td>0.5000</td>
-              <td>0.0500</td>
-              <td>48.5%</td>
-              <td>33.8% (23/68)</td>
-            </tr>
-            <tr>
-              <td>Logistic Reg (Grid)</td>
-              <td>0.9198</td>
-              <td>0.3994</td>
-              <td>0.0%</td>
-              <td>51.5% (35/68)</td>
-            </tr>
-            <tr>
-              <td>Decision Tree (D=5)</td>
-              <td>0.9177</td>
-              <td>0.4715</td>
-              <td>83.8%</td>
-              <td>52.9% (36/68)</td>
-            </tr>
-            <tr>
-              <td>Random Forest</td>
-              <td>0.9561</td>
-              <td>0.5866</td>
-              <td class="text-emerald-400 font-bold">89.7%</td>
-              <td>51.5% (35/68)</td>
-            </tr>
-            <tr>
-              <td>Gradient Boosting</td>
-              <td>0.9622</td>
-              <td>0.5994</td>
-              <td>41.2%</td>
-              <td>52.9% (36/68)</td>
-            </tr>
-            <tr>
-              <td>LightGBM</td>
-              <td>0.9586</td>
-              <td>0.6152</td>
-              <td>83.8%</td>
-              <td>51.5% (35/68)</td>
-            </tr>
-            <tr class="bg-red-950/30 border-l-2 border-l-[#E10600]">
-              <td class="font-bold text-white">XGBoost (Champion)</td>
-              <td class="font-bold text-emerald-400">0.9635</td>
-              <td class="font-bold text-cyan-400">0.6029</td>
-              <td class="font-bold text-white">82.4%</td>
-              <td class="font-bold text-amber-400">54.4% (37/68)</td>
-            </tr>
-            <tr class="bg-emerald-950/30">
-              <td class="font-bold text-emerald-300">Rule-Augmented XGB</td>
-              <td class="font-bold text-emerald-300">0.9836</td>
-              <td class="font-bold text-emerald-300">0.7281</td>
-              <td class="font-bold text-emerald-300">86.7%</td>
-              <td class="font-bold text-emerald-300">67.6% (46/68)</td>
-            </tr>
+            <tr class="bg-purple-950/30"><td class="font-bold text-white">K-Means</td><td class="font-bold text-emerald-400">0.264</td><td>1.276</td><td class="font-bold text-emerald-400">347.5</td><td>0.945</td></tr>
+            <tr><td>Agglomerative (Ward)</td><td>0.181</td><td>1.515</td><td>280.8</td><td>0.520</td></tr>
+            <tr><td>BIRCH</td><td>0.195</td><td>1.523</td><td>298.3</td><td>0.502</td></tr>
+            <tr><td>Gaussian Mixture</td><td>0.141</td><td>1.685</td><td>252.7</td><td class="font-bold text-emerald-400">0.995</td></tr>
+            <tr><td>DBSCAN (7.7% noise)</td><td>0.112</td><td>0.855†</td><td>24.0</td><td>0.897</td></tr>
           </tbody>
         </table>
-
-        <!-- Hypothesis Testing Box -->
-        <div class="p-2 rounded bg-[#090D13] border border-[#30363D] text-[10px]">
-          <div class="font-bold text-amber-400">Statistical Significance Hypothesis Test:</div>
-          <div class="text-slate-300 mt-0.5">
-            Paired Student's $t$-test: <b>$t = -8.2045$, $p = 0.0012$ ($p < 0.01$)</b>.<br>
-            Wilcoxon Signed-Rank test: <b>$W = 0.0, p = 0.0312$</b>. $H_0$ decisively rejected!
-          </div>
-        </div>
+        <div class="text-[10px] text-slate-400"><b class="text-slate-200">k = 3</b> from the elbow (inertia 4,075 → 3,175) and confirmed by the Ward dendrogram cut. †DBSCAN scored on non-noise points only.</div>
       </section>
 
-      <!-- Panel 3.2: 6-Fold Expanding Window Cross Validation -->
-      <section class="card-panel">
-        <span class="section-badge badge-cyan">TEMPORAL INTEGRITY</span>
-        <h2 class="text-base font-bold text-white">6-Fold Expanding-Window Validation</h2>
-        <p class="text-xs text-slate-300">
-          Guarantees zero future-data leakage across shifting FIA aerodynamic rulebooks.
-        </p>
-
-        <!-- Bar chart SVG -->
-        <div class="bg-[#090D13] p-2.5 rounded-lg border border-[#21262D]">
-          <svg viewBox="0 0 280 85" class="w-full h-auto text-[9px]">
-            <!-- Axis -->
-            <line x1="30" y1="70" x2="270" y2="70" stroke="#484F58"/>
-            <line x1="30" y1="10" x2="30" y2="70" stroke="#484F58"/>
-            <text x="5" y="15" fill="#8B949E">1.0</text>
-            <text x="5" y="42" fill="#8B949E">0.95</text>
-            <text x="5" y="70" fill="#8B949E">0.90</text>
-
-            <!-- Bars -->
-            <!-- 2019: 0.9512 -->
-            <rect x="40" y="38" width="25" height="32" rx="2" fill="#00BDAE"/>
-            <text x="52" y="80" fill="#8B949E" text-anchor="middle">2019</text>
-            <!-- 2020: 0.9213 -->
-            <rect x="78" y="54" width="25" height="16" rx="2" fill="#00BDAE"/>
-            <text x="90" y="80" fill="#8B949E" text-anchor="middle">2020</text>
-            <!-- 2021: 0.9242 -->
-            <rect x="116" y="52" width="25" height="18" rx="2" fill="#00BDAE"/>
-            <text x="128" y="80" fill="#8B949E" text-anchor="middle">2021</text>
-            <!-- 2022: 0.9587 -->
-            <rect x="154" y="34" width="25" height="36" rx="2" fill="#E10600"/>
-            <text x="166" y="80" fill="#FF7B72" text-anchor="middle">2022</text>
-            <!-- 2023: 0.9856 -->
-            <rect x="192" y="18" width="25" height="52" rx="2" fill="#E10600"/>
-            <text x="204" y="80" fill="#FF7B72" text-anchor="middle">2023</text>
-            <!-- 2024: 0.9367 -->
-            <rect x="230" y="46" width="25" height="24" rx="2" fill="#E10600"/>
-            <text x="242" y="80" fill="#FF7B72" text-anchor="middle">2024</text>
-          </svg>
-        </div>
-        <div class="text-[10px] text-slate-400 text-center">
-          Mean Temporal ROC-AUC: <b class="text-white">0.9463</b> &bull; Mean Top-1 Hit Rate: <b class="text-white">54.44%</b>
-        </div>
-      </section>
-
-    </div>
-
-    <!-- ---------------------------------------------------- -->
-    <!-- COLUMN 4: CHAMPION XGBOOST, GROUP SOFTMAX & METRICS (3 COLS) -->
-    <!-- ---------------------------------------------------- -->
-    <div class="col-span-3 flex flex-col gap-4">
-      
-      <!-- Panel 4.1: Mathematical Formulation & Group Softmax -->
       <section class="card-panel">
         <div class="flex items-center justify-between">
-          <span class="section-badge badge-red">JURY DELIVERABLE 3</span>
-          <span class="text-xs font-semibold text-slate-400">Champion Engine</span>
+          <span class="section-badge badge-purple">DASHBOARD 3</span>
+          <span class="text-xs font-semibold text-slate-400">K-Means &amp; Metrics</span>
         </div>
-        <h2 class="text-base font-bold text-white">XGBoost & Group Softmax Formulation</h2>
-        
-        <div class="text-[11px] text-slate-300">
-          <b>1. Cost-Sensitive Imbalance Loss ($w_{\text{pos}} = 15.0$):</b>
+        <h2 class="text-base font-bold text-white">Three Driver Performance Tiers</h2>
+        <div class="space-y-1.5 text-[10.5px]">
+          <div class="p-2 rounded bg-[#0D1117] border-l-4 border-l-[#E10600]"><b class="text-white">Title Contenders</b> · 108 &nbsp; grid 4.0 · finish 5.0 · <b class="text-white">win 25%</b> · podium 59%</div>
+          <div class="p-2 rounded bg-[#0D1117] border-l-4 border-l-[#F2C811]"><b class="text-white">Midfield Regulars</b> · 325 &nbsp; grid 9.6 · finish 10.4 · win 1% · points 57%</div>
+          <div class="p-2 rounded bg-[#0D1117] border-l-4 border-l-[#8B949E]"><b class="text-white">Backmarkers</b> · 270 &nbsp; grid 16.5 · finish 14.9 · DNF 39%</div>
         </div>
-        <div class="code-box text-[9.5px]">
-          &fnof;(x) = -&sum; [ 15.0 &bull; y<sub>i</sub> log(p&#770;<sub>i</sub>) + (1 - y<sub>i</sub>) log(1 - p&#770;<sub>i</sub>) ] + &Omega;
+        <div class="grid grid-cols-3 gap-2">
+          <div class="kpi-box"><div class="kpi-value text-emerald-400 text-lg">0.264</div><div class="kpi-label">Silhouette</div></div>
+          <div class="kpi-box"><div class="kpi-value text-cyan-400 text-lg">1.276</div><div class="kpi-label">Davies-Bouldin</div></div>
+          <div class="kpi-box"><div class="kpi-value text-amber-400 text-lg">0.92</div><div class="kpi-label">Seed ARI</div></div>
         </div>
-
-        <div class="text-[11px] text-slate-300 mt-1">
-          <b>2. Temperature-Scaled Group Softmax Normalization:</b>
+        <div class="text-[10px] text-slate-300"><b class="text-white">External check:</b> 80.6% of Contender seasons finished the championship top 3; no Backmarker season ever did.</div>
+        <div class="p-2 rounded bg-[#0D1117] border-l-2 border-l-[#A371F7] text-[10px] text-slate-300">
+          <b class="text-white">Hamilton, label-free:</b> Contender 2007–08 → Midfield 2009 → Contender 2010–22 → Midfield 2023–24.<br>
+          <b class="text-white">Clusters → classifier:</b> the previous-season tier lifts grid-only PR-AUC from 0.40 to 0.49, but is redundant next to the 16 features.
         </div>
-        <div class="code-box text-[9.5px]">
-          P(Win<sub>i</sub> | Race<sub>j</sub>) = exp(z<sub>i</sub> / T) / &sum;<sub>k</sub> exp(z<sub>k</sub> / T)<br>
-          <span class="text-emerald-400 font-bold">&sum;<sub>i</sub> P(Win<sub>i</sub>) = 1.0000</span> (Enforces Zero-Sum Constraint)
-        </div>
-
-        <div class="p-2 rounded bg-[#0D1117] border border-[#21262D] text-[10px]">
-          <div class="font-bold text-slate-200">Top Feature Importance Gain:</div>
-          <div class="grid grid-cols-2 gap-1 mt-1 text-slate-400">
-            <div>1. Grid Position: <b class="text-white">38.14%</b></div>
-            <div>2. Constructor Form: <b class="text-white">10.60%</b></div>
-            <div>3. Driver Form (5 GP): <b class="text-white">7.23%</b></div>
-            <div>4. Career Win Rate: <b class="text-white">6.12%</b></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Panel 4.2: Holdout Confusion Matrix & Case Study -->
-      <section class="card-panel">
-        <span class="section-badge badge-gold">HOLD-OUT VERIFICATION</span>
-        <h2 class="text-base font-bold text-white">Confusion Matrix (68 Unseen GPs)</h2>
-
-        <!-- Confusion Matrix Box -->
-        <div class="bg-[#090D13] p-2.5 rounded-lg border border-[#21262D]">
-          <div class="grid grid-cols-3 gap-1 text-center text-xs">
-            <div class="p-1"></div>
-            <div class="p-1 font-bold text-slate-400 text-[10px]">Pred: Loss (0)</div>
-            <div class="p-1 font-bold text-slate-400 text-[10px]">Pred: Win (1)</div>
-
-            <div class="p-1 font-bold text-slate-400 text-[10px] text-right">Act: Loss (0)</div>
-            <div class="p-2 bg-slate-800/60 rounded border border-slate-700">
-              <div class="font-bold text-white text-sm">1,171</div>
-              <div class="text-[9px] text-slate-400">True Neg (TN)</div>
-            </div>
-            <div class="p-2 bg-rose-950/40 rounded border border-rose-800">
-              <div class="font-bold text-rose-300 text-sm">120</div>
-              <div class="text-[9px] text-rose-400">False Pos (FP)</div>
-            </div>
-
-            <div class="p-1 font-bold text-slate-400 text-[10px] text-right">Act: Win (1)</div>
-            <div class="p-2 bg-amber-950/40 rounded border border-amber-800">
-              <div class="font-bold text-amber-300 text-sm">13</div>
-              <div class="text-[9px] text-amber-400">False Neg (FN)</div>
-            </div>
-            <div class="p-2 bg-emerald-950/50 rounded border border-emerald-600">
-              <div class="font-bold text-emerald-300 text-sm">55</div>
-              <div class="text-[9px] text-emerald-400">True Pos (TP)</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Real-world proof case -->
-        <div class="p-2 rounded bg-[#0D1117] border-l-2 border-l-[#00BDAE] text-[10px] text-slate-300">
-          <b class="text-white">Validation Proof: 2024 British GP (Silverstone)</b><br>
-          Naive baseline selected Russell (P1 pole; DNF Lap 34). Our model correctly promoted <b>Lewis Hamilton (P2)</b> based on track affinity (8 wins) and rolling constructor pace.
-        </div>
-
-        <!-- Tech Badges -->
         <div class="flex flex-wrap gap-1.5 pt-1">
           <span class="px-2 py-0.5 rounded bg-[#161B22] border border-[#30363D] text-[10px] text-slate-300">Snowflake</span>
-          <span class="px-2 py-0.5 rounded bg-[#161B22] border border-[#30363D] text-[10px] text-slate-300">Python 3.10+</span>
+          <span class="px-2 py-0.5 rounded bg-[#161B22] border border-[#30363D] text-[10px] text-slate-300">SQLite</span>
+          <span class="px-2 py-0.5 rounded bg-[#161B22] border border-[#30363D] text-[10px] text-slate-300">scikit-learn</span>
           <span class="px-2 py-0.5 rounded bg-[#161B22] border border-[#30363D] text-[10px] text-slate-300">XGBoost</span>
           <span class="px-2 py-0.5 rounded bg-[#161B22] border border-[#30363D] text-[10px] text-slate-300">mlxtend</span>
           <span class="px-2 py-0.5 rounded bg-[#161B22] border border-[#30363D] text-[10px] text-slate-300">Streamlit</span>
-          <span class="px-2 py-0.5 rounded bg-[#161B22] border border-[#30363D] text-[10px] text-slate-300">Power BI</span>
         </div>
       </section>
-
     </div>
 
   </main>
 
-  <!-- ========================================== -->
-  <!-- POSTER FOOTER                              -->
-  <!-- ========================================== -->
   <footer class="mt-4 pt-3 border-t border-[#30363D] flex items-center justify-between text-xs text-slate-400">
     <div class="flex items-center gap-6">
-      <div><b>Team Members:</b> Student Researcher 1 (Data Eng) &bull; Student Researcher 2 (ML Lead)</div>
-      <div><b>Deliverable Artifacts:</b> 15 Streamlit Pages &bull; Power BI Star Schema Package &bull; In-DB SQL Scoring</div>
+      <div><b>Team:</b> Adesh Patankar &bull; Dhruv Sakhare</div>
+      <div><b>Faculty:</b> Reena Pagare</div>
+      <div><b>Artifacts:</b> 3 rubric dashboards (Streamlit) &bull; 12 module scripts &bull; Snowflake deployment &bull; 61 automated tests</div>
     </div>
     <div class="flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-[#E10600]"></span>
-      <span class="text-white font-semibold">ApexIQ Enterprise Intelligence Platform</span>
+      <span class="text-white font-semibold">ApexIQ</span>
       <span class="text-slate-500">&copy; 2026 Academic Review</span>
     </div>
   </footer>

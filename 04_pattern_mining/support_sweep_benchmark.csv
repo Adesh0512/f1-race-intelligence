@@ -1,0 +1,5 @@
+min_support,itemsets,apriori_candidates,fp_tree_nodes,apriori_time_sec,fpgrowth_time_sec
+0.05,126,280,2361,0.0029,0.0229
+0.02,414,770,4230,0.0092,0.0294
+0.01,943,1570,4230,0.0215,0.052
+0.005,2130,3089,4230,0.0462,0.0424

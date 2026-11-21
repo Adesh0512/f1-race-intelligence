@@ -28,14 +28,14 @@
 
 | Metric | Measured Value | Standard Error / Notes |
 |---|---|---|
-| **ROC-AUC** | **0.9635** | Evaluated on out-of-sample holdout |
-| **PR-AUC (Avg Precision)** | **0.6009** | Baseline random guess PR-AUC = 0.0500 |
-| **Overall Accuracy** | **90.21%** | Binary classification at default threshold |
-| **Winner Class Recall** | **80.88%** | 55 of 68 actual race winners identified |
-| **Top-1 Winner Hit Rate** | **57.35% (39/68)** | True winner had highest probability on grid |
-| **Top-3 Podium Hit Rate** | **88.24% (60/68)** | True winner in top-3 highest probabilities |
-| **Brier Calibration Score** | **0.0663** | Well-calibrated probabilistic output |
-| **Inference Latency** | **5.64 ms** | Per full 20-car grid evaluation |
+| **ROC-AUC** | **0.9629** | Evaluated on out-of-sample holdout |
+| **PR-AUC (Avg Precision)** | **0.6433** | Baseline random guess PR-AUC = 0.0500 |
+| **Overall Accuracy** | **90.29%** | Binary classification at default threshold |
+| **Winner Class Recall** | **85.29%** | 55 of 68 actual race winners identified |
+| **Top-1 Winner Hit Rate** | **58.82% (40/68)** | True winner had highest probability on grid |
+| **Top-3 Podium Hit Rate** | **86.76% (59/68)** | True winner in top-3 highest probabilities |
+| **Brier Calibration Score** | **0.0669** | Well-calibrated probabilistic output |
+| **Inference Latency** | **≈3 ms** | Batch of all 1,359 holdout entries |
 
 ## Factors & Feature Importance
 The top five influential features driving model decisions:

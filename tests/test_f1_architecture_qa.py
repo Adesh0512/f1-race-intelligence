@@ -14,6 +14,9 @@ Validates all architectural and engineering criteria:
 
 import unittest
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _paths import find
 import sqlite3
 import re
 
@@ -21,13 +24,13 @@ class TestF1ArchitectureQAEvaluation(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.db_path = "f1_warehouse.db"
-        cls.star_ddl = "create_star_schema.sql"
-        cls.snow_ddl = "create_snowflake_schema.sql"
-        cls.doc_path = "ARCHITECTURE_SPECIFICATION.md"
-        cls.er_star = "er_diagram_star.mmd"
-        cls.er_snow = "er_diagram_snowflake.mmd"
-        cls.er_oltp = "er_diagram.mmd"
+        cls.db_path = find("f1_warehouse.db")
+        cls.star_ddl = find("create_star_schema.sql")
+        cls.snow_ddl = find("create_snowflake_schema.sql")
+        cls.doc_path = find("docs/architecture.md")
+        cls.er_star = find("er_diagram_star.mmd")
+        cls.er_snow = find("er_diagram_snowflake.mmd")
+        cls.er_oltp = find("er_diagram.mmd")
 
     def test_01_architecture_artifacts_presence(self):
         """Verify all architecture documentation, DDL scripts, and Mermaid diagrams exist."""
@@ -91,8 +94,8 @@ class TestF1ArchitectureQAEvaluation(unittest.TestCase):
 
     def test_05_multi_dimensional_olap_cube_structure(self):
         """Verify OLAP Cube engine file exists and defines 4-dimensional lattice."""
-        self.assertTrue(os.path.exists("f1_cube_engine.py"))
-        with open("f1_cube_engine.py", "r", encoding="utf-8") as f:
+        self.assertTrue(os.path.exists(find("f1_cube_engine.py")))
+        with open(find("f1_cube_engine.py"), "r", encoding="utf-8") as f:
             code = f.read()
         self.assertIn("cuboids", code.lower())
         self.assertIn("season", code.lower())

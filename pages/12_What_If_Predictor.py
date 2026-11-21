@@ -37,13 +37,13 @@ p_col1, p_col2, p_col3 = st.columns(3)
 
 preset_clicked = None
 with p_col1:
-    if st.button("🏎️ Preset 1: Verstappen Pole Dominance", use_container_width=True):
+    if st.button("🏎️ Preset 1: Verstappen Pole Dominance", width="stretch"):
         preset_clicked = "Verstappen_Pole"
 with p_col2:
-    if st.button("🏎️ Preset 2: Norris P2 Front-Row Challenge", use_container_width=True):
+    if st.button("🏎️ Preset 2: Norris P2 Front-Row Challenge", width="stretch"):
         preset_clicked = "Norris_FrontRow"
 with p_col3:
-    if st.button("🏎️ Preset 3: Alonso Midfield Surge (P8)", use_container_width=True):
+    if st.button("🏎️ Preset 3: Alonso Midfield Surge (P8)", width="stretch"):
         preset_clicked = "Alonso_Midfield"
 
 # Default Form State

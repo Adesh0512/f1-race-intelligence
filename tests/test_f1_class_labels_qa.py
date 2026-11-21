@@ -12,6 +12,9 @@ Validates all Target Class Labeling criteria:
 
 import unittest
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _paths import find
 import sqlite3
 import pandas as pd
 import numpy as np
@@ -20,8 +23,8 @@ class TestF1ClassLabelsQAEvaluation(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.csv_path = "F1_ML_Winner_Prediction_Dataset.csv"
-        cls.db_path = "f1_warehouse.db"
+        cls.csv_path = find("F1_ML_Winner_Prediction_Dataset.csv")
+        cls.db_path = find("f1_warehouse.db")
         cls.df = pd.read_csv(cls.csv_path, low_memory=False)
 
     def test_01_target_labels_presence(self):
@@ -65,7 +68,7 @@ class TestF1ClassLabelsQAEvaluation(unittest.TestCase):
     def test_06_zero_target_leakage_in_features(self):
         """Verify feature matrices do NOT include target labels or post-race finishing positions."""
         import joblib
-        artifact = joblib.load("f1_winner_model.joblib")
+        artifact = joblib.load(find("f1_winner_model.joblib"))
         features = artifact["features"]
         
         forbidden_targets = ["is_win", "is_podium", "is_top_10", "finish_position", "finish_position_text", "race_points", "finishing_tier"]

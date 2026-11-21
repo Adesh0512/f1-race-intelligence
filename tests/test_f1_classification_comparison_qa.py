@@ -12,6 +12,9 @@ Validates:
 
 import unittest
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _paths import find
 import pandas as pd
 import numpy as np
 
@@ -19,10 +22,10 @@ class TestF1ClassificationComparisonQAEvaluation(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.bench_csv = "f1_classification_benchmark_results.csv"
-        cls.abl_csv = "f1_ablation_study_results.csv"
-        cls.script_path = "f1_classification_comparison_benchmark.py"
-        cls.doc_path = "05_algorithm_comparison/comparison_report.md"
+        cls.bench_csv = find("f1_classification_benchmark_results.csv")
+        cls.abl_csv = find("f1_ablation_study_results.csv")
+        cls.script_path = find("05_algorithm_comparison/train_comparison.py")
+        cls.doc_path = find("05_algorithm_comparison/comparison_report.md")
 
         cls.df_bench = pd.read_csv(cls.bench_csv) if os.path.exists(cls.bench_csv) else None
         cls.df_abl = pd.read_csv(cls.abl_csv) if os.path.exists(cls.abl_csv) else None

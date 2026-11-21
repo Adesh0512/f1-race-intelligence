@@ -1,0 +1,2 @@
+comparison,metric,mean_delta,ci_low,ci_high,p_value,resamples
+XGBoost vs Grid-Only Baseline,ROC-AUC,0.0424,0.0183,0.0732,0.0,1000

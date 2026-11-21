@@ -134,7 +134,7 @@ with t1:
                 color="Wins", color_continuous_scale=["#333C48", F1_RED]
             )
             fig.update_layout(yaxis=dict(autorange="reversed"), coloraxis_showscale=False)
-            st.plotly_chart(get_plotly_theme(fig), use_container_width=True)
+            st.plotly_chart(get_plotly_theme(fig), width="stretch")
 
 with t2:
     p1, p2, p3 = st.columns(3)

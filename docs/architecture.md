@@ -76,3 +76,24 @@ flowchart LR
 
 ### Tier 5: Streamlit in Snowflake (SiS) Dashboard
 * 14 modular interactive pages built with F1 racing red theme (`#E10600`), Plotly interactive charts, live What-If scenario simulations, and interactive SQL playgrounds.
+
+---
+
+## 🧱 Dimensional Model: Star Schema vs. Snowflake Schema (Dashboard 1)
+
+The warehouse design lives in [`00_data_warehouse/`](../00_data_warehouse/): DDL, Mermaid ER diagrams, OLAP queries and the ETL scripts. The loaded tables are in `f1_warehouse.db`.
+
+**Fact grains:** `FACT_RACE_RESULTS` = one row per driver per Grand Prix (8,650 rows, 2004–2024); `FACT_LAP_TIMES` = one row per driver per lap (296,727 rows). The ER diagrams are generated from the DDL by `generate_er_diagrams.py`, and all 24 DDL tables match `f1_warehouse.db` column for column.
+
+| | Star Schema | Snowflake Schema |
+|---|---|---|
+| DDL / diagram | `create_star_schema.sql` · `er_diagram_star.mmd` | `create_snowflake_schema.sql` · `er_diagram_snowflake.mmd` |
+| Shape | Fact constellation: 2 facts + 7 dimensions (9 tables) | 2 facts + 13 normalised dimensions (15 tables) |
+| Fact tables | `FACT_RACE_RESULTS` (40 columns) · `FACT_LAP_TIMES` (34 columns) | `FACT_RACE_RESULTS_SNOWFLAKE` (16) · `FACT_LAP_TIMES_SNOWFLAKE` (13, not yet loaded) |
+| Dimensions | Denormalised: `DIM_DRIVER`, `DIM_CONSTRUCTOR`, `DIM_RACE` (circuit attributes inlined), `DIM_STATUS`, `DIM_DATE`, `DIM_SESSION`, `DIM_TYRE_COMPOUND` | Normalised: `DIM_DRIVER_SNOWFLAKE → DIM_NATIONALITY`, `DIM_CONSTRUCTOR_SNOWFLAKE → DIM_ENGINE_SUPPLIER / DIM_TEAM_PRINCIPAL / DIM_LIVERY_SPONSOR`, `DIM_RACE_SNOWFLAKE → DIM_CIRCUIT_SNOWFLAKE → DIM_COUNTRY`, `DIM_DATE_SNOWFLAKE → DIM_SEASON`, plus history tables `DIM_DRIVER_NUMBER_HISTORY`, `DIM_CIRCUIT_LAYOUT_HISTORY` |
+| Joins per query | 1 hop (fact → dimension) | 2–3 hops (fact → dimension → sub-dimension) |
+| Query latency | **Lower**: fewer joins, best for BI dashboards and OLAP roll-ups | Higher: extra joins |
+| Storage / redundancy | Higher: circuit and country text repeated per race | Lower: each attribute stored once, easier updates |
+| Used for | Power BI / Streamlit dashboards, OLAP cube (`f1_cube_engine.py`) | Data-integrity-critical reference data, Snowflake Cloud deployment |
+
+**Trade-off:** we serve analytics from the **star schema** for low latency and keep the **snowflake schema** for normalised, update-friendly reference data. Both are generated from the same 65-column master (`F1_Warehouse_Master_65_Columns_2004_2024.csv`) by `etl_master_ingestion.py`.

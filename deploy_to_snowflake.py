@@ -21,6 +21,7 @@ Executes 100% end-to-end Snowflake deployment:
 """
 
 import os
+import re
 import sys
 import time
 
@@ -54,6 +55,16 @@ def clean_sql_commands(sql_content):
         ]):
             commands.append(cleaned)
     return commands
+
+def master_section(name):
+    """Returns one '-- 0X_NAME.SQL' section of MASTER_SNOWFLAKE_DEPLOYMENT.sql (the project ships no sql/ folder)."""
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "MASTER_SNOWFLAKE_DEPLOYMENT.sql"), encoding="utf-8") as f:
+        content = f.read()
+    m = re.search(rf"-- {re.escape(name)}:.*?(?=\n-- =+\n-- \d\d_[A-Z_]+\.SQL:|\Z)", content, re.S)
+    if not m:
+        raise ValueError(f"Section {name} not found in MASTER_SNOWFLAKE_DEPLOYMENT.sql")
+    return m.group(0)
+
 
 def deploy():
     print("=" * 80, flush=True)
@@ -107,20 +118,16 @@ def deploy():
     # STEP 1: Setup Infrastructure
     # -------------------------------------------------------------------------
     print("[1/7] Initializing Infrastructure (01_setup.sql)...", flush=True)
-    with open(os.path.join(sql_dir, "01_setup.sql"), "r", encoding="utf-8") as f:
-        cmds = clean_sql_commands(f.read())
-        for idx, cmd in enumerate(cmds, 1):
-            cs.execute(cmd)
+    for cmd in clean_sql_commands(master_section("01_SETUP.SQL")):
+        cs.execute(cmd)
     print("  [+] Warehouse, Database, Schemas (RAW, CLEAN, ML, ANALYTICS), Formats, and Stages created.\n", flush=True)
 
     # -------------------------------------------------------------------------
     # STEP 2: Create Table DDLs
     # -------------------------------------------------------------------------
     print("[2/7] Creating Table DDLs (02_create_tables.sql)...", flush=True)
-    with open(os.path.join(sql_dir, "02_create_tables.sql"), "r", encoding="utf-8") as f:
-        cmds = clean_sql_commands(f.read())
-        for idx, cmd in enumerate(cmds, 1):
-            cs.execute(cmd)
+    for cmd in clean_sql_commands(master_section("02_CREATE_TABLES.SQL")):
+        cs.execute(cmd)
     print("  [+] All RAW, CLEAN, and ML tables created successfully.\n", flush=True)
 
     # -------------------------------------------------------------------------
@@ -414,6 +421,20 @@ def deploy():
     print()
 
     # -------------------------------------------------------------------------
+    # STEP 6b: Dimensional Model (Star + Snowflake) and Clustering Output
+    # -------------------------------------------------------------------------
+    print("[6b/7] Building DW star & snowflake schemas and loading driver-season clusters...", flush=True)
+    clusters_csv = os.path.join(os.path.dirname(os.path.abspath(__file__)), "11_clustering_algorithm", "driver_season_clusters.csv")
+    if os.path.exists(clusters_csv):
+        cs.execute(f"PUT file://{clusters_csv.replace(os.sep, '/')} @RAW.F1_RAW_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
+    for cmd in clean_sql_commands(master_section("07_DIMENSIONAL_MODEL.SQL")):
+        try:
+            cs.execute(cmd)
+        except Exception as e:
+            print(f"  [-] {cmd.splitlines()[0][:70]}... : {e}", flush=True)
+    print("  [+] DW schema (5 star tables, 3 snowflake tables + view) and ML.DRIVER_SEASON_CLUSTERS deployed.\n", flush=True)
+
+    # -------------------------------------------------------------------------
     # STEP 7: Full Deployment Verification Scorecard
     # -------------------------------------------------------------------------
     print("=" * 80, flush=True)
@@ -433,7 +454,11 @@ def deploy():
         ("ML.FEATURE_IMPORTANCE", "SELECT COUNT(*) FROM ML.FEATURE_IMPORTANCE;"),
         ("ML.FREQUENT_ITEMSETS", "SELECT COUNT(*) FROM ML.FREQUENT_ITEMSETS;"),
         ("ML.REGRESSION_METRICS", "SELECT COUNT(*) FROM ML.REGRESSION_METRICS;"),
-        ("ML.ASSOCIATION_RULES", "SELECT COUNT(*) FROM ML.ASSOCIATION_RULES;")
+        ("ML.ASSOCIATION_RULES", "SELECT COUNT(*) FROM ML.ASSOCIATION_RULES;"),
+        ("DW.FACT_RACE_RESULTS_STAR", "SELECT COUNT(*) FROM DW.FACT_RACE_RESULTS_STAR;"),
+        ("DW.DIM_DRIVER", "SELECT COUNT(*) FROM DW.DIM_DRIVER;"),
+        ("DW.DIM_CIRCUIT", "SELECT COUNT(*) FROM DW.DIM_CIRCUIT;"),
+        ("ML.DRIVER_SEASON_CLUSTERS", "SELECT COUNT(*) FROM ML.DRIVER_SEASON_CLUSTERS;")
     ]
 
     for label, qry in verification_queries:

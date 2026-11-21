@@ -13,6 +13,7 @@ Compares:
 
 import os
 import sys
+import json
 import time
 import pandas as pd
 import numpy as np
@@ -22,6 +23,41 @@ from mlxtend.frequent_patterns import fpgrowth, apriori, association_rules
 # Import transaction generator from apriori_analysis
 sys.path.append(os.path.dirname(__file__))
 from apriori_analysis import build_race_transactions
+
+from itertools import combinations
+
+
+def apriori_candidate_count(frequent_itemsets):
+    """Candidates Apriori must count: every k-itemset whose (k-1)-subsets are all frequent (apriori-gen + prune)."""
+    levels = {}
+    for its in frequent_itemsets:
+        levels.setdefault(len(its), set()).add(frozenset(its))
+    total, k = len(set().union(*levels.get(1, [set()]))), 2  # level 1: every single item is a candidate
+    while levels.get(k - 1):
+        prev = levels[k - 1]
+        items = sorted(set().union(*prev))
+        cands = {frozenset(c) for a in prev for b in prev if len(a | b) == k
+                 for c in [a | b] if all(frozenset(x) in prev for x in combinations(c, k - 1))}
+        total += len(cands)
+        k += 1
+    return total
+
+
+def fp_tree_node_count(encoded_df, min_support):
+    """Nodes in the FP-tree: each transaction's frequent items, sorted by global frequency, inserted as a shared prefix path."""
+    support = encoded_df.mean()
+    order = support[support >= min_support].sort_values(ascending=False).index.tolist()
+    root, nodes = {}, 0
+    for row in encoded_df[order].itertuples(index=False):
+        node = root
+        for item, present in zip(order, row):
+            if present:
+                if item not in node:
+                    node[item] = {}
+                    nodes += 1
+                node = node[item]
+    return nodes
+
 
 def run_fpgrowth_analysis(min_support=0.02, min_confidence=0.25, export_csv=True):
     print("=" * 80)
@@ -58,7 +94,26 @@ def run_fpgrowth_analysis(min_support=0.02, min_confidence=0.25, export_csv=True
     print(f"[+] FP-Growth runtime: {t_fp:.4f} s | Itemsets: {len(fp_itemsets):,}")
 
     speedup = (t_ap / t_fp) if t_fp > 0 else 1.0
-    print(f"[+] Speedup factor: {speedup:.2f}x faster execution with FP-Growth")
+
+    # Implementation-independent cost: Apriori's candidate generation vs. FP-Growth's compressed tree
+    n_candidates = apriori_candidate_count(list(ap_itemsets["itemsets"]))
+    n_tree_nodes = fp_tree_node_count(encoded_df, min_support)
+    print(f"[+] Apriori candidates generated & counted: {n_candidates:,} over {int(ap_itemsets['itemsets'].apply(len).max())} database scans")
+    print(f"[+] FP-tree nodes: {n_tree_nodes:,} built in exactly 2 database scans "
+          f"({len(encoded_df):,} transactions compressed {len(encoded_df) / n_tree_nodes:.1f}x)")
+
+    # Runtime vs. support sweep: how each algorithm scales as the threshold drops
+    sweep = []
+    for s_ in [0.05, 0.02, 0.01, 0.005]:
+        t0 = time.perf_counter(); a_ = apriori(encoded_df, min_support=s_, use_colnames=True); ta_ = time.perf_counter() - t0
+        t0 = time.perf_counter(); f_ = fpgrowth(encoded_df, min_support=s_, use_colnames=True); tf_ = time.perf_counter() - t0
+        sweep.append({"min_support": s_, "itemsets": len(f_), "apriori_candidates": apriori_candidate_count(list(a_["itemsets"])),
+                      "fp_tree_nodes": fp_tree_node_count(encoded_df, s_),
+                      "apriori_time_sec": round(ta_, 4), "fpgrowth_time_sec": round(tf_, 4)})
+    sweep_df = pd.DataFrame(sweep)
+    print(sweep_df.to_string(index=False))
+    faster = "FP-Growth" if t_fp < t_ap else "Apriori"
+    print(f"[+] Wall-clock winner: {faster} ({max(t_ap, t_fp) / min(t_ap, t_fp):.1f}x). See support_sweep_benchmark.csv for how the gap changes as min_support drops.")
 
     # 3. Equivalence Verification
     ap_set = set(frozenset(x) for x in ap_itemsets['itemsets'])
@@ -83,6 +138,20 @@ def run_fpgrowth_analysis(min_support=0.02, min_confidence=0.25, export_csv=True
     if export_csv:
         output_csv = os.path.join(os.path.dirname(__file__), "association_rules.csv")
         export_df.to_csv(output_csv, index=False)
+        itemsets_out = fp_itemsets.assign(
+            itemsets=fp_itemsets["itemsets"].apply(lambda x: ", ".join(sorted(x))),
+            length=fp_itemsets["itemsets"].apply(len)).sort_values("support", ascending=False)
+        sweep_df.to_csv(os.path.join(os.path.dirname(__file__), "support_sweep_benchmark.csv"), index=False)
+        itemsets_out.to_csv(os.path.join(os.path.dirname(__file__), "frequent_itemsets.csv"), index=False)
+        with open(os.path.join(os.path.dirname(__file__), "pattern_mining_benchmark.json"), "w") as f:
+            json.dump({"transactions": int(len(encoded_df)), "items": int(encoded_df.shape[1]),
+                       "min_support": min_support, "min_confidence": min_confidence,
+                       "apriori_time_sec": round(t_ap, 4), "fpgrowth_time_sec": round(t_fp, 4),
+                       "speedup": round(speedup, 2), "itemsets_count": int(len(fp_itemsets)),
+                       "apriori_candidates": int(n_candidates), "fp_tree_nodes": int(n_tree_nodes),
+                       "apriori_db_scans": int(ap_itemsets["itemsets"].apply(len).max()), "fpgrowth_db_scans": 2,
+                       "apriori_itemsets_count": int(len(ap_itemsets)),
+                       "rules_count": int(len(rules)), "is_equivalent": bool(is_identical)}, f, indent=2)
         print(f"[+] Exported association rules to: {output_csv}")
 
     # Inspect top outcome-predicting rules

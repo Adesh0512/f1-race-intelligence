@@ -144,6 +144,7 @@ def calculate_full_metric_suite():
     print(f"  False Negatives (FN): {cm[1, 0]:,} (Winners missed by threshold)")
     print(f"  True Positives  (TP): {cm[1, 1]:,} (Winners successfully caught: {cm[1, 1]}/{cm[1, 0] + cm[1, 1]} = {cm[1, 1]/(cm[1, 0] + cm[1, 1])*100:.1f}%)")
 
+    pd.DataFrame(summary_rows).to_csv(os.path.join(os.path.dirname(__file__), "partition_metrics.csv"), index=False)
     return summary_rows, report_df, cm_df
 
 if __name__ == "__main__":

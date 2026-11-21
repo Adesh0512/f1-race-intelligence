@@ -1,0 +1,4 @@
+cluster,cluster_name,avg_grid,avg_finish,finish_std,win_rate,podium_rate,points_rate,dnf_rate,teammate_quali_rate,starts,size
+0,Title Contenders,4.0045,5.0356,5.2014,0.2523,0.5926,0.849,0.1362,0.5838,18.6944,108
+1,Midfield Regulars,9.587,10.3857,5.2549,0.0119,0.0909,0.5714,0.2759,0.5327,18.1323,325
+2,Backmarkers,16.5032,14.9404,3.5835,0.0002,0.0026,0.1525,0.386,0.3243,15.8852,270

@@ -115,5 +115,18 @@ def run_baseline_vs_improved_comparison():
     print(f"    - Top-1 Winner Hits increased from {top1_base} to {top1_imp} (+{top1_imp - top1_base} Grand Prix winners correctly identified)")
     print(f"    - Winner Recall surged from {rec_base*100:.1f}% to {rec_imp*100:.1f}%\n")
 
+    pd.DataFrame([
+        {"metric": "ROC-AUC", "baseline": auc_base, "improved": auc_imp},
+        {"metric": "PR-AUC", "baseline": prauc_base, "improved": prauc_imp},
+        {"metric": "Accuracy %", "baseline": acc_base, "improved": acc_imp},
+        {"metric": "Winner Precision", "baseline": prec_base, "improved": prec_imp},
+        {"metric": "Winner Recall", "baseline": rec_base, "improved": rec_imp},
+        {"metric": "Winner F1", "baseline": f1_base, "improved": f1_imp},
+        {"metric": "Brier Score", "baseline": brier_base, "improved": brier_imp},
+        {"metric": "Top-1 Winner Hit %", "baseline": top1_base_pct, "improved": top1_imp_pct},
+        {"metric": "Top-3 Winner Presence %", "baseline": top3_base_pct, "improved": top3_imp_pct},
+    ]).round(4).assign(delta=lambda d: (d["improved"] - d["baseline"]).round(4)).to_csv(
+        os.path.join(os.path.dirname(__file__), "innovation_results.csv"), index=False)
+
 if __name__ == "__main__":
     run_baseline_vs_improved_comparison()

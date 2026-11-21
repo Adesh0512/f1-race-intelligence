@@ -15,7 +15,7 @@
 
 ## 2. Empirical Benchmark Results
 
-Below are the empirical metrics recorded from executing [train_comparison.py](file:///C:/Users/dhruv/.gemini/antigravity-ide/scratch/f1_dw/f1-race-intelligence/05_algorithm_comparison/train_comparison.py), exported to [comparison_results.csv](file:///C:/Users/dhruv/.gemini/antigravity-ide/scratch/f1_dw/f1-race-intelligence/05_algorithm_comparison/comparison_results.csv):
+Below are the empirical metrics recorded from executing [train_comparison.py](train_comparison.py), exported to [comparison_results.csv](comparison_results.csv):
 
 | Architecture | ROC-AUC | PR-AUC | Accuracy (%) | Balanced Acc (%) | Top-1 Winner Hit % (68 GPs) | Top-3 Winner Hit % | Brier Score | Inference Latency (ms) |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -25,26 +25,26 @@ Below are the empirical metrics recorded from executing [train_comparison.py](fi
 | **4. Random Forest Classifier** | 0.9561 | 0.5866 | 86.83% | 88.19% | 51.5% (35/68) | 86.8% | 0.0919 | 14.28 ms |
 | **5. Gradient Boosting (GBDT)** | 0.9622 | 0.5994 | 96.32% | 70.20% | 52.9% (36/68) | 86.8% | 0.0293 | 3.12 ms |
 | **6. LightGBM Classifier** | 0.9586 | 0.6152 | 88.01% | 86.02% | 51.5% (35/68) | 83.8% | 0.0811 | 4.85 ms |
-| **7. XGBoost Classifier (Champion)** | **0.9635** | **0.6029** | 90.14% | 86.45% | **54.4% (37/68)** | **88.2%** | 0.0678 | 5.64 ms |
+| **7. XGBoost Classifier (Champion)** | **0.9629** | **0.6433** | 90.29% | 87.92% | **58.8% (40/68)** | 86.8% | 0.0669 | ≈3 ms |
 
 ---
 
 ## 3. Expanding-Window Chronological Validation
 
-To ensure performance stability across shifting technical regulations and team dominance cycles, [temporal_validation.py](file:///C:/Users/dhruv/.gemini/antigravity-ide/scratch/f1_dw/f1-race-intelligence/05_algorithm_comparison/temporal_validation.py) executed 6 expanding-window temporal folds:
+To ensure performance stability across shifting technical regulations and team dominance cycles, [temporal_validation.py](temporal_validation.py) executed 6 expanding-window temporal folds:
 
 | Fold # | Historical Training Period | Out-of-Sample Test Season | Train Rows | Test Rows | ROC-AUC | Top-1 Winner Hit Rate |
 |---|---|---|---:|---:|---:|---:|
-| **Fold 1** | 1994–2018 | **2019** | 9,799 | 420 | 0.9512 | 33.3% (07/21 GPs) |
-| **Fold 2** | 1994–2019 | **2020** | 10,219 | 340 | 0.9213 | 70.6% (12/17 GPs) |
-| **Fold 3** | 1994–2020 | **2021** | 10,559 | 440 | 0.9242 | 50.0% (11/22 GPs) |
-| **Fold 4** | 1994–2021 | **2022** (Ground Effect Intro) | 10,999 | 440 | 0.9587 | 45.5% (10/22 GPs) |
-| **Fold 5** | 1994–2022 | **2023** (RB19 Dominance) | 11,439 | 440 | 0.9856 | 77.3% (17/22 GPs) |
-| **Fold 6** | 1994–2023 | **2024** (7 Distinct Winners) | 11,879 | 479 | 0.9367 | 50.0% (12/24 GPs) |
-| **MEAN** | — | **2019–2024** | — | — | **0.9463** | **54.44%** |
+| **Fold 1** | 1994–2018 | **2019** | 9,799 | 420 | 0.9480 | 38.1% (08/21 GPs) |
+| **Fold 2** | 1994–2019 | **2020** | 10,219 | 340 | 0.9137 | 47.1% (08/17 GPs) |
+| **Fold 3** | 1994–2020 | **2021** | 10,559 | 440 | 0.9336 | 54.5% (12/22 GPs) |
+| **Fold 4** | 1994–2021 | **2022** (Ground Effect Intro) | 10,999 | 440 | 0.9606 | 50.0% (11/22 GPs) |
+| **Fold 5** | 1994–2022 | **2023** (RB19 Dominance) | 11,439 | 440 | 0.9844 | 77.3% (17/22 GPs) |
+| **Fold 6** | 1994–2023 | **2024** (7 Distinct Winners) | 11,879 | 479 | 0.9317 | 50.0% (12/24 GPs) |
+| **MEAN** | — | **2019–2024** | — | — | **0.9453** | **52.83%** |
 
 ### Key Temporal Takeaways:
-1. **Stability Across Eras:** The expanding-window model maintains a consistent mean ROC-AUC of **0.9463**, demonstrating that the multi-era engineered feature set generalizes across engine eras.
+1. **Stability Across Eras:** The expanding-window model maintains a consistent mean ROC-AUC of **0.9453**, demonstrating that the multi-era engineered feature set generalizes across engine eras.
 2. **Handling Competitive Volatility:** Even in the unpredictable 2024 season (which featured 7 different Grand Prix winners across 4 constructors: Red Bull, McLaren, Ferrari, Mercedes), the model achieved a 50.0% Top-1 hit rate and 0.9367 ROC-AUC without fine-tuning on 2024 data.
 3. **Temporal Invariant Guaranteed:** In every single fold, zero data from season $T$ was accessible during model fitting.
 
@@ -53,5 +53,5 @@ To ensure performance stability across shifting technical regulations and team d
 ## 4. Conclusion on Parameter 05
 
 The empirical comparison confirms:
-- Tree ensembles dramatically outperform both the stochastic baseline (+46.35 AUC points) and the grid-only linear baseline (+4.37 AUC points).
-- **XGBoost Classifier** achieves the highest discriminative performance (ROC-AUC: 0.9635, Top-1 Hit: 54.4%, Top-3 Hit: 88.2%), making it the mathematically justified choice for the production pipeline.
+- Tree ensembles dramatically outperform both the stochastic baseline (+46.35 AUC points) and the grid-only linear baseline (+4.31 AUC points).
+- **XGBoost Classifier** achieves the highest discriminative performance (ROC-AUC: 0.9629, Top-1 Hit: 58.8%, Top-3 Hit: 86.8%), making it the mathematically justified choice for the production pipeline.

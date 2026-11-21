@@ -87,9 +87,9 @@ In the **Model View** (left sidebar, 3rd icon), ensure these 1-to-many relations
   * **Category Slicer:** Multiselect (`Proposed Innovation`, `Gradient Boosted Trees`, `Bagging Ensemble`, `Linear Baseline`, `Neural Network`).
   * **Sort Metric Slicer:** Radio button (`Test ROC-AUC`, `PR-AUC`, `Top-1 Hit Rate`).
 * **KPI Scorecards (Row 1):**
-  * `Top Benchmark ROC-AUC` $\rightarrow$ `0.9635` (*Champion XGBoost*).
-  * `Peak PR-AUC (19:1 Imbalance)` $\rightarrow$ `0.6009` (*+50.4% vs Baseline*).
-  * `Top-1 Winner Hit Rate` $\rightarrow$ `57.35%` (*39 / 68 Test GPs*).
+  * `Top Benchmark ROC-AUC` $\rightarrow$ `0.9629` (*Champion XGBoost*).
+  * `Peak PR-AUC (19:1 Imbalance)` $\rightarrow$ `0.6433` (*+61.1% vs Baseline*).
+  * `Top-1 Winner Hit Rate` $\rightarrow$ `58.82%` (*39 / 68 Test GPs*).
   * `Hypothesis Significance` $\rightarrow$ `p = 0.0012` (*Paired t-test t = -8.20, Reject H0*).
 * **Core Visuals:**
   * **Overlaid Receiver Operating Characteristic (ROC) Curves (Line Chart):**

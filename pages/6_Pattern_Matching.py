@@ -48,7 +48,7 @@ with t1:
             color="Algorithm", color_discrete_map={"Apriori": "#8B949E", "FP-Growth": F1_RED},
             title="Algorithm Execution Latency Benchmark (mlxtend)"
         )
-        st.plotly_chart(get_plotly_theme(fig_time), use_container_width=True)
+        st.plotly_chart(get_plotly_theme(fig_time), width="stretch")
 
     with col_c2:
         st.markdown("""
@@ -73,7 +73,7 @@ with t2:
             labels={"lift": "Lift Factor (x)", "antecedents": "Antecedent Itemset", "confidence": "Confidence"}
         )
         fig_lift.update_layout(yaxis=dict(autorange="reversed"))
-        st.plotly_chart(get_plotly_theme(fig_lift), use_container_width=True)
+        st.plotly_chart(get_plotly_theme(fig_lift), width="stretch")
 
         st.markdown("""
         > [!TIP]
@@ -102,6 +102,6 @@ with t3:
         ].sort_values(by="lift", ascending=False)
 
         st.write(f"Displaying **{len(filtered_rules):,}** filtered association rules matching criteria:")
-        st.dataframe(filtered_rules[["antecedents", "consequents", "support", "confidence", "lift"]].head(100), use_container_width=True)
+        st.dataframe(filtered_rules[["antecedents", "consequents", "support", "confidence", "lift"]].head(100), width="stretch")
     else:
         st.info("Rule dataset unavailable.")

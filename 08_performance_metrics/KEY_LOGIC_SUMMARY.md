@@ -1,42 +1,34 @@
 # 08. Performance Metrics: Key Logic & Core Summary
 
-## 1. Empirical Partition Performance (Train vs. Val vs. Test)
-
-| Partition | Seasons & Entrants | ROC-AUC | PR-AUC | Accuracy | Winner Recall | Brier Score | Top-1 Winner Hit |
+## 1. Train vs. Validation vs. Test
+| Partition | Seasons & entries | ROC-AUC | PR-AUC | Accuracy | Winner recall | Brier | Top-1 winner hit |
 |---|---|---:|---:|---:|---:|---:|---:|
-| **Train** | 1994–2021 (10,999 rows) | 0.9733 | 0.6139 | 91.25% | 93.71% | 0.0626 | 58.7% (299/509) |
-| **Validation** | 2022 (440 rows, 22 GPs) | 0.9581 | 0.5313 | 89.55% | 81.82% | 0.0702 | 50.0% (11/22) |
-| **Test** | 2023–2024 (919 rows, 46 GPs) | 0.9659 | 0.6307 | 90.53% | 80.43% | 0.0645 | 60.9% (28/46) |
-| **Combined Holdout**| **2022–2024 (1,359 rows, 68 GPs)**| **0.9635** | **0.6009** | **90.21%** | **80.88%** | **0.0663** | **57.4% (39/68)** |
+| Train | 1994–2021 (10,999 rows) | 0.9730 | 0.5990 | 91.30% | 93.52% | 0.0625 | 59.1% (301/509) |
+| Validation | 2022 (440 rows, 22 GPs) | 0.9606 | 0.5997 | 89.77% | 90.91% | 0.0692 | 50.0% (11/22) |
+| Test | 2023–2024 (919 rows, 46 GPs) | 0.9636 | 0.6658 | 90.53% | 82.61% | 0.0658 | 63.0% (29/46) |
+| **Combined holdout** | **2022–2024 (1,359 rows, 68 GPs)** | **0.9629** | **0.6433** | **90.29%** | **85.29%** | **0.0669** | **58.8% (40/68)** |
 
-## 2. Confusion Matrix & Per-Class Trade-Off (68 Holdout GPs)
+The train→test ROC-AUC gap is only 0.01, so the model shows little overfitting.
 
-| | Predicted Non-Winner (0) | Predicted Winner (1) | Total Actual |
+## 2. Confusion Matrix (holdout, threshold 0.5)
+| | Predicted non-winner | Predicted winner | Total |
 |---|---:|---:|---:|
-| **Actual Non-Winner (0)** | **1,171 (TN)** | 120 (FP) | 1,291 |
-| **Actual Winner (1)** | 13 (FN) | **55 (TP)** | 68 |
+| **Actual non-winner** | **1,169 (TN)** | 122 (FP) | 1,291 |
+| **Actual winner** | 10 (FN) | **58 (TP)** | 68 |
 
-- **Winner Recall (80.88% = 55/68):** Captures over 4 out of 5 true race winners.
-- **Winner Precision (31.43% = 55/175):** Multiple genuine contenders cross binary threshold before group softmax normalization.
-- **Top-1 Winner Hit Rate:** **57.35% (39/68 GPs)** assigned to exact race winner.
-- **Top-3 Podium Winner Presence:** **88.24% (60/68 GPs)**.
+- **Winner recall:** 85.29% (58/68). The model catches more than 4 out of 5 real winners.
+- **Winner precision:** 32.22% (58/180). Several genuine contenders cross the 0.5 threshold in each race. The race softmax then picks one of them, which gives the 58.8% top-1 hit rate.
+- **F1 (winner):** 0.4677 · **Log loss:** 0.2165.
+- **Top-3 winner presence:** 86.76% (59/68 GPs).
 
-## 3. Minimal Metrics Calculation Logic
+## 3. Minimal Metric Logic
 ```python
-from sklearn.metrics import roc_auc_score, precision_recall_curve, auc, confusion_matrix, brier_score_loss
+from sklearn.metrics import roc_auc_score, average_precision_score, brier_score_loss, confusion_matrix
+roc = roc_auc_score(y, p); pr = average_precision_score(y, p); brier = brier_score_loss(y, p)
+tn, fp, fn, tp = confusion_matrix(y, (p >= 0.5).astype(int)).ravel()
+top1 = df.loc[df.groupby("race_id")["p"].idxmax(), "target_is_win"].mean()
+```
 
-# Binary entry metrics
-roc_auc = roc_auc_score(y_test, probs)
-precision, recall, _ = precision_recall_curve(y_test, probs)
-pr_auc = auc(recall, precision)
-brier = brier_score_loss(y_test, probs)
-tn, fp, fn, tp = confusion_matrix(y_test, (probs >= 0.5).astype(int)).ravel()
-
-# Group race-level top-1 hit rate
-top1_hits = test_df.groupby("race_id").apply(
-    lambda g: g.loc[g["win_prob"].idxmax(), "target_is_win"]
-).sum()
-top1_rate = top1_hits / test_df["race_id"].nunique()
-
-print(f"ROC-AUC: {roc_auc:.4f} | PR-AUC: {pr_auc:.4f} | Top-1: {top1_rate*100:.1f}%")
+```bash
+python3 08_performance_metrics/calculate_metrics.py   # writes classification_report.csv, confusion_matrix.csv, partition_metrics.csv
 ```

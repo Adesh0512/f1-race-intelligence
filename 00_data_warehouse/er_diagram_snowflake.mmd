@@ -1,0 +1,162 @@
+erDiagram
+    DIM_CIRCUIT_LAYOUT_HISTORY {
+        INT layout_id PK
+        INT circuit_id FK
+        VARCHAR layout_version_name
+        DECIMAL length_km
+        INT number_of_corners
+        INT drs_zones_count
+        INT valid_from_year
+        INT valid_to_year
+    }
+    DIM_CIRCUIT_SNOWFLAKE {
+        INT circuit_id PK
+        VARCHAR circuit_ref
+        VARCHAR circuit_name
+        VARCHAR circuit_location
+        INT country_id FK
+        DECIMAL circuit_latitude
+        DECIMAL circuit_longitude
+        INT circuit_altitude_m
+    }
+    DIM_CONSTRUCTOR_SNOWFLAKE {
+        INT constructor_id PK
+        VARCHAR constructor_ref
+        VARCHAR constructor_name
+        INT nationality_id FK
+        INT engine_supplier_id FK
+        INT principal_id FK
+        INT sponsor_id FK
+        VARCHAR color_hex
+    }
+    DIM_COUNTRY {
+        INT country_id PK
+        VARCHAR country_name
+        VARCHAR alpha2_code
+        VARCHAR alpha3_code
+        VARCHAR region
+    }
+    DIM_DATE_SNOWFLAKE {
+        INT date_id PK
+        DATE full_date
+        INT season_year FK
+        INT quarter
+        INT month
+        VARCHAR month_name
+        INT day_of_week
+        VARCHAR day_name
+    }
+    DIM_DRIVER_NUMBER_HISTORY {
+        INT history_id PK
+        INT driver_id FK
+        INT season_year FK
+        INT permanent_car_number
+        INT is_reigning_champion_override
+    }
+    DIM_DRIVER_SNOWFLAKE {
+        INT driver_id PK
+        VARCHAR driver_ref
+        VARCHAR driver_code
+        VARCHAR driver_name
+        DATE driver_dob
+        INT nationality_id FK
+        TEXT headshot_url
+    }
+    DIM_ENGINE_SUPPLIER {
+        INT engine_supplier_id PK
+        VARCHAR supplier_name
+        VARCHAR headquarters_country
+        VARCHAR engine_architecture
+    }
+    DIM_LIVERY_SPONSOR {
+        INT sponsor_id PK
+        VARCHAR sponsor_name
+        VARCHAR industry
+        INT contract_start_year
+    }
+    DIM_NATIONALITY {
+        INT nationality_id PK
+        VARCHAR nationality_name
+        VARCHAR country_code
+        VARCHAR continent
+    }
+    DIM_RACE_SNOWFLAKE {
+        INT race_id PK
+        INT season_year FK
+        INT round
+        VARCHAR race_name
+        INT circuit_id FK
+        INT layout_id FK
+        DATE race_date
+        VARCHAR race_start_time
+        INT total_race_laps
+    }
+    DIM_SEASON {
+        INT season_year PK
+        VARCHAR technical_regulations_era
+        VARCHAR points_system_version
+        VARCHAR sprint_format_type
+        INT total_rounds_scheduled
+    }
+    DIM_TEAM_PRINCIPAL {
+        INT principal_id PK
+        VARCHAR principal_name
+        INT nationality_id FK
+        INT appointment_year
+    }
+    FACT_LAP_TIMES_SNOWFLAKE {
+        INT lap_id PK
+        INT race_id FK
+        INT driver_id FK
+        INT constructor_id FK
+        INT date_id FK
+        INT lap_number
+        INT lap_position
+        INT lap_time_ms
+        INT sector1_ms
+        INT sector2_ms
+        INT sector3_ms
+        INT tyre_age_laps
+        INT is_pit_lap
+    }
+    FACT_RACE_RESULTS_SNOWFLAKE {
+        INT result_id PK
+        INT race_id FK
+        INT driver_id FK
+        INT constructor_id FK
+        INT date_id FK
+        INT status_id
+        INT grid_position
+        INT finish_position
+        DECIMAL race_points
+        INT race_laps
+        VARCHAR fastest_lap_time
+        INT pit_stop_count
+        DECIMAL total_pit_duration_sec
+        DECIMAL driver_standing_points
+        INT is_win
+        INT is_podium
+    }
+
+    DIM_CIRCUIT_SNOWFLAKE ||--o{ DIM_CIRCUIT_LAYOUT_HISTORY : "circuit_id"
+    DIM_COUNTRY ||--o{ DIM_CIRCUIT_SNOWFLAKE : "country_id"
+    DIM_LIVERY_SPONSOR ||--o{ DIM_CONSTRUCTOR_SNOWFLAKE : "sponsor_id"
+    DIM_TEAM_PRINCIPAL ||--o{ DIM_CONSTRUCTOR_SNOWFLAKE : "principal_id"
+    DIM_ENGINE_SUPPLIER ||--o{ DIM_CONSTRUCTOR_SNOWFLAKE : "engine_supplier_id"
+    DIM_NATIONALITY ||--o{ DIM_CONSTRUCTOR_SNOWFLAKE : "nationality_id"
+    DIM_SEASON ||--o{ DIM_DATE_SNOWFLAKE : "season_year"
+    DIM_SEASON ||--o{ DIM_DRIVER_NUMBER_HISTORY : "season_year"
+    DIM_DRIVER_SNOWFLAKE ||--o{ DIM_DRIVER_NUMBER_HISTORY : "driver_id"
+    DIM_NATIONALITY ||--o{ DIM_DRIVER_SNOWFLAKE : "nationality_id"
+    DIM_CIRCUIT_LAYOUT_HISTORY ||--o{ DIM_RACE_SNOWFLAKE : "layout_id"
+    DIM_CIRCUIT_SNOWFLAKE ||--o{ DIM_RACE_SNOWFLAKE : "circuit_id"
+    DIM_SEASON ||--o{ DIM_RACE_SNOWFLAKE : "season_year"
+    DIM_NATIONALITY ||--o{ DIM_TEAM_PRINCIPAL : "nationality_id"
+    DIM_DATE_SNOWFLAKE ||--o{ FACT_LAP_TIMES_SNOWFLAKE : "date_id"
+    DIM_CONSTRUCTOR_SNOWFLAKE ||--o{ FACT_LAP_TIMES_SNOWFLAKE : "constructor_id"
+    DIM_DRIVER_SNOWFLAKE ||--o{ FACT_LAP_TIMES_SNOWFLAKE : "driver_id"
+    DIM_RACE_SNOWFLAKE ||--o{ FACT_LAP_TIMES_SNOWFLAKE : "race_id"
+    DIM_DATE_SNOWFLAKE ||--o{ FACT_RACE_RESULTS_SNOWFLAKE : "date_id"
+    DIM_CONSTRUCTOR_SNOWFLAKE ||--o{ FACT_RACE_RESULTS_SNOWFLAKE : "constructor_id"
+    DIM_DRIVER_SNOWFLAKE ||--o{ FACT_RACE_RESULTS_SNOWFLAKE : "driver_id"
+    DIM_RACE_SNOWFLAKE ||--o{ FACT_RACE_RESULTS_SNOWFLAKE : "race_id"

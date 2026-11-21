@@ -20,6 +20,8 @@ Implements:
 import os
 import pandas as pd
 import numpy as np
+from scipy.stats import wilcoxon
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score, average_precision_score, brier_score_loss
 import xgboost as xgb
 
@@ -69,7 +71,7 @@ def run_temporal_validation():
 
         clf = xgb.XGBClassifier(
             n_estimators=100, max_depth=4, learning_rate=0.05,
-            scale_pos_weight=15, random_state=42, eval_metric="logloss"
+            scale_pos_weight=15, subsample=0.85, colsample_bytree=0.85, random_state=42, eval_metric="logloss"
         )
         clf.fit(X_train, y_train)
 
@@ -86,6 +88,10 @@ def run_temporal_validation():
             top1_hits += int(grp.sort_values(by="p", ascending=False).iloc[0]["target_is_win"] == 1)
         top1_pct = (top1_hits / n_races) * 100
 
+        # Same fold, grid-only baseline: paired comparison for the significance test
+        base = LogisticRegression(max_iter=300, random_state=42).fit(X_train[["grid_position"]], y_train)
+        auc_base = roc_auc_score(y_test, base.predict_proba(X_test[["grid_position"]])[:, 1])
+
         print(f"Fold {i} | 1994-{test_yr-1:<10} | {test_yr:<11} | {len(X_train):<10,} | {len(X_test):<9,} | {auc:.4f}  | {top1_pct:5.1f}% ({top1_hits:02d}/{n_races:02d})")
 
         fold_results.append({
@@ -95,6 +101,7 @@ def run_temporal_validation():
             "train_size": len(X_train),
             "test_size": len(X_test),
             "roc_auc": round(auc, 4),
+            "baseline_roc_auc": round(auc_base, 4),
             "pr_auc": round(pr_auc, 4),
             "brier_score": round(brier, 4),
             "top1_pct": round(top1_pct, 2),
@@ -109,6 +116,12 @@ def run_temporal_validation():
     print("-" * 95)
     print(f"MEAN EXPANDING-WINDOW PERFORMANCE: ROC-AUC = {mean_auc:.4f} | Top-1 Accuracy = {mean_top1:.2f}%")
     print("[+] Temporal Validation Proof: PASSED (Zero future-to-past leakage across all 6 folds).\n")
+
+    # One-sided Wilcoxon signed-rank: is XGBoost's fold AUC higher than the grid-only baseline's?
+    stat, p = wilcoxon(res_df["roc_auc"], res_df["baseline_roc_auc"], alternative="greater")
+    print(f"[+] Wilcoxon signed-rank (XGBoost > Baseline, 6 paired folds): W = {stat:.1f}, p = {p:.4f}")
+    res_df["wilcoxon_w"], res_df["wilcoxon_p"] = stat, round(p, 4)
+    res_df.to_csv(os.path.join(base_dir, "temporal_validation_results.csv"), index=False)
     return res_df
 
 if __name__ == "__main__":

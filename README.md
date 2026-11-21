@@ -1,8 +1,10 @@
 # Formula 1 Race Intelligence & Winner Prediction System (1994–2024)
 
+**Authors:** Adesh Patankar · Dhruv Sakhare (MIT School of Computing, DWDM 2025–26) · **Maintained by** Adesh Patankar ([@Adesh0512](https://github.com/Adesh0512))
+
 An enterprise machine learning and pattern mining framework designed to classify and predict Formula 1 Grand Prix race winners using historical data across 31 FIA World Championship seasons (1994–2024).
 
-This repository is structured into **8 Production Engineering Modules**:
+This repository is structured into **12 Production Engineering Modules**:
 
 1. **01 Architecture Diagram:** Complete end-to-end data and model pipeline with Apriori / FP-Growth association branches.
 2. **02 Input / Output Specification:** 16 pre-race features, JSON Schemas, and sample prediction payloads.
@@ -12,8 +14,25 @@ This repository is structured into **8 Production Engineering Modules**:
 6. **06 Classification Algorithm:** Production XGBoost pipeline with cost-sensitive weighting, artifact persistence, and group softmax.
 7. **07 Innovation:** Leakage-safe multi-horizon rolling form, circuit affinity, and teammate relational deltas (+4.36% ROC-AUC, +20.15% PR-AUC).
 8. **08 Performance Metrics:** Empirical holdout metrics: Accuracy, Precision, Recall, F1, Confusion Matrix, ROC-AUC, Brier score, and Log Loss across Train, Validation, and Test partitions.
+9. **09 Unsupervised Dataset (Dashboard 3):** 703 unlabelled driver-season performance profiles with 9 standardised features.
+10. **10 Clustering Algorithm Comparison (Dashboard 3):** K-Means, Agglomerative (Ward), Gaussian Mixture, BIRCH and DBSCAN, with elbow and silhouette k-selection.
+11. **11 Clustering Algorithm (Dashboard 3):** Champion K-Means (k = 3): Title Contenders, Midfield Regulars, Backmarkers.
+12. **12 Clustering Performance Metrics (Dashboard 3):** Silhouette, Davies-Bouldin, Calinski-Harabasz, seed/bootstrap stability ARI, and an external check against championship standings.
 
 ---
+
+## End-Semester Jury: Run the Dashboard
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   # one-time setup
+.venv/bin/python run_all_modules.py                                    # regenerate every number (≈20 s)
+.venv/bin/streamlit run streamlit_app.py                               # open http://localhost:8501
+.venv/bin/python -m unittest discover -s tests                         # 61 automated checks
+```
+
+The sidebar follows the rubric: **Dashboard 1 · Data Warehouse** (warehouse design, Snowflake deployment), **Dashboard 2 · Supervised Learning** (dataset, FP-Growth vs Apriori, classifier comparison & validation, classification algorithm) and **Dashboard 3 · Unsupervised Learning** (dataset, clustering comparison, K-Means, clustering metrics). Oral prep: `JURY_QA_PREP.md`. Report: `PROJECT_REPORT_DWDM_APEXIQ.pdf`.
+
+> Use the project `.venv`: the saved models need NumPy 2 and scikit-learn ≥ 1.9.
 
 ## Quickstart: Reproducing All Engineering Modules
 
@@ -41,6 +60,12 @@ py -3 07_innovation/baseline_vs_improved.py
 
 # 6. Module 08: Calculate Comprehensive Performance Metrics & Export CSVs
 py -3 08_performance_metrics/calculate_metrics.py
+
+# 7. Dashboard 3: Unsupervised Clustering (run in order)
+py -3 09_unsupervised_dataset/build_unsupervised_dataset.py
+py -3 10_clustering_comparison/clustering_comparison.py
+py -3 11_clustering_algorithm/kmeans_clustering.py
+py -3 12_clustering_metrics/clustering_metrics.py
 ```
 
 ---

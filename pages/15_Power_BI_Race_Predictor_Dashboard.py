@@ -109,19 +109,19 @@ b_col1, b_col2, b_col3, b_col4, b_col5 = st.columns(5)
 
 preset_selection = None
 with b_col1:
-    if st.button("🏎️ Hamilton @ Abu Dhabi (Yas Marina)", use_container_width=True):
+    if st.button("🏎️ Hamilton @ Abu Dhabi (Yas Marina)", width="stretch"):
         preset_selection = "HAM_ABU"
 with b_col2:
-    if st.button("⚡ Verstappen @ Abu Dhabi (Yas Marina)", use_container_width=True):
+    if st.button("⚡ Verstappen @ Abu Dhabi (Yas Marina)", width="stretch"):
         preset_selection = "VER_ABU"
 with b_col3:
-    if st.button("🟠 Norris @ Silverstone", use_container_width=True):
+    if st.button("🟠 Norris @ Silverstone", width="stretch"):
         preset_selection = "NOR_SIL"
 with b_col4:
-    if st.button("🔴 Leclerc @ Monaco", use_container_width=True):
+    if st.button("🔴 Leclerc @ Monaco", width="stretch"):
         preset_selection = "LEC_MON"
 with b_col5:
-    if st.button("🪄 Alonso @ Interlagos (Brazil)", use_container_width=True):
+    if st.button("🪄 Alonso @ Interlagos (Brazil)", width="stretch"):
         preset_selection = "ALO_INT"
 
 # Default Slicer States
@@ -166,9 +166,9 @@ s_col1, s_col2, s_col3, s_col4 = st.columns([1.5, 1.2, 1.3, 1.0])
 
 # Available Model Options
 model_options = [
-    "1. XGBoost Classifier (Champion - Best ROC-AUC 0.9635)",
+    "1. XGBoost Classifier (Champion - Best ROC-AUC 0.9629)",
     "2. LightGBM Classifier (Balanced Tree Boost - PR-AUC 0.6152)",
-    "3. Random Forest Classifier (150 Balanced Trees - Top-1 55.88%)",
+    "3. Random Forest Classifier (150 Balanced Trees - ROC-AUC 0.9561)",
     "4. Gradient Boosting (GBDT - Accuracy 96.32%)",
     "5. Decision Tree (Entropy Balanced Depth 5)",
     "6. Baseline (Logistic Reg - Grid Position Benchmark)",
@@ -622,7 +622,7 @@ with row2_col1:
         height=380,
         showlegend=False
     )
-    st.plotly_chart(get_pbi_plotly_theme(fig_dist), use_container_width=True)
+    st.plotly_chart(get_pbi_plotly_theme(fig_dist), width="stretch")
 
 with row2_col2:
     st.markdown("""
@@ -668,7 +668,7 @@ with row2_col2:
         height=380,
         showlegend=False
     )
-    st.plotly_chart(get_pbi_plotly_theme(fig_models), use_container_width=True)
+    st.plotly_chart(get_pbi_plotly_theme(fig_models), width="stretch")
 
 # ---------------------------------------------------------
 # VISUAL ROW 3: DRIVER HISTORICAL TRACK RECORD & DECISION FACTORS
@@ -712,14 +712,14 @@ with row3_col1:
             xaxis=dict(title="Formula 1 Championship Season", tickmode="linear", dtick=2),
             height=300
         )
-        st.plotly_chart(get_pbi_plotly_theme(fig_hist), use_container_width=True)
+        st.plotly_chart(get_pbi_plotly_theme(fig_hist), width="stretch")
 
         with st.expander("📄 View Detailed Year-by-Year Abu Dhabi Track Record Matrix", expanded=False):
             disp_cols = ["season", "round", "driver_name", "constructor_name", "grid_position", "target_finish_position", "target_is_win", "target_is_podium"]
             existing_disp = [c for c in disp_cols if c in history_df.columns]
             hist_view = history_df[existing_disp].copy()
             hist_view["Result"] = hist_view.apply(lambda r: "🏆 WINNER" if r.get("target_is_win") == 1 else ("🥉 PODIUM" if r.get("target_is_podium") == 1 else f"P{r.get('target_finish_position', '-')}"), axis=1)
-            st.dataframe(hist_view, use_container_width=True)
+            st.dataframe(hist_view, width="stretch")
     else:
         st.info(f"No prior historical Grand Prix starts found for {selected_driver} at {selected_circuit}. Generating predictive extrapolation based on career form and car performance.")
 
@@ -762,7 +762,7 @@ with row3_col2:
         height=300,
         showlegend=False
     )
-    st.plotly_chart(get_pbi_plotly_theme(fig_waterfall), use_container_width=True)
+    st.plotly_chart(get_pbi_plotly_theme(fig_waterfall), width="stretch")
 
 # ---------------------------------------------------------
 # VISUAL ROW 4: 20-CAR SIMULATED GRAND PRIX FIELD LEADERBOARD
@@ -852,7 +852,7 @@ if not sim_field_df.empty and artifacts:
             lambda row: ["background-color: #3B1C1D; font-weight: bold; color: #FFFFFF;" if row["Driver"] == selected_driver else "" for _ in row],
             axis=1
         ),
-        use_container_width=True,
+        width="stretch",
         height=400
     )
 
