@@ -1,6 +1,6 @@
 """
-ApexIQ · Formula 1 Race Intelligence: jury dashboard router.
-Pages are grouped exactly as the end-semester rubric: Dashboard 1 (warehouse),
+ApexIQ · Formula 1 Race Intelligence: dashboard router.
+Pages are grouped into Dashboard 1 (warehouse),
 Dashboard 2 (supervised), Dashboard 3 (unsupervised), plus extras.
 The previous landing page is kept at pages/legacy_platform_hub.py.
 """
@@ -11,7 +11,7 @@ st.set_page_config(page_title="ApexIQ · F1 Race Intelligence", page_icon=":mate
 
 P = st.Page
 nav = st.navigation({
-    "Overview": [P("pages/00_Jury_Home.py", title="Rubric classification", icon=":material/flag:", default=True)],
+    "Overview": [P("pages/00_Jury_Home.py", title="Project overview", icon=":material/flag:", default=True)],
     "Dashboard 1: Data warehouse": [
         P("pages/20_D1_Warehouse_Design.py", title="Warehouse Design", icon=":material/account_tree:"),
         P("pages/21_D1_Snowflake_Deployment.py", title="Snowflake Deployment", icon=":material/cloud_upload:"),
@@ -20,7 +20,7 @@ nav = st.navigation({
     ],
     "Dashboard 2: Supervised learning": [
         P("pages/22_D2_Supervised_Dataset.py", title="Dataset (Supervised)", icon=":material/table_rows:"),
-        P("pages/23_D2_Pattern_Mining.py", title="Pattern Matching: FP-Growth & Apriori", icon=":material/hub:"),
+        P("pages/23_D2_Pattern_Mining.py", title="Pattern Mining: FP-Growth", icon=":material/hub:"),
         P("pages/24_D2_Classifier_Comparison.py", title="Classifier Comparison & Validation", icon=":material/leaderboard:"),
         P("pages/25_D2_Classification_Algorithm.py", title="Classification Algorithm", icon=":material/sports_score:"),
     ],
@@ -32,8 +32,6 @@ nav = st.navigation({
     ],
     "Extras": [
         P("pages/13_SQL_Playground.py", title="SQL Playground", icon=":material/terminal:"),
-        P("pages/5_Data_Explorer.py", title="Warehouse Data Explorer", icon=":material/search:"),
-        P("pages/15_Power_BI_Race_Predictor_Dashboard.py", title="Race Predictor (Power BI style)", icon=":material/insights:"),
     ],
 })
 nav.run()

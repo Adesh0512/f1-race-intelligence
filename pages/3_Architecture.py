@@ -1,76 +1,63 @@
 import os
 import sys
+import json
 import streamlit as st
+import pandas as pd
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from db_utils import apply_f1_theme, F1_RED
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, ROOT)
+from db_utils import apply_f1_theme, page_header
 
 apply_f1_theme()
 
-st.title("🏛️ End-to-End Modern Data Stack Architecture & Snowflake Pipeline")
-st.markdown("### End-to-End Modern Data Stack & Machine Learning Lifecycle on Snowflake")
+page_header("Dashboard 1", "Data warehouse", "Pipeline architecture",
+            "How data flows from the source files through the warehouse into pattern mining, classification and clustering, and out to the dashboards.")
 
-import base64
 
-# Render Architecture SVG
-svg_candidates = [
-    os.path.join(os.path.dirname(__file__), "..", "docs", "architecture.svg"),
-    os.path.join(os.path.dirname(__file__), "docs", "architecture.svg"),
-    os.path.join(os.path.dirname(__file__), "..", "snowflake_f1", "docs", "architecture.svg"),
-    os.path.join(os.path.dirname(__file__), "architecture.svg")
-]
-svg_content = None
-for p in svg_candidates:
-    if os.path.exists(p):
-        with open(p, "r", encoding="utf-8") as f:
-            svg_content = f.read()
-        break
+def out(*p):
+    return os.path.join(ROOT, *p)
 
-if svg_content:
-    b64_svg = base64.b64encode(svg_content.encode("utf-8")).decode("utf-8")
-    st.markdown(
-        f'<div style="background: #0B0D10; border-radius: 12px; border: 1px solid #30363D; padding: 15px; margin-bottom: 25px; text-align: center;">'
-        f'<img src="data:image/svg+xml;base64,{b64_svg}" style="width: 100%; max-width: 1400px; height: auto; border-radius: 8px; display: block; margin: 0 auto;" alt="Formula 1 Modern Data Stack Architecture" />'
-        f'</div>',
-        unsafe_allow_html=True
-    )
-else:
-    st.info("Architecture vector specification rendered in documentation suite.")
 
-st.markdown("---")
+bench = json.load(open(out("04_pattern_mining", "pattern_mining_benchmark.json")))
+cm = json.load(open(out("12_clustering_metrics", "clustering_metrics.json")))
+ho = pd.read_csv(out("08_performance_metrics", "partition_metrics.csv")).set_index("partition").loc["Combined Holdout (2022–2024)"]
+n_algos = len(pd.read_csv(out("10_clustering_comparison", "comparison_results.csv")))
+n_models = len(pd.read_csv(out("05_algorithm_comparison", "comparison_results.csv")))
 
-st.markdown("### 🛠️ 5-Tier Pipeline Component Breakdown & Toolchain")
+dot = f"""digraph P {{
+  rankdir=TB; bgcolor="transparent"; nodesep=0.5; ranksep=0.45;
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#D8DCE2", fillcolor="#FFFFFF", fontcolor="#15181D", margin="0.18,0.10"];
+  edge [color="#59616C", arrowsize=0.7];
+  subgraph cluster_src {{ label="Sources"; fontname="Helvetica"; fontcolor="#59616C"; color="#D8DCE2";
+    src [label="Ergast F1 results\\nCSV files"]; }}
+  subgraph cluster_dw {{ label="Data warehouse (Dashboard 1)"; fontname="Helvetica"; fontcolor="#59616C"; color="#D8DCE2";
+    etl [label="ETL\\nclean, conform keys"];
+    dw [label="Star + snowflake schemas\\n2 facts, 7 dimensions\\nf1_warehouse.db", fillcolor="#15181D", fontcolor="#FFFFFF"];
+    sf [label="Snowflake\\nRAW → CLEAN → DW\\n→ ML → ANALYTICS"]; }}
+  fs [label="Feature store 1994–2024\\n12,358 race entries\\n16 pre-race features"];
+  subgraph cluster_ml {{ label="Data mining (Dashboards 2 and 3)"; fontname="Helvetica"; fontcolor="#59616C"; color="#D8DCE2";
+    pm [label="Pattern mining\\nApriori = FP-Growth\\n{bench['itemsets_count']} itemsets, {bench['rules_count']:,} rules"];
+    clf [label="Classification\\n{n_models} models, XGBoost champion\\nROC-AUC {ho['roc_auc']:.4f}, {int(ho['top1_hits'])}/{int(ho['total_gps'])} winners", fillcolor="#7B2CBF", fontcolor="#FFFFFF"];
+    cl [label="Clustering\\n{cm['n_profiles']} driver-seasons, {n_algos} algorithms\\nK-Means k = {cm['k']}", fillcolor="#1A9E55", fontcolor="#FFFFFF"]; }}
+  subgraph cluster_out {{ label="Outputs"; fontname="Helvetica"; fontcolor="#59616C"; color="#D8DCE2";
+    app [label="Streamlit dashboards"]; pbi [label="Power BI\\nworkbook + project"]; rep [label="Report + tests"]; }}
+  src -> etl -> dw -> sf; dw -> fs; fs -> pm; fs -> clf; fs -> cl;
+  pm -> app; clf -> app; cl -> app; clf -> pbi; cl -> pbi; app -> rep [style=invis];
+  sf -> app [style=dashed, label=" live SQL", fontname="Helvetica", fontsize=9, fontcolor="#59616C"];
+}}"""
+st.graphviz_chart(dot, width="stretch")
 
-col1, col2 = st.columns(2)
-
-with col1:
-    st.markdown("""
-    #### 1. Ingestion & Staging Tier (Python / SnowSQL)
-    * **Source Data**: 8,650 historical race results (2004–2024), 412 Grands Prix across 38 circuits.
-    * **Snowflake Stage**: `@RAW.F1_RAW_STAGE` with gzip compression and CSV file format parsing.
-    * **Raw Storage**: Declarative `COPY INTO` loading immutable dimensional tables:
-      `RAW_RACES`, `RAW_DRIVERS`, `RAW_CONSTRUCTORS`, `RAW_CIRCUITS`, `RAW_RACE_RESULTS`.
-    
-    #### 2. Feature Store Tier (Snowflake SQL / Snowpark)
-    * **Table**: `CLEAN.F1_MODELING_MASTER` at the atomic grain of 1 row per driver per race.
-    * **The 3 Pillars**:
-      * **Car Specs**: BHP (750–1,050), Min Weight (605–798 kg), Reliability, Starting Grid.
-      * **Lap Records**: FIA Circuit records, Driver Delta (sec), Pace Ratio, Qualifying Delta.
-      * **Pit Strategy**: Stops Count (1, 2, 3+), Transit Loss, Stationary Time, DHL Crew Score.
-    * **Leakage Isolation**: Strict pre-race boundaries (no finish time, race points, or finish position as inputs).
-    """)
-
-with col2:
-    st.markdown("""
-    #### 3. Pattern Mining & ML Engine (MLxtend / Scikit-Learn / XGBoost)
-    * **FP-Growth & Apriori**: 12,358 race transactions over 24 items; both find the same 414 frequent itemsets and 1,393 rules.
-    * **Classifier Benchmark**: 7 models on a chronological 2022–2024 holdout + 6-fold expanding-window validation + race-level bootstrap test.
-    * **Champion**: Cost-sensitive XGBoost (`scale_pos_weight = 15`) on 16 leakage-safe features + race-level softmax (ROC-AUC 0.9629).
-    * **Clustering**: K-Means (k = 3) on 703 driver-season profiles, compared with K-Medoids, Ward, GMM, BIRCH and DBSCAN.
-    * **Secondary Regression**: Independent Random Forest Regressor predicting finish position.
-    
-    #### 4. Snowflake Serving & Streamlit UI (SiS & Cortex AI)
-    * **Registry Tables**: `ML.MODEL_COMPARISON`, `ML.ASSOCIATION_RULES`, `ML.MODEL_METRICS`.
-    * **Snowflake Enterprise**: Zero-Copy Clone, Time Travel, Dynamic Tables, Streams & Tasks, Secure Views.
-    * **Streamlit**: 3 rubric dashboards (warehouse, supervised, unsupervised) + extras.
-    """)
+a, b = st.columns(2)
+a.markdown(f"""
+#### Warehouse
+* **Grain:** one row per driver per Grand Prix. Star schema for fast dashboard queries, snowflake schema for normalised reference data.
+* **Snowflake:** `deploy_to_snowflake.py` loads RAW, transforms to CLEAN, builds the DW star and snowflake tables and the ML result tables.
+* **Feature store:** every feature uses only races before the one being predicted, so nothing from the race itself leaks in.
+""")
+b.markdown(f"""
+#### Mining and learning
+* **Pattern mining:** Apriori and FP-Growth find the same {bench['itemsets_count']} itemsets; FP-Growth scales better as support drops.
+* **Classification:** cost-sensitive XGBoost, trained on 1994–2021 and tested on unseen 2022–2024 races; probabilities sum to 1 per race.
+* **Clustering:** {n_algos} algorithms compared on {cm['n_profiles']} driver-season profiles; K-Means finds 3 performance tiers.
+* **One command** (`run_all_modules.py`) regenerates every number shown in the app, the report and Power BI.
+""")

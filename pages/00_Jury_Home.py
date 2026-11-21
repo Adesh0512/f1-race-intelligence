@@ -41,7 +41,6 @@ st.markdown(f"""
 .apx-pos {{ font-family: {DISPLAY_FONT}; font-size: 1.5rem; color: {GRAPHITE}; }}
 .apx-item {{ font-weight: 600; color: {INK}; }}
 .apx-dash {{ color: {GRAPHITE}; font-size: 0.9rem; }}
-.apx-marks-cell {{ font-family: {DISPLAY_FONT}; font-size: 1.35rem; color: {INK}; }}
 .apx-result {{ color: {INK}; }}
 .apx-result b {{ font-family: {DISPLAY_FONT}; font-size: 1.15rem; }}
 .apx-colhead {{ color: {GRAPHITE}; font-size: 0.85rem; border-bottom: 2px solid {INK}; padding-bottom: 4px; }}
@@ -51,7 +50,7 @@ st.markdown(f"""
   <div>
     <h1>ApexIQ</h1>
     <p>Formula 1 race intelligence: a data warehouse, a race-winner classifier and driver-tier clustering,
-       built on 31 seasons of Grand Prix results. Each row below is one item of the end-semester rubric.</p>
+       built on 31 seasons of Grand Prix results. Start with any page below.</p>
   </div>
   <div class="apx-tower">
     <div><span>Race winner picked, 2022–2024</span><b class="best">{int(ho['top1_hits'])} / {int(ho['total_gps'])}</b></div>
@@ -64,33 +63,29 @@ st.markdown(f"""
 
 champ = ccomp[ccomp["champion"]].iloc[0]
 ROWS = [
-    ("Data warehouse design", "Dashboard 1: data warehouse", 3, "<b>2</b> fact tables, <b>7</b> dimensions, 12 live OLAP queries", "pages/20_D1_Warehouse_Design.py"),
-    ("Snowflake deployment", "Dashboard 1: data warehouse", 3, "RAW → CLEAN → DW → ML → ANALYTICS, <b>40</b> objects", "pages/21_D1_Snowflake_Deployment.py"),
-    ("Dataset (supervised)", "Dashboard 2: supervised learning", 1, "<b>12,358</b> labelled entries, 16 pre-race features", "pages/22_D2_Supervised_Dataset.py"),
-    ("Pattern matching: FP-Growth and Apriori", "Dashboard 2: supervised learning", 1, f"<b>{bench['itemsets_count']}</b> identical itemsets, {bench['rules_count']:,} rules", "pages/23_D2_Pattern_Mining.py"),
-    ("Comparison with other classifiers, validation test", "Dashboard 2: supervised learning", 2, f"<b>{len(comp)}</b> models, bootstrap CI [{sig['ci_low']:+.3f}, {sig['ci_high']:+.3f}]", "pages/24_D2_Classifier_Comparison.py"),
-    ("Classification algorithm", "Dashboard 2: supervised learning", 2, f"XGBoost, recall <b>{ho['recall_class_1'] * 100:.1f}%</b>", "pages/25_D2_Classification_Algorithm.py"),
-    ("Dataset (unsupervised)", "Dashboard 3: unsupervised learning", 5, f"<b>{prof_n}</b> driver-season profiles, 9 features", "pages/16_D3_Unsupervised_Dataset.py"),
-    ("Clustering algorithm comparison (at least 4)", "Dashboard 3: unsupervised learning", 10, f"<b>{len(ccomp)}</b> algorithms, {champ['algorithm']} chosen at k = {int(champ['n_clusters'])}", "pages/17_D3_Clustering_Comparison.py"),
-    ("Clustering algorithm", "Dashboard 3: unsupervised learning", 5, "K-Means: Contenders, Midfield, Backmarkers", "pages/18_D3_KMeans_Clustering.py"),
-    ("Performance metrics", "Dashboard 3: unsupervised learning", 5, f"silhouette <b>{cm['silhouette']:.3f}</b>, stability ARI <b>{cm['seed_stability_ari_mean']:.2f}</b>", "pages/19_D3_Clustering_Metrics.py"),
-    ("Report", "Submitted document", 5, "PROJECT_REPORT_DWDM_APEXIQ.pdf, 8 chapters", None),
-    ("Oral / Q&A", "Viva", 10, "Prepared answers in JURY_QA_PREP.md", None),
+    ("Warehouse design", "Dashboard 1: Data warehouse", "<b>2</b> fact tables, <b>7</b> dimensions, 12 live OLAP queries", "pages/20_D1_Warehouse_Design.py"),
+    ("Snowflake deployment", "Dashboard 1: Data warehouse", "RAW → CLEAN → DW → ML → ANALYTICS, <b>40</b> objects", "pages/21_D1_Snowflake_Deployment.py"),
+    ("Supervised dataset", "Dashboard 2: Supervised learning", "<b>12,358</b> labelled entries, 16 pre-race features", "pages/22_D2_Supervised_Dataset.py"),
+    ("Pattern matching: FP-Growth and Apriori", "Dashboard 2: Supervised learning", f"<b>{bench['itemsets_count']}</b> identical itemsets, {bench['rules_count']:,} rules", "pages/23_D2_Pattern_Mining.py"),
+    ("Classifier comparison and validation", "Dashboard 2: Supervised learning", f"<b>{len(comp)}</b> models, bootstrap CI [{sig['ci_low']:+.3f}, {sig['ci_high']:+.3f}]", "pages/24_D2_Classifier_Comparison.py"),
+    ("Classification algorithm", "Dashboard 2: Supervised learning", f"XGBoost, recall <b>{ho['recall_class_1'] * 100:.1f}%</b>", "pages/25_D2_Classification_Algorithm.py"),
+    ("Unsupervised dataset", "Dashboard 3: Unsupervised learning", f"<b>{prof_n}</b> driver-season profiles, 9 features", "pages/16_D3_Unsupervised_Dataset.py"),
+    ("Clustering comparison", "Dashboard 3: Unsupervised learning", f"<b>{len(ccomp)}</b> algorithms, {champ['algorithm']} chosen at k = {int(champ['n_clusters'])}", "pages/17_D3_Clustering_Comparison.py"),
+    ("Clustering algorithm: K-Means", "Dashboard 3: Unsupervised learning", "Title Contenders, Midfield Regulars, Backmarkers", "pages/18_D3_KMeans_Clustering.py"),
+    ("Clustering performance metrics", "Dashboard 3: Unsupervised learning", f"silhouette <b>{cm['silhouette']:.3f}</b>, stability ARI <b>{cm['seed_stability_ari_mean']:.2f}</b>", "pages/19_D3_Clustering_Metrics.py"),
 ]
 
-widths = [0.5, 3.2, 0.8, 3.4, 1.1]
+widths = [0.5, 3.6, 3.8, 1.1]
 with st.container(key="sheet"):
     head = st.columns(widths, vertical_alignment="bottom")
-    for col, label in zip(head, ["Pos", "Rubric item", "Marks", "Result in this project", ""]):
+    for col, label in zip(head, ["#", "Page", "Key result", ""]):
         col.markdown(f'<div class="apx-colhead">{label}</div>', unsafe_allow_html=True)
-    for pos, (item, dash, marks, result, page) in enumerate(ROWS, 1):
+    for pos, (item, dash, result, page) in enumerate(ROWS, 1):
         c = st.columns(widths, vertical_alignment="center")
         c[0].markdown(f'<span class="apx-pos">{pos}</span>', unsafe_allow_html=True)
         c[1].markdown(f'<div class="apx-item">{item}</div><div class="apx-dash">{dash}</div>', unsafe_allow_html=True)
-        c[2].markdown(f'<span class="apx-marks-cell">{marks}</span>', unsafe_allow_html=True)
-        c[3].markdown(f'<div class="apx-result">{result}</div>', unsafe_allow_html=True)
-        if page:
-            c[4].page_link(page, label="Open page", icon=":material/arrow_outward:")
+        c[2].markdown(f'<div class="apx-result">{result}</div>', unsafe_allow_html=True)
+        c[3].page_link(page, label="Open page", icon=":material/arrow_outward:")
 
 st.caption("Every result on this page is read from the module output files, so the dashboards, the report and the code "
            "always agree. Run `python3 run_all_modules.py` to regenerate them.")

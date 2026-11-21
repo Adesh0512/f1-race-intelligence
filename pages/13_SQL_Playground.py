@@ -6,12 +6,12 @@ import pandas as pd
 import plotly.express as px
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from db_utils import apply_f1_theme, get_plotly_theme, query_snowflake, get_local_data, F1_RED
+from db_utils import apply_f1_theme, get_plotly_theme, query_snowflake, get_local_data, F1_RED, page_header
 
 apply_f1_theme()
 
-st.title("💻 Snowflake SQL Playground & Analytical Suite")
-st.markdown("### Interactive Execution of 12 Production Snowflake Analytical Queries (Window Functions, QUALIFY, CTEs)")
+page_header('Extras', 'Snowflake SQL', 'SQL playground',
+            '12 analytical Snowflake queries using window functions, QUALIFY and CTEs. They run live when Snowflake is connected.')
 
 # 12 Saved Queries Dictionary
 SAVED_QUERIES = {
@@ -160,7 +160,7 @@ query_code = SAVED_QUERIES[selected_title]
 st.markdown("##### SQL Query Text (Snowflake ANSI SQL)")
 st.code(query_code, language="sql")
 
-if st.button("🚀 Execute Query", width="stretch"):
+if st.button("Run query", width="stretch"):
     t0 = time.perf_counter()
     res = pd.DataFrame()
     executed_on = "Snowflake Data Cloud"
@@ -176,7 +176,7 @@ if st.button("🚀 Execute Query", width="stretch"):
 
     # 2. Offline fallback if needed
     if res is None or res.empty:
-        executed_on = "Curated Local Telemetry Store"
+        executed_on = "this computer (pandas equivalent of the query; Snowflake not connected)"
         df = get_local_data("clean_f1_modeling_master.csv")
         if not df.empty and "is_win" in df.columns:
             if "Win Tally" in selected_title:
@@ -198,18 +198,16 @@ if st.button("🚀 Execute Query", width="stretch"):
                     WINS_ACHIEVED=("is_win", "sum")
                 ).reset_index()
                 res["STRATEGY_WIN_PCT"] = (res["WINS_ACHIEVED"] / res["DRIVERS_ON_STRATEGY"] * 100).round(2)
-            else:
-                cols = [c for c in ["season", "race_name", "driver_name", "constructor_name", "grid_position", "finish_position", "is_win", "car_estimated_power_bhp"] if c in df.columns]
-                res = df.head(15)[cols] if cols else df.head(15)
-        else:
-            res = pd.DataFrame([{"Message": "Query executed successfully on warehouse."}])
+        if res is None or res.empty:
+            st.info("Snowflake is not connected, so this query cannot run here. Add Snowflake credentials to `.env` to run it live.")
+            st.stop()
         
     t_elapsed = time.perf_counter() - t0
     
     st.success(f"✓ Query executed on **{executed_on}** in **{t_elapsed*1000:.2f} ms** | Returned **{len(res)} rows**.")
     
     # Results Tab & Chart
-    r_tab1, r_tab2 = st.tabs(["📄 Result Table", "📊 Visualization"])
+    r_tab1, r_tab2 = st.tabs(["Result table", "Chart"])
     with r_tab1:
         st.dataframe(res, width="stretch")
     with r_tab2:

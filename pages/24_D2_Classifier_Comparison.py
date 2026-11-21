@@ -19,7 +19,7 @@ sig = pd.read_csv(os.path.join(MOD, "significance_test.csv")).iloc[0]
 champ = res[res["algorithm"].str.contains("Champion")].iloc[0]
 
 page_header('Dashboard 2', 'Supervised learning', 'Comparing seven classifiers',
-            'Trained on 1994–2021 and tested on 68 unseen Grands Prix from 2022–2024, with expanding-window validation and a significance test.', marks=2)
+            'Trained on 1994–2021 and tested on 68 unseen Grands Prix from 2022–2024, with expanding-window validation and a significance test.')
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Algorithms Compared", len(res))

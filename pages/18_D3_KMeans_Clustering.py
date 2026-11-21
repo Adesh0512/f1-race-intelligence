@@ -13,7 +13,7 @@ from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, TIER_COLORS, page
 apply_f1_theme()
 
 page_header('Dashboard 3', 'Unsupervised learning', 'K-Means: three driver tiers',
-            'The chosen algorithm sorts every driver-season into Title Contenders, Midfield Regulars or Backmarkers, without being told what those are.', marks=5)
+            'The chosen algorithm sorts every driver-season into Title Contenders, Midfield Regulars or Backmarkers, without being told what those are.')
 
 mod = os.path.join(ROOT, "11_clustering_algorithm")
 cl = pd.read_csv(os.path.join(mod, "driver_season_clusters.csv"))

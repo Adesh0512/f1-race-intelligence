@@ -4,12 +4,12 @@ import streamlit as st
 import pandas as pd
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from db_utils import apply_f1_theme, F1_RED
+from db_utils import apply_f1_theme, F1_RED, page_header
 
 apply_f1_theme()
 
-st.title("❄️ Snowflake Enterprise Architecture & Features Showcase")
-st.markdown("### Advanced Snowflake Cloud Capabilities Implemented in `06_extras.sql`")
+page_header('Dashboard 1', 'Data warehouse', 'Snowflake advanced features',
+            'Zero-copy clone, Time Travel, dynamic tables, streams and tasks, semi-structured data, secure views and Cortex AI, from section 06 of MASTER_SNOWFLAKE_DEPLOYMENT.sql.')
 
 t1, t2, t3, t4, t5 = st.tabs([
     "1. Clone & Time Travel",
@@ -112,7 +112,7 @@ END;
 $$;""", language="sql")
 
     # Interactive Cortex AI Simulation
-    st.markdown("##### 💬 Test Cortex AI Output (Interactive Simulation)")
+    st.markdown("##### Try the Cortex AI explainer (simulated offline)")
     t_driver = st.selectbox("Select Driver to Explain", ["Max Verstappen (P1)", "Lando Norris (P2)", "Lewis Hamilton (P7)"])
     if st.button("Generate Cortex AI Summary"):
         if "Verstappen" in t_driver:

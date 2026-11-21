@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "ApexIQ_F1_Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a261e612-6b74-4ad9-b6f6-38e06cd76df7"
+  }
+}

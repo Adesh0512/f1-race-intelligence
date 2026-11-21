@@ -1,0 +1,49 @@
+table Classifier_Comparison
+	lineageTag: 8ed483ad-56f6-47f5-ac98-5ffe657ef6e8
+
+	column 'model'
+		dataType: string
+		lineageTag: 4e37d91b-5518-47ae-8df0-408cf5520b67
+		summarizeBy: none
+		sourceColumn: model
+
+	column 'roc_auc'
+		dataType: double
+		lineageTag: 623f5c07-fa0c-4e18-bc91-7b7e8fd9ba17
+		summarizeBy: none
+		sourceColumn: roc_auc
+
+	column 'pr_auc'
+		dataType: double
+		lineageTag: ffd9b1f9-386e-4c99-9e8b-c911e3304e46
+		summarizeBy: none
+		sourceColumn: pr_auc
+
+	column 'recall'
+		dataType: double
+		lineageTag: 2e6998fb-5c9f-43d4-b04b-be0d101cec86
+		summarizeBy: none
+		sourceColumn: recall
+
+	column 'top1_winner_hit_pct'
+		dataType: double
+		lineageTag: c83ceaa9-e81f-4b7f-bb16-198db528038f
+		summarizeBy: none
+		sourceColumn: top1_winner_hit_pct
+
+	column 'top3_podium_hit_pct'
+		dataType: double
+		lineageTag: 91058820-d485-4462-85e6-748a70499e33
+		summarizeBy: none
+		sourceColumn: top3_podium_hit_pct
+
+	partition Classifier_Comparison = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("bZHLasMwEEV/ZfDKhVRElvXaOqbepBRCFgWThYlVR2BLxXIX+fvG1qRN2qzmItDRuaO6TsqvYTjDpm9CsB/WjMkKkjXhcaxx5oqzOTFGVDYHzolSyWEFdVI0wfTWGUi3vrNhskfYmQ6eoRptC2+uPz9FiKZaxcS0zvGBBUZJLuegFvxCLc3RBusd7EdjrvelRB1JUUwx9MlIREoxsxbErnGtH+DFjyZM/xpqLih2VUIgTUt6LySIFJFWjU1rjZug8P5S0nWQVkW5v3YTWYa0n245perO7Ya2td1pqorXB1oKZQTl2Z+SD/b0Xi0+NxxIN6dm+Lzs7tdNIzJnDJE8nnGFH4puh28=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [model = _t, roc_auc = _t, pr_auc = _t, recall = _t, top1_winner_hit_pct = _t, top3_podium_hit_pct = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"model", type text}, {"roc_auc", type number}, {"pr_auc", type number}, {"recall", type number}, {"top1_winner_hit_pct", type number}, {"top3_podium_hit_pct", type number}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

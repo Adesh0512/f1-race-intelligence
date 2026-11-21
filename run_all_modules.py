@@ -22,6 +22,8 @@ SCRIPTS = [
     "11_clustering_algorithm/kmeans_clustering.py",
     "12_clustering_metrics/clustering_metrics.py",
     "12_clustering_metrics/cluster_feature_experiment.py",
+    "build_powerbi_master_package.py",  # Power BI workbook is built from the outputs above
+    "powerbi/build_pbip.py",
 ]
 
 if __name__ == "__main__":

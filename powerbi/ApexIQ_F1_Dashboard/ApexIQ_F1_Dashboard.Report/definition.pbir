@@ -1,0 +1,9 @@
+{
+  "version": "4.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../ApexIQ_F1_Dashboard.SemanticModel"
+    },
+    "byConnection": null
+  }
+}

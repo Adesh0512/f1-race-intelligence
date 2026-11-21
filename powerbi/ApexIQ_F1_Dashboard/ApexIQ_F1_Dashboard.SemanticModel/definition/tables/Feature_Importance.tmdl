@@ -1,0 +1,25 @@
+table Feature_Importance
+	lineageTag: 3db176ff-b095-4100-82f4-12ab624206c9
+
+	column 'feature'
+		dataType: string
+		lineageTag: 5759333a-d6df-4b0a-a523-25f24299cf54
+		summarizeBy: none
+		sourceColumn: feature
+
+	column 'importance_pct'
+		dataType: double
+		lineageTag: 84f3a034-6602-43c5-bc8e-f76129420d0d
+		summarizeBy: none
+		sourceColumn: importance_pct
+
+	partition Feature_Importance = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("dZHtboQgEEVfZcPvDQE/22cxmwkVdCdZwQxo+/hFwW3dtL/P9d4j03VsJNQwO48BnWXXC6taXjXsdr10TBOuhoDc44F2hAEt+jvUW0oKLqqU6hWZmPpEC6SC2Tt402borA+09MH99MwObfAgRYqKIkV3k9XD4GiCUc0bLfl79X9RFkpFJW/LHEXqFwxxR+MyPaVKXuSAuhulwQ0QjJqmiGHbThn5569n5TplRO7xRnlnD/hhovm+VPC3FxW1HraJN+e303Z4akYoT9AHRcEnVBcnPTXmT46LHXvmazaExvaZixef38eSPN7q9g0=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [feature = _t, importance_pct = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"feature", type text}, {"importance_pct", type number}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

@@ -287,7 +287,7 @@ On the held-out 2022–2024 partition the champion classifier achieves **ROC-AUC
 
 ### CHAPTER 7 : RESULTS, DASHBOARDS & REAL-WORLD VALIDATION
 * 7.1 Interactive Jury Evaluation Portal (Streamlit) ........................................................ 74
-* 7.2 Executive Power BI Telemetry Workspace ............................................................. 76
+* 7.2 Power BI Dataset ...................................................................................... 76
 * 7.3 Real-World Case Studies (2024 Season) ................................................................. 77
 
 ### CHAPTER 8 : CONCLUSION & FUTURE WORK
@@ -1159,13 +1159,14 @@ All results are served by a Streamlit app (`streamlit_app.py`) whose sidebar mir
 
 ---
 
-## 7.2 Executive Power BI Telemetry Workspace
+## 7.2 Power BI Dataset
 
-To support C-suite stakeholders and pit wall engineers, an enterprise **Microsoft Power BI Master Package** (`F1_Race_Intelligence_PowerBI_Dataset.xlsx`) was engineered containing 12 pre-structured relational tables:
-* `Fact_Grand_Prix_Predictions`: 8,650 driver starts with 3-pillar features and win probabilities.
-* `Dim_Drivers`, `Dim_Circuits`, `Dim_Constructors`, `Dim_Races`: Core Star Schema dimensions.
-* `ML_Model_Benchmark` & `ML_ROC_Curves`: Tabular coordinates for high-density ROC curve rendering.
-* Custom F1 Dark Racing Theme (`F1_PowerBI_Theme.json`): Incorporating official FIA hex codes (`#E10600`, `#00BDAE`, `#F2C811`, `#0B0D10`).
+`build_powerbi_master_package.py` exports the module outputs into `F1_Race_Intelligence_PowerBI_Dataset.xlsx` (18 sheets), so a Power BI report shows exactly the same numbers as the Streamlit dashboards:
+* `Fact_Holdout_Predictions`: the champion model's real predictions for all 1,359 entries of the 2022–2024 holdout, with race-normalised win probabilities.
+* `Dim_Drivers`, `Dim_Constructors`, `Dim_Circuits`, `Dim_Races`: 1994–2024 history dimensions.
+* `ML_*` sheets: classifier comparison, expanding-window validation, ROC curve, feature importance, association rules and itemsets.
+* `CL_*` sheets: driver-season tiers, tier profiles and the clustering comparison.
+* `F1_PowerBI_Theme.json` uses the dashboards' colours; `POWER_BI_DASHBOARD_BLUEPRINT.md` describes the relationships, DAX measures and suggested pages.
 
 ---
 

@@ -13,7 +13,7 @@ from build_unsupervised_dataset import CLUSTER_FEATURE_COLS, MIN_STARTS
 apply_f1_theme()
 
 page_header('Dashboard 3', 'Unsupervised learning', 'Driver-season dataset',
-            '703 unlabelled driver-season profiles from 1994–2024, built for clustering. There is no target column.', marks=5)
+            '703 unlabelled driver-season profiles from 1994–2024, built for clustering. There is no target column.')
 
 prof = pd.read_csv(os.path.join(ROOT, "09_unsupervised_dataset", "driver_season_profiles.csv"))
 

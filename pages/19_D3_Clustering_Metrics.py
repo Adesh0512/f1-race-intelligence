@@ -12,7 +12,7 @@ from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, TIER_COLORS, page
 apply_f1_theme()
 
 page_header('Dashboard 3', 'Unsupervised learning', 'How good are the clusters?',
-            'Internal validity, stability across reruns, and a check against the real championship standings.', marks=5)
+            'Internal validity, stability across reruns, and a check against the real championship standings.')
 
 mod = os.path.join(ROOT, "12_clustering_metrics")
 with open(os.path.join(mod, "clustering_metrics.json")) as f:

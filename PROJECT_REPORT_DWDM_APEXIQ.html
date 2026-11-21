@@ -457,7 +457,7 @@
 
 <h3 class="subsection-title">CHAPTER 7 : RESULTS, DASHBOARDS & REAL-WORLD VALIDATION</h3>
 <p class="bullet-item">• 7.1 Interactive Jury Evaluation Portal (Streamlit) ........................................................ 74</p>
-<p class="bullet-item">• 7.2 Executive Power BI Telemetry Workspace ............................................................. 76</p>
+<p class="bullet-item">• 7.2 Power BI Dataset ...................................................................................... 76</p>
 <p class="bullet-item">• 7.3 Real-World Case Studies (2024 Season) ................................................................. 77</p>
 
 <h3 class="subsection-title">CHAPTER 8 : CONCLUSION & FUTURE WORK</h3>
@@ -2208,13 +2208,14 @@ CREATE OR REPLACE TABLE CLEAN.F1_MODELING_MASTER (
 
 <hr class="divider">
 
-<h2 class="section-title">7.2 Executive Power BI Telemetry Workspace</h2>
+<h2 class="section-title">7.2 Power BI Dataset</h2>
 
-<p class="para">To support C-suite stakeholders and pit wall engineers, an enterprise <strong>Microsoft Power BI Master Package</strong> (<code>F1_Race_Intelligence_PowerBI_Dataset.xlsx</code>) was engineered containing 12 pre-structured relational tables:</p>
-<p class="bullet-item">• <code>Fact_Grand_Prix_Predictions</code>: 8,650 driver starts with 3-pillar features and win probabilities.</p>
-<p class="bullet-item">• <code>Dim_Drivers</code>, <code>Dim_Circuits</code>, <code>Dim_Constructors</code>, <code>Dim_Races</code>: Core Star Schema dimensions.</p>
-<p class="bullet-item">• <code>ML_Model_Benchmark</code> & <code>ML_ROC_Curves</code>: Tabular coordinates for high-density ROC curve rendering.</p>
-<p class="bullet-item">• Custom F1 Dark Racing Theme (<code>F1_PowerBI_Theme.json</code>): Incorporating official FIA hex codes (<code>#E10600</code>, <code>#00BDAE</code>, <code>#F2C811</code>, <code>#0B0D10</code>).</p>
+<p class="para"><code>build_powerbi_master_package.py</code> exports the module outputs into <code>F1_Race_Intelligence_PowerBI_Dataset.xlsx</code> (18 sheets), so a Power BI report shows exactly the same numbers as the Streamlit dashboards:</p>
+<p class="bullet-item">• <code>Fact_Holdout_Predictions</code>: the champion model's real predictions for all 1,359 entries of the 2022–2024 holdout, with race-normalised win probabilities.</p>
+<p class="bullet-item">• <code>Dim_Drivers</code>, <code>Dim_Constructors</code>, <code>Dim_Circuits</code>, <code>Dim_Races</code>: 1994–2024 history dimensions.</p>
+<p class="bullet-item">• <code>ML_*</code> sheets: classifier comparison, expanding-window validation, ROC curve, feature importance, association rules and itemsets.</p>
+<p class="bullet-item">• <code>CL_*</code> sheets: driver-season tiers, tier profiles and the clustering comparison.</p>
+<p class="bullet-item">• <code>F1_PowerBI_Theme.json</code> uses the dashboards' colours; <code>POWER_BI_DASHBOARD_BLUEPRINT.md</code> describes the relationships, DAX measures and suggested pages.</p>
 
 <hr class="divider">
 

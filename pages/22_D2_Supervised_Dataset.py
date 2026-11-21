@@ -13,7 +13,7 @@ from feature_engineering import ENGINEERED_FEATURE_COLS
 apply_f1_theme()
 
 page_header('Dashboard 2', 'Supervised learning', 'Supervised dataset',
-            '12,358 labelled driver-race entries from 577 Grands Prix, 1994–2024.', marks=1)
+            '12,358 labelled driver-race entries from 577 Grands Prix, 1994–2024.')
 
 
 @st.cache_data

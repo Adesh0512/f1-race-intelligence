@@ -1,0 +1,17 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+ref table Race_Predictions
+ref table Classifier_Comparison
+ref table Season_Validation
+ref table Feature_Importance
+ref table Association_Rules
+ref table Driver_Season_Tiers
+ref table Clustering_Comparison

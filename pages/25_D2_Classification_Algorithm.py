@@ -20,7 +20,7 @@ innov = pd.read_csv(os.path.join(ROOT, "07_innovation", "innovation_results.csv"
 ho = parts[parts["partition"].str.startswith("Combined")].iloc[0]
 
 page_header('Dashboard 2', 'Supervised learning', 'Classification algorithm: cost-sensitive XGBoost',
-            "Predicts each driver's chance of winning. The probabilities in every race add up to 100%.", marks=2)
+            "Predicts each driver's chance of winning. The probabilities in every race add up to 100%.")
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Holdout ROC-AUC", f"{ho['roc_auc']:.4f}")

@@ -12,7 +12,7 @@ from db_utils import apply_f1_theme, get_plotly_theme, get_snowflake_session, qu
 apply_f1_theme()
 
 page_header('Dashboard 1', 'Data warehouse', 'Snowflake deployment',
-            'How the warehouse is built in Snowflake, layer by layer: RAW → CLEAN → DW → ML → ANALYTICS.', marks=3)
+            'How the warehouse is built in Snowflake, layer by layer: RAW → CLEAN → DW → ML → ANALYTICS.')
 
 SQL_PATH = os.path.join(ROOT, "MASTER_SNOWFLAKE_DEPLOYMENT.sql")
 sql_text = open(SQL_PATH, encoding="utf-8").read()
@@ -27,7 +27,7 @@ live = conn_type in ("snowpark", "connector")
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Snowflake Objects Defined", len(objs))
-c2.metric("Schemas", int((objs["type"] == "SCHEMA").sum()), "RAW · CLEAN · ML · ANALYTICS · DW")
+c2.metric("Schemas", int((objs["type"] == "SCHEMA").sum()), "RAW to ANALYTICS", delta_color="off")
 c3.metric("Tables & Views", int(objs["type"].isin(["TABLE", "VIEW", "DYNAMIC TABLE"]).sum()))
 c4.metric("Connection", "Live" if live else "Offline", conn_type, delta_color="normal" if live else "off")
 
@@ -57,7 +57,7 @@ with t1:
     `PUT` every app file to the stage → `CREATE STREAMLIT … ROOT_LOCATION = '@F1_STREAMLIT_STAGE' MAIN_FILE = 'streamlit_app.py'`.
     Read-only scripts in `00_data_warehouse/snowflake_streamlit_deployment/` prove what is live
     (`SHOW STREAMLITS`, `DESCRIBE STREAMLIT`, `LIST @F1_STREAMLIT_STAGE`, `GET` the deployed `streamlit_app.py`).
-    The app that is currently deployed is the Jury 2 version.
+    The deployed app is an earlier version of this dashboard.
     """)
 
 with t2:

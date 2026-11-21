@@ -1,0 +1,55 @@
+table Clustering_Comparison
+	lineageTag: d002f11f-b025-41c4-8059-a8878586f845
+
+	column 'algorithm'
+		dataType: string
+		lineageTag: 6234a8c6-959b-42f1-a766-965d3614b114
+		summarizeBy: none
+		sourceColumn: algorithm
+
+	column 'n_clusters'
+		dataType: int64
+		lineageTag: 3cfe6186-ebbb-4c8f-8e24-4eb8da457d16
+		summarizeBy: none
+		sourceColumn: n_clusters
+
+	column 'noise_pct'
+		dataType: double
+		lineageTag: 1e6d983c-4bdd-4eba-8b73-5e0be10b4e1b
+		summarizeBy: none
+		sourceColumn: noise_pct
+
+	column 'silhouette'
+		dataType: double
+		lineageTag: a5d0580b-11b2-4e2d-86db-8ef4bcd02e9b
+		summarizeBy: none
+		sourceColumn: silhouette
+
+	column 'davies_bouldin'
+		dataType: double
+		lineageTag: c40f5f51-6e35-467c-9dd2-470e0083df82
+		summarizeBy: none
+		sourceColumn: davies_bouldin
+
+	column 'calinski_harabasz'
+		dataType: double
+		lineageTag: 461f1cb2-260b-4e5e-b22b-1f20d7d99bcf
+		summarizeBy: none
+		sourceColumn: calinski_harabasz
+
+	column 'stability_ari'
+		dataType: double
+		lineageTag: 4fe8ac43-38fe-440b-85ce-00f5053baefe
+		summarizeBy: none
+		sourceColumn: stability_ari
+
+	partition Clustering_Comparison = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("bZBBa8MwDIX/ivGpg85YtmVLx7SDbYyMsR12KDkYEkpgayFpx37+Gsu75WIbPb9Pejoc9Mt9O+TTrLdK++Wwxsrloo/LC4xLyEUPyaCIHELS3VaJvz+P/aw2b017t8LxHoXj2UPRHRsQkShF4TTH49f5e5jyZfwZ1OYzT/0KDMiSwBBCGc/RjSIiApPAHvN1nsd8Uu34e7lOwwooWBZQJAwFhM6kmo7RC2j3/L5/WnEzQh3DSSbHZOoftFB387D72DevS7V0SLde1Q8Q6wKwxgj/bOIUdNf9AQ==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [algorithm = _t, n_clusters = _t, noise_pct = _t, silhouette = _t, davies_bouldin = _t, calinski_harabasz = _t, stability_ari = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"algorithm", type text}, {"n_clusters", Int64.Type}, {"noise_pct", type number}, {"silhouette", type number}, {"davies_bouldin", type number}, {"calinski_harabasz", type number}, {"stability_ari", type number}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

@@ -19,7 +19,7 @@ rules = pd.read_csv(os.path.join(MOD, "association_rules.csv"))
 itemsets = pd.read_csv(os.path.join(MOD, "frequent_itemsets.csv"))
 
 page_header('Dashboard 2', 'Supervised learning', 'Pattern matching: FP-Growth and Apriori',
-            f"{bench['transactions']:,} race transactions over {bench['items']} items, with minimum support {bench['min_support']} and minimum confidence {bench['min_confidence']}.", marks=1)
+            f"{bench['transactions']:,} race transactions over {bench['items']} items, with minimum support {bench['min_support']} and minimum confidence {bench['min_confidence']}.")
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Frequent Itemsets", bench["itemsets_count"], "Identical in both" if bench["is_equivalent"] else "MISMATCH")
@@ -37,9 +37,10 @@ with t1:
     fig.add_trace(go.Scatter(x=sweep["min_support"], y=sweep["fp_tree_nodes"], name="FP-tree nodes", mode="lines+markers", line=dict(color=F1_RED)))
     fig.update_layout(title="Search-space cost vs. min_support", xaxis=dict(title="min_support", autorange="reversed", type="log"), yaxis_title="count")
     a.plotly_chart(get_plotly_theme(fig), width="stretch")
-    long = sweep.melt(id_vars="min_support", value_vars=["apriori_time_sec", "fpgrowth_time_sec"], var_name="algorithm", value_name="seconds")
+    long = sweep.rename(columns={"apriori_time_sec": "Apriori", "fpgrowth_time_sec": "FP-Growth"}).melt(
+        id_vars="min_support", value_vars=["Apriori", "FP-Growth"], var_name="algorithm", value_name="seconds")
     b.plotly_chart(get_plotly_theme(px.line(long, x="min_support", y="seconds", color="algorithm", markers=True, log_x=True,
-                                            color_discrete_map={"apriori_time_sec": "#8B949E", "fpgrowth_time_sec": F1_RED},
+                                            color_discrete_map={"Apriori": "#8B949E", "FP-Growth": F1_RED},
                                             title="Wall-clock runtime (mlxtend)").update_xaxes(autorange="reversed")), width="stretch")
     st.dataframe(sweep, width="stretch", hide_index=True)
     st.markdown(f"""

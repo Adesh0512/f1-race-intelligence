@@ -1,0 +1,15 @@
+{
+  "name": "ApexIQ Classification Sheet",
+  "dataColors": [
+    "#7B2CBF",
+    "#1A9E55",
+    "#C99700",
+    "#15181D",
+    "#9AA1AB",
+    "#D50F1F",
+    "#2F6FDB"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#15181D",
+  "tableAccent": "#7B2CBF"
+}

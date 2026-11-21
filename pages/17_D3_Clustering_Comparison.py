@@ -12,7 +12,7 @@ from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, page_header
 apply_f1_theme()
 
 page_header('Dashboard 3', 'Unsupervised learning', 'Comparing six clustering algorithms',
-            'K-Means, K-Medoids, Agglomerative (Ward), Gaussian Mixture, BIRCH and DBSCAN, run on the same 703 profiles and scored the same way.', marks=10)
+            'K-Means, K-Medoids, Agglomerative (Ward), Gaussian Mixture, BIRCH and DBSCAN, run on the same 703 profiles and scored the same way.')
 
 mod = os.path.join(ROOT, "10_clustering_comparison")
 res = pd.read_csv(os.path.join(mod, "comparison_results.csv"))

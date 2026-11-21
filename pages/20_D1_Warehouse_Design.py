@@ -15,7 +15,7 @@ DW = os.path.join(ROOT, "00_data_warehouse")
 DB = os.path.join(ROOT, "f1_warehouse.db")
 
 page_header('Dashboard 1', 'Data warehouse', 'Warehouse design',
-            'Star and snowflake models over 8,650 race results (2004–2024), with OLAP queries running live on the warehouse.', marks=3)
+            'Star and snowflake models over 8,650 race results (2004–2024), with OLAP queries running live on the warehouse.')
 
 
 def mermaid_er_to_dot(path):

@@ -1,0 +1,31 @@
+table Season_Validation
+	lineageTag: 8af6e400-7d98-407b-9ae1-3d56d459da71
+
+	column 'test_season'
+		dataType: int64
+		lineageTag: 7225b105-30ad-4854-9019-1095ffbb7b8c
+		summarizeBy: none
+		sourceColumn: test_season
+
+	column 'roc_auc'
+		dataType: double
+		lineageTag: b57d2814-1f00-462c-92cd-aa2e0aa56d9b
+		summarizeBy: none
+		sourceColumn: roc_auc
+
+	column 'baseline_roc_auc'
+		dataType: double
+		lineageTag: 695790f3-6de9-4b40-b8d0-4d5a1aeafd84
+		summarizeBy: none
+		sourceColumn: baseline_roc_auc
+
+	partition Season_Validation = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("Rc3JDcAwCETRVizOVsQWArVY7r8NJxKQ2+i/w6wFjBQwB+AV6jluDdhzfMiYjeTJxWytlE3ESklaOZthaZNkcNV6x1+rCdUp+Xu6Dw==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [test_season = _t, roc_auc = _t, baseline_roc_auc = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"test_season", Int64.Type}, {"roc_auc", type number}, {"baseline_roc_auc", type number}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

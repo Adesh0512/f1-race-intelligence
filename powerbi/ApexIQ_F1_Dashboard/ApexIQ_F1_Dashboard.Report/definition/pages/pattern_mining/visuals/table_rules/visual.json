@@ -1,0 +1,134 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.3.0/schema.json",
+  "name": "table_rules",
+  "position": {
+    "x": 340,
+    "y": 20,
+    "z": 1000,
+    "height": 680,
+    "width": 920,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Association_Rules"
+                    }
+                  },
+                  "Property": "antecedents"
+                }
+              },
+              "queryRef": "Association_Rules.antecedents",
+              "nativeQueryRef": "antecedents"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Association_Rules"
+                    }
+                  },
+                  "Property": "consequents"
+                }
+              },
+              "queryRef": "Association_Rules.consequents",
+              "nativeQueryRef": "consequents"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Association_Rules"
+                    }
+                  },
+                  "Property": "support"
+                }
+              },
+              "queryRef": "Association_Rules.support",
+              "nativeQueryRef": "support"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Association_Rules"
+                    }
+                  },
+                  "Property": "confidence"
+                }
+              },
+              "queryRef": "Association_Rules.confidence",
+              "nativeQueryRef": "confidence"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Association_Rules"
+                    }
+                  },
+                  "Property": "lift"
+                }
+              },
+              "queryRef": "Association_Rules.lift",
+              "nativeQueryRef": "lift"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Association_Rules"
+                  }
+                },
+                "Property": "lift"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Association rules (FP-Growth = Apriori), sorted by lift'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

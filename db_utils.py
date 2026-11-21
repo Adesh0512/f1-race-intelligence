@@ -62,9 +62,9 @@ def apply_f1_theme():
         /* Sidebar */
         [data-testid="stSidebar"] {{ background: {SURFACE}; border-right: 1px solid {RULE}; }}
         [data-testid="stSidebarNav"] a span {{ color: {INK}; }}
-        [data-testid="stSidebarNav"] header span, [data-testid="stNavSectionHeader"] {{
-            font-family: {DISPLAY_FONT}; color: {GRAPHITE}; font-size: 0.95rem;
-        }}
+        /* Title text only: the collapse arrow is an icon-font ligature and must keep its own font */
+        [data-testid="stNavSectionHeader"] p {{ font-family: {DISPLAY_FONT}; color: {GRAPHITE}; font-size: 0.95rem;
+            white-space: normal; overflow: visible; text-overflow: clip; }}
 
         /* Metrics read like timing-tower cells */
         [data-testid="stMetric"] {{
@@ -86,7 +86,6 @@ def apply_f1_theme():
         .apx-head {{ border-bottom: 2px solid {INK}; padding-bottom: 0.6rem; margin-bottom: 1.2rem; }}
         .apx-ref {{ display: flex; gap: 0.9rem; align-items: baseline; color: {GRAPHITE}; font-size: 0.95rem; }}
         .apx-ref b {{ font-family: {DISPLAY_FONT}; color: {INK}; font-size: 1.05rem; }}
-        .apx-marks {{ font-family: {DISPLAY_FONT}; background: {INK}; color: {PAPER}; padding: 1px 9px; border-radius: 3px; }}
         .apx-head h1 {{ margin: 0.25rem 0 0.35rem 0; padding: 0; }}
         .apx-sum {{ color: {GRAPHITE}; font-size: 1.05rem; max-width: 75ch; margin: 0; }}
 
@@ -219,11 +218,10 @@ def get_plotly_theme(fig):
     return fig
 
 
-def page_header(dashboard: str, area: str, title: str, summary: str, marks: int = None):
-    """Shared page heading: which dashboard and rubric item this page answers, then the title."""
-    chip = f'<span class="apx-marks">{marks} mark{"s" if marks != 1 else ""}</span>' if marks else ""
+def page_header(dashboard: str, area: str, title: str, summary: str):
+    """Shared page heading: which dashboard and area this page belongs to, then the title."""
     st.markdown(f"""<div class="apx-head">
-        <div class="apx-ref"><b>{dashboard}</b><span>{area}</span>{chip}</div>
+        <div class="apx-ref"><b>{dashboard}</b><span>{area}</span></div>
         <h1>{title}</h1><p class="apx-sum">{summary}</p></div>""", unsafe_allow_html=True)
 
 
