@@ -15,7 +15,7 @@ This repository is structured into **12 Production Engineering Modules**:
 7. **07 Innovation:** Leakage-safe multi-horizon rolling form, circuit affinity, and teammate relational deltas (+4.36% ROC-AUC, +20.15% PR-AUC).
 8. **08 Performance Metrics:** Empirical holdout metrics: Accuracy, Precision, Recall, F1, Confusion Matrix, ROC-AUC, Brier score, and Log Loss across Train, Validation, and Test partitions.
 9. **09 Unsupervised Dataset (Dashboard 3):** 703 unlabelled driver-season performance profiles with 9 standardised features.
-10. **10 Clustering Algorithm Comparison (Dashboard 3):** K-Means, Agglomerative (Ward), Gaussian Mixture, BIRCH and DBSCAN, with elbow and silhouette k-selection.
+10. **10 Clustering Algorithm Comparison (Dashboard 3):** K-Means, K-Medoids, Agglomerative (Ward), Gaussian Mixture, BIRCH and DBSCAN, with elbow, silhouette, GMM BIC/AIC and DBSCAN k-distance tuning.
 11. **11 Clustering Algorithm (Dashboard 3):** Champion K-Means (k = 3): Title Contenders, Midfield Regulars, Backmarkers.
 12. **12 Clustering Performance Metrics (Dashboard 3):** Silhouette, Davies-Bouldin, Calinski-Harabasz, seed/bootstrap stability ARI, and an external check against championship standings.
 

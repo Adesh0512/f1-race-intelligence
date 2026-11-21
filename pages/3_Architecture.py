@@ -66,7 +66,7 @@ with col2:
     * **FP-Growth & Apriori**: 12,358 race transactions over 24 items; both find the same 414 frequent itemsets and 1,393 rules.
     * **Classifier Benchmark**: 7 models on a chronological 2022–2024 holdout + 6-fold expanding-window validation + race-level bootstrap test.
     * **Champion**: Cost-sensitive XGBoost (`scale_pos_weight = 15`) on 16 leakage-safe features + race-level softmax (ROC-AUC 0.9629).
-    * **Clustering**: K-Means (k = 3) on 703 driver-season profiles, compared with Ward, GMM, BIRCH and DBSCAN.
+    * **Clustering**: K-Means (k = 3) on 703 driver-season profiles, compared with K-Medoids, Ward, GMM, BIRCH and DBSCAN.
     * **Secondary Regression**: Independent Random Forest Regressor predicting finish position.
     
     #### 4. Snowflake Serving & Streamlit UI (SiS & Cortex AI)

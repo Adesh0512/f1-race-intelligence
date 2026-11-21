@@ -24,179 +24,71 @@ try:
 except ImportError:
     pass
 
-F1_RED = "#E10600"
+# Design tokens: an FIA classification sheet read with F1 timing-screen colours
+PAPER = "#F6F7F9"
+SURFACE = "#FFFFFF"
+INK = "#15181D"
+GRAPHITE = "#59616C"
+RULE = "#D8DCE2"
+PURPLE = "#7B2CBF"   # timing purple: best / champion
+GREEN = "#1A9E55"    # timing green: improvement, passed check
+YELLOW = "#C99700"   # timing yellow: caution, notes
+FLAG_RED = "#D50F1F" # FIA stripe only
+TIER_COLORS = {"Title Contenders": PURPLE, "Midfield Regulars": GREEN, "Backmarkers": "#9AA1AB"}
+DISPLAY_FONT = "'DIN Alternate', 'DIN Condensed', Bahnschrift, 'Roboto Condensed', system-ui, sans-serif"
+
+# Legacy names still imported by older pages
+F1_RED = PURPLE
 F1_DARK_BG = "#0B0D10"
 F1_CARD_BG = "#161B22"
 F1_BORDER = "#30363D"
 F1_TEXT_MUTED = "#8B949E"
 
 def apply_f1_theme():
-    """Applies custom dark carbon and F1 racing red CSS styling with high-contrast visibility."""
+    """Applies the light classification-sheet theme to every page."""
     st.markdown(f"""
         <style>
-        /* Base Application Layout */
-        .stApp {{
-            background-color: {F1_DARK_BG} !important;
-            color: #E6EDF3 !important;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        /* Base: light classification-sheet layout */
+        .stApp {{ background: {PAPER}; color: {INK}; }}
+        [data-testid="stHeader"] {{ background: transparent; border-top: 4px solid {FLAG_RED}; }}
+        .stApp, .stApp p, .stApp li, .stApp label {{ font-variant-numeric: tabular-nums; }}
+        .stApp h1, .stApp h2, .stApp h3, .stApp h4 {{
+            font-family: {DISPLAY_FONT}; color: {INK}; letter-spacing: -0.005em; font-weight: 700;
+        }}
+        .stApp h1 {{ font-size: 2.35rem; line-height: 1.1; }}
+        .stApp h3 {{ font-size: 1.25rem; }}
+        .block-container {{ max-width: 1280px; padding-top: 5.2rem; }}
+
+        /* Sidebar */
+        [data-testid="stSidebar"] {{ background: {SURFACE}; border-right: 1px solid {RULE}; }}
+        [data-testid="stSidebarNav"] a span {{ color: {INK}; }}
+        [data-testid="stSidebarNav"] header span, [data-testid="stNavSectionHeader"] {{
+            font-family: {DISPLAY_FONT}; color: {GRAPHITE}; font-size: 0.95rem;
         }}
 
-        /* Headings & Text */
-        .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6 {{
-            color: #FFFFFF !important;
-            font-weight: 700 !important;
+        /* Metrics read like timing-tower cells */
+        [data-testid="stMetric"] {{
+            background: {SURFACE}; border: 1px solid {RULE}; border-left: 3px solid {INK};
+            border-radius: 4px; padding: 10px 14px;
         }}
-        .stApp p, .stApp span, .stApp label, .stApp div {{
-            color: #E6EDF3;
-        }}
+        [data-testid="stMetricValue"] {{ font-family: {DISPLAY_FONT}; font-size: 2rem; color: {INK}; }}
+        [data-testid="stMetricLabel"] p {{ color: {GRAPHITE}; font-size: 0.85rem; }}
 
-        /* High-Contrast Sidebar */
-        [data-testid="stSidebar"] {{
-            background-color: #0D1117 !important;
-            border-right: 1px solid {F1_BORDER} !important;
-        }}
-        [data-testid="stSidebar"] *,
-        [data-testid="stSidebar"] div,
-        [data-testid="stSidebar"] p,
-        [data-testid="stSidebar"] span,
-        [data-testid="stSidebar"] label,
-        [data-testid="stSidebarNav"] span,
-        [data-testid="stSidebarNav"] a,
-        [data-testid="stSidebarNav"] li,
-        [data-testid="stSidebarNav"] p,
-        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
-        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] span,
-        [data-testid="stSidebarNavItems"] span,
-        [data-testid="stSidebarNavItems"] a,
-        section[data-testid="stSidebar"] span,
-        section[data-testid="stSidebar"] a {{
-            color: #FFFFFF !important;
-        }}
-        [data-testid="stSidebarNav"] {{
-            padding-top: 1rem;
-        }}
-        [data-testid="stSidebarNav"] a {{
-            color: #C9D1D9 !important;
-            font-size: 14px !important;
-            font-weight: 600 !important;
-            padding: 8px 14px !important;
-            border-radius: 6px !important;
-            margin-bottom: 3px !important;
-            transition: all 0.2s ease !important;
-            background-color: transparent !important;
-        }}
-        [data-testid="stSidebarNav"] a span {{
-            color: #E6EDF3 !important;
-            font-size: 14px !important;
-            font-weight: 600 !important;
-        }}
-        [data-testid="stSidebarNav"] a:hover {{
-            background-color: rgba(225, 6, 0, 0.2) !important;
-            color: #FFFFFF !important;
-            transform: translateX(4px);
-        }}
-        [data-testid="stSidebarNav"] a:hover span {{
-            color: #FFFFFF !important;
-        }}
-        [data-testid="stSidebarNav"] a[aria-current="page"],
-        [data-testid="stSidebarNav"] li[aria-selected="true"] a {{
-            background: linear-gradient(90deg, rgba(225, 6, 0, 0.35) 0%, rgba(225, 6, 0, 0.08) 100%) !important;
-            border-left: 4px solid {F1_RED} !important;
-            color: #FFFFFF !important;
-            font-weight: 700 !important;
-        }}
-        [data-testid="stSidebarNav"] a[aria-current="page"] span,
-        [data-testid="stSidebarNav"] li[aria-selected="true"] a span {{
-            color: #FFFFFF !important;
-        }}
+        /* Tabs */
+        [data-baseweb="tab"] p {{ font-family: {DISPLAY_FONT}; font-size: 1.02rem; }}
 
-        /* Metric Cards */
-        .metric-card {{
-            background-color: {F1_CARD_BG};
-            border-left: 4px solid {F1_RED};
-            border-radius: 8px;
-            padding: 16px 20px;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-            border: 1px solid #21262D;
-            border-left: 4px solid {F1_RED};
-        }}
-        .metric-label {{
-            font-size: 12px;
-            color: {F1_TEXT_MUTED};
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }}
-        .metric-value {{
-            font-size: 26px;
-            font-weight: 800;
-            color: #FFFFFF !important;
-            letter-spacing: 0.5px;
-        }}
-        .metric-delta {{
-            font-size: 12px;
-            color: #00E676;
-            margin-top: 5px;
-            font-weight: 500;
-        }}
+        /* Markdown tables: printed results-sheet style */
+        .stApp table {{ border-collapse: collapse; width: 100%; background: {SURFACE}; }}
+        .stApp th {{ background: #EEF0F3; color: {INK}; text-align: left; font-weight: 600; border-bottom: 2px solid {INK}; padding: 7px 10px; }}
+        .stApp td {{ border-bottom: 1px solid {RULE}; padding: 6px 10px; }}
 
-        /* Badges */
-        .badge-car {{
-            background: rgba(225, 6, 0, 0.25);
-            color: #FF7B7B !important;
-            border: 1px solid #E10600;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: bold;
-        }}
-        .badge-lap {{
-            background: rgba(0, 229, 255, 0.25);
-            color: #00E5FF !important;
-            border: 1px solid #00E5FF;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: bold;
-        }}
-        .badge-pit {{
-            background: rgba(255, 204, 0, 0.25);
-            color: #FFD54F !important;
-            border: 1px solid #FFCC00;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: bold;
-        }}
-
-        /* Tables & Markdown */
-        table {{
-            color: #E6EDF3 !important;
-            background-color: #161B22 !important;
-            border-collapse: collapse !important;
-            width: 100%;
-            margin: 15px 0;
-            border-radius: 6px;
-            overflow: hidden;
-        }}
-        th {{
-            background-color: #21262D !important;
-            color: #FFFFFF !important;
-            border: 1px solid #30363D !important;
-            padding: 10px 14px !important;
-            font-size: 13px !important;
-            text-transform: uppercase;
-        }}
-        td {{
-            border: 1px solid #30363D !important;
-            padding: 10px 14px !important;
-            font-size: 14px !important;
-        }}
-        tr:nth-child(even) {{
-            background-color: #0E1217 !important;
-        }}
+        /* Page header component */
+        .apx-head {{ border-bottom: 2px solid {INK}; padding-bottom: 0.6rem; margin-bottom: 1.2rem; }}
+        .apx-ref {{ display: flex; gap: 0.9rem; align-items: baseline; color: {GRAPHITE}; font-size: 0.95rem; }}
+        .apx-ref b {{ font-family: {DISPLAY_FONT}; color: {INK}; font-size: 1.05rem; }}
+        .apx-marks {{ font-family: {DISPLAY_FONT}; background: {INK}; color: {PAPER}; padding: 1px 9px; border-radius: 3px; }}
+        .apx-head h1 {{ margin: 0.25rem 0 0.35rem 0; padding: 0; }}
+        .apx-sum {{ color: {GRAPHITE}; font-size: 1.05rem; max-width: 75ch; margin: 0; }}
 
         /* Power BI Visual Card & KPI Design System */
         .pbi-card {{
@@ -312,18 +204,28 @@ def apply_f1_theme():
     """, unsafe_allow_html=True)
 
 def get_plotly_theme(fig):
-    """Formats Plotly figure with dark carbon F1 racing palette."""
+    """Formats a Plotly figure in the light classification-sheet style."""
     fig.update_layout(
-        paper_bgcolor=F1_CARD_BG,
-        plot_bgcolor="#0F141C",
-        font=dict(color="#E6EDF3", family="'Segoe UI', Roboto, sans-serif"),
-        title=dict(font=dict(size=15, color="#FFFFFF")),
-        margin=dict(l=40, r=40, t=50, b=40),
-        xaxis=dict(gridcolor="#21262D", zerolinecolor="#30363D"),
-        yaxis=dict(gridcolor="#21262D", zerolinecolor="#30363D"),
-        legend=dict(bgcolor="rgba(0,0,0,0)", bordercolor="#30363D")
+        paper_bgcolor=SURFACE,
+        plot_bgcolor=SURFACE,
+        colorway=[PURPLE, GREEN, YELLOW, INK, "#9AA1AB", FLAG_RED, "#2F6FDB"],
+        font=dict(color=INK, family="system-ui, -apple-system, 'Segoe UI', sans-serif", size=13),
+        title=dict(font=dict(size=16, color=INK, family=DISPLAY_FONT)),
+        margin=dict(l=40, r=30, t=56, b=40),
+        xaxis=dict(gridcolor="#E6E9EE", zerolinecolor=RULE, linecolor=RULE),
+        yaxis=dict(gridcolor="#E6E9EE", zerolinecolor=RULE, linecolor=RULE),
+        legend=dict(bgcolor="rgba(0,0,0,0)"),
     )
     return fig
+
+
+def page_header(dashboard: str, area: str, title: str, summary: str, marks: int = None):
+    """Shared page heading: which dashboard and rubric item this page answers, then the title."""
+    chip = f'<span class="apx-marks">{marks} mark{"s" if marks != 1 else ""}</span>' if marks else ""
+    st.markdown(f"""<div class="apx-head">
+        <div class="apx-ref"><b>{dashboard}</b><span>{area}</span>{chip}</div>
+        <h1>{title}</h1><p class="apx-sum">{summary}</p></div>""", unsafe_allow_html=True)
+
 
 def get_pbi_plotly_theme(fig):
     """Formats Plotly figure with authentic Microsoft Power BI Dark Visual styling."""

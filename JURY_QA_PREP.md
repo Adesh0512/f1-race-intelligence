@@ -118,14 +118,18 @@ K-Means uses Euclidean distance. Without scaling, `starts` (≈17) would dominat
 - k = 2 has a higher silhouette but only separates front-runners from everyone else.
 - The Ward dendrogram's largest vertical gap also gives 3 clusters.
 
-**Q: Compare your 5 algorithms.**
+**Q: Compare your 6 algorithms.**
 | Algorithm | How it works | How it did here |
 |---|---|---|
 | **K-Means** (centroid) | Minimises within-cluster squared distance | Best silhouette and Calinski-Harabasz, stable |
+| **K-Medoids** (PAM) | Like K-Means, but every centre must be a real driver-season | Close second (silhouette 0.234), robust to outliers |
 | **Ward** (hierarchical) | Merges the groups that add the least variance | Unstable, ARI 0.52 |
 | **GMM** (probabilistic) | EM fits Gaussians with soft membership | Most stable, but its clusters overlap heavily |
 | **BIRCH** (CF-tree) | Single-pass summarisation | Unstable, like Ward |
 | **DBSCAN** (density) | Finds dense regions, no k needed | Labels 7.7% as noise and fails on varying density |
+
+**Q: How did you choose eps for DBSCAN and k for GMM?**
+DBSCAN: grid search, then checked on the k-distance curve (sorted distance to each point's 5th nearest neighbour); eps = 1.3 sits near the knee. GMM: BIC and AIC keep falling until k = 7 because full-covariance Gaussians always fit density better with more parts. That's a density answer, not a tier count, so we compare all algorithms at the elbow's k = 3.
 
 **Q: Silhouette 0.26 seems low.**
 Driver performance is a continuum, not separate islands, so touching clusters are expected. Only 2% of points have a negative silhouette, stability is high (ARI 0.92), and the external check is strong: 81% of Contenders finished the championship top-3, and no Backmarker ever did.

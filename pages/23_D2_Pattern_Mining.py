@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-from db_utils import apply_f1_theme, get_plotly_theme, F1_RED
+from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, page_header
 
 apply_f1_theme()
 
@@ -18,8 +18,8 @@ sweep = pd.read_csv(os.path.join(MOD, "support_sweep_benchmark.csv"))
 rules = pd.read_csv(os.path.join(MOD, "association_rules.csv"))
 itemsets = pd.read_csv(os.path.join(MOD, "frequent_itemsets.csv"))
 
-st.title("🧩 Dashboard 2 · Pattern Matching: FP-Growth vs. Apriori")
-st.markdown(f"### {bench['transactions']:,} race transactions · {bench['items']} items · min_support {bench['min_support']} · min_confidence {bench['min_confidence']}")
+page_header('Dashboard 2', 'Supervised learning', 'Pattern matching: FP-Growth and Apriori',
+            f"{bench['transactions']:,} race transactions over {bench['items']} items, with minimum support {bench['min_support']} and minimum confidence {bench['min_confidence']}.", marks=1)
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Frequent Itemsets", bench["itemsets_count"], "Identical in both" if bench["is_equivalent"] else "MISMATCH")
@@ -28,7 +28,7 @@ c3.metric("Apriori Candidates", f"{bench['apriori_candidates']:,}", f"{bench['ap
 c4.metric("FP-Tree Nodes", f"{bench['fp_tree_nodes']:,}", "2 DB scans", delta_color="off")
 
 st.markdown("---")
-t1, t2, t3, t4 = st.tabs(["⚖️ Algorithm Comparison", "🏆 Outcome Rules", "🎛️ Rule Explorer", "📦 Frequent Itemsets"])
+t1, t2, t3, t4 = st.tabs(["Algorithm Comparison", "Outcome Rules", "Rule Explorer", "Frequent Itemsets"])
 
 with t1:
     a, b = st.columns(2)

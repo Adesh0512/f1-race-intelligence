@@ -9,7 +9,7 @@ from sklearn.metrics import roc_curve, precision_recall_curve, confusion_matrix
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-from db_utils import apply_f1_theme, get_plotly_theme, F1_RED
+from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, page_header
 
 apply_f1_theme()
 
@@ -19,8 +19,8 @@ parts = pd.read_csv(os.path.join(ROOT, "08_performance_metrics", "partition_metr
 innov = pd.read_csv(os.path.join(ROOT, "07_innovation", "innovation_results.csv"))
 ho = parts[parts["partition"].str.startswith("Combined")].iloc[0]
 
-st.title("🏎️ Dashboard 2 · Classification Algorithm: Cost-Sensitive XGBoost + Race Softmax")
-st.markdown("### Predicts P(win) for every driver on the grid · probabilities sum to 100% per race")
+page_header('Dashboard 2', 'Supervised learning', 'Classification algorithm: cost-sensitive XGBoost',
+            "Predicts each driver's chance of winning. The probabilities in every race add up to 100%.", marks=2)
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Holdout ROC-AUC", f"{ho['roc_auc']:.4f}")
@@ -29,7 +29,7 @@ c3.metric("Winner Recall", f"{ho['recall_class_1'] * 100:.1f}%")
 c4.metric("Race Winner Picked (Top-1)", f"{ho['top1_winner_hit_pct']:.1f}%", f"{int(ho['top1_hits'])}/{int(ho['total_gps'])} GPs")
 
 st.markdown("---")
-t1, t2, t3, t4, t5 = st.tabs(["⚙️ How It Works", "📈 Curves & Threshold", "🧮 Train / Val / Test", "💡 Innovation", "🏁 Race Explorer"])
+t1, t2, t3, t4, t5 = st.tabs(["How It Works", "Curves & Threshold", "Train / Val / Test", "Innovation", "Race Explorer"])
 
 with t1:
     a, b = st.columns([3, 2])
@@ -90,7 +90,7 @@ with t5:
     g["result"] = np.where(g["target_is_win"] == 1, "🏆 Actual winner", "")
     st.plotly_chart(get_plotly_theme(px.bar(g.head(10), x="norm_prob", y="driver_name", orientation="h", text=g.head(10)["result"],
                                             color=g.head(10)["target_is_win"].map({1: "Winner", 0: "Other"}),
-                                            color_discrete_map={"Winner": F1_RED, "Other": "#30363D"},
+                                            color_discrete_map={"Winner": F1_RED, "Other": "#C3C8CF"},
                                             title=f"Predicted win probability (sum = {g['norm_prob'].sum():.2f})").update_yaxes(autorange="reversed")),
                     width="stretch")
     st.dataframe(g[["driver_name", "constructor_name", "grid_position", "norm_prob", "target_finish_position"]].round(4), width="stretch", hide_index=True)

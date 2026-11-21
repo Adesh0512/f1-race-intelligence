@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-from db_utils import apply_f1_theme, get_plotly_theme, F1_RED
+from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, page_header
 
 apply_f1_theme()
 
@@ -18,8 +18,8 @@ folds = pd.read_csv(os.path.join(MOD, "temporal_validation_results.csv"))
 sig = pd.read_csv(os.path.join(MOD, "significance_test.csv")).iloc[0]
 champ = res[res["algorithm"].str.contains("Champion")].iloc[0]
 
-st.title("⚖️ Dashboard 2 · Classification Algorithm Comparison & Validation")
-st.markdown("### 7 classifiers · train 1994–2021 → test 2022–2024 (68 unseen Grands Prix) · 6-fold expanding window · significance test")
+page_header('Dashboard 2', 'Supervised learning', 'Comparing seven classifiers',
+            'Trained on 1994–2021 and tested on 68 unseen Grands Prix from 2022–2024, with expanding-window validation and a significance test.', marks=2)
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Algorithms Compared", len(res))
@@ -28,14 +28,14 @@ c3.metric("Expanding-Window Mean AUC", f"{folds['roc_auc'].mean():.4f}", f"{len(
 c4.metric("AUC Gain vs. Baseline", f"{sig['mean_delta']:+.4f}", f"95% CI [{sig['ci_low']:+.3f}, {sig['ci_high']:+.3f}]")
 
 st.markdown("---")
-t1, t2, t3, t4 = st.tabs(["🏁 Holdout Benchmark", "🔁 Expanding-Window Validation", "🧪 Significance Test", "🧠 Why These Models"])
+t1, t2, t3, t4 = st.tabs(["Holdout Benchmark", "Expanding-Window Validation", "Significance Test", "Why These Models"])
 
 with t1:
     metric = st.radio("Metric", ["roc_auc", "pr_auc", "balanced_acc_pct", "recall", "f1_score", "top1_winner_hit_pct", "top3_podium_hit_pct", "brier_score"], horizontal=True)
     order = res.sort_values(metric, ascending=(metric == "brier_score"))
     fig = px.bar(order, x=metric, y="model", orientation="h", title=f"{metric} on 2022–2024 holdout",
                  color=order["algorithm"].str.contains("Champion").map({True: "Champion", False: "Other"}),
-                 color_discrete_map={"Champion": F1_RED, "Other": "#30363D"})
+                 color_discrete_map={"Champion": F1_RED, "Other": "#C3C8CF"})
     st.plotly_chart(get_plotly_theme(fig.update_yaxes(autorange="reversed")), width="stretch")
     st.dataframe(res.drop(columns=["model"]), width="stretch", hide_index=True)
     st.caption("Accuracy is misleading at 20:1 imbalance: the grid-only baseline scores 95% accuracy by predicting 'no win' for everyone (recall 0). "

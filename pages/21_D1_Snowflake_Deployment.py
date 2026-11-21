@@ -7,12 +7,12 @@ import plotly.express as px
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-from db_utils import apply_f1_theme, get_plotly_theme, get_snowflake_session, query_snowflake
+from db_utils import apply_f1_theme, get_plotly_theme, get_snowflake_session, query_snowflake, page_header
 
 apply_f1_theme()
 
-st.title("❄️ Dashboard 1 · Snowflake Data Warehouse Deployment")
-st.markdown("### RAW → CLEAN → DW (star + snowflake) → ML → ANALYTICS on Snowflake Data Cloud")
+page_header('Dashboard 1', 'Data warehouse', 'Snowflake deployment',
+            'How the warehouse is built in Snowflake, layer by layer: RAW → CLEAN → DW → ML → ANALYTICS.', marks=3)
 
 SQL_PATH = os.path.join(ROOT, "MASTER_SNOWFLAKE_DEPLOYMENT.sql")
 sql_text = open(SQL_PATH, encoding="utf-8").read()
@@ -32,7 +32,7 @@ c3.metric("Tables & Views", int(objs["type"].isin(["TABLE", "VIEW", "DYNAMIC TAB
 c4.metric("Connection", "Live" if live else "Offline", conn_type, delta_color="normal" if live else "off")
 
 st.markdown("---")
-t1, t2, t3, t4 = st.tabs(["🚀 Deployment Pipeline", "📦 Object Manifest", "🔍 Live Verification", "📜 Deployment SQL"])
+t1, t2, t3, t4 = st.tabs(["Deployment Pipeline", "Object Manifest", "Live Verification", "Deployment SQL"])
 
 with t1:
     st.markdown("""

@@ -7,12 +7,12 @@ import plotly.express as px
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-from db_utils import apply_f1_theme, get_plotly_theme, F1_RED
+from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, TIER_COLORS, page_header
 
 apply_f1_theme()
 
-st.title("📏 Dashboard 3 · Clustering Performance Metrics")
-st.markdown("### Internal validity · Stability · External sanity check")
+page_header('Dashboard 3', 'Unsupervised learning', 'How good are the clusters?',
+            'Internal validity, stability across reruns, and a check against the real championship standings.', marks=5)
 
 mod = os.path.join(ROOT, "12_clustering_metrics")
 with open(os.path.join(mod, "clustering_metrics.json")) as f:
@@ -27,7 +27,7 @@ c3.metric("Calinski-Harabasz", f"{m['calinski_harabasz']:.1f}", "higher is bette
 c4.metric("Seed Stability (ARI)", f"{m['seed_stability_ari_mean']:.4f}", f"bootstrap {m['bootstrap_stability_ari_mean']:.4f}")
 
 st.markdown("---")
-t1, t2, t4, t3 = st.tabs(["🧪 Internal Validity", "🏆 vs. Championship Standing", "🔗 Clusters → Classifier", "📖 Metric Definitions"])
+t1, t2, t4, t3 = st.tabs(["Internal Validity", "vs. Championship Standing", "Clusters → Classifier", "Metric Definitions"])
 
 with t1:
     st.dataframe(per, width="stretch", hide_index=True)
@@ -39,12 +39,12 @@ with t1:
     cl["silhouette"] = silhouette_samples(X, cl["cluster"])
     cl = cl.sort_values(["cluster", "silhouette"], ascending=[True, False]).reset_index(drop=True)
     fig = px.bar(cl, x=cl.index, y="silhouette", color="cluster_name", hover_data=["driver_name", "season"],
-                 color_discrete_map={"Title Contenders": F1_RED, "Midfield Regulars": "#F2C811", "Backmarkers": "#8B949E"},
+                 color_discrete_map=TIER_COLORS,
                  title="Silhouette plot: every driver-season, sorted within its cluster (bars below 0 = closer to another cluster)")
-    fig.add_hline(y=m["silhouette"], line=dict(dash="dash", color="white"), annotation_text=f"mean {m['silhouette']:.3f}")
+    fig.add_hline(y=m["silhouette"], line=dict(dash="dash", color="#15181D"), annotation_text=f"mean {m['silhouette']:.3f}")
     st.plotly_chart(get_plotly_theme(fig.update_traces(marker_line_width=0).update_layout(bargap=0, xaxis_title="driver-season")), width="stretch")
     st.plotly_chart(get_plotly_theme(px.bar(per, x="cluster_name", y="mean_silhouette", color="cluster_name",
-                                            color_discrete_map={"Title Contenders": F1_RED, "Midfield Regulars": "#F2C811", "Backmarkers": "#8B949E"},
+                                            color_discrete_map=TIER_COLORS,
                                             title="Mean Silhouette per Cluster")), width="stretch")
 
 with t2:

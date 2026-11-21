@@ -42,6 +42,19 @@ class TestF1ClusteringQA(unittest.TestCase):
         cl = pd.read_csv(os.path.join(ROOT, "11_clustering_algorithm", "driver_season_clusters.csv"))
         self.assertEqual(int(cent["size"].sum()), len(cl))
 
+    def test_05_kmedoids_finds_separated_groups_with_real_medoids(self):
+        sys.path.insert(0, os.path.join(ROOT, "10_clustering_comparison"))
+        from clustering_comparison import KMedoids
+        import numpy as np
+        rng = np.random.default_rng(1)
+        X = np.vstack([rng.normal(c, 0.2, size=(30, 2)) for c in ((0, 0), (5, 5), (0, 5))])
+        km = KMedoids(n_clusters=3, random_state=0)
+        labels = km.fit_predict(X)
+        self.assertEqual(len(set(labels)), 3)
+        for g in range(3):  # each generated blob lands in exactly one cluster
+            self.assertEqual(len(set(labels[g * 30:(g + 1) * 30])), 1)
+        self.assertTrue(all(0 <= i < len(X) for i in km.medoid_indices_))  # medoids are actual rows
+
     def test_04_metrics_within_bounds_and_sane(self):
         with open(os.path.join(ROOT, "12_clustering_metrics", "clustering_metrics.json")) as f:
             m = json.load(f)

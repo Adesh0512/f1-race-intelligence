@@ -1,15 +1,17 @@
 """
 Clustering Algorithm Comparison (Parameter 10)
 ==============================================
-Benchmarks 5 clustering algorithms on 703 driver-season profiles (1994–2024):
+Benchmarks 6 clustering algorithms on 703 driver-season profiles (1994–2024):
 
 1. K-Means              (centroid, Lloyd's algorithm, k-means++ init)
-2. Agglomerative (Ward) (hierarchical, minimum-variance merge)
-3. Gaussian Mixture     (probabilistic, full covariance, EM)
-4. BIRCH                (CF-tree, single scan, scalable)
-5. DBSCAN               (density-based, no k, flags noise)
+2. K-Medoids (PAM)      (medoid: every centre is a real driver-season)
+3. Agglomerative (Ward) (hierarchical, minimum-variance merge)
+4. Gaussian Mixture     (probabilistic, full covariance, EM)
+5. BIRCH                (CF-tree, single scan, scalable)
+6. DBSCAN               (density-based, no k, flags noise)
 
-Step 1 — choose k with the Elbow (inertia) and Silhouette methods (k = 2..8).
+Step 1 — choose k with the Elbow (inertia) and Silhouette methods (k = 2..8);
+         cross-check with GMM BIC/AIC; justify DBSCAN eps with the k-distance curve.
 Step 2 — fit every algorithm at the chosen k (DBSCAN: eps from a grid search).
 Step 3 — score with Silhouette (↑), Davies-Bouldin (↓), Calinski-Harabasz (↑),
          seed/bootstrap stability ARI (↑) and runtime; rank to pick the champion.
@@ -17,6 +19,8 @@ Step 3 — score with Silhouette (↑), Davies-Bouldin (↓), Calinski-Harabasz 
 Outputs:
 - 10_clustering_comparison/k_selection.csv
 - 10_clustering_comparison/comparison_results.csv
+- 10_clustering_comparison/gmm_bic_aic.csv
+- 10_clustering_comparison/dbscan_k_distance.csv
 """
 
 import os
@@ -26,6 +30,8 @@ import numpy as np
 import pandas as pd
 from sklearn.cluster import KMeans, AgglomerativeClustering, Birch, DBSCAN
 from sklearn.mixture import GaussianMixture
+from sklearn.neighbors import NearestNeighbors
+from sklearn.metrics import pairwise_distances
 from sklearn.metrics import (
     silhouette_score, davies_bouldin_score, calinski_harabasz_score, adjusted_rand_score
 )
@@ -38,9 +44,38 @@ K_RANGE = range(2, 9)
 N_STABILITY_RUNS = 10
 
 
+class KMedoids:
+    """K-Medoids by alternating PAM (Voronoi iteration): each centre is an actual data point."""
+
+    def __init__(self, n_clusters, n_init=10, max_iter=100, random_state=0):
+        self.n_clusters, self.n_init, self.max_iter, self.random_state = n_clusters, n_init, max_iter, random_state
+
+    def fit_predict(self, X):
+        D = pairwise_distances(X)
+        rng = np.random.default_rng(self.random_state)
+        best = None
+        for _ in range(self.n_init):
+            medoids = rng.choice(len(X), self.n_clusters, replace=False)
+            for _ in range(self.max_iter):
+                labels = D[:, medoids].argmin(axis=1)
+                # new medoid of each cluster = member with the smallest total distance to the other members
+                new = np.array([np.flatnonzero(labels == c)[D[np.ix_(labels == c, labels == c)].sum(axis=1).argmin()]
+                                for c in range(self.n_clusters)])
+                if np.array_equal(np.sort(new), np.sort(medoids)):
+                    break
+                medoids = new
+            labels = D[:, medoids].argmin(axis=1)
+            cost = D[np.arange(len(X)), medoids[labels]].sum()
+            if best is None or cost < best[0]:
+                best = (cost, medoids, labels)
+        self.cost_, self.medoid_indices_, self.labels_ = best
+        return self.labels_
+
+
 def make_models(k, eps=1.5, min_samples=8):
     return {
         "K-Means": lambda s: KMeans(n_clusters=k, n_init=10, random_state=s),
+        "K-Medoids (PAM)": lambda s: KMedoids(n_clusters=k, n_init=10, random_state=s),
         "Agglomerative (Ward)": lambda s: AgglomerativeClustering(n_clusters=k, linkage="ward"),
         "Gaussian Mixture": lambda s: GaussianMixture(n_components=k, covariance_type="full", random_state=s),
         "BIRCH": lambda s: Birch(n_clusters=k, threshold=0.5),
@@ -78,6 +113,21 @@ def tune_dbscan(X):
     return (best[1], best[2]) if best else (1.5, 8)
 
 
+def gmm_bic_aic(X):
+    """Information criteria for Gaussian Mixture, k = 2..8: lower is better."""
+    rows = []
+    for k in K_RANGE:
+        g = GaussianMixture(n_components=k, covariance_type="full", random_state=42).fit(X)
+        rows.append({"k": k, "bic": round(g.bic(X), 1), "aic": round(g.aic(X), 1)})
+    return pd.DataFrame(rows)
+
+
+def dbscan_k_distance(X, min_samples):
+    """Sorted distance from every point to its min_samples-th neighbour; the knee suggests eps."""
+    dist, _ = NearestNeighbors(n_neighbors=min_samples).fit(X).kneighbors(X)
+    return pd.DataFrame({"rank": np.arange(1, len(X) + 1), "k_distance": np.round(np.sort(dist[:, -1]), 4)})
+
+
 def fit_predict(factory, seed, X):
     return factory(seed).fit_predict(X)
 
@@ -95,7 +145,7 @@ def stability_ari(factory, X, labels_full, runs=N_STABILITY_RUNS):
 
 def run_comparison():
     print("=" * 100)
-    print("   PARAMETER 10: CLUSTERING ALGORITHM COMPARISON (5 ALGORITHMS)")
+    print("   PARAMETER 10: CLUSTERING ALGORITHM COMPARISON (6 ALGORITHMS)")
     print("=" * 100)
 
     prof, X = load_profiles()
@@ -108,8 +158,15 @@ def run_comparison():
     k = elbow_k
     print(f"[+] Elbow point: k = {k}")
 
+    bic = gmm_bic_aic(X)
+    bic.to_csv(os.path.join(BASE_DIR, "gmm_bic_aic.csv"), index=False)
+    print(f"[+] GMM BIC minimum at k = {int(bic.loc[bic['bic'].idxmin(), 'k'])}, AIC minimum at k = {int(bic.loc[bic['aic'].idxmin(), 'k'])}")
+
     eps, ms = tune_dbscan(X)
     print(f"[+] DBSCAN tuned: eps = {eps}, min_samples = {ms}")
+    kd = dbscan_k_distance(X, ms).assign(chosen_eps=eps, min_samples=ms)
+    kd.to_csv(os.path.join(BASE_DIR, "dbscan_k_distance.csv"), index=False)
+    print(f"[+] k-distance: {(kd['k_distance'] > eps).mean() * 100:.1f}% of points are non-core at this eps (border or noise; DBSCAN keeps border points)")
 
     rows = []
     print("\n--- STEP 2: FITTING ALL ALGORITHMS ---")
@@ -146,7 +203,7 @@ def run_comparison():
     champ = res.iloc[0]
     print("-" * 100)
     print(f"\n[+] CHAMPION: {champ['algorithm']} (mean rank {champ['rank_score']:.2f}) at k = {k}")
-    print(f"[+] Saved: comparison_results.csv, k_selection.csv")
+    print(f"[+] Saved: comparison_results.csv, k_selection.csv, gmm_bic_aic.csv, dbscan_k_distance.csv")
     return res, k
 
 

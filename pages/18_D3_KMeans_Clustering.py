@@ -8,24 +8,24 @@ import plotly.graph_objects as go
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-from db_utils import apply_f1_theme, get_plotly_theme, F1_RED
+from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, TIER_COLORS, page_header
 
 apply_f1_theme()
 
-st.title("🎯 Dashboard 3 · Clustering Algorithm: K-Means (k = 3)")
-st.markdown("### Unsupervised discovery of driver performance tiers")
+page_header('Dashboard 3', 'Unsupervised learning', 'K-Means: three driver tiers',
+            'The chosen algorithm sorts every driver-season into Title Contenders, Midfield Regulars or Backmarkers, without being told what those are.', marks=5)
 
 mod = os.path.join(ROOT, "11_clustering_algorithm")
 cl = pd.read_csv(os.path.join(mod, "driver_season_clusters.csv"))
 cent = pd.read_csv(os.path.join(mod, "cluster_profiles.csv"))
-COLORS = {"Title Contenders": F1_RED, "Midfield Regulars": "#F2C811", "Backmarkers": "#8B949E"}
+COLORS = TIER_COLORS
 
 cols = st.columns(len(cent))
 for col, r in zip(cols, cent.itertuples()):
     col.metric(r.cluster_name, f"{r.size} seasons", f"avg finish P{r.avg_finish:.1f} · win {r.win_rate*100:.1f}%")
 
 st.markdown("---")
-t1, t2, t5, t3, t6, t4 = st.tabs(["🗺️ Cluster Map (PCA)", "📋 Centroid Profiles", "📅 Tiers by Era", "🔎 Driver Explorer", "🧪 Classify a Season", "📘 How K-Means Works"])
+t1, t2, t5, t3, t6, t4 = st.tabs(["Cluster Map (PCA)", "Centroid Profiles", "Tiers by Era", "Driver Explorer", "Classify a Season", "How K-Means Works"])
 
 with t1:
     seasons = st.slider("Seasons", int(cl["season"].min()), int(cl["season"].max()), (1994, 2024))

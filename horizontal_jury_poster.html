@@ -100,7 +100,7 @@
             <span class="neon-red">ApexIQ:</span> Formula 1 Data Warehouse, Race-Winner Classification &amp; Driver-Tier Clustering
           </h1>
           <p class="text-xs text-slate-300">
-            Dashboard 1: Star / Snowflake warehouse on Snowflake &bull; Dashboard 2: FP-Growth vs Apriori + cost-sensitive XGBoost &bull; Dashboard 3: 5-algorithm clustering comparison + K-Means tiers
+            Dashboard 1: Star / Snowflake warehouse on Snowflake &bull; Dashboard 2: FP-Growth vs Apriori + cost-sensitive XGBoost &bull; Dashboard 3: 6-algorithm clustering comparison + K-Means tiers
           </p>
         </div>
       </div>
@@ -331,12 +331,13 @@
           <span class="section-badge badge-purple">DASHBOARD 3</span>
           <span class="text-xs font-semibold text-slate-400">Unsupervised</span>
         </div>
-        <h2 class="text-base font-bold text-white">Dataset &amp; 5-Algorithm Clustering Comparison</h2>
+        <h2 class="text-base font-bold text-white">Dataset &amp; 6-Algorithm Clustering Comparison</h2>
         <p class="text-[11px] text-slate-300"><b>703 driver-season profiles</b> (153 drivers, ≥ 5 starts), <b>9 standardised features</b>, no label: avg grid, avg finish, finish std, win / podium / points / DNF rate, teammate-quali rate, starts.</p>
         <table class="border border-[#21262D]">
           <thead><tr><th>Algorithm</th><th>Silh ↑</th><th>DB ↓</th><th>CH ↑</th><th>ARI ↑</th></tr></thead>
           <tbody>
             <tr class="bg-purple-950/30"><td class="font-bold text-white">K-Means</td><td class="font-bold text-emerald-400">0.264</td><td>1.276</td><td class="font-bold text-emerald-400">347.5</td><td>0.945</td></tr>
+            <tr><td>K-Medoids (PAM)</td><td>0.234</td><td>1.393</td><td>329.1</td><td>0.888</td></tr>
             <tr><td>Agglomerative (Ward)</td><td>0.181</td><td>1.515</td><td>280.8</td><td>0.520</td></tr>
             <tr><td>BIRCH</td><td>0.195</td><td>1.523</td><td>298.3</td><td>0.502</td></tr>
             <tr><td>Gaussian Mixture</td><td>0.141</td><td>1.685</td><td>252.7</td><td class="font-bold text-emerald-400">0.995</td></tr>

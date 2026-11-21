@@ -7,15 +7,15 @@ import pandas as pd
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-from db_utils import apply_f1_theme
+from db_utils import apply_f1_theme, page_header
 
 apply_f1_theme()
 
 DW = os.path.join(ROOT, "00_data_warehouse")
 DB = os.path.join(ROOT, "f1_warehouse.db")
 
-st.title("🏛️ Dashboard 1 · Data Warehouse Design")
-st.markdown("### Star & Snowflake dimensional models over 8,650 race results (2004–2024) · OLAP on a live SQLite warehouse")
+page_header('Dashboard 1', 'Data warehouse', 'Warehouse design',
+            'Star and snowflake models over 8,650 race results (2004–2024), with OLAP queries running live on the warehouse.', marks=3)
 
 
 def mermaid_er_to_dot(path):
@@ -25,13 +25,13 @@ def mermaid_er_to_dot(path):
     rels = re.findall(r"^\s*(\w+)\s+\S+--\S+\s+(\w+)\s*:\s*\"?([\w\s]+)\"?", text, re.M)
     lines = ['digraph ER { rankdir=LR; bgcolor="transparent"; nodesep=0.3; ranksep=1.2;',
              'node [shape=record, style=filled, fontname="Helvetica", fontsize=11, fontcolor="white", color="#30363D"];',
-             'edge [color="#E10600", fontcolor="#C9D1D9", fontname="Helvetica", fontsize=10, arrowhead=crow, arrowtail=tee, dir=both];']
+             'edge [color="#59616C", fontcolor="#59616C", fontname="Helvetica", fontsize=10, arrowhead=crow, arrowtail=tee, dir=both];']
     for name, body in entities:
         cols = [c.split() for c in body.strip().splitlines() if c.strip()]
         shown = [f"{c[1]}{'  [' + c[2] + ']' if len(c) > 2 else ''}" for c in cols[:12]]
         if len(cols) > 12:
             shown.append(f"… +{len(cols) - 12} more")
-        fill = "#B30500" if name.startswith("FACT") else "#1F4E99"
+        fill = "#15181D" if name.startswith("FACT") else "#3B5B8A"
         fields = "".join(s + "\\l" for s in shown)  # \l = left-justified line break in a Graphviz record
         lines.append(f'{name} [fillcolor="{fill}", label="{{{name}|{fields}}}"];')
     for a, b, label in rels:
@@ -69,7 +69,7 @@ c3.metric("Lap-Time Fact Rows", f"{int(counts.loc[counts['table'] == 'FACT_LAP_T
 c4.metric("OLAP Queries", len(olap_queries()), "Roll-up · Drill-down · Slice · Dice · Pivot")
 
 st.markdown("---")
-t1, t2, t3, t4, t5 = st.tabs(["⭐ Star Schema", "❄️ Snowflake Schema", "⚖️ Star vs. Snowflake", "🧊 Live OLAP Queries", "🗄️ Tables & ETL"])
+t1, t2, t3, t4, t5 = st.tabs(["Star Schema", "Snowflake Schema", "Star vs. Snowflake", "Live OLAP Queries", "Tables & ETL"])
 
 with t1:
     st.markdown("**Fact constellation (galaxy) schema:** two fact tables share conformed dimensions. "

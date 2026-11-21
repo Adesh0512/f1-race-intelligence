@@ -7,13 +7,13 @@ import plotly.express as px
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "09_unsupervised_dataset"))
-from db_utils import apply_f1_theme, get_plotly_theme
+from db_utils import apply_f1_theme, get_plotly_theme, page_header
 from build_unsupervised_dataset import CLUSTER_FEATURE_COLS, MIN_STARTS
 
 apply_f1_theme()
 
-st.title("🗂️ Dashboard 3 · Unsupervised Dataset: Driver-Season Performance Profiles")
-st.markdown("### 1 row per driver per season (1994–2024) — no class label, built for clustering")
+page_header('Dashboard 3', 'Unsupervised learning', 'Driver-season dataset',
+            '703 unlabelled driver-season profiles from 1994–2024, built for clustering. There is no target column.', marks=5)
 
 prof = pd.read_csv(os.path.join(ROOT, "09_unsupervised_dataset", "driver_season_profiles.csv"))
 
@@ -24,7 +24,7 @@ c3.metric("Seasons", f"{prof['season'].min()}–{prof['season'].max()}")
 c4.metric("Clustering Features", len(CLUSTER_FEATURE_COLS), "No target column")
 
 st.markdown("---")
-t1, t2, t3 = st.tabs(["📋 Data Dictionary & Sample", "📈 Feature Distributions", "🔗 Feature Correlation"])
+t1, t2, t3 = st.tabs(["Data Dictionary & Sample", "Feature Distributions", "Feature Correlation"])
 
 with t1:
     st.markdown(f"""
