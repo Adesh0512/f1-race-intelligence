@@ -130,6 +130,45 @@ def upcoming_calendar():
     return cal
 
 
+# ---------------------------------------------------------------- scenarios (what the dashboard filters change)
+def move_to_grid(lineup, driver_id, slot):
+    """Puts a driver on a grid slot; whoever held it takes his old slot, so the grid stays a valid order."""
+    out = lineup.copy()
+    me = out.index[out["driver_id"] == driver_id][0]
+    old = out.at[me, "grid_position"]
+    out.loc[out["grid_position"] == slot, "grid_position"] = old
+    out.at[me, "grid_position"] = slot
+    return out
+
+
+def move_to_team(lineup, driver_id, constructor_id, constructor_name):
+    out = lineup.copy()
+    out.loc[out["driver_id"] == driver_id, ["constructor_id", "constructor_name"]] = [constructor_id, constructor_name]
+    return out
+
+
+def forecast(history, dob, model, lineup, circuit_id, race_date, overrides=None):
+    """
+    Win probability for every driver in one race.
+    overrides: {driver_id: {"driver_rolling_finish_5": x, "ahead_of_teammate_grid": 0/1}} replace a built feature;
+    the derived grid_vs_form_gap is recomputed so the inputs stay consistent.
+    """
+    f = race_features(history, dob, lineup, circuit_id, race_date)
+    for driver_id, values in (overrides or {}).items():
+        for feature, value in values.items():
+            f.loc[f["driver_id"] == driver_id, feature] = value
+    f["grid_vs_form_gap"] = f["grid_position"] - f["driver_rolling_finish_5"]
+    f["win_probability"] = win_probability(model, f)
+    f["rank"] = f["win_probability"].rank(ascending=False, method="first").astype(int)
+    return f.sort_values("rank").reset_index(drop=True)
+
+
+def what_if_venues(history):
+    """Every circuit of the latest season, so any track can be tried as a hypothetical next race."""
+    last = history[history["season"] == history["season"].max()].drop_duplicates("circuit_id").sort_values("round")
+    return last[["circuit_id", "circuit_name", "race_name"]].reset_index(drop=True)
+
+
 def real_world_test(store_only, recent, dob):
     """The champion as validated (trained on 1994-2024 only) predicts every race after 2024."""
     model = full_history_model(store_only)

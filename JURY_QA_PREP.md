@@ -233,4 +233,4 @@ We added each driver's previous-season tier (K-Means fitted on 1994–2021 only)
 
 ## Report & reproducibility
 **Q: Can you reproduce a number live?**
-Run `.venv/bin/python run_all_modules.py` (about 20 s), then refresh the dashboard. There are 64 automated tests: `.venv/bin/python -m unittest discover -s tests`.
+Run `.venv/bin/python run_all_modules.py` (about 20 s), then refresh the dashboard. There are 70 automated tests: `.venv/bin/python -m unittest discover -s tests`.
