@@ -1,5 +1,6 @@
 import os
 import sys
+from datetime import date
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -24,6 +25,12 @@ st.markdown(f"""<style>
 .podium .team {{ color: {GRAPHITE}; font-size: .85rem; }}
 .podium .pct {{ font-family: {DISPLAY_FONT}; font-size: 1.9rem; font-weight: 700; color: {INK}; }}
 .podium .p1 .pct {{ color: {PURPLE}; }}
+.race-banner {{ display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: flex-end;
+  border-left: 4px solid {PURPLE}; padding: 6px 0 6px 16px; margin: 18px 0 14px 0; }}
+.race-banner .lbl {{ color: {GRAPHITE}; font-size: .85rem; }}
+.race-banner .big {{ font-family: {DISPLAY_FONT}; color: {INK}; font-size: 2rem; font-weight: 700; line-height: 1.1; }}
+.race-banner .sub {{ color: {INK}; font-size: .95rem; }}
+.race-banner .right {{ text-align: right; }}
 </style>""", unsafe_allow_html=True)
 
 
@@ -55,85 +62,120 @@ def forecaster():
 
 
 history, dob, model, projection = forecaster()
-last = history.iloc[-1]
+last = history[history["race_date"] == history["race_date"].max()]
+last_win = last[last["target_is_win"] == 1].iloc[0]
+cal = fr.upcoming_calendar()
 page_header('Dashboard 2', 'Supervised learning', 'Race predictor',
-            f"Set the race and the scenario; the champion model recalculates every driver's win chance instantly. "
-            f"Data runs to the {int(last['season'])} {last['race_name']}.")
+            f"Who wins the next Grand Prix? Predicted from every race up to the {int(last_win['season'])} "
+            f"{last_win['race_name']} ({pd.Timestamp(last_win['race_date']):%d %b}). Change any parameter and the forecast updates instantly.")
 
-live, record, past = st.tabs(["Live forecast", "Track record", "Check a past race"])
+live, record, past = st.tabs(["Next race forecast", "Track record", "Check a past race"])
 
 with live:
-    cal, venues = fr.upcoming_calendar(), fr.what_if_venues(history)
-    options = [(f"{r.race_date:%d %b %Y} · {r.season} {r.race_name}", r.circuit_id, r.race_date) for r in cal.itertuples()]
-    options += [(f"What-if: next race at {r.race_name.replace(' Grand Prix', '')}", r.circuit_id, cal["race_date"].min())
-                for r in venues.itertuples() if r.circuit_id not in set(cal["circuit_id"])]
+    # races to forecast: the rest of the calendar, then "what if the next race were at another 2026 track"
+    nxt = cal.iloc[0]
+    options = [dict(label=f"{r.race_name}, {r.race_date:%d %b}", race=r.race_name,
+                    track=r.circuit_name, circuit_id=r.circuit_id, date=r.race_date) for r in cal.itertuples()]
+    options += [dict(label=f"What-if: next race at {r.circuit_name}", race=f"What-if at {r.circuit_name}", track=r.circuit_name,
+                     circuit_id=r.circuit_id, date=nxt["race_date"])
+                for r in fr.what_if_venues(history).itertuples() if r.circuit_id not in set(cal["circuit_id"])]
+    labels = [o["label"] for o in options]
     names = dict(zip(projection["driver_id"], projection["driver_name"]))
     by_name = {n: d for d, n in names.items()}  # widgets hold names; the engine works on driver ids
-    labels = [o[0] for o in options]
     teams = projection.drop_duplicates("constructor_id").set_index("constructor_name")["constructor_id"].sort_index()
     v = st.session_state.get("rp_reset", 0)
 
-    controls, results = st.columns([1, 2.3], gap="large")
-    with controls:
-        with st.container(border=True):
-            st.markdown("**Race**")
-            pick = st.selectbox("Grand Prix", labels, key=f"rp_race_{v}")
-            _, circuit_id, race_date = options[labels.index(pick)]
-            pole = by_name[st.selectbox("Pole sitter", list(projection["driver_name"]), key=f"rp_pole_{v}",
-                                        help="Qualifying has not happened. The default grid follows each driver's average start over his last 5 races.")]
-            st.markdown("**Driver what-if**")
-            drivers = list(projection["driver_name"])
-            default = drivers.index("Lewis Hamilton") if "Lewis Hamilton" in drivers else min(5, len(drivers) - 1)
-            focus = by_name[st.selectbox("Driver", drivers, index=default, key=f"rp_driver_{v}")]
-            lineup = fr.move_to_grid(projection, pole, 1)
-            base_feats = fr.race_features(history, dob, lineup, circuit_id, race_date).set_index("driver_id")
-            mine = base_feats.loc[focus]
-            k = f"{v}_{focus}_{pole}"
-            team = st.selectbox("Team", list(teams.index), index=list(teams.index).index(mine["constructor_name"]), key=f"rp_team_{k}")
-            slot = st.slider("Grid slot", 1, len(lineup), int(mine["grid_position"]), key=f"rp_grid_{k}")
-            form = st.slider("Average finish, last 5 races", 1.0, float(len(lineup)), float(round(mine["driver_rolling_finish_5"] * 2) / 2),
-                             0.5, key=f"rp_form_{k}", help="Lower is better. Default: his real last 5 races.")
-            beat = st.toggle("Out-qualified his teammate", bool(mine["ahead_of_teammate_grid"]), key=f"rp_beat_{k}")
-            if st.button("Reset all", width="stretch"):
-                st.session_state["rp_reset"] = v + 1
-                st.rerun()
+    banner_slot = st.empty()  # filled once the race is picked, but shown above the controls
+    with st.container(border=True):
+        a, b = st.columns(2)
+        o = options[labels.index(a.selectbox("Grand Prix to predict", labels, key=f"rp_race_{v}"))]
+        pole = by_name[b.selectbox("Pole position", list(projection["driver_name"]), key=f"rp_pole_{v}",
+                                   help="Qualifying is on Saturday. Until then the grid follows each driver's average start over his last 5 races.")]
+        lineup = fr.move_to_grid(projection, pole, 1)
+        base_feats = fr.race_features(history, dob, lineup, o["circuit_id"], o["date"])
+        favourite = fr.forecast(history, dob, model, lineup, o["circuit_id"], o["date"]).iloc[0]["driver_name"]
+        st.markdown("**Adjust one driver's parameters**")
+        c1, c2, c3 = st.columns(3)
+        drivers = list(projection["driver_name"])
+        focus = by_name[c1.selectbox("Driver", drivers, index=drivers.index(favourite), key=f"rp_driver_{v}")]
+        mine = base_feats.set_index("driver_id").loc[focus]
+        k = f"{v}_{focus}_{pole}_{o['circuit_id']}"
+        team = c2.selectbox("Team", list(teams.index), index=list(teams.index).index(mine["constructor_name"]), key=f"rp_team_{k}")
+        slot = c3.slider("Starting position", 1, len(lineup), int(mine["grid_position"]), key=f"rp_grid_{k}")
+        c4, c5, c6 = st.columns(3, vertical_alignment="center")
+        form = c4.slider("Avg finish, last 5 races", 1.0, float(len(lineup)), float(round(mine["driver_rolling_finish_5"], 1)),
+                         0.1, key=f"rp_form_{k}", help="Lower is better. Starts at his real last 5 races.")
+        beat = c5.toggle("Beat teammate in qualifying", bool(mine["ahead_of_teammate_grid"]), key=f"rp_beat_{k}")
+        if c6.button("Reset all parameters", width="stretch"):
+            st.session_state["rp_reset"] = v + 1
+            st.rerun()
 
     scenario = fr.move_to_team(fr.move_to_grid(lineup, focus, slot), focus, teams[team], team)
-    overrides = {focus: {"driver_rolling_finish_5": form, "ahead_of_teammate_grid": int(beat)}}
-    result = fr.forecast(history, dob, model, scenario, circuit_id, race_date, overrides)
-    baseline = fr.forecast(history, dob, model, projection, circuit_id, race_date).set_index("driver_id")
+    result = fr.forecast(history, dob, model, scenario, o["circuit_id"], o["date"],
+                         {focus: {"driver_rolling_finish_5": form, "ahead_of_teammate_grid": int(beat)}})
+    baseline = fr.forecast(history, dob, model, projection, o["circuit_id"], o["date"]).set_index("driver_id")["win_probability"]
+    result["change"] = result["win_probability"] - result["driver_id"].map(baseline)
 
-    with results:
-        top = result.head(3)
-        step = lambda r, cls, pos: (f'<div class="step {cls}"><div class="pos">{pos}</div><div class="name">{r.driver_name}</div>'
-                                    f'<div class="team">{r.constructor_name} · starts P{int(r.grid_position)}</div>'
-                                    f'<div class="pct">{r.win_probability:.1f}%</div></div>')
-        st.markdown('<div class="podium">' + step(top.iloc[1], "p2", "2nd favourite") + step(top.iloc[0], "p1", "Predicted winner")
-                    + step(top.iloc[2], "p3", "3rd favourite") + "</div>", unsafe_allow_html=True)
-        me = result.set_index("driver_id").loc[focus]
-        a, b, c = st.columns(3)
-        a.metric(f"{names[focus]}: win chance", f"{me['win_probability']:.1f}%",
-                 f"{me['win_probability'] - baseline.at[focus, 'win_probability']:+.1f} pts vs. projection")
-        b.metric("His predicted rank", f"P{int(me['rank'])}", f"of {len(result)} drivers", delta_color="off")
-        c.metric("Favourite's margin", f"{top['win_probability'].iat[0] - top['win_probability'].iat[1]:.1f} pts",
-                 "over the 2nd favourite", delta_color="off")
+
+    days = (pd.Timestamp(o["date"]).date() - date.today()).days
+    with banner_slot:
+        st.markdown(f"""<div class="race-banner">
+            <div><div class="lbl">{"Next race" if o["race"] == nxt["race_name"] else "Scenario" if o["race"].startswith("What-if") else "Upcoming race"}</div>
+                 <div class="big">{o["race"]}</div>
+                 <div class="sub">{o["track"]} · {pd.Timestamp(o["date"]):%A %d %B %Y}{f" · in {days} days" if days > 0 else ""}</div></div>
+            <div class="right"><div class="lbl">Last race</div>
+                 <div class="sub">{last_win["race_name"]}, {pd.Timestamp(last_win["race_date"]):%d %b}: won by <b>{last_win["driver_name"]}</b></div></div>
+            </div>""", unsafe_allow_html=True)
+    top = result.head(3)
+    step = lambda r, cls, pos: (f'<div class="step {cls}"><div class="pos">{pos}</div><div class="name">{r.driver_name}</div>'
+                                f'<div class="team">{r.constructor_name} · starts P{int(r.grid_position)}</div>'
+                                f'<div class="pct">{r.win_probability:.1f}%</div><div class="team">chance to win</div></div>')
+    st.markdown('<div class="podium">' + step(top.iloc[1], "p2", "2nd favourite") + step(top.iloc[0], "p1", "Predicted winner")
+                + step(top.iloc[2], "p3", "3rd favourite") + "</div>", unsafe_allow_html=True)
+
+    def why(r):
+        track = (f"averages P{r.circuit_avg_finish:.1f} at this track ({int(r.circuit_experience)} start{'s' * (r.circuit_experience != 1)})"
+                 if r.circuit_experience else "has never raced at this track")
+        return (f"**{r.driver_name}** starts P{int(r.grid_position)}, averaged P{r.driver_rolling_finish_5:.1f} over his "
+                f"last 5 races, {r.constructor_name} scored {r.constructor_rolling_points_10:.1f} points per race over its last 10, "
+                f"and he {track}.")
+
+    left, right = st.columns([1.15, 1], gap="large")
+    with left:
         chart = result.head(10).iloc[::-1]
-        colour = np.where(chart["driver_id"] == focus, "Your driver", np.where(chart["rank"] == 1, "Predicted winner", "Other"))
+        colour = np.where(chart["rank"] == 1, "Predicted winner", np.where(chart["driver_id"] == focus, "Driver you adjusted", "Other drivers"))
         fig = px.bar(chart, x="win_probability", y="driver_name", orientation="h", text="win_probability", color=colour,
-                     color_discrete_map={"Predicted winner": PURPLE, "Your driver": GREEN, "Other": "#B8BEC7"},
-                     title="Win probability, top 10 (updates as you change the filters)")
+                     color_discrete_map={"Predicted winner": PURPLE, "Driver you adjusted": GREEN, "Other drivers": "#B8BEC7"},
+                     title="Chance to win, top 10")
         fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside", cliponaxis=False).update_layout(
-            xaxis_title="Win probability %", yaxis_title=None, legend_title_text="", height=420,
-            xaxis_range=[0, chart["win_probability"].max() * 1.18])
+            xaxis_title="Chance to win (%)", yaxis_title=None, showlegend=False, height=430,
+            xaxis_range=[0, chart["win_probability"].max() * 1.2])
         fig.update_yaxes(categoryorder="array", categoryarray=chart["driver_name"].tolist())  # keep probability order across colours
         st.plotly_chart(get_plotly_theme(fig), width="stretch")
-        with st.expander("All drivers: inputs and prediction"):
-            st.dataframe(result[["rank", "driver_name", "constructor_name", "grid_position", "win_probability", "driver_rolling_finish_5",
-                                 "constructor_rolling_points_10", "circuit_experience", "career_win_rate"]].round(2),
-                         width="stretch", hide_index=True, height=420)
-    st.caption("How it works: history = f1.zip (1994–2024) + results since from the public Jolpica-F1 API. Each driver's 16 inputs are "
-               "rebuilt from his record up to the race (form, team form, circuit record, career, age), the champion cost-sensitive "
-               "XGBoost (retrained on all races) scores them, and a race softmax makes the race add up to 100%.")
+        st.caption("Purple: predicted winner. Green: the driver whose parameters you adjusted.")
+    with right:
+        st.markdown("**Why the model ranks them this way**")
+        for r in top.itertuples():
+            st.markdown(why(r))
+        me = result.set_index("driver_id").loc[focus]
+        if int(me["rank"]) > 3:
+            st.markdown(why(next(result[result["driver_id"] == focus].itertuples())))
+        st.caption(f"{names[focus]}: {me['win_probability']:.1f}% chance, predicted P{int(me['rank'])}"
+                   + (f" ({me['change']:+.1f} points vs. the default forecast)." if abs(me["change"]) >= 0.05 else "."))
+
+    st.markdown("**Full predicted order and the parameters behind it**")
+    table = result.assign(career_win_rate=result["career_win_rate"] * 100)[
+        ["rank", "driver_name", "constructor_name", "grid_position", "win_probability", "change", "driver_rolling_finish_5",
+         "constructor_rolling_points_10", "circuit_experience", "career_win_rate"]].round(1)
+    table.columns = ["Predicted", "Driver", "Team", "Starts", "Win chance %", "Change vs default", "Avg finish, last 5",
+                     "Team points per race, last 10", "Starts at this track", "Career win %"]
+    if table["Change vs default"].abs().max() < 0.05:  # nothing adjusted yet
+        table = table.drop(columns="Change vs default")
+    st.dataframe(table, width="stretch", hide_index=True)
+    st.caption("How it works: the history is f1.zip (1994–2024) plus every race since, from the public Jolpica-F1 API. For each driver the "
+               f"model rebuilds {len(FEATURES)} parameters from his record before the race (starting position, recent form, team form, "
+               "record at this track, career, age, teammate battle). The champion XGBoost classifier, retrained on all races, scores them "
+               "and a race softmax makes the chances add up to 100%.")
 
 with record:
     test = pd.read_csv(os.path.join(ROOT, "06_classification_algorithm", "real_world_test.csv"))
