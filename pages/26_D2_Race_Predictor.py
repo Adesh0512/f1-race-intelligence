@@ -17,7 +17,7 @@ import future_race as fr
 apply_f1_theme()
 
 page_header('Dashboard 2', 'Supervised learning', 'Race predictor',
-            "Forecast an upcoming 2025 Grand Prix, or check the model on a past race it never saw.")
+            "Forecast the next Grands Prix from the latest results, or check the model on a past race it never saw.")
 
 
 @st.cache_resource
@@ -40,20 +40,24 @@ def predict(model, rows):
 @st.cache_resource
 def forecaster():
     history, dob = fr.load_history()
-    return history, dob, fr.full_history_model(history), fr.latest_lineup(history), fr.calendar_2025(history)
+    history = fr.add_recent_features(history, dob)
+    return history, dob, fr.full_history_model(history), fr.latest_lineup(history), fr.upcoming_calendar()
 
 
-mode = st.radio("Mode", ["Upcoming race: 2025 forecast", "Past race: check against the result"], horizontal=True,
+mode = st.radio("Mode", ["Next race: forecast", "Past race: check against the result"], horizontal=True,
                 label_visibility="collapsed")
 
-if mode.startswith("Upcoming"):
+if mode.startswith("Next"):
     history, dob, model26, lineup, cal = forecaster()
-    gp = st.selectbox("2025 Grand Prix", range(len(cal)), format_func=lambda i: f"Round {cal['round'][i]}: {cal['race_name'][i]}")
+    last = history.iloc[-1]
+    gp = st.selectbox("Upcoming Grand Prix", range(len(cal)),
+                      format_func=lambda i: f"{cal['season'][i]} {cal['race_name'][i]} ({cal['race_date'][i]:%d %b %Y})")
     race = cal.iloc[gp]
-    st.caption(f"The data ends after the 2024 Abu Dhabi GP, so this race has not happened in the data. The model is the champion "
-               f"retrained on every season 1994–2024. Each driver's inputs are rebuilt from his history up to the end of 2024 "
-               f"(form, team form, record at {race['circuit_name']}, career). Qualifying is unknown, so the grid is projected "
-               f"from each driver's average start over his last 5 races; edit it, or move a driver to another team.")
+    st.caption(f"History runs to the latest race, the {int(last['season'])} {last['race_name']}: 1994–2024 from f1.zip, results since "
+               f"then from the public Jolpica-F1 API (the continuation of the Ergast database). The model is the champion retrained "
+               f"on all of it. Each driver's inputs are rebuilt from his history (form, team form, record at {race['circuit_name']}, "
+               f"career). Qualifying has not happened, so the grid is projected from each driver's average start over his last 5 "
+               f"races; edit it, or move a driver to another team.")
     teams = lineup.drop_duplicates("constructor_id").set_index("constructor_name")["constructor_id"]
     base = lineup.assign(grid_position=fr.projected_grid(history, lineup)).sort_values("grid_position")
     shown = base[["driver_name", "constructor_name", "grid_position"]].rename(
@@ -88,9 +92,17 @@ if mode.startswith("Upcoming"):
     fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside", cliponaxis=False).update_layout(yaxis_title=None, legend_title_text="")
     st.plotly_chart(get_plotly_theme(fig), width="stretch")
     st.dataframe(out, width="stretch", hide_index=True)
-    st.info("How far to trust it: on 68 races it had never seen (2022–2024) the same model picked the winner 40 times. "
-            "Driver moves for 2025 (for example Hamilton to Ferrari) and new rookies are not in the 1994–2024 data; "
-            "edit the Team column to test a line-up change.")
+    test = pd.read_csv(os.path.join(ROOT, "06_classification_algorithm", "real_world_test.csv"))
+    st.markdown("#### How far to trust it: a real-world test")
+    a, b, c = st.columns(3)
+    a.metric("Races since 2024", len(test), "never seen in training", delta_color="off")
+    b.metric("Model picked the winner", f"{test['model_correct'].sum()} / {len(test)}", f"{test['model_correct'].mean():.0%}", delta_color="off")
+    c.metric("Pole-sitter won", f"{test['pole_correct'].sum()} / {len(test)}", f"{test['pole_correct'].mean():.0%}", delta_color="off")
+    st.caption("The champion trained on 1994–2024 only, then asked to call every race of 2025–26 before it happened. "
+               "In these seasons qualifying decided most races, and the 2026 rule change made older form a weaker guide, "
+               "so starting from pole was as strong a signal as the model's full set of inputs.")
+    with st.expander("Every race since 2024: prediction vs. result"):
+        st.dataframe(test.sort_values(["season", "round"], ascending=False), width="stretch", hide_index=True, height=360)
     st.stop()
 
 model, holdout = champion()

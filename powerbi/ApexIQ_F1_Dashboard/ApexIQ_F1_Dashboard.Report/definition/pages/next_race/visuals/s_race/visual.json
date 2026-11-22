@@ -1,97 +1,70 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
-  "name": "prob",
+  "name": "s_race",
   "position": {
-    "x": 20,
-    "y": 195,
+    "x": 1020,
+    "y": 80,
     "z": 1000,
-    "height": 505,
-    "width": 490,
+    "height": 300,
+    "width": 240,
     "tabOrder": 0
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "slicer",
     "query": {
       "queryState": {
-        "Category": {
+        "Values": {
           "projections": [
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Forecast_2025"
+                      "Entity": "Forecast_Upcoming"
                     }
                   },
-                  "Property": "driver_name"
+                  "Property": "race"
                 }
               },
-              "queryRef": "Forecast_2025.driver_name",
-              "nativeQueryRef": "driver_name"
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
-            {
-              "field": {
-                "Aggregation": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Forecast_2025"
-                        }
-                      },
-                      "Property": "win_probability"
-                    }
-                  },
-                  "Function": 1
-                }
-              },
-              "queryRef": "Avg(Forecast_2025.win_probability)",
-              "nativeQueryRef": "Avg of win_probability"
+              "queryRef": "Forecast_Upcoming.race",
+              "nativeQueryRef": "race"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Aggregation": {
-                "Expression": {
-                  "Column": {
-                    "Expression": {
-                      "SourceRef": {
-                        "Entity": "Forecast_2025"
-                      }
-                    },
-                    "Property": "win_probability"
-                  }
-                },
-                "Function": 1
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "drillFilterOtherVisuals": true,
     "objects": {
-      "labels": [
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "header": [
         {
           "properties": {
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
-            },
-            "color": {
+            }
+          }
+        }
+      ],
+      "items": [
+        {
+          "properties": {
+            "fontColor": {
               "solid": {
                 "color": {
                   "expr": {
@@ -102,10 +75,14 @@
                 }
               }
             },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9D"
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#131823'"
+                    }
+                  }
                 }
               }
             }
@@ -127,7 +104,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Win probability (%), selected race'"
+                  "Value": "'Upcoming Grand Prix (pick one)'"
                 }
               }
             },

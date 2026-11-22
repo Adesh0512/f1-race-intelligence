@@ -43,7 +43,7 @@ Every number below comes from the module output files. Rerun them with `.venv/bi
 Yes: account UKFIGDV-WD45232 (AWS ap-southeast-7). `deploy_to_snowflake.py` builds everything from `.env` credentials; `deploy_streamlit_app.py` uploads this dashboard into Snowflake.
 
 **Q: What exactly is in Snowflake?**
-- Database `F1_PREDICTION_DB` with schemas RAW → CLEAN → DW → ML → ANALYTICS: 28 tables and views, 41 objects defined in the master SQL.
+- Database `F1_PREDICTION_DB` with schemas RAW → CLEAN → DW → ML → ANALYTICS: 29 tables and views, 42 objects defined in the master SQL.
 - Row counts match the local files exactly: 8,650 results, 412 races, 1,393 rules, 414 itemsets, 7 models, 703 clustered driver-seasons.
 - Warehouse `F1_WH` is X-Small and suspends after 60 seconds idle.
 
@@ -116,7 +116,7 @@ Warehouse Design page → Live OLAP Queries tab. Queries 1–5 run live against 
 5. ELT into CLEAN.
 6. Clone, Time Travel, dynamic table, stream + task, secure view and a Cortex procedure.
 
-Step 6b builds the DW star and snowflake schemas and loads the clustering output. In total, 41 objects across 5 schemas.
+Step 6b builds the DW star and snowflake schemas and loads the clustering output. In total, 42 objects across 5 schemas.
 
 **Q: Zero-copy clone vs. Time Travel?**
 A clone creates a new table that shares the same micro-partitions, with no data copied (used for dev/test). Time Travel queries a table as it was in the past (`AT(OFFSET => -60)`), for recovery and auditing.

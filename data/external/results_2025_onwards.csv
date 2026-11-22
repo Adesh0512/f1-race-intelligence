@@ -1,0 +1,942 @@
+race_id,season,round,circuit_id,circuit_name,race_name,race_date,driver_id,driver_name,driver_dob,constructor_id,constructor_name,grid_position,finish_position,target_finish_position,target_is_win,target_is_podium,target_is_dnf,race_points,status
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,846,Lando Norris,1999-11-13,1,McLaren,1,1,1,1,1,0,25.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,830,Max Verstappen,1997-09-30,9,Red Bull,3,2,2,0,1,0,18.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,847,George Russell,1998-02-15,131,Mercedes,4,3,3,0,1,0,15.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,16,4,4,0,0,0,12.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,848,Alexander Albon,1996-03-23,3,Williams,6,5,5,0,0,0,10.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,840,Lance Stroll,1998-10-29,117,Aston Martin,13,6,6,0,0,0,8.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,807,Nico Hülkenberg,1987-08-19,15,Sauber,17,7,7,0,0,0,6.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,844,Charles Leclerc,1997-10-16,6,Ferrari,7,8,8,0,0,0,4.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,857,Oscar Piastri,2001-04-06,1,McLaren,2,9,9,0,0,0,2.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,1,Lewis Hamilton,1985-01-07,6,Ferrari,8,10,10,0,0,0,1.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,9,11,11,0,0,0,0.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,852,Yuki Tsunoda,2000-05-11,215,RB F1 Team,5,12,12,0,0,0,0.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,19,13,13,0,0,0,0.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,20,14,14,0,0,0,0.0,Finished
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,859,Liam Lawson,2002-02-11,9,Red Bull,18,15,15,0,0,1,0.0,Retired
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,15,16,16,0,0,1,0.0,Retired
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,4,Fernando Alonso,1981-07-29,117,Aston Martin,12,17,17,0,0,1,0.0,Retired
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,832,Carlos Sainz,1994-09-01,3,Williams,10,18,18,0,0,1,0.0,Retired
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,862,Jack Doohan,2003-01-20,214,Alpine F1 Team,14,19,19,0,0,1,0.0,Retired
+11501,2025,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2025-03-16,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,11,20,20,0,0,1,0.0,Retired
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,857,Oscar Piastri,2001-04-06,1,McLaren,1,1,1,1,1,0,25.0,Finished
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,846,Lando Norris,1999-11-13,1,McLaren,3,2,2,0,1,0,18.0,Finished
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,847,George Russell,1998-02-15,131,Mercedes,2,3,3,0,1,0,15.0,Finished
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,830,Max Verstappen,1997-09-30,9,Red Bull,4,4,4,0,0,0,12.0,Finished
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,11,5,5,0,0,0,10.0,Finished
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,8,6,6,0,0,0,8.0,Finished
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,848,Alexander Albon,1996-03-23,3,Williams,10,7,7,0,0,0,6.0,Finished
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,17,8,8,0,0,0,4.0,Finished
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,840,Lance Stroll,1998-10-29,117,Aston Martin,14,9,9,0,0,0,2.0,Finished
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,832,Carlos Sainz,1994-09-01,3,Williams,15,10,10,0,0,0,1.0,Finished
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,7,11,11,0,0,0,0.0,Finished
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,859,Liam Lawson,2002-02-11,9,Red Bull,20,12,12,0,0,0,0.0,Finished
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,862,Jack Doohan,2003-01-20,214,Alpine F1 Team,18,13,13,0,0,0,0.0,Finished
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,19,14,14,0,0,0,0.0,Lapped
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,807,Nico Hülkenberg,1987-08-19,15,Sauber,12,15,15,0,0,0,0.0,Lapped
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,852,Yuki Tsunoda,2000-05-11,215,RB F1 Team,9,16,16,0,0,0,0.0,Lapped
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,4,Fernando Alonso,1981-07-29,117,Aston Martin,13,17,17,0,0,1,0.0,Retired
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,844,Charles Leclerc,1997-10-16,6,Ferrari,6,18,18,0,0,1,0.0,Disqualified
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,1,Lewis Hamilton,1985-01-07,6,Ferrari,5,19,19,0,0,1,0.0,Disqualified
+11502,2025,2,17,Shanghai International Circuit,Chinese Grand Prix,2025-03-23,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,16,20,20,0,0,1,0.0,Disqualified
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,830,Max Verstappen,1997-09-30,9,Red Bull,1,1,1,1,1,0,25.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,846,Lando Norris,1999-11-13,1,McLaren,2,2,2,0,1,0,18.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,857,Oscar Piastri,2001-04-06,1,McLaren,3,3,3,0,1,0,15.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,844,Charles Leclerc,1997-10-16,6,Ferrari,4,4,4,0,0,0,12.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,847,George Russell,1998-02-15,131,Mercedes,5,5,5,0,0,0,10.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,6,6,6,0,0,0,8.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,1,Lewis Hamilton,1985-01-07,6,Ferrari,8,7,7,0,0,0,6.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,7,8,8,0,0,0,4.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,848,Alexander Albon,1996-03-23,3,Williams,9,9,9,0,0,0,2.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,10,10,10,0,0,0,1.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,4,Fernando Alonso,1981-07-29,117,Aston Martin,12,11,11,0,0,0,0.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,852,Yuki Tsunoda,2000-05-11,9,Red Bull,14,12,12,0,0,0,0.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,11,13,13,0,0,0,0.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,832,Carlos Sainz,1994-09-01,3,Williams,15,14,14,0,0,0,0.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,862,Jack Doohan,2003-01-20,214,Alpine F1 Team,19,15,15,0,0,0,0.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,807,Nico Hülkenberg,1987-08-19,15,Sauber,16,16,16,0,0,0,0.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,859,Liam Lawson,2002-02-11,215,RB F1 Team,13,17,17,0,0,0,0.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,18,18,18,0,0,0,0.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,17,19,19,0,0,0,0.0,Finished
+11503,2025,3,22,Suzuka Circuit,Japanese Grand Prix,2025-04-06,840,Lance Stroll,1998-10-29,117,Aston Martin,20,20,20,0,0,0,0.0,Lapped
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,857,Oscar Piastri,2001-04-06,1,McLaren,1,1,1,1,1,0,25.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,847,George Russell,1998-02-15,131,Mercedes,3,2,2,0,1,0,18.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,846,Lando Norris,1999-11-13,1,McLaren,6,3,3,0,1,0,15.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,844,Charles Leclerc,1997-10-16,6,Ferrari,2,4,4,0,0,0,12.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,1,Lewis Hamilton,1985-01-07,6,Ferrari,9,5,5,0,0,0,10.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,830,Max Verstappen,1997-09-30,9,Red Bull,7,6,6,0,0,0,8.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,4,7,7,0,0,0,6.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,14,8,8,0,0,0,4.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,852,Yuki Tsunoda,2000-05-11,9,Red Bull,10,9,9,0,0,0,2.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,20,10,10,0,0,0,1.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,5,11,11,0,0,0,0.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,848,Alexander Albon,1996-03-23,3,Williams,15,12,12,0,0,0,0.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,12,13,13,0,0,0,0.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,862,Jack Doohan,2003-01-20,214,Alpine F1 Team,11,14,14,0,0,0,0.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,4,Fernando Alonso,1981-07-29,117,Aston Martin,13,15,15,0,0,0,0.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,859,Liam Lawson,2002-02-11,215,RB F1 Team,17,16,16,0,0,0,0.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,840,Lance Stroll,1998-10-29,117,Aston Martin,19,17,17,0,0,0,0.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,18,18,18,0,0,0,0.0,Finished
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,832,Carlos Sainz,1994-09-01,3,Williams,8,19,19,0,0,1,0.0,Retired
+11504,2025,4,3,Bahrain International Circuit,Bahrain Grand Prix,2025-04-13,807,Nico Hülkenberg,1987-08-19,15,Sauber,16,20,20,0,0,1,0.0,Disqualified
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,857,Oscar Piastri,2001-04-06,1,McLaren,2,1,1,1,1,0,25.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,830,Max Verstappen,1997-09-30,9,Red Bull,1,2,2,0,1,0,18.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,844,Charles Leclerc,1997-10-16,6,Ferrari,4,3,3,0,1,0,15.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,846,Lando Norris,1999-11-13,1,McLaren,10,4,4,0,0,0,12.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,847,George Russell,1998-02-15,131,Mercedes,3,5,5,0,0,0,10.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,5,6,6,0,0,0,8.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,1,Lewis Hamilton,1985-01-07,6,Ferrari,7,7,7,0,0,0,6.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,832,Carlos Sainz,1994-09-01,3,Williams,6,8,8,0,0,0,4.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,848,Alexander Albon,1996-03-23,3,Williams,11,9,9,0,0,0,2.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,14,10,10,0,0,0,1.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,4,Fernando Alonso,1981-07-29,117,Aston Martin,13,11,11,0,0,0,0.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,859,Liam Lawson,2002-02-11,215,RB F1 Team,12,12,12,0,0,0,0.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,15,13,13,0,0,0,0.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,19,14,14,0,0,0,0.0,Finished
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,807,Nico Hülkenberg,1987-08-19,15,Sauber,18,15,15,0,0,0,0.0,Lapped
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,840,Lance Stroll,1998-10-29,117,Aston Martin,16,16,16,0,0,0,0.0,Lapped
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,862,Jack Doohan,2003-01-20,214,Alpine F1 Team,17,17,17,0,0,0,0.0,Lapped
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,20,18,18,0,0,0,0.0,Lapped
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,852,Yuki Tsunoda,2000-05-11,9,Red Bull,8,19,19,0,0,1,0.0,Retired
+11505,2025,5,77,Jeddah Corniche Circuit,Saudi Arabian Grand Prix,2025-04-20,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,9,20,20,0,0,1,0.0,Retired
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,857,Oscar Piastri,2001-04-06,1,McLaren,4,1,1,1,1,0,25.0,Finished
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,846,Lando Norris,1999-11-13,1,McLaren,2,2,2,0,1,0,18.0,Finished
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,847,George Russell,1998-02-15,131,Mercedes,5,3,3,0,1,0,15.0,Finished
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,830,Max Verstappen,1997-09-30,9,Red Bull,1,4,4,0,0,0,12.0,Finished
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,848,Alexander Albon,1996-03-23,3,Williams,7,5,5,0,0,0,10.0,Finished
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,3,6,6,0,0,0,8.0,Finished
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,844,Charles Leclerc,1997-10-16,6,Ferrari,8,7,7,0,0,0,6.0,Finished
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,1,Lewis Hamilton,1985-01-07,6,Ferrari,12,8,8,0,0,0,4.0,Finished
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,832,Carlos Sainz,1994-09-01,3,Williams,6,9,9,0,0,0,2.0,Finished
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,852,Yuki Tsunoda,2000-05-11,9,Red Bull,10,10,10,0,0,0,1.0,Finished
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,11,11,11,0,0,0,0.0,Finished
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,9,12,12,0,0,0,0.0,Finished
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,20,13,13,0,0,0,0.0,Finished
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,807,Nico Hülkenberg,1987-08-19,15,Sauber,16,14,14,0,0,0,0.0,Lapped
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,4,Fernando Alonso,1981-07-29,117,Aston Martin,17,15,15,0,0,0,0.0,Lapped
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,840,Lance Stroll,1998-10-29,117,Aston Martin,18,16,16,0,0,0,0.0,Lapped
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,859,Liam Lawson,2002-02-11,215,RB F1 Team,15,17,17,0,0,1,0.0,Retired
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,13,18,18,0,0,1,0.0,Retired
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,19,19,19,0,0,1,0.0,Retired
+11506,2025,6,79,Miami International Autodrome,Miami Grand Prix,2025-05-04,862,Jack Doohan,2003-01-20,214,Alpine F1 Team,14,20,20,0,0,1,0.0,Retired
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,830,Max Verstappen,1997-09-30,9,Red Bull,2,1,1,1,1,0,25.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,846,Lando Norris,1999-11-13,1,McLaren,4,2,2,0,1,0,18.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,857,Oscar Piastri,2001-04-06,1,McLaren,1,3,3,0,1,0,15.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,1,Lewis Hamilton,1985-01-07,6,Ferrari,12,4,4,0,0,0,12.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,848,Alexander Albon,1996-03-23,3,Williams,7,5,5,0,0,0,10.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,844,Charles Leclerc,1997-10-16,6,Ferrari,11,6,6,0,0,0,8.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,847,George Russell,1998-02-15,131,Mercedes,3,7,7,0,0,0,6.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,832,Carlos Sainz,1994-09-01,3,Williams,6,8,8,0,0,0,4.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,9,9,9,0,0,0,2.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,852,Yuki Tsunoda,2000-05-11,9,Red Bull,20,10,10,0,0,0,1.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,4,Fernando Alonso,1981-07-29,117,Aston Martin,5,11,11,0,0,0,0.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,807,Nico Hülkenberg,1987-08-19,15,Sauber,17,12,12,0,0,0,0.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,10,13,13,0,0,0,0.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,859,Liam Lawson,2002-02-11,215,RB F1 Team,15,14,14,0,0,0,0.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,840,Lance Stroll,1998-10-29,117,Aston Martin,8,15,15,0,0,0,0.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,16,16,16,0,0,0,0.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,19,17,17,0,0,0,0.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,14,18,18,0,0,0,0.0,Finished
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,13,19,19,0,0,1,0.0,Retired
+11507,2025,7,21,Autodromo Enzo e Dino Ferrari,Emilia Romagna Grand Prix,2025-05-18,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,18,20,20,0,0,1,0.0,Retired
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,846,Lando Norris,1999-11-13,1,McLaren,1,1,1,1,1,0,25.0,Finished
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,844,Charles Leclerc,1997-10-16,6,Ferrari,2,2,2,0,1,0,18.0,Finished
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,857,Oscar Piastri,2001-04-06,1,McLaren,3,3,3,0,1,0,15.0,Finished
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,830,Max Verstappen,1997-09-30,9,Red Bull,4,4,4,0,0,0,12.0,Finished
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,1,Lewis Hamilton,1985-01-07,6,Ferrari,7,5,5,0,0,0,10.0,Finished
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,5,6,6,0,0,0,8.0,Lapped
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,8,7,7,0,0,0,6.0,Lapped
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,859,Liam Lawson,2002-02-11,215,RB F1 Team,9,8,8,0,0,0,4.0,Lapped
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,848,Alexander Albon,1996-03-23,3,Williams,10,9,9,0,0,0,2.0,Lapped
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,832,Carlos Sainz,1994-09-01,3,Williams,11,10,10,0,0,0,1.0,Lapped
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,847,George Russell,1998-02-15,131,Mercedes,14,11,11,0,0,0,0.0,Lapped
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,20,12,12,0,0,0,0.0,Lapped
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,18,13,13,0,0,0,0.0,Lapped
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,16,14,14,0,0,0,0.0,Lapped
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,840,Lance Stroll,1998-10-29,117,Aston Martin,19,15,15,0,0,0,0.0,Lapped
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,807,Nico Hülkenberg,1987-08-19,15,Sauber,13,16,16,0,0,0,0.0,Lapped
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,852,Yuki Tsunoda,2000-05-11,9,Red Bull,12,17,17,0,0,0,0.0,Lapped
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,15,18,18,0,0,0,0.0,Lapped
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,4,Fernando Alonso,1981-07-29,117,Aston Martin,6,19,19,0,0,1,0.0,Retired
+11508,2025,8,6,Circuit de Monaco,Monaco Grand Prix,2025-05-25,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,17,20,20,0,0,1,0.0,Retired
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,857,Oscar Piastri,2001-04-06,1,McLaren,1,1,1,1,1,0,25.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,846,Lando Norris,1999-11-13,1,McLaren,2,2,2,0,1,0,18.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,844,Charles Leclerc,1997-10-16,6,Ferrari,7,3,3,0,1,0,15.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,847,George Russell,1998-02-15,131,Mercedes,4,4,4,0,0,0,12.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,807,Nico Hülkenberg,1987-08-19,15,Sauber,15,5,5,0,0,0,10.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,1,Lewis Hamilton,1985-01-07,6,Ferrari,5,6,6,0,0,0,8.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,9,7,7,0,0,0,6.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,8,8,8,0,0,0,4.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,4,Fernando Alonso,1981-07-29,117,Aston Martin,10,9,9,0,0,0,2.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,830,Max Verstappen,1997-09-30,9,Red Bull,3,10,10,0,0,0,1.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,859,Liam Lawson,2002-02-11,215,RB F1 Team,13,11,11,0,0,0,0.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,12,12,12,0,0,0,0.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,852,Yuki Tsunoda,2000-05-11,9,Red Bull,19,13,13,0,0,0,0.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,832,Carlos Sainz,1994-09-01,3,Williams,17,14,14,0,0,0,0.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,18,15,15,0,0,0,0.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,16,16,16,0,0,0,0.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,14,17,17,0,0,0,0.0,Finished
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,6,18,18,0,0,1,0.0,Retired
+11509,2025,9,4,Circuit de Barcelona-Catalunya,Spanish Grand Prix,2025-06-01,848,Alexander Albon,1996-03-23,3,Williams,11,19,19,0,0,1,0.0,Retired
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,847,George Russell,1998-02-15,131,Mercedes,1,1,1,1,1,0,25.0,Finished
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,830,Max Verstappen,1997-09-30,9,Red Bull,2,2,2,0,1,0,18.0,Finished
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,4,3,3,0,1,0,15.0,Finished
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,857,Oscar Piastri,2001-04-06,1,McLaren,3,4,4,0,0,0,12.0,Finished
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,844,Charles Leclerc,1997-10-16,6,Ferrari,8,5,5,0,0,0,10.0,Finished
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,1,Lewis Hamilton,1985-01-07,6,Ferrari,5,6,6,0,0,0,8.0,Finished
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,4,Fernando Alonso,1981-07-29,117,Aston Martin,6,7,7,0,0,0,6.0,Finished
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,807,Nico Hülkenberg,1987-08-19,15,Sauber,11,8,8,0,0,0,4.0,Finished
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,14,9,9,0,0,0,2.0,Lapped
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,832,Carlos Sainz,1994-09-01,3,Williams,16,10,10,0,0,0,1.0,Lapped
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,13,11,11,0,0,0,0.0,Lapped
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,852,Yuki Tsunoda,2000-05-11,9,Red Bull,18,12,12,0,0,0,0.0,Lapped
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,10,13,13,0,0,0,0.0,Lapped
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,15,14,14,0,0,0,0.0,Lapped
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,20,15,15,0,0,0,0.0,Lapped
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,12,16,16,0,0,0,0.0,Lapped
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,840,Lance Stroll,1998-10-29,117,Aston Martin,17,17,17,0,0,0,0.0,Lapped
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,846,Lando Norris,1999-11-13,1,McLaren,7,18,18,0,0,1,0.0,Retired
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,859,Liam Lawson,2002-02-11,215,RB F1 Team,19,19,19,0,0,1,0.0,Retired
+11510,2025,10,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2025-06-15,848,Alexander Albon,1996-03-23,3,Williams,9,20,20,0,0,1,0.0,Retired
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,846,Lando Norris,1999-11-13,1,McLaren,1,1,1,1,1,0,25.0,Finished
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,857,Oscar Piastri,2001-04-06,1,McLaren,3,2,2,0,1,0,18.0,Finished
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,844,Charles Leclerc,1997-10-16,6,Ferrari,2,3,3,0,1,0,15.0,Finished
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,1,Lewis Hamilton,1985-01-07,6,Ferrari,4,4,4,0,0,0,12.0,Finished
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,847,George Russell,1998-02-15,131,Mercedes,5,5,5,0,0,0,10.0,Finished
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,859,Liam Lawson,2002-02-11,215,RB F1 Team,6,6,6,0,0,0,8.0,Finished
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,4,Fernando Alonso,1981-07-29,117,Aston Martin,11,7,7,0,0,0,6.0,Lapped
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,8,8,8,0,0,0,4.0,Lapped
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,807,Nico Hülkenberg,1987-08-19,15,Sauber,20,9,9,0,0,0,2.0,Lapped
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,17,10,10,0,0,0,1.0,Lapped
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,15,11,11,0,0,0,0.0,Lapped
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,13,12,12,0,0,0,0.0,Lapped
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,10,13,13,0,0,0,0.0,Lapped
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,840,Lance Stroll,1998-10-29,117,Aston Martin,16,14,14,0,0,0,0.0,Lapped
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,14,15,15,0,0,0,0.0,Lapped
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,852,Yuki Tsunoda,2000-05-11,9,Red Bull,18,16,16,0,0,0,0.0,Lapped
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,848,Alexander Albon,1996-03-23,3,Williams,12,17,17,0,0,1,0.0,Retired
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,830,Max Verstappen,1997-09-30,9,Red Bull,7,18,18,0,0,1,0.0,Retired
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,9,19,19,0,0,1,0.0,Retired
+11511,2025,11,70,Red Bull Ring,Austrian Grand Prix,2025-06-29,832,Carlos Sainz,1994-09-01,3,Williams,19,20,20,0,0,1,0.0,Did not start
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,846,Lando Norris,1999-11-13,1,McLaren,3,1,1,1,1,0,25.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,857,Oscar Piastri,2001-04-06,1,McLaren,2,2,2,0,1,0,18.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,807,Nico Hülkenberg,1987-08-19,15,Sauber,19,3,3,0,1,0,15.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,1,Lewis Hamilton,1985-01-07,6,Ferrari,5,4,4,0,0,0,12.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,830,Max Verstappen,1997-09-30,9,Red Bull,1,5,5,0,0,0,10.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,8,6,6,0,0,0,8.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,840,Lance Stroll,1998-10-29,117,Aston Martin,17,7,7,0,0,0,6.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,848,Alexander Albon,1996-03-23,3,Williams,13,8,8,0,0,0,4.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,4,Fernando Alonso,1981-07-29,117,Aston Martin,7,9,9,0,0,0,2.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,847,George Russell,1998-02-15,131,Mercedes,4,10,10,0,0,0,1.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,18,11,11,0,0,0,0.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,832,Carlos Sainz,1994-09-01,3,Williams,9,12,12,0,0,0,0.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,14,13,13,0,0,0,0.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,844,Charles Leclerc,1997-10-16,6,Ferrari,6,14,14,0,0,0,0.0,Finished
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,852,Yuki Tsunoda,2000-05-11,9,Red Bull,11,15,15,0,0,0,0.0,Lapped
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,10,16,16,0,0,1,0.0,Retired
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,12,17,17,0,0,1,0.0,Retired
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,16,18,18,0,0,1,0.0,Retired
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,859,Liam Lawson,2002-02-11,215,RB F1 Team,15,19,19,0,0,1,0.0,Retired
+11512,2025,12,9,Silverstone Circuit,British Grand Prix,2025-07-06,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,20,20,20,0,0,1,0.0,Did not start
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,857,Oscar Piastri,2001-04-06,1,McLaren,2,1,1,1,1,0,25.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,846,Lando Norris,1999-11-13,1,McLaren,1,2,2,0,1,0,18.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,844,Charles Leclerc,1997-10-16,6,Ferrari,3,3,3,0,1,0,15.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,830,Max Verstappen,1997-09-30,9,Red Bull,4,4,4,0,0,0,12.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,847,George Russell,1998-02-15,131,Mercedes,6,5,5,0,0,0,10.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,848,Alexander Albon,1996-03-23,3,Williams,5,6,6,0,0,0,8.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,1,Lewis Hamilton,1985-01-07,6,Ferrari,18,7,7,0,0,0,6.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,859,Liam Lawson,2002-02-11,215,RB F1 Team,9,8,8,0,0,0,4.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,10,9,9,0,0,0,2.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,13,10,10,0,0,0,1.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,12,11,11,0,0,0,0.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,807,Nico Hülkenberg,1987-08-19,15,Sauber,14,12,12,0,0,0,0.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,852,Yuki Tsunoda,2000-05-11,9,Red Bull,7,13,13,0,0,0,0.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,840,Lance Stroll,1998-10-29,117,Aston Martin,16,14,14,0,0,0,0.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,11,15,15,0,0,0,0.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,19,16,16,0,0,0,0.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,4,Fernando Alonso,1981-07-29,117,Aston Martin,20,17,17,0,0,0,0.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,832,Carlos Sainz,1994-09-01,3,Williams,17,18,18,0,0,0,0.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,15,19,19,0,0,0,0.0,Finished
+11513,2025,13,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2025-07-27,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,8,20,20,0,0,0,0.0,Lapped
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,846,Lando Norris,1999-11-13,1,McLaren,3,1,1,1,1,0,25.0,Finished
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,857,Oscar Piastri,2001-04-06,1,McLaren,2,2,2,0,1,0,18.0,Finished
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,847,George Russell,1998-02-15,131,Mercedes,4,3,3,0,1,0,15.0,Finished
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,844,Charles Leclerc,1997-10-16,6,Ferrari,1,4,4,0,0,0,12.0,Finished
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,4,Fernando Alonso,1981-07-29,117,Aston Martin,5,5,5,0,0,0,10.0,Finished
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,7,6,6,0,0,0,8.0,Finished
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,840,Lance Stroll,1998-10-29,117,Aston Martin,6,7,7,0,0,0,6.0,Finished
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,859,Liam Lawson,2002-02-11,215,RB F1 Team,9,8,8,0,0,0,4.0,Finished
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,830,Max Verstappen,1997-09-30,9,Red Bull,8,9,9,0,0,0,2.0,Finished
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,15,10,10,0,0,0,1.0,Lapped
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,10,11,11,0,0,0,0.0,Lapped
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,1,Lewis Hamilton,1985-01-07,6,Ferrari,12,12,12,0,0,0,0.0,Lapped
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,807,Nico Hülkenberg,1987-08-19,15,Sauber,18,13,13,0,0,0,0.0,Lapped
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,832,Carlos Sainz,1994-09-01,3,Williams,13,14,14,0,0,0,0.0,Lapped
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,848,Alexander Albon,1996-03-23,3,Williams,19,15,15,0,0,0,0.0,Lapped
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,17,16,16,0,0,0,0.0,Lapped
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,852,Yuki Tsunoda,2000-05-11,9,Red Bull,20,17,17,0,0,0,0.0,Lapped
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,14,18,18,0,0,0,0.0,Lapped
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,16,19,19,0,0,0,0.0,Lapped
+11514,2025,14,11,Hungaroring,Hungarian Grand Prix,2025-08-03,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,11,20,20,0,0,1,0.0,Retired
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,857,Oscar Piastri,2001-04-06,1,McLaren,1,1,1,1,1,0,25.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,830,Max Verstappen,1997-09-30,9,Red Bull,3,2,2,0,1,0,18.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,4,3,3,0,1,0,15.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,847,George Russell,1998-02-15,131,Mercedes,5,4,4,0,0,0,12.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,848,Alexander Albon,1996-03-23,3,Williams,15,5,5,0,0,0,10.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,20,6,6,0,0,0,8.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,840,Lance Stroll,1998-10-29,117,Aston Martin,19,7,7,0,0,0,6.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,4,Fernando Alonso,1981-07-29,117,Aston Martin,10,8,8,0,0,0,4.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,852,Yuki Tsunoda,2000-05-11,9,Red Bull,12,9,9,0,0,0,2.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,18,10,10,0,0,0,1.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,16,11,11,0,0,0,0.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,859,Liam Lawson,2002-02-11,215,RB F1 Team,8,12,12,0,0,0,0.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,832,Carlos Sainz,1994-09-01,3,Williams,9,13,13,0,0,0,0.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,807,Nico Hülkenberg,1987-08-19,15,Sauber,17,14,14,0,0,0,0.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,13,15,15,0,0,0,0.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,11,16,16,0,0,0,0.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,14,17,17,0,0,0,0.0,Finished
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,846,Lando Norris,1999-11-13,1,McLaren,2,18,18,0,0,1,0.0,Retired
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,844,Charles Leclerc,1997-10-16,6,Ferrari,6,19,19,0,0,1,0.0,Retired
+11515,2025,15,39,Circuit Park Zandvoort,Dutch Grand Prix,2025-08-31,1,Lewis Hamilton,1985-01-07,6,Ferrari,7,20,20,0,0,1,0.0,Retired
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,830,Max Verstappen,1997-09-30,9,Red Bull,1,1,1,1,1,0,25.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,846,Lando Norris,1999-11-13,1,McLaren,2,2,2,0,1,0,18.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,857,Oscar Piastri,2001-04-06,1,McLaren,3,3,3,0,1,0,15.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,844,Charles Leclerc,1997-10-16,6,Ferrari,4,4,4,0,0,0,12.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,847,George Russell,1998-02-15,131,Mercedes,5,5,5,0,0,0,10.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,1,Lewis Hamilton,1985-01-07,6,Ferrari,10,6,6,0,0,0,8.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,848,Alexander Albon,1996-03-23,3,Williams,14,7,7,0,0,0,6.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,7,8,8,0,0,0,4.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,6,9,9,0,0,0,2.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,19,10,10,0,0,0,1.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,832,Carlos Sainz,1994-09-01,3,Williams,13,11,11,0,0,0,0.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,11,12,12,0,0,0,0.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,852,Yuki Tsunoda,2000-05-11,9,Red Bull,9,13,13,0,0,0,0.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,859,Liam Lawson,2002-02-11,215,RB F1 Team,18,14,14,0,0,0,0.0,Finished
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,15,15,15,0,0,0,0.0,Lapped
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,20,16,16,0,0,0,0.0,Lapped
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,17,17,17,0,0,0,0.0,Lapped
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,840,Lance Stroll,1998-10-29,117,Aston Martin,16,18,18,0,0,0,0.0,Lapped
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,4,Fernando Alonso,1981-07-29,117,Aston Martin,8,19,19,0,0,1,0.0,Retired
+11516,2025,16,14,Autodromo Nazionale di Monza,Italian Grand Prix,2025-09-07,807,Nico Hülkenberg,1987-08-19,15,Sauber,12,20,20,0,0,1,0.0,Did not start
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,830,Max Verstappen,1997-09-30,9,Red Bull,1,1,1,1,1,0,25.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,847,George Russell,1998-02-15,131,Mercedes,5,2,2,0,1,0,18.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,832,Carlos Sainz,1994-09-01,3,Williams,2,3,3,0,1,0,15.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,4,4,4,0,0,0,12.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,859,Liam Lawson,2002-02-11,215,RB F1 Team,3,5,5,0,0,0,10.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,852,Yuki Tsunoda,2000-05-11,9,Red Bull,6,6,6,0,0,0,8.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,846,Lando Norris,1999-11-13,1,McLaren,7,7,7,0,0,0,6.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,1,Lewis Hamilton,1985-01-07,6,Ferrari,12,8,8,0,0,0,4.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,844,Charles Leclerc,1997-10-16,6,Ferrari,10,9,9,0,0,0,2.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,8,10,10,0,0,0,1.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,13,11,11,0,0,0,0.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,15,12,12,0,0,0,0.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,848,Alexander Albon,1996-03-23,3,Williams,19,13,13,0,0,0,0.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,20,14,14,0,0,0,0.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,4,Fernando Alonso,1981-07-29,117,Aston Martin,11,15,15,0,0,0,0.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,807,Nico Hülkenberg,1987-08-19,15,Sauber,17,16,16,0,0,0,0.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,840,Lance Stroll,1998-10-29,117,Aston Martin,14,17,17,0,0,0,0.0,Finished
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,18,18,18,0,0,0,0.0,Lapped
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,16,19,19,0,0,0,0.0,Lapped
+11517,2025,17,73,Baku City Circuit,Azerbaijan Grand Prix,2025-09-21,857,Oscar Piastri,2001-04-06,1,McLaren,9,20,20,0,0,1,0.0,Retired
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,847,George Russell,1998-02-15,131,Mercedes,1,1,1,1,1,0,25.0,Finished
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,830,Max Verstappen,1997-09-30,9,Red Bull,2,2,2,0,1,0,18.0,Finished
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,846,Lando Norris,1999-11-13,1,McLaren,5,3,3,0,1,0,15.0,Finished
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,857,Oscar Piastri,2001-04-06,1,McLaren,3,4,4,0,0,0,12.0,Finished
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,4,5,5,0,0,0,10.0,Finished
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,844,Charles Leclerc,1997-10-16,6,Ferrari,7,6,6,0,0,0,8.0,Finished
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,4,Fernando Alonso,1981-07-29,117,Aston Martin,10,7,7,0,0,0,6.0,Finished
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,1,Lewis Hamilton,1985-01-07,6,Ferrari,6,8,8,0,0,0,4.0,Finished
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,9,9,9,0,0,0,2.0,Finished
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,832,Carlos Sainz,1994-09-01,3,Williams,18,10,10,0,0,0,1.0,Lapped
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,8,11,11,0,0,0,0.0,Lapped
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,852,Yuki Tsunoda,2000-05-11,9,Red Bull,13,12,12,0,0,0,0.0,Lapped
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,840,Lance Stroll,1998-10-29,117,Aston Martin,15,13,13,0,0,0,0.0,Lapped
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,848,Alexander Albon,1996-03-23,3,Williams,20,14,14,0,0,0,0.0,Lapped
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,859,Liam Lawson,2002-02-11,215,RB F1 Team,12,15,15,0,0,0,0.0,Lapped
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,16,16,16,0,0,0,0.0,Lapped
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,14,17,17,0,0,0,0.0,Lapped
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,17,18,18,0,0,0,0.0,Lapped
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,19,19,19,0,0,0,0.0,Lapped
+11518,2025,18,15,Marina Bay Street Circuit,Singapore Grand Prix,2025-10-05,807,Nico Hülkenberg,1987-08-19,15,Sauber,11,20,20,0,0,0,0.0,Lapped
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,830,Max Verstappen,1997-09-30,9,Red Bull,1,1,1,1,1,0,25.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,846,Lando Norris,1999-11-13,1,McLaren,2,2,2,0,1,0,18.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,844,Charles Leclerc,1997-10-16,6,Ferrari,3,3,3,0,1,0,15.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,1,Lewis Hamilton,1985-01-07,6,Ferrari,5,4,4,0,0,0,12.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,857,Oscar Piastri,2001-04-06,1,McLaren,6,5,5,0,0,0,10.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,847,George Russell,1998-02-15,131,Mercedes,4,6,6,0,0,0,8.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,852,Yuki Tsunoda,2000-05-11,9,Red Bull,13,7,7,0,0,0,6.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,807,Nico Hülkenberg,1987-08-19,15,Sauber,11,8,8,0,0,0,4.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,8,9,9,0,0,0,2.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,4,Fernando Alonso,1981-07-29,117,Aston Martin,10,10,10,0,0,0,1.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,859,Liam Lawson,2002-02-11,215,RB F1 Team,12,11,11,0,0,0,0.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,840,Lance Stroll,1998-10-29,117,Aston Martin,19,12,12,0,0,0,0.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,7,13,13,0,0,0,0.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,848,Alexander Albon,1996-03-23,3,Williams,18,14,14,0,0,0,0.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,17,15,15,0,0,0,0.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,20,16,16,0,0,0,0.0,Finished
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,15,17,17,0,0,0,0.0,Lapped
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,16,18,18,0,0,0,0.0,Lapped
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,14,19,19,0,0,0,0.0,Lapped
+11519,2025,19,69,Circuit of the Americas,United States Grand Prix,2025-10-19,832,Carlos Sainz,1994-09-01,3,Williams,9,20,20,0,0,1,0.0,Retired
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,846,Lando Norris,1999-11-13,1,McLaren,1,1,1,1,1,0,25.0,Finished
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,844,Charles Leclerc,1997-10-16,6,Ferrari,2,2,2,0,1,0,18.0,Finished
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,830,Max Verstappen,1997-09-30,9,Red Bull,5,3,3,0,1,0,15.0,Finished
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,9,4,4,0,0,0,12.0,Finished
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,857,Oscar Piastri,2001-04-06,1,McLaren,7,5,5,0,0,0,10.0,Finished
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,6,6,6,0,0,0,8.0,Finished
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,847,George Russell,1998-02-15,131,Mercedes,4,7,7,0,0,0,6.0,Finished
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,1,Lewis Hamilton,1985-01-07,6,Ferrari,3,8,8,0,0,0,4.0,Finished
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,11,9,9,0,0,0,2.0,Finished
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,16,10,10,0,0,0,1.0,Finished
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,852,Yuki Tsunoda,2000-05-11,9,Red Bull,10,11,11,0,0,0,0.0,Finished
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,848,Alexander Albon,1996-03-23,3,Williams,17,12,12,0,0,0,0.0,Lapped
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,8,13,13,0,0,0,0.0,Lapped
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,840,Lance Stroll,1998-10-29,117,Aston Martin,19,14,14,0,0,0,0.0,Lapped
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,18,15,15,0,0,0,0.0,Lapped
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,20,16,16,0,0,0,0.0,Lapped
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,832,Carlos Sainz,1994-09-01,3,Williams,12,17,17,0,0,1,0.0,Retired
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,4,Fernando Alonso,1981-07-29,117,Aston Martin,14,18,18,0,0,1,0.0,Retired
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,807,Nico Hülkenberg,1987-08-19,15,Sauber,13,19,19,0,0,1,0.0,Retired
+11520,2025,20,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2025-10-26,859,Liam Lawson,2002-02-11,215,RB F1 Team,15,20,20,0,0,1,0.0,Retired
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,846,Lando Norris,1999-11-13,1,McLaren,1,1,1,1,1,0,25.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,2,2,2,0,1,0,18.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,830,Max Verstappen,1997-09-30,9,Red Bull,19,3,3,0,1,0,15.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,847,George Russell,1998-02-15,131,Mercedes,6,4,4,0,0,0,12.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,857,Oscar Piastri,2001-04-06,1,McLaren,4,5,5,0,0,0,10.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,8,6,6,0,0,0,8.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,859,Liam Lawson,2002-02-11,215,RB F1 Team,7,7,7,0,0,0,6.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,5,8,8,0,0,0,4.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,807,Nico Hülkenberg,1987-08-19,15,Sauber,10,9,9,0,0,0,2.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,9,10,10,0,0,0,1.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,848,Alexander Albon,1996-03-23,3,Williams,12,11,11,0,0,0,0.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,20,12,12,0,0,0,0.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,832,Carlos Sainz,1994-09-01,3,Williams,15,13,13,0,0,0,0.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,4,Fernando Alonso,1981-07-29,117,Aston Martin,11,14,14,0,0,0,0.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,16,15,15,0,0,0,0.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,840,Lance Stroll,1998-10-29,117,Aston Martin,14,16,16,0,0,0,0.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,852,Yuki Tsunoda,2000-05-11,9,Red Bull,17,17,17,0,0,0,0.0,Finished
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,1,Lewis Hamilton,1985-01-07,6,Ferrari,13,18,18,0,0,1,0.0,Retired
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,844,Charles Leclerc,1997-10-16,6,Ferrari,3,19,19,0,0,1,0.0,Retired
+11521,2025,21,18,Autódromo José Carlos Pace,São Paulo Grand Prix,2025-11-09,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,18,20,20,0,0,1,0.0,Retired
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,830,Max Verstappen,1997-09-30,9,Red Bull,2,1,1,1,1,0,25.0,Finished
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,847,George Russell,1998-02-15,131,Mercedes,4,2,2,0,1,0,18.0,Finished
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,17,3,3,0,1,0,15.0,Finished
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,844,Charles Leclerc,1997-10-16,6,Ferrari,9,4,4,0,0,0,12.0,Finished
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,832,Carlos Sainz,1994-09-01,3,Williams,3,5,5,0,0,0,10.0,Finished
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,8,6,6,0,0,0,8.0,Finished
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,807,Nico Hülkenberg,1987-08-19,15,Sauber,11,7,7,0,0,0,6.0,Finished
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,1,Lewis Hamilton,1985-01-07,6,Ferrari,19,8,8,0,0,0,4.0,Finished
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,13,9,9,0,0,0,2.0,Finished
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,14,10,10,0,0,0,1.0,Finished
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,4,Fernando Alonso,1981-07-29,117,Aston Martin,7,11,11,0,0,0,0.0,Finished
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,852,Yuki Tsunoda,2000-05-11,9,Red Bull,20,12,12,0,0,0,0.0,Finished
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,10,13,13,0,0,0,0.0,Finished
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,859,Liam Lawson,2002-02-11,215,RB F1 Team,6,14,14,0,0,0,0.0,Lapped
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,15,15,15,0,0,0,0.0,Lapped
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,848,Alexander Albon,1996-03-23,3,Williams,16,16,16,0,0,1,0.0,Retired
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,18,17,17,0,0,1,0.0,Retired
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,840,Lance Stroll,1998-10-29,117,Aston Martin,12,18,18,0,0,1,0.0,Retired
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,846,Lando Norris,1999-11-13,1,McLaren,1,19,19,0,0,1,0.0,Disqualified
+11522,2025,22,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2025-11-23,857,Oscar Piastri,2001-04-06,1,McLaren,5,20,20,0,0,1,0.0,Disqualified
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,830,Max Verstappen,1997-09-30,9,Red Bull,3,1,1,1,1,0,25.0,Finished
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,857,Oscar Piastri,2001-04-06,1,McLaren,1,2,2,0,1,0,18.0,Finished
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,832,Carlos Sainz,1994-09-01,3,Williams,7,3,3,0,1,0,15.0,Finished
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,846,Lando Norris,1999-11-13,1,McLaren,2,4,4,0,0,0,12.0,Finished
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,5,5,5,0,0,0,10.0,Finished
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,847,George Russell,1998-02-15,131,Mercedes,4,6,6,0,0,0,8.0,Finished
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,4,Fernando Alonso,1981-07-29,117,Aston Martin,8,7,7,0,0,0,6.0,Finished
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,844,Charles Leclerc,1997-10-16,6,Ferrari,10,8,8,0,0,0,4.0,Finished
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,859,Liam Lawson,2002-02-11,215,RB F1 Team,12,9,9,0,0,0,2.0,Finished
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,852,Yuki Tsunoda,2000-05-11,9,Red Bull,15,10,10,0,0,0,1.0,Finished
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,848,Alexander Albon,1996-03-23,3,Williams,14,11,11,0,0,0,0.0,Finished
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,1,Lewis Hamilton,1985-01-07,6,Ferrari,17,12,12,0,0,0,0.0,Finished
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,19,13,13,0,0,0,0.0,Finished
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,20,14,14,0,0,0,0.0,Lapped
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,16,15,15,0,0,0,0.0,Lapped
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,9,16,16,0,0,0,0.0,Lapped
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,840,Lance Stroll,1998-10-29,117,Aston Martin,18,17,17,0,0,1,0.0,Retired
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,6,18,18,0,0,1,0.0,Retired
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,13,19,19,0,0,1,0.0,Retired
+11523,2025,23,78,Lusail International Circuit,Qatar Grand Prix,2025-11-30,807,Nico Hülkenberg,1987-08-19,15,Sauber,11,20,20,0,0,1,0.0,Retired
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,830,Max Verstappen,1997-09-30,9,Red Bull,1,1,1,1,1,0,25.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,857,Oscar Piastri,2001-04-06,1,McLaren,3,2,2,0,1,0,18.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,846,Lando Norris,1999-11-13,1,McLaren,2,3,3,0,1,0,15.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,844,Charles Leclerc,1997-10-16,6,Ferrari,5,4,4,0,0,0,12.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,847,George Russell,1998-02-15,131,Mercedes,4,5,5,0,0,0,10.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,4,Fernando Alonso,1981-07-29,117,Aston Martin,6,6,6,0,0,0,8.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,8,7,7,0,0,0,6.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,1,Lewis Hamilton,1985-01-07,6,Ferrari,16,8,8,0,0,0,4.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,807,Nico Hülkenberg,1987-08-19,15,Sauber,18,9,9,0,0,0,2.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,840,Lance Stroll,1998-10-29,117,Aston Martin,15,10,10,0,0,0,1.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,9110,Gabriel Bortoleto,2004-10-14,15,Sauber,7,11,11,0,0,0,0.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,11,12,12,0,0,0,0.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,832,Carlos Sainz,1994-09-01,3,Williams,12,13,13,0,0,0,0.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,852,Yuki Tsunoda,2000-05-11,9,Red Bull,10,14,14,0,0,0,0.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,14,15,15,0,0,0,0.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,848,Alexander Albon,1996-03-23,3,Williams,17,16,16,0,0,0,0.0,Finished
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,9111,Isack Hadjar,2004-09-28,215,RB F1 Team,9,17,17,0,0,0,0.0,Lapped
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,859,Liam Lawson,2002-02-11,215,RB F1 Team,13,18,18,0,0,0,0.0,Lapped
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,19,19,19,0,0,0,0.0,Lapped
+11524,2025,24,24,Yas Marina Circuit,Abu Dhabi Grand Prix,2025-12-07,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,20,20,20,0,0,0,0.0,Lapped
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,847,George Russell,1998-02-15,131,Mercedes,1,1,1,1,1,0,25.0,Finished
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,2,2,2,0,1,0,18.0,Finished
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,844,Charles Leclerc,1997-10-16,6,Ferrari,4,3,3,0,1,0,15.0,Finished
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,1,Lewis Hamilton,1985-01-07,6,Ferrari,7,4,4,0,0,0,12.0,Finished
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,846,Lando Norris,1999-11-13,1,McLaren,6,5,5,0,0,0,10.0,Finished
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,830,Max Verstappen,1997-09-30,9,Red Bull,20,6,6,0,0,0,8.0,Finished
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,12,7,7,0,0,0,6.0,Lapped
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,9,8,8,0,0,0,4.0,Lapped
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,10,9,9,0,0,0,2.0,Lapped
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,14,10,10,0,0,0,1.0,Lapped
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,13,11,11,0,0,0,0.0,Lapped
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,848,Alexander Albon,1996-03-23,3,Williams,15,12,12,0,0,0,0.0,Lapped
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,859,Liam Lawson,2002-02-11,215,RB F1 Team,8,13,13,0,0,0,0.0,Lapped
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,16,14,14,0,0,0,0.0,Lapped
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,832,Carlos Sainz,1994-09-01,3,Williams,20,15,15,0,0,0,0.0,Lapped
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,18,16,16,0,0,0,0.0,Lapped
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,840,Lance Stroll,1998-10-29,117,Aston Martin,20,17,17,0,0,0,0.0,Lapped
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,4,Fernando Alonso,1981-07-29,117,Aston Martin,17,18,18,0,0,1,0.0,Retired
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,19,19,19,0,0,1,0.0,Retired
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,9111,Isack Hadjar,2004-09-28,9,Red Bull,3,20,20,0,0,1,0.0,Retired
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,857,Oscar Piastri,2001-04-06,1,McLaren,5,21,20,0,0,1,0.0,Did not start
+11601,2026,1,1,Albert Park Grand Prix Circuit,Australian Grand Prix,2026-03-08,807,Nico Hülkenberg,1987-08-19,9036,Audi,11,22,20,0,0,1,0.0,Did not start
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,1,1,1,1,1,0,25.0,Finished
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,847,George Russell,1998-02-15,131,Mercedes,2,2,2,0,1,0,18.0,Finished
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,1,Lewis Hamilton,1985-01-07,6,Ferrari,3,3,3,0,1,0,15.0,Finished
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,844,Charles Leclerc,1997-10-16,6,Ferrari,4,4,4,0,0,0,12.0,Finished
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,10,5,5,0,0,0,10.0,Finished
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,7,6,6,0,0,0,8.0,Finished
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,859,Liam Lawson,2002-02-11,215,RB F1 Team,14,7,7,0,0,0,6.0,Finished
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,9111,Isack Hadjar,2004-09-28,9,Red Bull,9,8,8,0,0,0,4.0,Finished
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,832,Carlos Sainz,1994-09-01,3,Williams,17,9,9,0,0,0,2.0,Lapped
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,12,10,10,0,0,0,1.0,Lapped
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,807,Nico Hülkenberg,1987-08-19,9036,Audi,11,11,11,0,0,0,0.0,Lapped
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,15,12,12,0,0,0,0.0,Lapped
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,19,13,13,0,0,0,0.0,Lapped
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,13,14,14,0,0,0,0.0,Lapped
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,20,15,15,0,0,0,0.0,Lapped
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,830,Max Verstappen,1997-09-30,9,Red Bull,8,16,16,0,0,1,0.0,Retired
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,4,Fernando Alonso,1981-07-29,117,Aston Martin,18,17,17,0,0,1,0.0,Retired
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,840,Lance Stroll,1998-10-29,117,Aston Martin,20,18,18,0,0,1,0.0,Retired
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,857,Oscar Piastri,2001-04-06,1,McLaren,5,19,19,0,0,1,0.0,Did not start
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,846,Lando Norris,1999-11-13,1,McLaren,6,20,20,0,0,1,0.0,Did not start
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,16,21,20,0,0,1,0.0,Did not start
+11602,2026,2,17,Shanghai International Circuit,Chinese Grand Prix,2026-03-15,848,Alexander Albon,1996-03-23,3,Williams,20,22,20,0,0,1,0.0,Did not start
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,1,1,1,1,1,0,25.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,857,Oscar Piastri,2001-04-06,1,McLaren,3,2,2,0,1,0,18.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,844,Charles Leclerc,1997-10-16,6,Ferrari,4,3,3,0,1,0,15.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,847,George Russell,1998-02-15,131,Mercedes,2,4,4,0,0,0,12.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,846,Lando Norris,1999-11-13,1,McLaren,5,5,5,0,0,0,10.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,1,Lewis Hamilton,1985-01-07,6,Ferrari,6,6,6,0,0,0,8.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,7,7,7,0,0,0,6.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,830,Max Verstappen,1997-09-30,9,Red Bull,11,8,8,0,0,0,4.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,859,Liam Lawson,2002-02-11,215,RB F1 Team,14,9,9,0,0,0,2.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,12,10,10,0,0,0,1.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,807,Nico Hülkenberg,1987-08-19,9036,Audi,13,11,11,0,0,0,0.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,9111,Isack Hadjar,2004-09-28,9,Red Bull,8,12,12,0,0,0,0.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,9,13,13,0,0,0,0.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,10,14,14,0,0,0,0.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,832,Carlos Sainz,1994-09-01,3,Williams,16,15,15,0,0,0,0.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,15,16,16,0,0,0,0.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,19,17,17,0,0,0,0.0,Finished
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,4,Fernando Alonso,1981-07-29,117,Aston Martin,20,18,18,0,0,0,0.0,Lapped
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,20,19,19,0,0,0,0.0,Lapped
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,848,Alexander Albon,1996-03-23,3,Williams,17,20,20,0,0,0,0.0,Lapped
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,840,Lance Stroll,1998-10-29,117,Aston Martin,20,21,20,0,0,1,0.0,Retired
+11603,2026,3,22,Suzuka Circuit,Japanese Grand Prix,2026-03-29,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,18,22,20,0,0,1,0.0,Retired
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,1,1,1,1,1,0,25.0,Finished
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,846,Lando Norris,1999-11-13,1,McLaren,4,2,2,0,1,0,18.0,Finished
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,857,Oscar Piastri,2001-04-06,1,McLaren,7,3,3,0,1,0,15.0,Finished
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,847,George Russell,1998-02-15,131,Mercedes,5,4,4,0,0,0,12.0,Finished
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,830,Max Verstappen,1997-09-30,9,Red Bull,2,5,5,0,0,0,10.0,Finished
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,1,Lewis Hamilton,1985-01-07,6,Ferrari,6,6,6,0,0,0,8.0,Finished
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,8,7,7,0,0,0,6.0,Finished
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,844,Charles Leclerc,1997-10-16,6,Ferrari,3,8,8,0,0,0,4.0,Finished
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,832,Carlos Sainz,1994-09-01,3,Williams,13,9,9,0,0,0,2.0,Finished
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,848,Alexander Albon,1996-03-23,3,Williams,15,10,10,0,0,0,1.0,Finished
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,12,11,11,0,0,0,0.0,Lapped
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,20,12,12,0,0,0,0.0,Lapped
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,14,13,13,0,0,0,0.0,Lapped
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,16,14,14,0,0,0,0.0,Lapped
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,4,Fernando Alonso,1981-07-29,117,Aston Martin,17,15,15,0,0,0,0.0,Lapped
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,20,16,16,0,0,0,0.0,Lapped
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,840,Lance Stroll,1998-10-29,117,Aston Martin,18,17,17,0,0,0,0.0,Lapped
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,19,18,18,0,0,0,0.0,Lapped
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,807,Nico Hülkenberg,1987-08-19,9036,Audi,10,19,19,0,0,1,0.0,Retired
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,859,Liam Lawson,2002-02-11,215,RB F1 Team,11,20,20,0,0,1,0.0,Retired
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,9,21,20,0,0,1,0.0,Retired
+11604,2026,4,79,Miami International Autodrome,Miami Grand Prix,2026-05-03,9111,Isack Hadjar,2004-09-28,9,Red Bull,20,22,20,0,0,1,0.0,Retired
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,2,1,1,1,1,0,25.0,Finished
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,1,Lewis Hamilton,1985-01-07,6,Ferrari,5,2,2,0,1,0,18.0,Finished
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,830,Max Verstappen,1997-09-30,9,Red Bull,6,3,3,0,1,0,15.0,Finished
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,844,Charles Leclerc,1997-10-16,6,Ferrari,8,4,4,0,0,0,12.0,Finished
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,9111,Isack Hadjar,2004-09-28,9,Red Bull,7,5,5,0,0,0,10.0,Lapped
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,10,6,6,0,0,0,8.0,Lapped
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,859,Liam Lawson,2002-02-11,215,RB F1 Team,12,7,7,0,0,0,6.0,Lapped
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,14,8,8,0,0,0,4.0,Lapped
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,832,Carlos Sainz,1994-09-01,3,Williams,15,9,9,0,0,0,2.0,Lapped
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,16,10,10,0,0,0,1.0,Lapped
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,857,Oscar Piastri,2001-04-06,1,McLaren,4,11,11,0,0,0,0.0,Lapped
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,807,Nico Hülkenberg,1987-08-19,9036,Audi,11,12,12,0,0,0,0.0,Lapped
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,13,13,13,0,0,0,0.0,Lapped
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,17,14,14,0,0,0,0.0,Lapped
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,840,Lance Stroll,1998-10-29,117,Aston Martin,20,15,15,0,0,0,0.0,Lapped
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,20,16,16,0,0,0,0.0,Lapped
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,20,17,17,0,0,1,0.0,Retired
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,846,Lando Norris,1999-11-13,1,McLaren,3,18,18,0,0,1,0.0,Retired
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,847,George Russell,1998-02-15,131,Mercedes,1,19,19,0,0,1,0.0,Retired
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,4,Fernando Alonso,1981-07-29,117,Aston Martin,19,20,20,0,0,1,0.0,Retired
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,848,Alexander Albon,1996-03-23,3,Williams,18,21,20,0,0,1,0.0,Retired
+11605,2026,5,7,Circuit Gilles Villeneuve,Canadian Grand Prix,2026-05-24,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,9,22,20,0,0,1,0.0,Did not start
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,1,1,1,1,1,0,25.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,1,Lewis Hamilton,1985-01-07,6,Ferrari,3,2,2,0,1,0,18.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,9111,Isack Hadjar,2004-09-28,9,Red Bull,5,3,3,0,1,0,15.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,857,Oscar Piastri,2001-04-06,1,McLaren,7,4,4,0,0,0,12.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,859,Liam Lawson,2002-02-11,215,RB F1 Team,10,5,5,0,0,0,10.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,15,6,6,0,0,0,8.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,9,7,7,0,0,0,6.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,848,Alexander Albon,1996-03-23,3,Williams,11,8,8,0,0,0,4.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,17,9,9,0,0,0,2.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,4,Fernando Alonso,1981-07-29,117,Aston Martin,20,10,10,0,0,0,1.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,16,11,11,0,0,0,0.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,847,George Russell,1998-02-15,131,Mercedes,6,12,12,0,0,0,0.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,807,Nico Hülkenberg,1987-08-19,9036,Audi,13,13,13,0,0,0,0.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,14,14,14,0,0,0,0.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,18,15,15,0,0,0,0.0,Finished
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,832,Carlos Sainz,1994-09-01,3,Williams,12,16,16,0,0,1,0.0,Retired
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,844,Charles Leclerc,1997-10-16,6,Ferrari,4,17,17,0,0,1,0.0,Retired
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,840,Lance Stroll,1998-10-29,117,Aston Martin,20,18,18,0,0,1,0.0,Retired
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,846,Lando Norris,1999-11-13,1,McLaren,8,19,19,0,0,1,0.0,Retired
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,19,20,20,0,0,1,0.0,Retired
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,20,21,20,0,0,1,0.0,Retired
+11606,2026,6,6,Circuit de Monaco,Monaco Grand Prix,2026-06-07,830,Max Verstappen,1997-09-30,9,Red Bull,2,22,20,0,0,1,0.0,Retired
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,1,Lewis Hamilton,1985-01-07,6,Ferrari,2,1,1,1,1,0,25.0,Finished
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,847,George Russell,1998-02-15,131,Mercedes,1,2,2,0,1,0,18.0,Finished
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,846,Lando Norris,1999-11-13,1,McLaren,4,3,3,0,1,0,15.0,Finished
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,830,Max Verstappen,1997-09-30,9,Red Bull,5,4,4,0,0,0,12.0,Finished
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,857,Oscar Piastri,2001-04-06,1,McLaren,7,5,5,0,0,0,10.0,Finished
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,9111,Isack Hadjar,2004-09-28,9,Red Bull,6,6,6,0,0,0,8.0,Lapped
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,14,7,7,0,0,0,6.0,Lapped
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,859,Liam Lawson,2002-02-11,215,RB F1 Team,8,8,8,0,0,0,4.0,Lapped
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,11,9,9,0,0,0,2.0,Lapped
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,13,10,10,0,0,0,1.0,Lapped
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,12,11,11,0,0,0,0.0,Lapped
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,832,Carlos Sainz,1994-09-01,3,Williams,16,12,12,0,0,0,0.0,Lapped
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,17,13,13,0,0,0,0.0,Lapped
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,19,14,14,0,0,0,0.0,Lapped
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,844,Charles Leclerc,1997-10-16,6,Ferrari,10,15,15,0,0,1,0.0,Retired
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,3,16,16,0,0,1,0.0,Retired
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,15,17,17,0,0,1,0.0,Retired
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,848,Alexander Albon,1996-03-23,3,Williams,18,18,18,0,0,0,0.0,Lapped
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,4,Fernando Alonso,1981-07-29,117,Aston Martin,20,19,19,0,0,1,0.0,Retired
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,807,Nico Hülkenberg,1987-08-19,9036,Audi,9,20,20,0,0,1,0.0,Retired
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,20,21,20,0,0,1,0.0,Retired
+11607,2026,7,4,Circuit de Barcelona-Catalunya,Barcelona Grand Prix,2026-06-14,840,Lance Stroll,1998-10-29,117,Aston Martin,20,22,20,0,0,1,0.0,Retired
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,847,George Russell,1998-02-15,131,Mercedes,1,1,1,1,1,0,25.0,Finished
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,830,Max Verstappen,1997-09-30,9,Red Bull,5,2,2,0,1,0,18.0,Finished
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,4,3,3,0,1,0,15.0,Finished
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,857,Oscar Piastri,2001-04-06,1,McLaren,7,4,4,0,0,0,12.0,Finished
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,1,Lewis Hamilton,1985-01-07,6,Ferrari,3,5,5,0,0,0,10.0,Finished
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,9111,Isack Hadjar,2004-09-28,9,Red Bull,8,6,6,0,0,0,8.0,Finished
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,846,Lando Norris,1999-11-13,1,McLaren,6,7,7,0,0,0,6.0,Finished
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,844,Charles Leclerc,1997-10-16,6,Ferrari,2,8,8,0,0,0,4.0,Finished
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,859,Liam Lawson,2002-02-11,215,RB F1 Team,9,9,9,0,0,0,2.0,Lapped
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,10,10,10,0,0,0,1.0,Lapped
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,12,11,11,0,0,0,0.0,Lapped
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,807,Nico Hülkenberg,1987-08-19,9036,Audi,14,12,12,0,0,0,0.0,Lapped
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,11,13,13,0,0,0,0.0,Lapped
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,13,14,14,0,0,0,0.0,Lapped
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,16,15,15,0,0,0,0.0,Lapped
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,15,16,16,0,0,0,0.0,Lapped
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,848,Alexander Albon,1996-03-23,3,Williams,18,17,17,0,0,0,0.0,Lapped
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,4,Fernando Alonso,1981-07-29,117,Aston Martin,20,18,18,0,0,0,0.0,Lapped
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,840,Lance Stroll,1998-10-29,117,Aston Martin,20,19,19,0,0,1,0.0,Retired
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,832,Carlos Sainz,1994-09-01,3,Williams,17,20,20,0,0,1,0.0,Retired
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,19,21,20,0,0,1,0.0,Retired
+11608,2026,8,70,Red Bull Ring,Austrian Grand Prix,2026-06-28,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,20,22,20,0,0,1,0.0,Retired
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,844,Charles Leclerc,1997-10-16,6,Ferrari,2,1,1,1,1,0,25.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,847,George Russell,1998-02-15,131,Mercedes,4,2,2,0,1,0,18.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,1,Lewis Hamilton,1985-01-07,6,Ferrari,3,3,3,0,1,0,15.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,846,Lando Norris,1999-11-13,1,McLaren,6,4,4,0,0,0,12.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,9111,Isack Hadjar,2004-09-28,9,Red Bull,5,5,5,0,0,0,10.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,859,Liam Lawson,2002-02-11,215,RB F1 Team,10,6,6,0,0,0,8.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,9,7,7,0,0,0,6.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,11,8,8,0,0,0,4.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,19,9,9,0,0,0,2.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,15,10,10,0,0,0,1.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,857,Oscar Piastri,2001-04-06,1,McLaren,8,11,11,0,0,0,0.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,13,12,12,0,0,0,0.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,17,13,13,0,0,0,0.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,20,14,14,0,0,0,0.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,1,15,15,0,0,0,0.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,18,16,16,0,0,0,0.0,Finished
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,832,Carlos Sainz,1994-09-01,3,Williams,14,17,17,0,0,0,0.0,Lapped
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,4,Fernando Alonso,1981-07-29,117,Aston Martin,20,18,18,0,0,0,0.0,Lapped
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,840,Lance Stroll,1998-10-29,117,Aston Martin,20,19,19,0,0,0,0.0,Lapped
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,830,Max Verstappen,1997-09-30,9,Red Bull,7,20,20,0,0,1,0.0,Retired
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,848,Alexander Albon,1996-03-23,3,Williams,16,21,20,0,0,1,0.0,Retired
+11609,2026,9,9,Silverstone Circuit,British Grand Prix,2026-07-05,807,Nico Hülkenberg,1987-08-19,9036,Audi,12,22,20,0,0,1,0.0,Retired
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,1,1,1,1,1,0,25.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,844,Charles Leclerc,1997-10-16,6,Ferrari,4,2,2,0,1,0,18.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,830,Max Verstappen,1997-09-30,9,Red Bull,2,3,3,0,1,0,15.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,1,Lewis Hamilton,1985-01-07,6,Ferrari,5,4,4,0,0,0,12.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,857,Oscar Piastri,2001-04-06,1,McLaren,6,5,5,0,0,0,10.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,9111,Isack Hadjar,2004-09-28,9,Red Bull,20,6,6,0,0,0,8.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,846,Lando Norris,1999-11-13,1,McLaren,13,7,7,0,0,0,6.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,8,8,8,0,0,0,4.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,7,9,9,0,0,0,2.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,11,10,10,0,0,0,1.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,10,11,11,0,0,0,0.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,859,Liam Lawson,2002-02-11,215,RB F1 Team,9,12,12,0,0,0,0.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,807,Nico Hülkenberg,1987-08-19,9036,Audi,12,13,13,0,0,0,0.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,14,14,14,0,0,0,0.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,848,Alexander Albon,1996-03-23,3,Williams,15,15,15,0,0,0,0.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,832,Carlos Sainz,1994-09-01,3,Williams,19,16,16,0,0,0,0.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,16,17,17,0,0,0,0.0,Finished
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,17,18,18,0,0,0,0.0,Lapped
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,4,Fernando Alonso,1981-07-29,117,Aston Martin,20,19,19,0,0,0,0.0,Lapped
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,840,Lance Stroll,1998-10-29,117,Aston Martin,20,20,20,0,0,1,0.0,Retired
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,18,21,20,0,0,1,0.0,Retired
+11610,2026,10,13,Circuit de Spa-Francorchamps,Belgian Grand Prix,2026-07-19,847,George Russell,1998-02-15,131,Mercedes,3,22,20,0,0,1,0.0,Retired
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,846,Lando Norris,1999-11-13,1,McLaren,1,1,1,1,1,0,25.0,Finished
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,830,Max Verstappen,1997-09-30,9,Red Bull,4,2,2,0,1,0,18.0,Finished
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,7,3,3,0,1,0,15.0,Finished
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,844,Charles Leclerc,1997-10-16,6,Ferrari,2,4,4,0,0,0,12.0,Finished
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,1,Lewis Hamilton,1985-01-07,6,Ferrari,5,5,5,0,0,0,10.0,Finished
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,9111,Isack Hadjar,2004-09-28,9,Red Bull,8,6,6,0,0,0,8.0,Finished
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,847,George Russell,1998-02-15,131,Mercedes,6,7,7,0,0,0,6.0,Finished
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,859,Liam Lawson,2002-02-11,215,RB F1 Team,11,8,8,0,0,0,4.0,Lapped
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,807,Nico Hülkenberg,1987-08-19,9036,Audi,10,9,9,0,0,0,2.0,Lapped
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,9,10,10,0,0,0,1.0,Lapped
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,14,11,11,0,0,0,0.0,Lapped
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,12,12,12,0,0,0,0.0,Lapped
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,840,Lance Stroll,1998-10-29,117,Aston Martin,20,13,13,0,0,0,0.0,Lapped
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,4,Fernando Alonso,1981-07-29,117,Aston Martin,16,14,14,0,0,0,0.0,Lapped
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,13,15,15,0,0,0,0.0,Lapped
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,15,16,16,0,0,0,0.0,Lapped
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,848,Alexander Albon,1996-03-23,3,Williams,19,17,17,0,0,0,0.0,Lapped
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,832,Carlos Sainz,1994-09-01,3,Williams,18,18,18,0,0,0,0.0,Lapped
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,17,19,19,0,0,0,0.0,Lapped
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,857,Oscar Piastri,2001-04-06,1,McLaren,3,20,20,0,0,1,0.0,Retired
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,20,21,20,0,0,1,0.0,Retired
+11611,2026,11,11,Hungaroring,Hungarian Grand Prix,2026-07-26,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,20,22,20,0,0,1,0.0,Retired
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,846,Lando Norris,1999-11-13,1,McLaren,1,1,1,1,1,0,25.0,Finished
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,3,2,2,0,1,0,18.0,Finished
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,847,George Russell,1998-02-15,131,Mercedes,2,3,3,0,1,0,15.0,Finished
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,1,Lewis Hamilton,1985-01-07,6,Ferrari,5,4,4,0,0,0,12.0,Finished
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,844,Charles Leclerc,1997-10-16,6,Ferrari,6,5,5,0,0,0,10.0,Finished
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,857,Oscar Piastri,2001-04-06,1,McLaren,4,6,6,0,0,0,8.0,Finished
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,859,Liam Lawson,2002-02-11,9,Red Bull,8,7,7,0,0,0,6.0,Finished
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,807,Nico Hülkenberg,1987-08-19,9036,Audi,13,8,8,0,0,0,4.0,Lapped
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,4,Fernando Alonso,1981-07-29,117,Aston Martin,18,9,9,0,0,0,2.0,Lapped
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,11,10,10,0,0,0,1.0,Lapped
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,852,Yuki Tsunoda,2000-05-11,215,RB F1 Team,12,11,11,0,0,0,0.0,Lapped
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,10,12,12,0,0,0,0.0,Lapped
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,9,13,13,0,0,0,0.0,Lapped
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,14,14,14,0,0,0,0.0,Lapped
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,20,15,15,0,0,0,0.0,Lapped
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,832,Carlos Sainz,1994-09-01,3,Williams,17,16,16,0,0,0,0.0,Lapped
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,848,Alexander Albon,1996-03-23,3,Williams,16,17,17,0,0,1,0.0,Retired
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,20,18,18,0,0,1,0.0,Retired
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,15,19,19,0,0,1,0.0,Retired
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,840,Lance Stroll,1998-10-29,117,Aston Martin,19,20,20,0,0,1,0.0,Retired
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,20,21,20,0,0,1,0.0,Retired
+11612,2026,12,39,Circuit Park Zandvoort,Dutch Grand Prix,2026-08-23,830,Max Verstappen,1997-09-30,9,Red Bull,7,22,20,0,0,1,0.0,Retired
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,19,1,1,1,1,0,25.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,847,George Russell,1998-02-15,131,Mercedes,2,2,2,0,1,0,18.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,830,Max Verstappen,1997-09-30,9,Red Bull,5,3,3,0,1,0,15.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,846,Lando Norris,1999-11-13,1,McLaren,8,4,4,0,0,0,12.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,857,Oscar Piastri,2001-04-06,1,McLaren,6,5,5,0,0,0,10.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,1,Lewis Hamilton,1985-01-07,6,Ferrari,4,6,6,0,0,0,8.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,1,7,7,0,0,0,6.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,9,8,8,0,0,0,4.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,7,9,9,0,0,0,2.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,852,Yuki Tsunoda,2000-05-11,215,RB F1 Team,15,10,10,0,0,0,1.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,10,11,11,0,0,0,0.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,807,Nico Hülkenberg,1987-08-19,9036,Audi,12,12,12,0,0,0,0.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,832,Carlos Sainz,1994-09-01,3,Williams,13,13,13,0,0,0,0.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,859,Liam Lawson,2002-02-11,9,Red Bull,20,14,14,0,0,0,0.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,11,15,15,0,0,0,0.0,Finished
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,14,16,16,0,0,0,0.0,Lapped
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,848,Alexander Albon,1996-03-23,3,Williams,20,17,17,0,0,0,0.0,Lapped
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,17,18,18,0,0,0,0.0,Lapped
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,16,19,19,0,0,0,0.0,Lapped
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,840,Lance Stroll,1998-10-29,117,Aston Martin,18,20,20,0,0,1,0.0,Retired
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,4,Fernando Alonso,1981-07-29,117,Aston Martin,20,21,20,0,0,1,0.0,Retired
+11613,2026,13,14,Autodromo Nazionale di Monza,Italian Grand Prix,2026-09-06,844,Charles Leclerc,1997-10-16,6,Ferrari,3,22,20,0,0,1,0.0,Retired
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,2,1,1,1,1,0,25.0,Finished
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,830,Max Verstappen,1997-09-30,9,Red Bull,3,2,2,0,1,0,18.0,Finished
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,846,Lando Norris,1999-11-13,1,McLaren,1,3,3,0,1,0,15.0,Finished
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,844,Charles Leclerc,1997-10-16,6,Ferrari,5,4,4,0,0,0,12.0,Finished
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,847,George Russell,1998-02-15,131,Mercedes,6,5,5,0,0,0,10.0,Finished
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,859,Liam Lawson,2002-02-11,9,Red Bull,8,6,6,0,0,0,8.0,Finished
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,9,7,7,0,0,0,6.0,Finished
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,857,Oscar Piastri,2001-04-06,1,McLaren,7,8,8,0,0,0,4.0,Finished
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,10,9,9,0,0,0,2.0,Lapped
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,807,Nico Hülkenberg,1987-08-19,9036,Audi,11,10,10,0,0,0,1.0,Lapped
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,13,11,11,0,0,0,0.0,Lapped
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,14,12,12,0,0,0,0.0,Lapped
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,12,13,13,0,0,0,0.0,Lapped
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,852,Yuki Tsunoda,2000-05-11,215,RB F1 Team,15,14,14,0,0,0,0.0,Lapped
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,848,Alexander Albon,1996-03-23,3,Williams,16,15,15,0,0,0,0.0,Lapped
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,20,16,16,0,0,0,0.0,Lapped
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,4,Fernando Alonso,1981-07-29,117,Aston Martin,17,17,17,0,0,0,0.0,Lapped
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,19,18,18,0,0,0,0.0,Lapped
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,832,Carlos Sainz,1994-09-01,3,Williams,20,19,19,0,0,1,0.0,Retired
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,18,20,20,0,0,1,0.0,Retired
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,840,Lance Stroll,1998-10-29,117,Aston Martin,20,21,20,0,0,1,0.0,Retired
+11614,2026,14,9045,Madring,Spanish Grand Prix,2026-09-13,1,Lewis Hamilton,1985-01-07,6,Ferrari,4,22,20,0,0,1,0.0,Retired
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,847,George Russell,1998-02-15,131,Mercedes,1,1,1,1,1,0,25.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,830,Max Verstappen,1997-09-30,9,Red Bull,8,2,2,0,1,0,18.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,9111,Isack Hadjar,2004-09-28,9,Red Bull,4,3,3,0,1,0,15.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,844,Charles Leclerc,1997-10-16,6,Ferrari,2,4,4,0,0,0,12.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,16,5,5,0,0,0,10.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,1,Lewis Hamilton,1985-01-07,6,Ferrari,6,6,6,0,0,0,8.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,15,7,7,0,0,0,6.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,13,8,8,0,0,0,4.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,10,9,9,0,0,0,2.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,832,Carlos Sainz,1994-09-01,3,Williams,14,10,10,0,0,0,1.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,807,Nico Hülkenberg,1987-08-19,9036,Audi,18,11,11,0,0,0,0.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,859,Liam Lawson,2002-02-11,215,RB F1 Team,11,12,12,0,0,0,0.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,857,Oscar Piastri,2001-04-06,1,McLaren,3,13,13,0,0,0,0.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,20,14,14,0,0,0,0.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,17,15,15,0,0,0,0.0,Finished
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,19,16,16,0,0,1,0.0,Retired
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,9,17,17,0,0,1,0.0,Retired
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,7,18,18,0,0,1,0.0,Retired
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,846,Lando Norris,1999-11-13,1,McLaren,5,19,19,0,0,1,0.0,Retired
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,848,Alexander Albon,1996-03-23,3,Williams,12,20,20,0,0,1,0.0,Retired
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,4,Fernando Alonso,1981-07-29,117,Aston Martin,20,21,20,0,0,1,0.0,Retired
+11615,2026,15,73,Baku City Circuit,Azerbaijan Grand Prix,2026-09-26,840,Lance Stroll,1998-10-29,117,Aston Martin,20,22,20,0,0,1,0.0,Retired
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,830,Max Verstappen,1997-09-30,9,Red Bull,1,1,1,1,1,0,25.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,3,2,2,0,1,0,18.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,1,Lewis Hamilton,1985-01-07,6,Ferrari,2,3,3,0,1,0,15.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,844,Charles Leclerc,1997-10-16,6,Ferrari,4,4,4,0,0,0,12.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,9111,Isack Hadjar,2004-09-28,9,Red Bull,8,5,5,0,0,0,10.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,857,Oscar Piastri,2001-04-06,1,McLaren,6,6,6,0,0,0,8.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,859,Liam Lawson,2002-02-11,215,RB F1 Team,11,7,7,0,0,0,6.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,4,Fernando Alonso,1981-07-29,117,Aston Martin,12,8,8,0,0,0,4.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,846,Lando Norris,1999-11-13,1,McLaren,5,9,9,0,0,0,2.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,20,10,10,0,0,0,1.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,807,Nico Hülkenberg,1987-08-19,9036,Audi,15,11,11,0,0,0,0.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,840,Lance Stroll,1998-10-29,117,Aston Martin,14,12,12,0,0,0,0.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,20,13,13,0,0,0,0.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,16,14,14,0,0,0,0.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,17,15,15,0,0,0,0.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,9,16,16,0,0,0,0.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,832,Carlos Sainz,1994-09-01,3,Williams,13,17,17,0,0,0,0.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,10,18,18,0,0,0,0.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,20,19,19,0,0,0,0.0,Finished
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,847,George Russell,1998-02-15,131,Mercedes,7,20,20,0,0,1,0.0,Retired
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,848,Alexander Albon,1996-03-23,3,Williams,18,21,20,0,0,1,0.0,Retired
+11616,2026,16,2,Sepang International Circuit,Bahrain Grand Prix in Malaysia,2026-10-04,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,19,22,20,0,0,1,0.0,Retired
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,830,Max Verstappen,1997-09-30,9,Red Bull,1,1,1,1,1,0,25.0,Finished
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,844,Charles Leclerc,1997-10-16,6,Ferrari,2,2,2,0,1,0,18.0,Finished
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,4,3,3,0,1,0,15.0,Finished
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,846,Lando Norris,1999-11-13,1,McLaren,5,4,4,0,0,0,12.0,Finished
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,857,Oscar Piastri,2001-04-06,1,McLaren,6,5,5,0,0,0,10.0,Finished
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,1,Lewis Hamilton,1985-01-07,6,Ferrari,3,6,6,0,0,0,8.0,Finished
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,859,Liam Lawson,2002-02-11,215,RB F1 Team,8,7,7,0,0,0,6.0,Finished
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,807,Nico Hülkenberg,1987-08-19,9036,Audi,10,8,8,0,0,0,4.0,Finished
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,847,George Russell,1998-02-15,131,Mercedes,19,9,9,0,0,0,2.0,Finished
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,9111,Isack Hadjar,2004-09-28,9,Red Bull,20,10,10,0,0,0,1.0,Finished
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,7,11,11,0,0,0,0.0,Lapped
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,11,12,12,0,0,0,0.0,Lapped
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,12,13,13,0,0,0,0.0,Lapped
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,832,Carlos Sainz,1994-09-01,3,Williams,13,14,14,0,0,0,0.0,Lapped
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,9,15,15,0,0,0,0.0,Lapped
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,4,Fernando Alonso,1981-07-29,117,Aston Martin,20,16,16,0,0,0,0.0,Lapped
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,17,17,17,0,0,0,0.0,Lapped
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,848,Alexander Albon,1996-03-23,3,Williams,16,18,18,0,0,1,0.0,Retired
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,18,19,19,0,0,0,0.0,Lapped
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,840,Lance Stroll,1998-10-29,117,Aston Martin,20,20,20,0,0,1,0.0,Retired
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,15,21,20,0,0,1,0.0,Retired
+11617,2026,17,15,Marina Bay Street Circuit,Singapore Grand Prix,2026-10-11,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,14,22,20,0,0,1,0.0,Retired
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,1,1,1,1,1,0,25.0,Finished
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,844,Charles Leclerc,1997-10-16,6,Ferrari,4,2,2,0,1,0,18.0,Finished
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,830,Max Verstappen,1997-09-30,9,Red Bull,2,3,3,0,1,0,15.0,Finished
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,1,Lewis Hamilton,1985-01-07,6,Ferrari,5,4,4,0,0,0,12.0,Finished
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,846,Lando Norris,1999-11-13,1,McLaren,8,5,5,0,0,0,10.0,Finished
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,9111,Isack Hadjar,2004-09-28,9,Red Bull,3,6,6,0,0,0,8.0,Finished
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,857,Oscar Piastri,2001-04-06,1,McLaren,7,7,7,0,0,0,6.0,Finished
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,847,George Russell,1998-02-15,131,Mercedes,6,8,8,0,0,0,4.0,Finished
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,859,Liam Lawson,2002-02-11,215,RB F1 Team,9,9,9,0,0,0,2.0,Finished
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,10,10,10,0,0,0,1.0,Finished
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,807,Nico Hülkenberg,1987-08-19,9036,Audi,11,11,11,0,0,0,0.0,Finished
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,14,12,12,0,0,0,0.0,Lapped
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,20,13,13,0,0,0,0.0,Lapped
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,839,Esteban Ocon,1996-09-17,210,Haas F1 Team,15,14,14,0,0,0,0.0,Lapped
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,840,Lance Stroll,1998-10-29,117,Aston Martin,20,15,15,0,0,0,0.0,Lapped
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,4,Fernando Alonso,1981-07-29,117,Aston Martin,12,16,16,0,0,0,0.0,Lapped
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,848,Alexander Albon,1996-03-23,3,Williams,17,17,17,0,0,0,0.0,Lapped
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,832,Carlos Sainz,1994-09-01,3,Williams,16,18,18,0,0,0,0.0,Lapped
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,18,19,19,0,0,0,0.0,Lapped
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,19,20,20,0,0,1,0.0,Retired
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,20,21,20,0,0,1,0.0,Retired
+11618,2026,18,69,Circuit of the Americas,United States Grand Prix,2026-10-25,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,13,22,20,0,0,1,0.0,Retired
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,830,Max Verstappen,1997-09-30,9,Red Bull,5,1,1,1,1,0,25.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,1,Lewis Hamilton,1985-01-07,6,Ferrari,1,2,2,0,1,0,18.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,4,3,3,0,1,0,15.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,844,Charles Leclerc,1997-10-16,6,Ferrari,3,4,4,0,0,0,12.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,846,Lando Norris,1999-11-13,1,McLaren,6,5,5,0,0,0,10.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,847,George Russell,1998-02-15,131,Mercedes,2,6,6,0,0,0,8.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,859,Liam Lawson,2002-02-11,215,RB F1 Team,20,7,7,0,0,0,6.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,13,8,8,0,0,0,4.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,9111,Isack Hadjar,2004-09-28,9,Red Bull,7,9,9,0,0,0,2.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,9113,Ryo Hirakawa,1994-03-07,210,Haas F1 Team,18,10,10,0,0,0,1.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,848,Alexander Albon,1996-03-23,3,Williams,16,11,11,0,0,0,0.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,832,Carlos Sainz,1994-09-01,3,Williams,15,12,12,0,0,0,0.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,857,Oscar Piastri,2001-04-06,1,McLaren,12,13,13,0,0,0,0.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,807,Nico Hülkenberg,1987-08-19,9036,Audi,10,14,14,0,0,0,0.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,11,15,15,0,0,0,0.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,20,16,16,0,0,0,0.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,9,17,17,0,0,0,0.0,Finished
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,8,18,18,0,0,1,0.0,Retired
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,14,19,19,0,0,1,0.0,Retired
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,20,20,20,0,0,1,0.0,Retired
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,840,Lance Stroll,1998-10-29,117,Aston Martin,19,21,20,0,0,1,0.0,Retired
+11619,2026,19,32,Autódromo Hermanos Rodríguez,Mexico City Grand Prix,2026-11-01,4,Fernando Alonso,1981-07-29,117,Aston Martin,17,22,20,0,0,1,0.0,Retired
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,846,Lando Norris,1999-11-13,1,McLaren,1,1,1,1,1,0,25.0,Finished
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,830,Max Verstappen,1997-09-30,9,Red Bull,20,2,2,0,1,0,18.0,Finished
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,9111,Isack Hadjar,2004-09-28,9,Red Bull,5,3,3,0,1,0,15.0,Finished
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,847,George Russell,1998-02-15,131,Mercedes,7,4,4,0,0,0,12.0,Finished
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,2,5,5,0,0,0,10.0,Finished
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,857,Oscar Piastri,2001-04-06,1,McLaren,10,6,6,0,0,0,8.0,Finished
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,859,Liam Lawson,2002-02-11,215,RB F1 Team,3,7,7,0,0,0,6.0,Finished
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,844,Charles Leclerc,1997-10-16,6,Ferrari,14,8,8,0,0,0,4.0,Finished
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,1,Lewis Hamilton,1985-01-07,6,Ferrari,20,9,9,0,0,0,2.0,Lapped
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,807,Nico Hülkenberg,1987-08-19,9036,Audi,4,10,10,0,0,0,1.0,Lapped
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,18,11,11,0,0,0,0.0,Lapped
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,4,Fernando Alonso,1981-07-29,117,Aston Martin,8,12,12,0,0,0,0.0,Lapped
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,13,13,13,0,0,0,0.0,Lapped
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,15,14,14,0,0,0,0.0,Lapped
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,848,Alexander Albon,1996-03-23,3,Williams,9,15,15,0,0,0,0.0,Lapped
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,19,16,16,0,0,0,0.0,Lapped
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,6,17,17,0,0,0,0.0,Lapped
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,20,18,18,0,0,0,0.0,Lapped
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,832,Carlos Sainz,1994-09-01,3,Williams,12,19,19,0,0,0,0.0,Lapped
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,9114,Rafael Camara,2005-05-05,210,Haas F1 Team,11,20,20,0,0,0,0.0,Lapped
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,840,Lance Stroll,1998-10-29,117,Aston Martin,16,21,20,0,0,1,0.0,Retired
+11620,2026,20,18,Autódromo José Carlos Pace,Brazilian Grand Prix,2026-11-08,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,17,22,20,0,0,1,0.0,Did not start
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,830,Max Verstappen,1997-09-30,9,Red Bull,1,1,1,1,1,0,25.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,846,Lando Norris,1999-11-13,1,McLaren,3,2,2,0,1,0,18.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,857,Oscar Piastri,2001-04-06,1,McLaren,17,3,3,0,1,0,15.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,9109,Andrea Kimi Antonelli,2006-08-25,131,Mercedes,6,4,4,0,0,0,12.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,842,Pierre Gasly,1996-02-07,214,Alpine F1 Team,8,5,5,0,0,0,10.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,861,Franco Colapinto,2003-05-27,214,Alpine F1 Team,9,6,6,0,0,0,8.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,1,Lewis Hamilton,1985-01-07,6,Ferrari,11,7,7,0,0,0,6.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,832,Carlos Sainz,1994-09-01,3,Williams,20,8,8,0,0,0,4.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,847,George Russell,1998-02-15,131,Mercedes,2,9,9,0,0,0,2.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,844,Charles Leclerc,1997-10-16,6,Ferrari,10,10,10,0,0,0,1.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,807,Nico Hülkenberg,1987-08-19,9036,Audi,12,11,11,0,0,0,0.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,9110,Gabriel Bortoleto,2004-10-14,9036,Audi,13,12,12,0,0,0,0.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,860,Oliver Bearman,2005-05-08,210,Haas F1 Team,20,13,13,0,0,0,0.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,859,Liam Lawson,2002-02-11,215,RB F1 Team,7,14,14,0,0,0,0.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,9111,Isack Hadjar,2004-09-28,9,Red Bull,4,15,15,0,0,0,0.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,9114,Rafael Camara,2005-05-05,210,Haas F1 Team,15,16,16,0,0,0,0.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,840,Lance Stroll,1998-10-29,117,Aston Martin,20,17,17,0,0,0,0.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,822,Valtteri Bottas,1989-08-28,9037,Cadillac F1 Team,19,18,18,0,0,0,0.0,Finished
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,4,Fernando Alonso,1981-07-29,117,Aston Martin,18,19,19,0,0,1,0.0,Retired
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,9112,Arvid Lindblad,2007-08-08,215,RB F1 Team,5,20,20,0,0,1,0.0,Retired
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,815,Sergio Pérez,1990-01-26,9037,Cadillac F1 Team,16,21,20,0,0,1,0.0,Retired
+11621,2026,21,80,Las Vegas Strip Street Circuit,Las Vegas Grand Prix,2026-11-22,848,Alexander Albon,1996-03-23,3,Williams,14,22,20,0,0,1,0.0,Did not start

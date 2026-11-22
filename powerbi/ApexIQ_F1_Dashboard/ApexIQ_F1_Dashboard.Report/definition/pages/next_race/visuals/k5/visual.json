@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
-  "name": "k2",
+  "name": "k5",
   "position": {
-    "x": 330,
-    "y": 80,
+    "x": 1020,
+    "y": 395,
     "z": 1000,
     "height": 100,
-    "width": 210,
+    "width": 240,
     "tabOrder": 0
   },
   "visual": {
@@ -20,14 +20,14 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Forecast_2025"
+                      "Entity": "Real_World_Test"
                     }
                   },
-                  "Property": "Forecast Win %"
+                  "Property": "Model Correct"
                 }
               },
-              "queryRef": "Forecast_2025.Forecast Win %",
-              "nativeQueryRef": "Forecast Win %"
+              "queryRef": "Real_World_Test.Model Correct",
+              "nativeQueryRef": "Model Correct"
             }
           ]
         }
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#A66CFF'"
                     }
                   }
                 }
@@ -87,7 +87,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Win probability %'"
+                  "Value": "'Model called the winner'"
                 }
               }
             },

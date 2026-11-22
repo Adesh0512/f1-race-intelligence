@@ -8,7 +8,8 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-ref table Forecast_2025
+ref table Forecast_Upcoming
+ref table Real_World_Test
 ref table Dim_Season
 ref table Race_Predictions
 ref table Classifier_Comparison

@@ -1,21 +1,21 @@
 table Warehouse_Tables
-	lineageTag: d7145ea6-0f72-41f1-a5e7-ea20a40d4800
+	lineageTag: 34ef654f-7cb9-4da4-b18a-b326397b4ae3
 
 	column 'table_name'
 		dataType: string
-		lineageTag: 48f8fe88-8f80-4993-bbd4-d42a6bc539bc
+		lineageTag: 0e5d9843-fd7d-41ee-9baf-d0c147bbb4fb
 		summarizeBy: none
 		sourceColumn: table_name
 
 	column 'table_role'
 		dataType: string
-		lineageTag: 25475d52-472e-4347-9f41-e8204c556903
+		lineageTag: 713b75e2-27ca-42cf-b404-fa403319fb13
 		summarizeBy: none
 		sourceColumn: table_role
 
 	column 'row_count'
 		dataType: int64
-		lineageTag: 777fbb5d-22bc-4616-9df5-6b0f6a4d63f2
+		lineageTag: ba533442-8620-4054-ba7c-d609b1e25665
 		summarizeBy: none
 		sourceColumn: row_count
 

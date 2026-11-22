@@ -1,0 +1,46 @@
+season,round,race_name,predicted_winner,win_probability,actual_winner,pole_sitter,model_correct,pole_correct
+2025,1,Australian Grand Prix,Lando Norris,28.58,Lando Norris,Lando Norris,1,1
+2025,2,Chinese Grand Prix,Oscar Piastri,25.54,Oscar Piastri,Oscar Piastri,1,1
+2025,3,Japanese Grand Prix,Max Verstappen,32.72,Max Verstappen,Max Verstappen,1,1
+2025,4,Bahrain Grand Prix,Oscar Piastri,26.03,Oscar Piastri,Oscar Piastri,1,1
+2025,5,Saudi Arabian Grand Prix,Max Verstappen,31.63,Oscar Piastri,Max Verstappen,0,0
+2025,6,Miami Grand Prix,Max Verstappen,31.14,Oscar Piastri,Max Verstappen,0,0
+2025,7,Emilia Romagna Grand Prix,Oscar Piastri,30.77,Max Verstappen,Oscar Piastri,0,0
+2025,8,Monaco Grand Prix,Lando Norris,27.19,Lando Norris,Lando Norris,1,1
+2025,9,Spanish Grand Prix,Oscar Piastri,29.38,Oscar Piastri,Oscar Piastri,1,1
+2025,10,Canadian Grand Prix,Max Verstappen,27.26,George Russell,George Russell,0,1
+2025,11,Austrian Grand Prix,Lando Norris,26.37,Lando Norris,Lando Norris,1,1
+2025,12,British Grand Prix,Oscar Piastri,28.5,Lando Norris,Max Verstappen,0,0
+2025,13,Belgian Grand Prix,Oscar Piastri,29.08,Oscar Piastri,Lando Norris,1,0
+2025,14,Hungarian Grand Prix,Oscar Piastri,29.09,Lando Norris,Charles Leclerc,0,0
+2025,15,Dutch Grand Prix,Oscar Piastri,31.94,Oscar Piastri,Oscar Piastri,1,1
+2025,16,Italian Grand Prix,Max Verstappen,29.39,Max Verstappen,Max Verstappen,1,1
+2025,17,Azerbaijan Grand Prix,Max Verstappen,31.88,Max Verstappen,Max Verstappen,1,1
+2025,18,Singapore Grand Prix,Max Verstappen,28.26,George Russell,George Russell,0,1
+2025,19,United States Grand Prix,Max Verstappen,31.72,Max Verstappen,Max Verstappen,1,1
+2025,20,Mexico City Grand Prix,Lando Norris,28.16,Lando Norris,Lando Norris,1,1
+2025,21,São Paulo Grand Prix,Lando Norris,28.25,Lando Norris,Lando Norris,1,1
+2025,22,Las Vegas Grand Prix,Max Verstappen,33.03,Max Verstappen,Lando Norris,1,0
+2025,23,Qatar Grand Prix,Oscar Piastri,28.86,Max Verstappen,Oscar Piastri,0,0
+2025,24,Abu Dhabi Grand Prix,Max Verstappen,29.41,Max Verstappen,Max Verstappen,1,1
+2026,1,Australian Grand Prix,George Russell,30.33,George Russell,George Russell,1,1
+2026,2,Chinese Grand Prix,Andrea Kimi Antonelli,27.55,Andrea Kimi Antonelli,Andrea Kimi Antonelli,1,1
+2026,3,Japanese Grand Prix,Andrea Kimi Antonelli,27.19,Andrea Kimi Antonelli,Andrea Kimi Antonelli,1,1
+2026,4,Miami Grand Prix,Max Verstappen,28.63,Andrea Kimi Antonelli,Andrea Kimi Antonelli,0,1
+2026,5,Canadian Grand Prix,George Russell,31.12,Andrea Kimi Antonelli,George Russell,0,0
+2026,6,Monaco Grand Prix,Andrea Kimi Antonelli,30.28,Andrea Kimi Antonelli,Andrea Kimi Antonelli,1,1
+2026,7,Barcelona Grand Prix,George Russell,33.6,Lewis Hamilton,George Russell,0,0
+2026,8,Austrian Grand Prix,George Russell,28.03,George Russell,George Russell,1,1
+2026,9,British Grand Prix,Andrea Kimi Antonelli,32.02,Charles Leclerc,Andrea Kimi Antonelli,0,0
+2026,10,Belgian Grand Prix,Andrea Kimi Antonelli,32.41,Andrea Kimi Antonelli,Andrea Kimi Antonelli,1,1
+2026,11,Hungarian Grand Prix,Lando Norris,27.51,Lando Norris,Lando Norris,1,1
+2026,12,Dutch Grand Prix,Lando Norris,26.25,Lando Norris,Lando Norris,1,1
+2026,13,Italian Grand Prix,George Russell,24.72,Andrea Kimi Antonelli,Pierre Gasly,0,0
+2026,14,Spanish Grand Prix,Lando Norris,32.94,Andrea Kimi Antonelli,Lando Norris,0,0
+2026,15,Azerbaijan Grand Prix,George Russell,26.39,George Russell,George Russell,1,1
+2026,16,Bahrain Grand Prix in Malaysia,Max Verstappen,35.95,Max Verstappen,Max Verstappen,1,1
+2026,17,Singapore Grand Prix,Max Verstappen,36.16,Max Verstappen,Max Verstappen,1,1
+2026,18,United States Grand Prix,Max Verstappen,33.25,Andrea Kimi Antonelli,Andrea Kimi Antonelli,0,1
+2026,19,Mexico City Grand Prix,George Russell,22.82,Max Verstappen,Lewis Hamilton,0,0
+2026,20,Brazilian Grand Prix,Lando Norris,34.6,Lando Norris,Lando Norris,1,1
+2026,21,Las Vegas Grand Prix,Max Verstappen,31.85,Max Verstappen,Max Verstappen,1,1

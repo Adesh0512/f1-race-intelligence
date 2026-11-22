@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
-  "name": "forecast_2025",
-  "displayName": "2. 2025 forecast",
+  "name": "next_race",
+  "displayName": "2. Next race forecast",
   "displayOption": "FitToPage",
   "height": 720,
   "width": 1280,

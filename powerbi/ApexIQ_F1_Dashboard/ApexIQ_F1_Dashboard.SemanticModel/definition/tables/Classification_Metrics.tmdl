@@ -1,15 +1,15 @@
 table Classification_Metrics
-	lineageTag: 148af715-7b9b-4913-9dfa-96f01c4a73b9
+	lineageTag: bdb41127-d2e6-452b-9329-f1066a57e40c
 
 	column 'metric'
 		dataType: string
-		lineageTag: 5442dc02-5239-4b4a-ac33-bc25fd2eaa35
+		lineageTag: f0ac77c9-2e06-4734-a970-18379080f8f1
 		summarizeBy: none
 		sourceColumn: metric
 
 	column 'value'
 		dataType: double
-		lineageTag: 2c198491-f327-45a8-91df-b1fe5e39b85d
+		lineageTag: fda0e9c2-49f9-4484-8f69-d5c8ba0b2533
 		summarizeBy: none
 		sourceColumn: value
 

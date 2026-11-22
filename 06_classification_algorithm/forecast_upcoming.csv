@@ -1,0 +1,45 @@
+season,round,race_name,race_date,circuit_name,driver_name,constructor_name,grid_position,win_probability,predicted_rank
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Max Verstappen,Red Bull,3,23.79,3
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,George Russell,Mercedes,5,3.8,5
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Lando Norris,McLaren,2,24.61,2
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Isack Hadjar,Red Bull,6,1.42,8
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Arvid Lindblad,RB F1 Team,12,0.15,12
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Andrea Kimi Antonelli,Mercedes,1,29.88,1
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Liam Lawson,RB F1 Team,8,0.56,9
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Pierre Gasly,Alpine F1 Team,10,0.19,10
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Franco Colapinto,Alpine F1 Team,15,0.19,11
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Charles Leclerc,Ferrari,4,10.29,4
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Lewis Hamilton,Ferrari,7,1.72,7
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Nico Hülkenberg,Audi,9,0.14,14
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Gabriel Bortoleto,Audi,19,0.05,18
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Alexander Albon,Williams,16,0.06,15
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Rafael Camara,Haas F1 Team,14,0.05,19
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Sergio Pérez,Cadillac F1 Team,20,0.06,16
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Oscar Piastri,McLaren,11,2.69,6
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Fernando Alonso,Aston Martin,17,0.05,20
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Valtteri Bottas,Cadillac F1 Team,21,0.05,21
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Carlos Sainz,Williams,18,0.06,17
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Oliver Bearman,Haas F1 Team,13,0.15,13
+2026,22,Qatar Grand Prix,2026-11-29,Lusail International Circuit,Lance Stroll,Aston Martin,22,0.03,22
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Max Verstappen,Red Bull,3,23.38,3
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,George Russell,Mercedes,5,4.89,5
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Lando Norris,McLaren,2,24.33,2
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Isack Hadjar,Red Bull,6,1.22,8
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Arvid Lindblad,RB F1 Team,12,0.15,13
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Andrea Kimi Antonelli,Mercedes,1,29.33,1
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Liam Lawson,RB F1 Team,8,0.69,9
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Pierre Gasly,Alpine F1 Team,10,0.15,14
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Franco Colapinto,Alpine F1 Team,15,0.18,10
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Charles Leclerc,Ferrari,4,10.12,4
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Lewis Hamilton,Ferrari,7,2.21,7
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Nico Hülkenberg,Audi,9,0.16,12
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Gabriel Bortoleto,Audi,19,0.07,16
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Alexander Albon,Williams,16,0.08,15
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Rafael Camara,Haas F1 Team,14,0.05,19
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Sergio Pérez,Cadillac F1 Team,20,0.05,20
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Oscar Piastri,McLaren,11,2.55,6
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Fernando Alonso,Aston Martin,17,0.05,21
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Valtteri Bottas,Cadillac F1 Team,21,0.07,17
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Carlos Sainz,Williams,18,0.07,18
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Oliver Bearman,Haas F1 Team,13,0.18,11
+2026,23,Abu Dhabi Grand Prix,2026-12-06,Yas Marina Circuit,Lance Stroll,Aston Martin,22,0.03,22

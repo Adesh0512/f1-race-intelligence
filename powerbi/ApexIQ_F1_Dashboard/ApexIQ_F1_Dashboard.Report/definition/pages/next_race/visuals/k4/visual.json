@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "k4",
   "position": {
-    "x": 860,
+    "x": 830,
     "y": 80,
     "z": 1000,
     "height": 100,
-    "width": 150,
+    "width": 180,
     "tabOrder": 0
   },
   "visual": {
@@ -20,14 +20,14 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Forecast_2025"
+                      "Entity": "Real_World_Test"
                     }
                   },
-                  "Property": "Races Forecast"
+                  "Property": "Model Hit %"
                 }
               },
-              "queryRef": "Forecast_2025.Races Forecast",
-              "nativeQueryRef": "Races Forecast"
+              "queryRef": "Real_World_Test.Model Hit %",
+              "nativeQueryRef": "Model Hit %"
             }
           ]
         }
@@ -87,7 +87,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Races forecast'"
+                  "Value": "'Real-world hit % since 2024'"
                 }
               }
             },

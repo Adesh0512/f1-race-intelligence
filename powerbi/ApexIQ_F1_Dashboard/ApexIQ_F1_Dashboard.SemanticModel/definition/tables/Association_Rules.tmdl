@@ -1,51 +1,51 @@
 table Association_Rules
-	lineageTag: 2bac2613-253c-40b0-8d30-ed70c006b6c9
+	lineageTag: 1a7383b1-8dea-48c8-aa8b-523a2a768f86
 
 	measure 'Rules' = COUNTROWS(Association_Rules)
 		formatString: #,0
-		lineageTag: 06c5609e-bdee-498b-9f1d-8ed50de308c8
+		lineageTag: fb5440dc-ce00-41fd-91a2-28eb88eae800
 
 	measure 'Max Lift' = MAX(Association_Rules[lift])
 		formatString: 0.00
-		lineageTag: eb2a8fb2-3161-45a7-96af-cd649e57ffc2
+		lineageTag: ab5255db-b25d-4c7c-9903-78ba96047d94
 
 	measure 'Avg Confidence %' = AVERAGE(Association_Rules[confidence]) * 100
 		formatString: 0.0
-		lineageTag: e97d0e15-fc76-4cce-be72-2ebd268721e7
+		lineageTag: 393262c5-13ae-40f2-8d8c-bedeb9980c78
 
 	column 'antecedents'
 		dataType: string
-		lineageTag: a48494c2-c5af-4d40-9f03-9c4c49d46fde
+		lineageTag: 31dceda4-19a7-4442-808e-7a8db4fd878d
 		summarizeBy: none
 		sourceColumn: antecedents
 
 	column 'consequents'
 		dataType: string
-		lineageTag: 74010459-5341-40a3-8670-27500564faf9
+		lineageTag: 4320abf2-7da9-4044-ada8-c46579a1abc7
 		summarizeBy: none
 		sourceColumn: consequents
 
 	column 'support'
 		dataType: double
-		lineageTag: d63847d1-d77e-4578-9330-66cc5fbf2f77
+		lineageTag: 235fc478-65ee-46f4-af00-e4268b31b9c9
 		summarizeBy: none
 		sourceColumn: support
 
 	column 'confidence'
 		dataType: double
-		lineageTag: ac9085d9-12fa-4e5d-b153-b359bea551bb
+		lineageTag: c4ae93f1-bdbf-4845-a383-7e468f5af882
 		summarizeBy: none
 		sourceColumn: confidence
 
 	column 'lift'
 		dataType: double
-		lineageTag: db7c2c76-ceca-4c7e-918e-5ebe3cb0a88d
+		lineageTag: 99e96e37-f0e5-4c3a-a1a4-570d9ffbd530
 		summarizeBy: none
 		sourceColumn: lift
 
 	column 'rule'
 		dataType: string
-		lineageTag: dbf9450f-e486-49ee-b377-ed12550dd229
+		lineageTag: 8fa26b34-67ca-4622-bf07-b563f832e9df
 		summarizeBy: none
 		sourceColumn: rule
 

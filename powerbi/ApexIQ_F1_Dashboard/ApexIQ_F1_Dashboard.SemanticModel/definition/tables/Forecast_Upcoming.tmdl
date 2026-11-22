@@ -1,0 +1,97 @@
+table Forecast_Upcoming
+	lineageTag: 868aaf0e-d2bd-4cc8-acef-aa4cf0d24947
+
+	measure 'Forecast Winner' = IF(HASONEVALUE(Forecast_Upcoming[race]), CALCULATE(MAX(Forecast_Upcoming[driver_name]), Forecast_Upcoming[predicted_rank] = 1), "Pick one race")
+		lineageTag: 0ce7881d-7650-44d1-b6f2-b353189da3b3
+
+	measure 'Forecast Win %' = IF(HASONEVALUE(Forecast_Upcoming[race]), CALCULATE(MAX(Forecast_Upcoming[win_probability]), Forecast_Upcoming[predicted_rank] = 1))
+		formatString: 0.0
+		lineageTag: 1a37820c-6259-4a66-a783-043f414b9d01
+
+	measure 'Main Rival' = IF(HASONEVALUE(Forecast_Upcoming[race]), CALCULATE(MAX(Forecast_Upcoming[driver_name]), Forecast_Upcoming[predicted_rank] = 2), "Pick one race")
+		lineageTag: 389ff77c-136e-4afa-af18-4512b9a94bd1
+
+	measure 'Expected Wins' = SUM(Forecast_Upcoming[win_probability]) / 100
+		formatString: 0.0
+		lineageTag: 2be704ef-536d-4276-aa0f-a62230ec3ff5
+
+	measure 'Races Forecast' = DISTINCTCOUNT(Forecast_Upcoming[round])
+		formatString: 0
+		lineageTag: d2e55be3-0030-49ab-9bf6-357f2d088358
+
+	column 'season'
+		dataType: int64
+		lineageTag: 28e7fea6-09ef-465d-88c9-53011e563f65
+		summarizeBy: none
+		sourceColumn: season
+
+	column 'round'
+		dataType: int64
+		lineageTag: 95f7da85-bdd4-4184-8b95-a098d3165519
+		summarizeBy: none
+		sourceColumn: round
+
+	column 'race_name'
+		dataType: string
+		lineageTag: deb3d21d-d881-4adc-be25-79fb11764f3e
+		summarizeBy: none
+		sourceColumn: race_name
+
+	column 'race_date'
+		dataType: string
+		lineageTag: 974cf9d7-60f7-4cf8-b3f3-aa261c4b1d0b
+		summarizeBy: none
+		sourceColumn: race_date
+
+	column 'circuit_name'
+		dataType: string
+		lineageTag: a2655b04-8343-41af-9075-587687d9656b
+		summarizeBy: none
+		sourceColumn: circuit_name
+
+	column 'driver_name'
+		dataType: string
+		lineageTag: 042f644c-42fb-4fd8-88cf-77e18be79875
+		summarizeBy: none
+		sourceColumn: driver_name
+
+	column 'constructor_name'
+		dataType: string
+		lineageTag: 7482111e-ae47-40aa-8498-4195ec46856d
+		summarizeBy: none
+		sourceColumn: constructor_name
+
+	column 'projected_grid'
+		dataType: int64
+		lineageTag: 2a60510e-d1b4-4e38-b739-650fb14d9a68
+		summarizeBy: none
+		sourceColumn: projected_grid
+
+	column 'win_probability'
+		dataType: double
+		lineageTag: 0fbe3655-5829-42db-9d76-2dc11d3b556b
+		summarizeBy: none
+		sourceColumn: win_probability
+
+	column 'predicted_rank'
+		dataType: int64
+		lineageTag: 80dba7da-ddb9-414f-b8ab-ebad5d430a2f
+		summarizeBy: none
+		sourceColumn: predicted_rank
+
+	column 'race'
+		dataType: string
+		lineageTag: 4835c745-50b1-4ece-befd-8072be258af7
+		summarizeBy: none
+		sourceColumn: race
+
+	partition Forecast_Upcoming = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("xZhdT9swFIb/isX1iPLRNsnu2k4UtBY6mJgmxsVpYsDDdZDtAuPXz7GjpnFBJBuKb5CdYPvp8etz/Obq6iD0w9HBJ3QQhuXfbyCBoxkHlqMlJ8/6jfqPwyA4DNOyN98IIBSdMIk5A0kKBhRNCc82RJbvF/CMLjEXEh4eMCufnOMcTTaUlu1ITxh5cVr3ttN/RmUb7TFcf0IfzznDBb/F6HwjBDZsC8wznGNRtocaz0u2bUeUczW0QKcF50RzLbI5cBNWvUI48EZB3XMDeSIgu0fHkP8Gbm+4XijwBnqpxCHkmD+SHM0Jy1cUco05QUcB+o5hrRn1Or4XDOueK1SWcwzoK1kTNGayYEqgxFao2fXUS5K650ijBNZoDk+iYPthTUxUh3rF1CHlkmDOMZqBoH90kOkDYbihAL9SQFr3HMEeqbFZgaYFBUUpizeAhw1glxqY3gGnWKA5zqgSqf4NKt7AtW4HJqCemWvgUqv4iQiVqtaESiPXHczY5Ko43HYcUZ4StfnHvza+f5PRe8xWmN9qCWxysj1Hat9NXF3GcwYrTjBFk4LLguJKqRVmUHH6JqU6zf4UP6vRmKMxXZmN/0FUVoW1SaajinRUnytHpOdwAyqgU1gDh/LBMYBonPpBI6ouc+qF0iUp0LJUKk45ftGpAHIVWch2mUO/Ed+RQ+YzkakZlgSENKd+50pVpVBvlG6vLq4KQPm4vPqNacGEOVVCZSy0AC6JgY13dRC6LFeXQKV6RVQakBLEmyoIGsRO65UqV4VAF0DYy14ySBpidVkIzih5VDlrgoGvgb2aDaLGtTVy61UyjC4kL8zV3xZsWN2w/ajudUXVQ8erDfpyByvyKm54aDbupwqUWpww6G5Po8Syp+WkFeGrq38wZQtzOvCS1HKnPUO28KZRZHnTnhFbONPQdqY9I3b0pe402cmVmo0P3GmzhSc1VT51xtjBkQ7ti37PqB39aGIb6J5x27lRc7LcBfV9Lxp65pIUO2Ns60RH9kezvgtmKx8a2+6j7xTa0oUmtgvtmfM/PGjPpN0d6J5b6pm4jf8cDi3/2Xe67+w+3VX6rt4ztk1d37WpjfOM7Q9mfYu0ve9M7G/P/buQf3Sd74Je/wU=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [season = _t, round = _t, race_name = _t, race_date = _t, circuit_name = _t, driver_name = _t, constructor_name = _t, projected_grid = _t, win_probability = _t, predicted_rank = _t, race = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"season", Int64.Type}, {"round", Int64.Type}, {"race_name", type text}, {"race_date", type text}, {"circuit_name", type text}, {"driver_name", type text}, {"constructor_name", type text}, {"projected_grid", Int64.Type}, {"win_probability", type number}, {"predicted_rank", Int64.Type}, {"race", type text}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
-  "name": "expected",
+  "name": "prob",
   "position": {
-    "x": 530,
+    "x": 20,
     "y": 195,
     "z": 1000,
-    "height": 300,
-    "width": 470,
+    "height": 505,
+    "width": 480,
     "tabOrder": 0
   },
   "visual": {
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Forecast_2025"
+                      "Entity": "Forecast_Upcoming"
                     }
                   },
                   "Property": "driver_name"
                 }
               },
-              "queryRef": "Forecast_2025.driver_name",
+              "queryRef": "Forecast_Upcoming.driver_name",
               "nativeQueryRef": "driver_name"
             }
           ]
@@ -35,17 +35,22 @@
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Aggregation": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "Forecast_2025"
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Forecast_Upcoming"
+                        }
+                      },
+                      "Property": "win_probability"
                     }
                   },
-                  "Property": "Expected Wins"
+                  "Function": 1
                 }
               },
-              "queryRef": "Forecast_2025.Expected Wins",
-              "nativeQueryRef": "Expected Wins"
+              "queryRef": "Avg(Forecast_Upcoming.win_probability)",
+              "nativeQueryRef": "Avg of win_probability"
             }
           ]
         }
@@ -54,13 +59,18 @@
         "sort": [
           {
             "field": {
-              "Measure": {
+              "Aggregation": {
                 "Expression": {
-                  "SourceRef": {
-                    "Entity": "Forecast_2025"
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Forecast_Upcoming"
+                      }
+                    },
+                    "Property": "win_probability"
                   }
                 },
-                "Property": "Expected Wins"
+                "Function": 1
               }
             },
             "direction": "Descending"
@@ -117,7 +127,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Expected wins over the selection'"
+                  "Value": "'Win probability (%), selected race'"
                 }
               }
             },

@@ -87,8 +87,12 @@ FROM ML.RACE_PREDICTIONS
 QUALIFY ROW_NUMBER() OVER (PARTITION BY race_id ORDER BY win_probability DESC) = 1
 ORDER BY season DESC, round DESC;
 
--- 11. 2025 forecast: predicted winner of every upcoming Grand Prix
-SELECT round, race_name, driver_name AS forecast_winner, constructor_name, ROUND(win_probability, 1) AS win_pct
-FROM ML.RACE_FORECAST_2025
+-- 11. Next-race forecast: predicted winner of each upcoming Grand Prix
+SELECT season, race_name, race_date, driver_name AS forecast_winner, constructor_name, ROUND(win_probability, 1) AS win_pct
+FROM ML.RACE_FORECAST_UPCOMING
 WHERE predicted_rank = 1
-ORDER BY round;
+ORDER BY race_date;
+
+-- 12. Real-world test: races since 2024 called before they happened, model vs. pole-sitter
+SELECT COUNT(*) AS races, SUM(model_correct) AS model_correct, SUM(pole_correct) AS pole_correct
+FROM ML.REAL_WORLD_TEST;

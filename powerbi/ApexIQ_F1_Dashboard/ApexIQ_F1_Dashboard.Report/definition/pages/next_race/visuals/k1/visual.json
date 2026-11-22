@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
-  "name": "k3",
+  "name": "k1",
   "position": {
-    "x": 550,
+    "x": 20,
     "y": 80,
     "z": 1000,
     "height": 100,
@@ -20,14 +20,14 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Forecast_2025"
+                      "Entity": "Forecast_Upcoming"
                     }
                   },
-                  "Property": "Main Rival"
+                  "Property": "Forecast Winner"
                 }
               },
-              "queryRef": "Forecast_2025.Main Rival",
-              "nativeQueryRef": "Main Rival"
+              "queryRef": "Forecast_Upcoming.Forecast Winner",
+              "nativeQueryRef": "Forecast Winner"
             }
           ]
         }
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2ECC71'"
+                      "Value": "'#A66CFF'"
                     }
                   }
                 }
@@ -87,7 +87,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Main rival'"
+                  "Value": "'Forecast winner'"
                 }
               }
             },

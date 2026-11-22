@@ -1,33 +1,33 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
-  "name": "s_race",
+  "name": "k3",
   "position": {
-    "x": 1020,
+    "x": 540,
     "y": 80,
     "z": 1000,
-    "height": 620,
-    "width": 240,
+    "height": 100,
+    "width": 280,
     "tabOrder": 0
   },
   "visual": {
-    "visualType": "slicer",
+    "visualType": "card",
     "query": {
       "queryState": {
         "Values": {
           "projections": [
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Forecast_2025"
+                      "Entity": "Forecast_Upcoming"
                     }
                   },
-                  "Property": "race"
+                  "Property": "Main Rival"
                 }
               },
-              "queryRef": "Forecast_2025.race",
-              "nativeQueryRef": "race"
+              "queryRef": "Forecast_Upcoming.Main Rival",
+              "nativeQueryRef": "Main Rival"
             }
           ]
         }
@@ -35,54 +35,37 @@
     },
     "drillFilterOtherVisuals": true,
     "objects": {
-      "data": [
+      "labels": [
         {
           "properties": {
-            "mode": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#2ECC71'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'Dropdown'"
+                  "Value": "26D"
                 }
               }
             }
           }
         }
       ],
-      "header": [
+      "categoryLabels": [
         {
           "properties": {
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "items": [
-        {
-          "properties": {
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#FFFFFF'"
-                    }
-                  }
-                }
-              }
-            },
-            "background": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#131823'"
-                    }
-                  }
                 }
               }
             }
@@ -104,7 +87,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'2025 Grand Prix (pick one)'"
+                  "Value": "'Main rival'"
                 }
               }
             },

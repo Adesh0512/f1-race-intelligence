@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
-  "name": "grid",
+  "name": "rw_table",
   "position": {
-    "x": 530,
-    "y": 510,
+    "x": 520,
+    "y": 330,
     "z": 1000,
-    "height": 190,
-    "width": 470,
+    "height": 370,
+    "width": 480,
     "tabOrder": 0
   },
   "visual": {
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Forecast_2025"
+                      "Entity": "Real_World_Test"
                     }
                   },
                   "Property": "race"
                 }
               },
-              "queryRef": "Forecast_2025.race",
+              "queryRef": "Real_World_Test.race",
               "nativeQueryRef": "race"
             },
             {
@@ -34,77 +34,45 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Forecast_2025"
+                      "Entity": "Real_World_Test"
                     }
                   },
-                  "Property": "driver_name"
+                  "Property": "predicted_winner"
                 }
               },
-              "queryRef": "Forecast_2025.driver_name",
-              "nativeQueryRef": "driver_name"
+              "queryRef": "Real_World_Test.predicted_winner",
+              "nativeQueryRef": "predicted_winner"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Forecast_2025"
+                      "Entity": "Real_World_Test"
                     }
                   },
-                  "Property": "constructor_name"
+                  "Property": "actual_winner"
                 }
               },
-              "queryRef": "Forecast_2025.constructor_name",
-              "nativeQueryRef": "constructor_name"
+              "queryRef": "Real_World_Test.actual_winner",
+              "nativeQueryRef": "actual_winner"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Forecast_2025"
+                      "Entity": "Real_World_Test"
                     }
                   },
-                  "Property": "projected_grid"
+                  "Property": "model_correct"
                 }
               },
-              "queryRef": "Forecast_2025.projected_grid",
-              "nativeQueryRef": "projected_grid"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Forecast_2025"
-                    }
-                  },
-                  "Property": "win_probability"
-                }
-              },
-              "queryRef": "Forecast_2025.win_probability",
-              "nativeQueryRef": "win_probability"
+              "queryRef": "Real_World_Test.model_correct",
+              "nativeQueryRef": "model_correct"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Forecast_2025"
-                  }
-                },
-                "Property": "win_probability"
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "drillFilterOtherVisuals": true,
@@ -122,7 +90,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Projected grid and forecast'"
+                  "Value": "'Every race since 2024: prediction vs. result'"
                 }
               }
             },

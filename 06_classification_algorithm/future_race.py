@@ -1,12 +1,15 @@
 """
-Forecasts races that have not happened yet (2025) with the champion XGBoost.
+Forecasts the next races that have not happened yet with the champion XGBoost.
 
-The 16 pre-race features are rebuilt from the full 1994-2024 history with the same definitions
-as the feature store (verified: they reproduce the stored 2024 values), for any circuit, team line-up and grid.
-The model is the champion's exact settings, retrained on every season 1994-2024 once it had been validated
-on the unseen 2022-2024 races.
+History = the 1994-2024 feature store (f1.zip) + the results since then (data/external/results_2025_onwards.csv,
+fetched from the Jolpica-F1 API). The 16 pre-race features are rebuilt from that history with the feature store's
+own definitions (verified: they reproduce the stored 2024 values exactly), for any circuit, team line-up and grid.
 
-Usage: .venv/bin/python 06_classification_algorithm/future_race.py   (writes forecast_2025.csv and self-checks)
+1. Real-world test: the champion trained on 1994-2024 only predicts every race since (it never saw them).
+2. The champion's settings are retrained on everything up to the latest race, then forecast the upcoming races.
+
+Usage: .venv/bin/python 06_classification_algorithm/future_race.py
+       (writes forecast_upcoming.csv and real_world_test.csv; self-checks the feature rebuild)
 """
 
 import os
@@ -27,8 +30,11 @@ FIRST = {"driver_rolling_finish_5": 14.0, "driver_rolling_points_5": 0.5, "const
          "constructor_rolling_points_10": 0.0, "circuit_avg_finish": 13.0, "career_dnf_rate": 0.2}
 
 
-def load_history():
-    """Every driver-race 1994-2024 with the unclipped finish and race points the rolling features use."""
+EXTERNAL = os.path.join(ROOT, "data", "external")
+
+
+def load_history(include_recent=True):
+    """Every driver-race with the unclipped finish and race points the rolling features use (1994-2024, then 2025 on)."""
     d = pd.read_csv(os.path.join(ROOT, "data", "processed", "F1_RACE_LAB_FEATURES_1994_2024.csv"), low_memory=False)
     raw = pd.read_csv(os.path.join(ROOT, "data", "raw", "F1_ML_Winner_Prediction_Dataset.csv"), low_memory=False,
                       usecols=["race_id", "driver_id", "finish_position", "race_points", "driver_dob"])
@@ -37,6 +43,14 @@ def load_history():
     h["race_points"] = h["race_points"].fillna(0)
     h["race_date"] = pd.to_datetime(h["race_date"])
     dob = raw.dropna(subset=["driver_dob"]).drop_duplicates("driver_id").set_index("driver_id")["driver_dob"]
+    recent_csv = os.path.join(EXTERNAL, "results_2025_onwards.csv")
+    if include_recent and os.path.exists(recent_csv):
+        rec = pd.read_csv(recent_csv)
+        rec["race_date"] = pd.to_datetime(rec["race_date"])
+        rec["finish"] = rec["finish_position"]
+        dob = pd.concat([dob, rec.drop_duplicates("driver_id").set_index("driver_id")["driver_dob"]])
+        dob = dob[~dob.index.duplicated()]
+        h = pd.concat([h, rec.drop(columns=["status"], errors="ignore")], ignore_index=True)
     return h.sort_values(["race_date", "race_id", "grid_position"]).reset_index(drop=True), pd.to_datetime(dob)
 
 
@@ -74,10 +88,22 @@ def race_features(history, dob, lineup, circuit_id, race_date):
 
 
 def full_history_model(history):
-    """Champion settings (improved_classifier.py), trained on every season once validation was done."""
+    """Champion settings (improved_classifier.py), trained on every row of history that has its features."""
+    train = history.dropna(subset=["driver_rolling_finish_5"])
     model = xgb.XGBClassifier(n_estimators=100, max_depth=4, learning_rate=0.05, scale_pos_weight=15, subsample=0.85,
                               colsample_bytree=0.85, random_state=42, eval_metric="logloss")
-    return model.fit(history[FEATURES].fillna(0), history["target_is_win"].astype(int))
+    return model.fit(train[FEATURES].fillna(0), train["target_is_win"].astype(int))
+
+
+def add_recent_features(history, dob):
+    """Rebuilds the 16 features for every race after the feature store, each from the history before it."""
+    out = history.copy()
+    for rid in history.loc[history["driver_rolling_finish_5"].isna(), "race_id"].unique():
+        race = history[history["race_id"] == rid]
+        f = race_features(history, dob, race[["driver_id", "driver_name", "constructor_id", "constructor_name", "grid_position"]],
+                          race["circuit_id"].iat[0], race["race_date"].iat[0])
+        out.loc[race.index, FEATURES] = f[FEATURES].values
+    return out
 
 
 def win_probability(model, features):
@@ -97,12 +123,25 @@ def projected_grid(history, lineup):
     return lineup["driver_id"].map(avg).rank(method="first").astype(int)
 
 
-def calendar_2025(history):
-    """Grands Prix of the last season in the data, dated one year on (the 2025 calendar is not in the data)."""
-    last = history[history["season"] == history["season"].max()].drop_duplicates("race_id").sort_values("round")
-    cal = last[["round", "race_name", "circuit_id", "circuit_name", "race_date"]].copy()
-    cal["race_date"] = cal["race_date"] + pd.DateOffset(years=1)
-    return cal.reset_index(drop=True)
+def upcoming_calendar():
+    """The races still to run after the latest result (fetched with the results)."""
+    cal = pd.read_csv(os.path.join(EXTERNAL, "calendar_upcoming.csv"))
+    cal["race_date"] = pd.to_datetime(cal["race_date"])
+    return cal
+
+
+def real_world_test(store_only, recent, dob):
+    """The champion as validated (trained on 1994-2024 only) predicts every race after 2024."""
+    model = full_history_model(store_only)
+    rows = []
+    for rid, race in recent.groupby("race_id", sort=False):
+        p = win_probability(model, race)
+        pick, actual = race["driver_name"].iat[int(np.argmax(p))], race.loc[race["target_is_win"] == 1, "driver_name"].iat[0]
+        pole = race.loc[race["grid_position"] == race["grid_position"].min(), "driver_name"].iat[0]
+        rows.append({"season": race["season"].iat[0], "round": race["round"].iat[0], "race_name": race["race_name"].iat[0],
+                     "predicted_winner": pick, "win_probability": round(float(p.max()), 2), "actual_winner": actual,
+                     "pole_sitter": pole, "model_correct": int(pick == actual), "pole_correct": int(pole == actual)})
+    return pd.DataFrame(rows).sort_values(["season", "round"])
 
 
 def self_check(history, dob):
@@ -117,21 +156,31 @@ def self_check(history, dob):
 
 
 if __name__ == "__main__":
+    store_only, dob = load_history(include_recent=False)
+    print("[+] self-check: rebuilt 2024 Abu Dhabi GP features match the feature store", self_check(store_only, dob))
     history, dob = load_history()
-    print("[+] self-check: rebuilt 2024 Abu Dhabi GP features match the feature store", self_check(history, dob))
+    history = add_recent_features(history, dob)
+    recent = history[history["race_date"] > store_only["race_date"].max()]
+
+    test = real_world_test(store_only, recent, dob)
+    test.to_csv(os.path.join(BASE, "real_world_test.csv"), index=False)
+    print(f"[+] real-world test on {len(test)} races after 2024: model {test.model_correct.sum()} correct, "
+          f"pole-sitter {test.pole_correct.sum()} correct")
+
     model = full_history_model(history)
     lineup = latest_lineup(history)
     lineup["grid_position"] = projected_grid(history, lineup)
     out = []
-    for race in calendar_2025(history).itertuples(index=False):
+    for race in upcoming_calendar().itertuples(index=False):
         f = race_features(history, dob, lineup, race.circuit_id, race.race_date)
-        out.append(f.assign(season=2025, round=race.round, race_name=race.race_name, circuit_name=race.circuit_name,
-                            win_probability=win_probability(model, f).round(2)))
+        out.append(f.assign(season=race.season, round=race.round, race_name=race.race_name, race_date=race.race_date.date(),
+                            circuit_name=race.circuit_name, win_probability=win_probability(model, f).round(2)))
     fc = pd.concat(out, ignore_index=True)
-    fc["predicted_rank"] = fc.groupby("round")["win_probability"].rank(ascending=False, method="first").astype(int)
-    fc = fc[["season", "round", "race_name", "circuit_name", "driver_name", "constructor_name", "grid_position",
+    fc["predicted_rank"] = fc.groupby(["season", "round"])["win_probability"].rank(ascending=False, method="first").astype(int)
+    fc = fc[["season", "round", "race_name", "race_date", "circuit_name", "driver_name", "constructor_name", "grid_position",
              "win_probability", "predicted_rank"]]
-    fc.to_csv(os.path.join(BASE, "forecast_2025.csv"), index=False)
-    winners = fc[fc["predicted_rank"] == 1]
-    print(f"[+] forecast_2025.csv: {fc['round'].nunique()} races x {len(lineup)} drivers")
-    print(winners["driver_name"].value_counts().to_string())
+    fc.to_csv(os.path.join(BASE, "forecast_upcoming.csv"), index=False)
+    last = history.iloc[-1]
+    print(f"[+] forecast_upcoming.csv: {fc.groupby(['season', 'round']).ngroups} upcoming races x {len(lineup)} drivers "
+          f"(history up to {last['season']} {last['race_name']})")
+    print(fc[fc.predicted_rank <= 3].to_string(index=False))

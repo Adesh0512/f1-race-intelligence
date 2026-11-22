@@ -10,7 +10,7 @@
 --   07_ml_results.sql                  Classifier comparison, association rules, K-Means tiers
 --   08_platform_features.sql           Clone, Time Travel, secure view, stream + task, dynamic table, Streamlit app
 --   09_race_predictor.sql              Race predictor: predicted winner per race, accuracy vs. the pole-sitter
---   10_forecast_2025.sql               2025 forecast: predicted winner of every upcoming Grand Prix
+--   10_next_race_forecast.sql          Next-race forecast (Qatar, Abu Dhabi 2026) and the real-world test since 2024
 --
 -- Run this file first: it wakes the warehouse so later results come back instantly.
 USE ROLE ACCOUNTADMIN;
