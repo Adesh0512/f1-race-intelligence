@@ -1,15 +1,15 @@
 table Dim_Season
-	lineageTag: 1ff89e04-5025-4c25-9774-53caf985910d
+	lineageTag: a43c5335-c0d2-437f-a6ac-66527588f92f
 
 	column 'season'
 		dataType: int64
-		lineageTag: 367447bd-7181-4539-80f4-124d7dddc79f
+		lineageTag: dcf66a75-6122-45a3-999b-cd89be4ff056
 		summarizeBy: none
 		sourceColumn: season
 
 	column 'era'
 		dataType: string
-		lineageTag: 044d8caa-d77d-4380-8ccb-602a8ed15934
+		lineageTag: 9b84463f-623f-45e9-8962-94cae657c1bb
 		summarizeBy: none
 		sourceColumn: era
 

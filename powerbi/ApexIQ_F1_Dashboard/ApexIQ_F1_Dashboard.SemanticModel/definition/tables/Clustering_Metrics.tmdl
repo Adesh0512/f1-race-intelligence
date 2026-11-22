@@ -1,15 +1,15 @@
 table Clustering_Metrics
-	lineageTag: 8cb66145-6dc4-495a-8a87-60d4d934c856
+	lineageTag: 73cfe083-a900-4264-9d70-bac028fcc1dd
 
 	column 'metric'
 		dataType: string
-		lineageTag: ff3da685-4550-47a4-9717-fbd98720087f
+		lineageTag: 7c3f6c1d-bc98-4c03-bed7-6ca13e222da0
 		summarizeBy: none
 		sourceColumn: metric
 
 	column 'value'
 		dataType: double
-		lineageTag: 917dbf2f-7678-42ab-b260-99bb432bb9cc
+		lineageTag: 3096e051-9a47-45ce-8bd7-2f49fab61502
 		summarizeBy: none
 		sourceColumn: value
 

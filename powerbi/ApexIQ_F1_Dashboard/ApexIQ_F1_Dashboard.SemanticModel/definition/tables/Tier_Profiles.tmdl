@@ -1,75 +1,75 @@
 table Tier_Profiles
-	lineageTag: 0c8908d3-1a27-4423-8da2-d154bc346ff8
+	lineageTag: 1905ae60-7f20-4284-900f-4e244c48f762
 
 	column 'cluster'
 		dataType: int64
-		lineageTag: ffd32aa3-15e5-431a-9d9c-723dbf541804
+		lineageTag: 8be131fd-24a0-4bae-8d6c-f6038f86fc83
 		summarizeBy: none
 		sourceColumn: cluster
 
 	column 'cluster_name'
 		dataType: string
-		lineageTag: 8002ed5c-5b6e-478c-b257-d5aec2534931
+		lineageTag: 2266b81b-c4a7-4830-860a-55e8de2d5efb
 		summarizeBy: none
 		sourceColumn: cluster_name
 
 	column 'avg_grid'
 		dataType: double
-		lineageTag: d8d96435-275e-4507-b510-1c7250059511
+		lineageTag: 1e3a3369-fa7c-47e9-8775-afe6c3d6bd04
 		summarizeBy: none
 		sourceColumn: avg_grid
 
 	column 'avg_finish'
 		dataType: double
-		lineageTag: 2495e668-5fc1-45a8-b218-6b5fdd6a7cf8
+		lineageTag: 44d81b68-0174-469b-bff1-6fcf00082ae5
 		summarizeBy: none
 		sourceColumn: avg_finish
 
 	column 'finish_std'
 		dataType: double
-		lineageTag: e2b1229d-605b-4f46-8aa4-c3343a7521a3
+		lineageTag: 0d8923b6-ea1b-41d2-abdb-6e2435cb20ea
 		summarizeBy: none
 		sourceColumn: finish_std
 
 	column 'win_rate'
 		dataType: double
-		lineageTag: 19f8eda9-4af9-4eac-9fd6-3c6b30842fbb
+		lineageTag: 76999c50-9341-4b76-b7d7-c2f0bd4ce348
 		summarizeBy: none
 		sourceColumn: win_rate
 
 	column 'podium_rate'
 		dataType: double
-		lineageTag: 19fb3a2c-56ed-493c-8172-98526f3e71ca
+		lineageTag: e54a00d4-7e9b-4e50-b4e7-d7c0a42a22fc
 		summarizeBy: none
 		sourceColumn: podium_rate
 
 	column 'points_rate'
 		dataType: double
-		lineageTag: a29c3a04-ac2e-4e94-94e6-df5542b213c5
+		lineageTag: 9a37b471-a852-47b1-8773-c06a629f2289
 		summarizeBy: none
 		sourceColumn: points_rate
 
 	column 'dnf_rate'
 		dataType: double
-		lineageTag: 363ef3c3-47e1-4834-80b0-f604e21e6eca
+		lineageTag: a4a1bbcc-184d-4051-b413-8f36e8c424b5
 		summarizeBy: none
 		sourceColumn: dnf_rate
 
 	column 'teammate_quali_rate'
 		dataType: double
-		lineageTag: d603f088-a95f-404b-992e-00a1bf28434a
+		lineageTag: f5870fb8-06e6-4641-aa0f-6cadf6019391
 		summarizeBy: none
 		sourceColumn: teammate_quali_rate
 
 	column 'starts'
 		dataType: double
-		lineageTag: 0a2845de-bec9-4a7e-9c5a-dad7c882e14f
+		lineageTag: 2b5d4a67-250c-440b-8c8b-d49a78c4bfa8
 		summarizeBy: none
 		sourceColumn: starts
 
 	column 'size'
 		dataType: int64
-		lineageTag: bb9a336a-30ed-404a-b6e2-5cd761d72e14
+		lineageTag: c580a65b-c170-4184-b42c-dcab207839c1
 		summarizeBy: none
 		sourceColumn: size
 

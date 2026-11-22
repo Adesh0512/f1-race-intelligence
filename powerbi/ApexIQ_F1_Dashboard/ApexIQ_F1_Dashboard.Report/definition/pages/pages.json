@@ -8,8 +8,9 @@
     "pattern_mining",
     "classifier_comparison",
     "classification",
-    "race_predictor",
     "next_race",
+    "track_record",
+    "race_predictor",
     "clustering_comparison",
     "driver_tiers",
     "clustering_metrics"

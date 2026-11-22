@@ -1,21 +1,21 @@
 table Dim_Constructor
-	lineageTag: 0d337818-10e7-4437-acb5-033a5a6042e7
+	lineageTag: 2cdf373a-e8c2-4cff-bed9-102ff495c6e3
 
 	column 'constructor_id'
 		dataType: int64
-		lineageTag: fbfd48fd-36b8-4d35-9972-9a65f28efb3c
+		lineageTag: 587604fc-e0cc-4288-8ecd-1b034fa386fc
 		summarizeBy: none
 		sourceColumn: constructor_id
 
 	column 'constructor_name'
 		dataType: string
-		lineageTag: 5cf40ff4-0134-4d25-8ada-bf87aee0aa71
+		lineageTag: 12565f4b-e83c-48ab-a2b0-21373319104c
 		summarizeBy: none
 		sourceColumn: constructor_name
 
 	column 'constructor_nationality'
 		dataType: string
-		lineageTag: f8989aee-02d9-46e0-b346-c800ff5b5e15
+		lineageTag: eaf1ec46-154d-49a0-9d2d-ccfff796f8ef
 		summarizeBy: none
 		sourceColumn: constructor_nationality
 

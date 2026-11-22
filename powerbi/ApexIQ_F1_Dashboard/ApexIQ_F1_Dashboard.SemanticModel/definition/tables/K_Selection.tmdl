@@ -1,21 +1,21 @@
 table K_Selection
-	lineageTag: a0936b50-a230-4679-9467-4dd98e1d1b17
+	lineageTag: fd8b7750-dac5-4888-b539-fa6e6a7c65e5
 
 	column 'k'
 		dataType: int64
-		lineageTag: bb482f29-8ac6-4bc8-a954-00664c7f278b
+		lineageTag: 707c09c8-6759-4c8c-9e16-6db4e1ac7dd5
 		summarizeBy: none
 		sourceColumn: k
 
 	column 'inertia'
 		dataType: double
-		lineageTag: fe5b994e-3d47-4eac-b281-e4bfb979a4ef
+		lineageTag: e7f4fff5-2456-4e96-bbae-72f9fca08641
 		summarizeBy: none
 		sourceColumn: inertia
 
 	column 'silhouette'
 		dataType: double
-		lineageTag: b4cbd932-beec-4ae6-a665-10ecad7d4744
+		lineageTag: 4d794bc9-9efd-4448-8dde-cdc517e9e167
 		summarizeBy: none
 		sourceColumn: silhouette
 

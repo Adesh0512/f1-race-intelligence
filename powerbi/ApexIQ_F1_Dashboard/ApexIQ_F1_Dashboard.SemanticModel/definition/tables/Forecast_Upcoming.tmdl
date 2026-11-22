@@ -1,146 +1,146 @@
 table Forecast_Upcoming
-	lineageTag: ffcf813b-0780-437b-9081-9d1d1d9530df
+	lineageTag: 55f41061-d817-4127-8842-34cf7e644c51
 
 	measure 'Selected Race' = IF(HASONEVALUE(Forecast_Upcoming[race]), VALUES(Forecast_Upcoming[race]), "Qatar Grand Prix, 29 Nov 2026")
-		lineageTag: a16d4906-3015-4a2e-9467-889bb3b5ed76
+		lineageTag: 2589003d-40c1-4d26-96c4-dadda85dea44
 
 	measure 'Selected Pole' = IF(HASONEVALUE(Forecast_Upcoming[pole_scenario]), VALUES(Forecast_Upcoming[pole_scenario]), "Projected grid (Andrea Kimi Antonelli on pole)")
-		lineageTag: fffd0682-a268-4749-a4d6-532a0f8382b2
+		lineageTag: 30086f33-aef5-4aa8-b1f8-94cd230c9771
 
 	measure 'Last Race Winner' = MAX(Forecast_Upcoming[last_race])
-		lineageTag: b492a7e0-496d-4607-9e78-077e27ef5e06
+		lineageTag: 44b6f46d-605d-48c2-a88d-598e02cd7c11
 
 	measure 'Forecast Winner' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(MAX(Forecast_Upcoming[driver_name]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p, Forecast_Upcoming[predicted_rank] = 1)
-		lineageTag: f8840857-1242-4448-889c-0de6a1e564b6
+		lineageTag: 74013b16-aca0-4f38-971b-b0e2f812028f
 
 	measure 'Forecast Win %' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(MAX(Forecast_Upcoming[win_probability]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p, Forecast_Upcoming[predicted_rank] = 1)
 		formatString: 0.0
-		lineageTag: 55a6ccde-a75b-47ac-9127-321fee335a34
+		lineageTag: 50f3b468-ef7e-4307-b466-2cd50b566626
 
 	measure 'Main Rival' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(MAX(Forecast_Upcoming[driver_name]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p, Forecast_Upcoming[predicted_rank] = 2)
-		lineageTag: 6bf90cc5-de50-4bed-a669-70e5746a1039
+		lineageTag: 7db419a5-f820-4810-a92c-c4cb18b6f70e
 
 	measure 'Win Chance %' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(AVERAGE(Forecast_Upcoming[win_probability]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
 		formatString: 0.0
-		lineageTag: f500d68b-6207-44ec-8b03-6faa94b1e9c2
+		lineageTag: 59fa3501-6a9c-4fb1-85e4-5ad62a065d6e
 
 	measure 'Predicted Position' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(MIN(Forecast_Upcoming[predicted_rank]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
 		formatString: 0
-		lineageTag: ceb7fcda-2fb4-4ff9-848d-9ac1bbbb6b06
+		lineageTag: dca91350-ae64-4001-8559-bfaa948730db
 
 	measure 'Starting Position' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(MIN(Forecast_Upcoming[grid_position]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
 		formatString: 0
-		lineageTag: b93cabee-1838-435e-a385-0f1da4c3cac0
+		lineageTag: 6d2caaa5-f996-46d0-ab11-4cff242a612a
 
 	measure 'Avg Finish Last 5' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(AVERAGE(Forecast_Upcoming[driver_rolling_finish_5]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
 		formatString: 0.0
-		lineageTag: d52ad215-be35-484d-b132-48373014270e
+		lineageTag: f37b0818-7f3d-4046-a5f5-70b42daf6542
 
 	measure 'Team Points Per Race' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(AVERAGE(Forecast_Upcoming[constructor_rolling_points_10]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
 		formatString: 0.0
-		lineageTag: 6ab4b543-85b5-44e2-80d8-ebc152024f4d
+		lineageTag: bae970d8-ba21-4cf9-a56c-4bcd952c347b
 
 	measure 'Starts At Track' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(MIN(Forecast_Upcoming[circuit_experience]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
 		formatString: 0
-		lineageTag: fa3954aa-cd39-4100-9330-2a3e54ecfab4
+		lineageTag: 1b7bd53d-c72c-4210-be97-79953f3300b5
 
 	measure 'Career Win Pct' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(AVERAGE(Forecast_Upcoming[career_win_rate]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
 		formatString: 0.0
-		lineageTag: 3c8049e0-1044-4445-a33a-a83f4c026792
+		lineageTag: 52552459-0213-40b5-85e8-ac08f0fd96bf
 
 	column 'race'
 		dataType: string
-		lineageTag: c18d8c08-1fa1-45ce-a005-9d9f3a9a1cae
+		lineageTag: 1fdab30a-16a4-4701-a3ae-4c8a74f36ef1
 		summarizeBy: none
 		sourceColumn: race
 
 	column 'race_date'
 		dataType: string
-		lineageTag: bc93ea37-bc1c-492e-9b50-bc123b037159
+		lineageTag: 20cfd076-159a-4e6c-976d-b206225185b2
 		summarizeBy: none
 		sourceColumn: race_date
 
 	column 'circuit_name'
 		dataType: string
-		lineageTag: dcdc8498-b2c4-409b-ae24-d0ec0effe87f
+		lineageTag: 02141634-b493-48f5-b439-f59253d6c5ff
 		summarizeBy: none
 		sourceColumn: circuit_name
 
 	column 'pole_scenario'
 		dataType: string
-		lineageTag: 9829ab88-c1df-48ae-9454-ddbd512723f0
+		lineageTag: db96c09c-3cb9-4a32-937e-092c839406a5
 		summarizeBy: none
 		sourceColumn: pole_scenario
 
 	column 'is_default'
 		dataType: int64
-		lineageTag: 96c7e49f-61bd-4e7a-8b7c-9408b507d1d4
+		lineageTag: 99037420-f060-4adb-80e2-b02bf483c68e
 		summarizeBy: none
 		sourceColumn: is_default
 
 	column 'last_race'
 		dataType: string
-		lineageTag: 7374a0fd-fd3b-4985-a8e7-3124c184346a
+		lineageTag: 5f173e93-8fa9-440e-b5ea-b730d7c2b63e
 		summarizeBy: none
 		sourceColumn: last_race
 
 	column 'driver_name'
 		dataType: string
-		lineageTag: 80fdbd22-4dbe-434b-92fb-1661c7f71892
+		lineageTag: d537c576-3b96-4221-9f8e-1aafada720e6
 		summarizeBy: none
 		sourceColumn: driver_name
 
 	column 'constructor_name'
 		dataType: string
-		lineageTag: 0757075c-57db-4efb-9084-decc62fa6d19
+		lineageTag: 1ce45db8-ceee-497d-9119-cbad8ea46b36
 		summarizeBy: none
 		sourceColumn: constructor_name
 
 	column 'grid_position'
 		dataType: int64
-		lineageTag: 3fb49ade-ac61-4d80-be8d-bfaccd2eaf40
+		lineageTag: 5cfbda15-be7e-46da-96cd-1f8a9f1c3b09
 		summarizeBy: none
 		sourceColumn: grid_position
 
 	column 'win_probability'
 		dataType: double
-		lineageTag: ca927597-e4e9-423b-9d2d-bebc0faf189d
+		lineageTag: 5bd64a90-7988-49f7-a5ac-4514ffa4eb30
 		summarizeBy: none
 		sourceColumn: win_probability
 
 	column 'predicted_rank'
 		dataType: int64
-		lineageTag: 69a3a157-0ffc-498b-ba78-3bdd6e57555c
+		lineageTag: dadce494-f94c-4315-881d-028b56e91b4a
 		summarizeBy: none
 		sourceColumn: predicted_rank
 
 	column 'driver_rolling_finish_5'
 		dataType: double
-		lineageTag: 0d23ac8f-58e4-4987-a5a0-f7bbcd61270f
+		lineageTag: 4cb249df-5b0a-46b3-8681-8543f9bb4ec2
 		summarizeBy: none
 		sourceColumn: driver_rolling_finish_5
 
 	column 'constructor_rolling_points_10'
 		dataType: double
-		lineageTag: b45edeb4-9c59-4ede-8246-de83cfd32d46
+		lineageTag: b6ed8845-e114-4956-bf63-13038989af45
 		summarizeBy: none
 		sourceColumn: constructor_rolling_points_10
 
 	column 'circuit_experience'
 		dataType: int64
-		lineageTag: ff8edff6-2525-4483-b4b9-e1e2d28d22ea
+		lineageTag: dde770c3-4476-4344-b973-f47a4e680442
 		summarizeBy: none
 		sourceColumn: circuit_experience
 
 	column 'circuit_avg_finish'
 		dataType: double
-		lineageTag: 64827018-74b3-435b-b50c-61fd3d3cbfc7
+		lineageTag: 133b17c8-e259-4bba-a41e-7fe8aba5bbc8
 		summarizeBy: none
 		sourceColumn: circuit_avg_finish
 
 	column 'career_win_rate'
 		dataType: double
-		lineageTag: d74648e3-4888-4fdf-81f1-34123a8a57f7
+		lineageTag: 67cab814-0a19-4d65-8ead-7c6859346460
 		summarizeBy: none
 		sourceColumn: career_win_rate
 

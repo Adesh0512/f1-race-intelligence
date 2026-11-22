@@ -1,41 +1,41 @@
 table Season_Entries
-	lineageTag: 19e2a9b7-5d19-4c81-8dc2-ac9c170be3f5
+	lineageTag: 23ed72f0-e27e-4840-9ea2-39cc225f7e0b
 
 	measure 'Labelled Entries' = SUM(Season_Entries[entries])
 		formatString: #,0
-		lineageTag: 8886e3bc-1f68-4fdb-beee-96f6a000485a
+		lineageTag: d89588d9-54ba-4169-8429-1445f7f52581
 
 	measure 'Dataset Grands Prix' = SUM(Season_Entries[grands_prix])
 		formatString: 0
-		lineageTag: 4186d138-6fdc-46bd-a51a-803d4b93a616
+		lineageTag: 990169b9-f295-45a4-b509-b1c92e562a54
 
 	column 'season'
 		dataType: int64
-		lineageTag: 273d2cb7-bf0b-449e-b1ce-b0220f07731e
+		lineageTag: 161c110d-577d-4323-b32a-677f24df471b
 		summarizeBy: none
 		sourceColumn: season
 
 	column 'split'
 		dataType: string
-		lineageTag: fa63ca70-9658-4e43-b447-e568100afbc2
+		lineageTag: b1566963-b586-4dc5-af79-680e60f86c5d
 		summarizeBy: none
 		sourceColumn: split
 
 	column 'entries'
 		dataType: int64
-		lineageTag: 36e15b5b-ee46-44ef-aa93-9dd6e352e324
+		lineageTag: f060d505-3fc9-4bcf-9552-afef86c471b8
 		summarizeBy: none
 		sourceColumn: entries
 
 	column 'grands_prix'
 		dataType: int64
-		lineageTag: 40309150-83ce-4a13-85ec-7f98bf22d538
+		lineageTag: 39c5579e-4de9-4f81-87e1-25b23a810a56
 		summarizeBy: none
 		sourceColumn: grands_prix
 
 	column 'winners'
 		dataType: int64
-		lineageTag: 18afbbc0-3990-40b0-8492-e9e17bce34b3
+		lineageTag: bea47024-c778-48e9-9989-4e13165e6e28
 		summarizeBy: none
 		sourceColumn: winners
 

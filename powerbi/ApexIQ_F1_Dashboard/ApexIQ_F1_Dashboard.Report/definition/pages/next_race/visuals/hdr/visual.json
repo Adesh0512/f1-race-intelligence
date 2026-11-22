@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "2. Next race forecast: who wins the next Grand Prix?",
+                    "value": "2. Race predictor: who wins the next Grand Prix?",
                     "textStyle": {
                       "fontSize": "20pt",
                       "color": "#FFFFFF",

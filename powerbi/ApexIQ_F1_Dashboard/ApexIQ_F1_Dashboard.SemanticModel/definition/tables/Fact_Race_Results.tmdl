@@ -1,81 +1,81 @@
 table Fact_Race_Results
-	lineageTag: 538c13b2-0850-4721-bf8b-b0f8fd6be6d6
+	lineageTag: ed1c1e39-eff1-4bca-ab53-562adb40d787
 
 	measure 'Race Results' = COUNTROWS(Fact_Race_Results)
 		formatString: #,0
-		lineageTag: f3efd2ec-4934-47dd-9a97-55b3b21bfae6
+		lineageTag: 96cd8094-4d95-48f3-b840-2fbdb6b86069
 
 	measure 'Wins' = SUM(Fact_Race_Results[is_win])
 		formatString: 0
-		lineageTag: 2e40cec8-9ab7-4875-a87c-17da8af47af1
+		lineageTag: 5f8a4573-0455-4915-8457-8f80399b1e44
 
 	measure 'Podiums' = SUM(Fact_Race_Results[is_podium])
 		formatString: 0
-		lineageTag: e88d572b-8108-4423-88d8-94c511612d86
+		lineageTag: 93167b9d-bfc0-46a8-b15b-a5f02a5d8fcb
 
 	measure 'Win Rate %' = DIVIDE([Wins], [Race Results]) * 100
 		formatString: 0.0
-		lineageTag: ca6c9513-b334-44c9-9979-e5ad2dc9de5d
+		lineageTag: 0615c42e-9a9c-44d5-8186-1282f06b7398
 
 	measure 'Drivers' = DISTINCTCOUNT(Fact_Race_Results[driver_id])
 		formatString: 0
-		lineageTag: 3a7dea44-5106-4d67-8392-69bbc52a216a
+		lineageTag: 238b9a15-261c-421d-947f-c2de2e47e2d8
 
 	measure 'Teams' = DISTINCTCOUNT(Fact_Race_Results[constructor_id])
 		formatString: 0
-		lineageTag: 8b28712b-14a6-4781-bcf3-210c5c763c89
+		lineageTag: 4778fed1-48e0-4861-8a0c-f5ed203e6698
 
 	column 'result_id'
 		dataType: int64
-		lineageTag: ecebb595-6f0a-423a-aa55-8a3ca6032e15
+		lineageTag: 3c3c9720-7e66-48ad-b4f5-05a1a0ad6f21
 		summarizeBy: none
 		sourceColumn: result_id
 
 	column 'race_id'
 		dataType: int64
-		lineageTag: b6b343c5-7b52-4c2d-b900-ed010af2739b
+		lineageTag: d6102e7d-050a-40b8-8bdc-35fd7bb237c7
 		summarizeBy: none
 		sourceColumn: race_id
 
 	column 'driver_id'
 		dataType: int64
-		lineageTag: 2e03f968-1774-48e5-b8c5-18bf52947afb
+		lineageTag: ffadad74-aeb4-4f3e-8757-56e5936208f8
 		summarizeBy: none
 		sourceColumn: driver_id
 
 	column 'constructor_id'
 		dataType: int64
-		lineageTag: 2385b49d-cb0b-4d3b-96df-9bc1ab28fa3a
+		lineageTag: 7b6eee16-ba8d-4d39-a2c4-f89453cf0b5a
 		summarizeBy: none
 		sourceColumn: constructor_id
 
 	column 'grid_position'
 		dataType: int64
-		lineageTag: bb67d6c8-066b-4429-8ae2-560aea309f0e
+		lineageTag: 763cd2a6-86da-43fb-b188-ee82821de050
 		summarizeBy: none
 		sourceColumn: grid_position
 
 	column 'finish_position'
 		dataType: int64
-		lineageTag: 3c772ef4-a30b-4f40-8ae5-e13646ca86cb
+		lineageTag: be1823f4-3dbf-48d5-8b31-1b3b9b8fd400
 		summarizeBy: none
 		sourceColumn: finish_position
 
 	column 'race_points'
 		dataType: double
-		lineageTag: 39010b53-7607-4470-be05-47864119a37f
+		lineageTag: c7adc183-421d-44c8-a411-c78bd7c82771
 		summarizeBy: none
 		sourceColumn: race_points
 
 	column 'is_win'
 		dataType: int64
-		lineageTag: 8f945868-2a81-4332-8cab-5da88704384e
+		lineageTag: 872ec22b-73a3-4481-9da3-9a74cbcc1c8f
 		summarizeBy: none
 		sourceColumn: is_win
 
 	column 'is_podium'
 		dataType: int64
-		lineageTag: 19f6ffa6-fdd2-4e08-bd92-68d31bc19e8a
+		lineageTag: 7a214e2e-24a2-447c-86e1-6d7b1bbe3ae9
 		summarizeBy: none
 		sourceColumn: is_podium
 

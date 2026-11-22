@@ -1,27 +1,27 @@
 table Dim_Driver
-	lineageTag: 16ad756d-3c11-42e1-9af7-b3b1994b6dfe
+	lineageTag: 2a11b1db-2c3d-489e-a793-49d45aa2c10f
 
 	column 'driver_id'
 		dataType: int64
-		lineageTag: 6a1fd9f3-c65b-4580-9adb-3843f74dc562
+		lineageTag: 59a5dd91-545b-48fa-83eb-e4d17140df80
 		summarizeBy: none
 		sourceColumn: driver_id
 
 	column 'driver_name'
 		dataType: string
-		lineageTag: 289c4ad8-7a46-404f-9d4a-4521851976e0
+		lineageTag: d643ea8c-1be4-45dd-964c-a40531686c6a
 		summarizeBy: none
 		sourceColumn: driver_name
 
 	column 'driver_code'
 		dataType: string
-		lineageTag: b53452ed-0dc4-4eee-8683-e32a488a668f
+		lineageTag: 8a46041e-aae8-40bd-b465-965fd1f49128
 		summarizeBy: none
 		sourceColumn: driver_code
 
 	column 'driver_nationality'
 		dataType: string
-		lineageTag: a6368e4f-84cb-4426-a61a-1a2aa571f570
+		lineageTag: aecb0934-2126-494a-a821-01d8ffe9dee0
 		summarizeBy: none
 		sourceColumn: driver_nationality
 

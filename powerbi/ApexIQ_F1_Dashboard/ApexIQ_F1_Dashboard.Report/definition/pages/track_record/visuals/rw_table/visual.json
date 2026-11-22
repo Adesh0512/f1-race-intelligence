@@ -1,0 +1,134 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "rw_table",
+  "position": {
+    "x": 520,
+    "y": 195,
+    "z": 1000,
+    "height": 505,
+    "width": 740,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Real_World_Test"
+                    }
+                  },
+                  "Property": "race"
+                }
+              },
+              "queryRef": "Real_World_Test.race",
+              "nativeQueryRef": "race"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Real_World_Test"
+                    }
+                  },
+                  "Property": "predicted_winner"
+                }
+              },
+              "queryRef": "Real_World_Test.predicted_winner",
+              "nativeQueryRef": "predicted_winner"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Real_World_Test"
+                    }
+                  },
+                  "Property": "actual_winner"
+                }
+              },
+              "queryRef": "Real_World_Test.actual_winner",
+              "nativeQueryRef": "actual_winner"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Real_World_Test"
+                    }
+                  },
+                  "Property": "model_correct"
+                }
+              },
+              "queryRef": "Real_World_Test.model_correct",
+              "nativeQueryRef": "model_correct"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Real_World_Test"
+                    }
+                  },
+                  "Property": "pole_correct"
+                }
+              },
+              "queryRef": "Real_World_Test.pole_correct",
+              "nativeQueryRef": "pole_correct"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Every race since 2024: prediction vs. result'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
