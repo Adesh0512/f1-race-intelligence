@@ -24,16 +24,17 @@ def mermaid_er_to_dot(path):
     entities = re.findall(r"^\s*(\w+)\s*\{(.*?)^\s*\}", text, re.S | re.M)
     rels = re.findall(r"^\s*(\w+)\s+\S+--\S+\s+(\w+)\s*:\s*\"?([\w\s]+)\"?", text, re.M)
     lines = ['digraph ER { rankdir=LR; bgcolor="transparent"; nodesep=0.3; ranksep=1.2;',
-             'node [shape=record, style=filled, fontname="Helvetica", fontsize=11, fontcolor="white", color="#30363D"];',
-             'edge [color="#59616C", fontcolor="#59616C", fontname="Helvetica", fontsize=10, arrowhead=crow, arrowtail=tee, dir=both];']
+             'node [shape=record, style="rounded,filled", fontname="Helvetica", fontsize=11, penwidth=1.2];',
+             'edge [color="#9AA1AB", fontcolor="#59616C", fontname="Helvetica", fontsize=9, arrowhead=crow, arrowtail=tee, dir=both, penwidth=1.1];']
     for name, body in entities:
         cols = [c.split() for c in body.strip().splitlines() if c.strip()]
         shown = [f"{c[1]}{'  [' + c[2] + ']' if len(c) > 2 else ''}" for c in cols[:12]]
         if len(cols) > 12:
             shown.append(f"… +{len(cols) - 12} more")
-        fill = "#15181D" if name.startswith("FACT") else "#3B5B8A"
+        # facts in timing purple, dimensions as white cards (house palette)
+        style = 'fillcolor="#7B2CBF", fontcolor="white", color="#5E1F96"' if name.startswith("FACT") else 'fillcolor="white", fontcolor="#15181D", color="#B8BEC7"'
         fields = "".join(s + "\\l" for s in shown)  # \l = left-justified line break in a Graphviz record
-        lines.append(f'{name} [fillcolor="{fill}", label="{{{name}|{fields}}}"];')
+        lines.append(f'{name} [{style}, label="{{{name}|{fields}}}"];')
     for a, b, label in rels:
         lines.append(f'{a} -> {b} [label="{label.strip()} (1:N)"];')
     lines.append("}")
@@ -69,7 +70,48 @@ c3.metric("Lap-Time Fact Rows", f"{int(counts.loc[counts['table'] == 'FACT_LAP_T
 c4.metric("OLAP Queries", len(olap_queries()), "Roll-up · Drill-down · Slice · Dice · Pivot")
 
 st.markdown("---")
-t1, t2, t3, t4, t5 = st.tabs(["Star Schema", "Snowflake Schema", "Star vs. Snowflake", "Live OLAP Queries", "Tables & ETL"])
+t0, t1, t2, t3, t4, t5 = st.tabs(["Problem & Model", "Star Schema", "Snowflake Schema", "Star vs. Snowflake", "Live OLAP Queries", "Tables & ETL"])
+
+# What each star-schema table records: (type, grain or what it describes)
+ROLES = {
+    "FACT_RACE_RESULTS": ("Fact", "1 row = 1 driver in 1 Grand Prix: grid, finish, points, pit stops, fastest lap"),
+    "FACT_LAP_TIMES": ("Fact", "1 row = 1 driver on 1 lap: lap time, position, tyre compound"),
+    "DIM_DRIVER": ("Dimension", "Who raced: name, code, nationality, date of birth"),
+    "DIM_CONSTRUCTOR": ("Dimension", "Which team: name, nationality, engine, team colours"),
+    "DIM_RACE": ("Dimension", "Which Grand Prix: season, round, circuit and its location"),
+    "DIM_DATE": ("Dimension", "When: day → month → quarter → season (roll-up hierarchy)"),
+    "DIM_STATUS": ("Dimension", "How the race ended: finished, +1 lap, engine, collision …"),
+    "DIM_SESSION": ("Dimension", "Which session: practice, qualifying, sprint, race"),
+    "DIM_TYRE_COMPOUND": ("Dimension", "Which tyre: soft, medium, hard, intermediate, wet"),
+}
+MEANING = {"DIM_DRIVER": "driver", "DIM_CONSTRUCTOR": "team", "DIM_RACE": "Grand Prix", "DIM_DATE": "date",
+           "DIM_STATUS": "finishing status", "DIM_SESSION": "session", "DIM_TYRE_COMPOUND": "tyre compound"}
+star_mmd = open(os.path.join(DW, "er_diagram_star.mmd"), encoding="utf-8").read()
+star_rels = re.findall(r"^\s*(\w+)\s+\S+--\S+\s+(\w+)\s*:\s*\"?([\w\s]+)\"?", star_mmd, re.M)
+assert star_rels and all(d in MEANING for d, _, _ in star_rels), "every star relationship needs a plain-English meaning"
+
+with t0:
+    st.markdown("""
+    #### Application domain and business problem
+    **Domain:** Formula 1 motorsport analytics. **Users:** team strategists, analysts and broadcasters.
+
+    Twenty seasons of results (2004–2024) are spread over separate source files (races, drivers, teams, circuits,
+    results, lap times, pit stops, standings) with different keys. Questions such as *how often does pole position
+    convert to a win?*, *which team gained most from one season to the next?* or *how does tyre choice change lap
+    pace?* each needed manual joins. The warehouse integrates everything once, at a fixed grain, so these questions
+    become one query, and it feeds the race-winner classifier (Dashboard 2) and the driver clustering (Dashboard 3).
+    """)
+    st.markdown("#### Fact and dimension tables (star schema)")
+    rc = dict(zip(counts["table"], counts["rows"]))
+    st.dataframe(pd.DataFrame([(t, k, g, rc.get(t)) for t, (k, g) in ROLES.items()],
+                              columns=["Table", "Type", "Grain / what it describes", "Rows"]), width="stretch")
+    st.markdown("#### Relationships")
+    st.dataframe(pd.DataFrame([(d, f, k.strip(), "1 : N",
+                                f"One {MEANING[d]} appears in many {'race results' if f == 'FACT_RACE_RESULTS' else 'laps'}")
+                               for d, f, k in sorted(star_rels, key=lambda r: (r[1] != "FACT_RACE_RESULTS", r[0]))],
+                              columns=["Dimension", "Fact", "Join key", "Cardinality", "Meaning"]), width="stretch")
+    st.caption("Every dimension joins its fact table directly through a surrogate key (1 hop). Both facts share the same "
+               "Driver, Constructor, Race and Date dimensions (conformed dimensions), which makes this a fact constellation.")
 
 with t1:
     st.markdown("**Fact constellation (galaxy) schema:** two fact tables share conformed dimensions. "

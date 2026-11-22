@@ -31,7 +31,8 @@ st.markdown("---")
 t1, t2, t5, t4, t3 = st.tabs(["Benchmark Table", "Choosing k", "Tuning GMM & DBSCAN", "Hierarchical Dendrogram", "Why These 6 Algorithms"])
 
 with t1:
-    st.dataframe(res.drop(columns=["champion"]), width="stretch", hide_index=True)
+    st.dataframe(res.assign(algorithm=res["algorithm"].where(~res["champion"].astype(bool), res["algorithm"] + " (Champion)"))
+                 .drop(columns=["champion"]), width="stretch", hide_index=True)
     metric = st.radio("Metric", ["silhouette", "davies_bouldin", "calinski_harabasz", "stability_ari", "runtime_ms"], horizontal=True, format_func=pretty)
     fig = px.bar(res, x="algorithm", y=metric, color="algorithm", title=f"{pretty(metric)} by algorithm",
                  color_discrete_map={"K-Means": F1_RED}, color_discrete_sequence=["#9AA1AB"], text_auto=".3~f")

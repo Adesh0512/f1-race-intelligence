@@ -91,6 +91,8 @@ with t5:
     st.plotly_chart(get_plotly_theme(px.bar(g.head(10), x="norm_prob", y="driver_name", orientation="h", text=g.head(10)["result"],
                                             color=g.head(10)["target_is_win"].map({1: "Winner", 0: "Other"}),
                                             color_discrete_map={"Winner": F1_RED, "Other": "#C3C8CF"},
-                                            title=f"Predicted win probability (sum = {g['norm_prob'].sum():.2f})").update_yaxes(autorange="reversed")),
+                                            title=f"Predicted win probability (sum = {g['norm_prob'].sum():.2f})")
+                                     .update_yaxes(categoryorder="array", categoryarray=g.head(10)["driver_name"].tolist(), autorange="reversed")
+                                     .update_layout(yaxis_title=None)),
                     width="stretch")
     st.dataframe(g[["driver_name", "constructor_name", "grid_position", "norm_prob", "target_finish_position"]].round(4), width="stretch", hide_index=True)

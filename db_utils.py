@@ -10,6 +10,7 @@ Manages Snowflake Snowpark Session / Local Connector with seamless offline fallb
 
 import os
 import re
+import html
 import json
 import pandas as pd
 import numpy as np
@@ -56,6 +57,8 @@ LABELS = {
     "davies_bouldin": "Davies-Bouldin", "calinski_harabasz": "Calinski-Harabasz",
     "stability_ari": "Stability (ARI)", "cluster_name": "Tier", "n_clusters": "Clusters",
     "baseline_roc_auc": "Baseline ROC-AUC", "brier_score": "Brier score",
+    "norm_prob": "Win probability", "raw_prob": "Raw probability", "target_finish_position": "Finish position",
+    "driver_name": "Driver", "constructor_name": "Team",
 }
 TOKENS = {"pct": "%", "ms": "(ms)", "sec": "(s)", "id": "ID", "auc": "AUC", "ari": "ARI", "dnf": "DNF",
           "pca": "PCA", "gp": "GP", "avg": "avg", "top1": "top-1", "top3": "top-3", "acc": "accuracy",
@@ -80,13 +83,45 @@ assert pretty("top1_winner_hit_pct") == "Top-1 winner hit %" and pretty("pca_1")
 assert pretty("Title Contenders") == "Title Contenders" and pretty("silhouette") == "Silhouette" and pretty(0.5) == 0.5
 
 
+def _cell(v):
+    """Formats one table cell: thousands separators, at most 4 decimals, a dash for missing."""
+    if v is None or (isinstance(v, float) and np.isnan(v)):
+        return "—"
+    if isinstance(v, (bool, np.bool_)):
+        return "Yes" if v else "No"
+    if isinstance(v, (int, np.integer)):
+        return f"{int(v):,}" if abs(int(v)) >= 10000 else str(int(v))
+    if isinstance(v, (float, np.floating)):
+        return (f"{v:,.4f}".rstrip("0").rstrip(".") if abs(v) < 10000 else f"{v:,.0f}")
+    return html.escape(str(v))
+
+
+def html_table(df, hide_index=True):
+    """Results-sheet table: small header, right-aligned figures, bold first column, champion row highlighted."""
+    if not hide_index:
+        df = df.reset_index()
+    num = [pd.api.types.is_numeric_dtype(df[c]) and not pd.api.types.is_bool_dtype(df[c]) for c in df.columns]
+    head = "".join(f'<th class="{"n" if n else ""}">{html.escape(str(c))}</th>' for c, n in zip(df.columns, num))
+    rows = []
+    for r in df.itertuples(index=False):
+        hot = any(isinstance(v, str) and "Champion" in v for v in r)
+        cells = "".join(f'<td class="{"n" if n else ""}">{_cell(v)}</td>' for v, n in zip(r, num))
+        rows.append(f'<tr class="{"hot" if hot else ""}">{cells}</tr>')
+    return f'<div class="apx-table"><table><thead><tr>{head}</tr></thead><tbody>{"".join(rows)}</tbody></table></div>'
+
+
+assert "<b>" not in html_table(pd.DataFrame({"a": ["<b>"]})) and _cell(0.12345) == "0.1235" and _cell(12358) == "12,358"
+
+
 def _pretty_dataframe(original):
-    """Wraps st.dataframe so snake_case column headers read as plain words (data and values are untouched)."""
+    """Wraps st.dataframe: snake_case headers read as plain words, and small tables render as a styled results sheet."""
     def dataframe(self, data=None, *args, **kwargs):
         if isinstance(data, pd.DataFrame) and kwargs.get("column_config") is None:
             data = data.rename(columns=lambda c: pretty(c) if isinstance(c, str) else c)
-            if isinstance(data.index, pd.RangeIndex):  # row numbers 0..n carry no meaning for a reviewer
+            if data.index.name is None and pd.api.types.is_integer_dtype(data.index):  # unnamed row numbers (even re-sorted) mean nothing to a reviewer
                 kwargs.setdefault("hide_index", True)
+            if len(data) <= 25 and len(data.columns) <= 16 and kwargs.get("height") is None:  # bigger tables stay scrollable grids
+                return self.markdown(html_table(data, kwargs.get("hide_index", False)), unsafe_allow_html=True)
         return original(self, data, *args, **kwargs)
     return dataframe
 
@@ -131,10 +166,38 @@ def apply_f1_theme():
         /* Tabs */
         [data-baseweb="tab"] p {{ font-family: {DISPLAY_FONT}; font-size: 1.02rem; }}
 
-        /* Markdown tables: printed results-sheet style */
-        .stApp table {{ border-collapse: collapse; width: 100%; background: {SURFACE}; }}
-        .stApp th {{ background: #EEF0F3; color: {INK}; text-align: left; font-weight: 600; border-bottom: 2px solid {INK}; padding: 7px 10px; }}
-        .stApp td {{ border-bottom: 1px solid {RULE}; padding: 6px 10px; }}
+        /* Tables: results sheet in a card (markdown tables and small dataframes) */
+        .apx-table {{ background: {SURFACE}; border: 1px solid {RULE}; border-radius: 10px; overflow-x: auto; margin: 0.2rem 0 1rem 0; }}
+        .apx-table table, .stMarkdown table {{ border-collapse: collapse; width: 100%; background: {SURFACE}; font-size: 0.92rem; }}
+        .stApp th {{ background: {SURFACE}; color: {GRAPHITE}; text-align: left; font-weight: 600; font-size: 0.74rem;
+            text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid {RULE}; padding: 10px 12px; white-space: nowrap; }}
+        .stApp td {{ border-bottom: 1px solid #EEF0F3; padding: 8px 12px; color: {INK}; }}
+        .stApp tbody tr:last-child td {{ border-bottom: none; }}
+        .stApp tbody tr:hover td {{ background: #F7F3FC; }}
+        .apx-table th, .apx-table td {{ border-left: none !important; border-right: none !important; border-top: none !important; }}
+        .apx-table td:first-child {{ font-weight: 600; white-space: nowrap; }}
+        .apx-table .n {{ text-align: right; font-variant-numeric: tabular-nums; }}
+        .apx-table tr.hot td {{ background: #F3EBFA; }}
+        .apx-table tr.hot td:first-child {{ box-shadow: inset 3px 0 0 {PURPLE}; color: {PURPLE}; }}
+        [data-testid="stDataFrame"] {{ border: 1px solid {RULE}; border-radius: 10px; overflow: hidden; }}
+
+        /* Charts and diagrams sit in their own card */
+        [data-testid="stPlotlyChart"], [data-testid="stGraphVizChart"] {{
+            background: {SURFACE}; border: 1px solid {RULE}; border-radius: 10px; padding: 8px 10px; }}
+
+        /* Radios become a segmented control (selectors cover Streamlit 1.52 in Snowflake and 1.67 locally) */
+        [data-testid="stRadio"] [role="radiogroup"] {{
+            display: inline-flex; flex-wrap: wrap; gap: 2px; background: #EAECEF; border-radius: 9px; padding: 3px; }}
+        [data-testid="stRadio"] [role="radiogroup"] label {{ margin: 0; padding: 4px 11px; border-radius: 7px; cursor: pointer; white-space: nowrap; }}
+        [data-testid="stRadio"] [role="radiogroup"] label div:not(:has(p)) {{ display: none; }}  /* the radio circle */
+        [data-testid="stRadio"] [role="radiogroup"] label p {{ font-size: 0.88rem; color: {GRAPHITE}; }}
+        [data-testid="stRadio"] [role="radiogroup"] label:has(input:checked) {{ background: {SURFACE}; box-shadow: 0 1px 2px rgba(21,24,29,.12); }}
+        [data-testid="stRadio"] [role="radiogroup"] label:has(input:checked) p {{ color: {PURPLE}; font-weight: 600; }}
+
+        /* Dropdowns and widget labels */
+        [data-baseweb="select"] > div {{ background: {SURFACE}; border: 1px solid {RULE}; border-radius: 8px; min-height: 40px; }}
+        [data-baseweb="select"] > div:hover {{ border-color: {PURPLE}; }}
+        [data-testid="stWidgetLabel"] p {{ color: {GRAPHITE}; font-size: 0.82rem; font-weight: 600; }}
 
         /* Page header component */
         .apx-head {{ border-bottom: 2px solid {INK}; padding-bottom: 0.6rem; margin-bottom: 1.2rem; }}
@@ -267,9 +330,15 @@ def get_plotly_theme(fig):
         margin=dict(l=40, r=30, t=56, b=40),
         xaxis=dict(gridcolor="#E6E9EE", zerolinecolor=RULE, linecolor=RULE),
         yaxis=dict(gridcolor="#E6E9EE", zerolinecolor=RULE, linecolor=RULE),
-        legend=dict(bgcolor="rgba(0,0,0,0)"),
+        legend=dict(bgcolor="rgba(0,0,0,0)", orientation="h", yanchor="bottom", y=1.01, xanchor="left", x=0,
+                    font=dict(size=12, color=GRAPHITE), itemsizing="constant", title=dict(side="left")),
         hoverlabel=dict(bgcolor=SURFACE, bordercolor=RULE, font=dict(color=INK)),
+        bargap=0.3,
     )
+    fig.update_xaxes(gridcolor="#EEF0F3", tickfont=dict(color=GRAPHITE), title_font=dict(color=GRAPHITE, size=12))
+    fig.update_yaxes(gridcolor="#EEF0F3", tickfont=dict(color=GRAPHITE), title_font=dict(color=GRAPHITE, size=12))
+    if fig.layout.showlegend is not False and sum(1 for tr in fig.data if tr.showlegend is not False) > 1:
+        fig.update_layout(margin=dict(t=84))  # room for the title and the legend row under it
     lay = fig.layout
     if lay.title.text:
         lay.title.text = " ".join(pretty(w) if "_" in w else w for w in lay.title.text.split(" "))

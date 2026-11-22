@@ -321,7 +321,10 @@ def deploy():
             SCORED_AT       TIMESTAMP_NTZ DEFAULT CURRENT_TIMESTAMP()
         );
         """)
-        print("  [+] 3. Streams & CDC Architecture deployed: RAW.STREAM_RACE_RESULTS_CDC", flush=True)
+        # Created suspended (the default), so it spends no credits until someone runs ALTER TASK ... RESUME
+        cs.execute(re.search(r"CREATE OR REPLACE TASK ML\.TASK_AUTO_SCORE_F1_PREDICTIONS.*?'INSERT';",
+                             open(os.path.join(ROOT, "MASTER_SNOWFLAKE_DEPLOYMENT.sql")).read(), re.S).group(0))
+        print("  [+] 3. Streams & CDC Architecture deployed: RAW.STREAM_RACE_RESULTS_CDC + suspended TASK_AUTO_SCORE_F1_PREDICTIONS", flush=True)
     except Exception as e:
         print(f"  [-] Streams notice: {e}")
 

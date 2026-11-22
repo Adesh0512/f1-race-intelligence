@@ -16,6 +16,83 @@ Every number below comes from the module output files. Rerun them with `.venv/bi
 
 ---
 
+## Your 60-second opening (say this before anything else)
+"ApexIQ answers two questions about Formula 1 from 31 seasons of results.
+**One:** before a race starts, who will win? **Two:** without being told, can we discover which drivers are title contenders, midfield or backmarkers?
+**Dashboard 1** is the data warehouse: a star schema with one row per driver per race, plus a snowflake schema, built in SQLite and deployed to Snowflake in five layers.
+**Dashboard 2** is supervised learning: 12,358 labelled entries, FP-Growth rules, seven classifiers compared on races the model never saw, and cost-sensitive XGBoost, which picks the winner in 40 of 68 races, better than always backing the pole-sitter.
+**Dashboard 3** is unsupervised learning: 703 driver-season profiles, six clustering algorithms compared, and K-Means finds three tiers that match the real championship standings 81% of the time."
+
+## Demo order (what to click, what to say)
+| # | Open | Say |
+|---|---|---|
+| 1 | Project overview | The 60-second opening; point at 40/68 and 0.9629 |
+| 2 | Warehouse Design → Star Schema, then Live OLAP Queries | Grain = driver × race; run roll-up, then slice/dice |
+| 3 | Snowflake Deployment → Live Verification | "Live, snowpark": the counts come from Snowflake right now |
+| 4 | Snowsight worksheet `SNOWFLAKE_DEMO_QUERIES.sql` (only if asked) | Queries 2–5: star join, ROLLUP, snowflake chain, QUALIFY |
+| 5 | Dataset (Supervised) | 20:1 imbalance, chronological split |
+| 6 | Pattern Mining | Same 414 itemsets from both algorithms; FP-tree stays at 4,230 nodes |
+| 7 | Classifier Comparison | Switch metric to *Accuracy %*: the baseline scores 95% yet finds no winners. That is why we rank on ROC-AUC / PR-AUC / top-1 |
+| 8 | Classification Algorithm → Curves & Threshold | Move the threshold slider: precision ↔ recall |
+| 9 | Dataset (Unsupervised) → Clustering Comparison | Different grain; 6 algorithms; ranking rule |
+| 10 | K-Means → Cluster Map, Centroid Profiles | Three tiers; radar = tier fingerprints |
+| 11 | Clustering Performance Metrics → vs. Championship | External check: 81% of Contenders finished top-3 |
+
+## Snowflake: how it is deployed now
+**Q: Is this your own Snowflake account?**
+Yes: account UKFIGDV-WD45232 (AWS ap-southeast-7). `deploy_to_snowflake.py` builds everything from `.env` credentials; `deploy_streamlit_app.py` uploads this dashboard into Snowflake.
+
+**Q: What exactly is in Snowflake?**
+- Database `F1_PREDICTION_DB` with schemas RAW → CLEAN → DW → ML → ANALYTICS: 26 tables and views, 39 objects defined in the master SQL.
+- Row counts match the local files exactly: 8,650 results, 412 races, 1,393 rules, 414 itemsets, 7 models, 703 clustered driver-seasons.
+- Warehouse `F1_WH` is X-Small and suspends after 60 seconds idle.
+
+**Q: Why does the dashboard also run inside Snowflake?**
+It is a native Streamlit-in-Snowflake app (`F1_RACE_INTELLIGENCE`). Inside Snowflake it uses the app's own Snowpark session, so no password is stored anywhere. It runs on the *warehouse runtime*, which installs packages from Snowflake's own Anaconda channel. The newer container runtime needs internet access to PyPI, which a trial account blocks.
+
+**Q: ELT or ETL?**
+Locally, ETL: Python cleans the data, then loads SQLite. In Snowflake, ELT: raw CSVs are loaded first (`PUT` + `COPY INTO` RAW), then transformed with SQL inside Snowflake (RAW → CLEAN → DW).
+
+**Q: Why five schemas?**
+Layered (medallion-style) design. RAW is untouched source data you can always rebuild from. CLEAN is typed and validated. DW holds the dimensional model. ML holds model outputs. ANALYTICS holds what users see (secure view, dynamic table). Each layer gets its own permissions.
+
+**Q: What is a dynamic table?**
+A table defined by a query that Snowflake keeps fresh automatically within a `TARGET_LAG` (ours: 1 hour, a rolling 5-race form per driver). It is suspended to save trial credits.
+
+**Q: What is a secure view?**
+A view whose definition is hidden from users, given to the read-only role `F1_ANALYST_READONLY`. Only public columns are exposed (no internal features).
+
+## Power BI
+**Q: What is the Power BI dashboard?**
+`powerbi/ApexIQ_F1_Dashboard.pbip` holds 4 pages: Race predictor, Classifier comparison, Pattern mining and Driver tiers. Its data comes from the same module outputs as Streamlit (`F1_Race_Intelligence_PowerBI_Dataset.xlsx`, 18 sheets), so the numbers match: 40/68, 0.9629, 1,393 rules, silhouette 0.264.
+
+**Q: Why both Streamlit and Power BI?**
+Streamlit holds the full analysis and the live Snowflake queries. Power BI is the business-user view: drag-and-drop filters, no code, the tool most companies use.
+
+## Basics they may test (one line each)
+- **Data warehouse:** a subject-oriented, integrated, time-variant, non-volatile store for analysis (Inmon).
+- **Fact vs. dimension:** facts are measurements (finish position, points); dimensions describe them (who, where, when).
+- **OLAP operations:**
+  - Roll-up: aggregate up a hierarchy (month → season).
+  - Drill-down: the reverse.
+  - Slice: fix one dimension (season = 2024).
+  - Dice: fix several.
+  - Pivot: rotate the axes.
+- **Supervised vs. unsupervised:** with a label (who won) vs. without one (find the tiers).
+- **XGBoost:** builds trees one after another, each one correcting the previous trees' errors, with regularisation.
+- **K-Means:**
+  1. Pick k centres.
+  2. Assign each point to the nearest centre.
+  3. Move each centre to the mean of its points.
+  4. Repeat until nothing changes.
+- **PCA:** projects the 9 features onto the 2 directions of largest variance, for plotting only. Clustering itself uses all 9.
+- **ROC-AUC:** the probability that a random winner is ranked above a random non-winner.
+- **PR-AUC:** the precision-recall area; its baseline equals the positive rate (0.05 here), so 0.64 is about 13× better than chance.
+- **Recall:** of the real winners, how many we flagged.
+- **Precision:** of the drivers we flagged, how many actually won.
+
+---
+
 ## Dashboard 1: Data Warehouse
 
 **Q: What is the grain of your fact table?**
@@ -39,13 +116,15 @@ Warehouse Design page → Live OLAP Queries tab. Queries 1–5 run live against 
 5. ELT into CLEAN.
 6. Clone, Time Travel, dynamic table, stream + task, secure view and a Cortex procedure.
 
-Step 6b builds the DW star and snowflake schemas and loads the clustering output. In total, 40 objects across 5 schemas.
+Step 6b builds the DW star and snowflake schemas and loads the clustering output. In total, 39 objects across 5 schemas.
 
 **Q: Zero-copy clone vs. Time Travel?**
 A clone creates a new table that shares the same micro-partitions, with no data copied (used for dev/test). Time Travel queries a table as it was in the past (`AT(OFFSET => -60)`), for recovery and auditing.
 
 **Q: What does the stream + task do?**
-The stream captures inserts into RAW race results (change data capture). The scheduled task scores new rows into `ML.AUTO_SCORED_WIN_PREDICTIONS` only when the stream has data.
+The stream `RAW.STREAM_RACE_RESULTS_CDC` captures inserts into RAW race results (change data capture). The task `ML.TASK_AUTO_SCORE_F1_PREDICTIONS` is scheduled every 10 minutes and runs only `WHEN SYSTEM$STREAM_HAS_DATA(...)`, writing scores into `ML.AUTO_SCORED_WIN_PREDICTIONS`.
+- **Be honest if asked:** the task scores with a simple pole-position rule, not the XGBoost model. It demonstrates the CDC pipeline. Putting XGBoost inside Snowflake would need a Snowpark Python UDF.
+- **It is kept suspended** so it spends no trial credits. `SHOW TASKS` shows it; `ALTER TASK ... RESUME` would start it.
 
 ---
 
@@ -154,4 +233,4 @@ We added each driver's previous-season tier (K-Means fitted on 1994–2021 only)
 
 ## Report & reproducibility
 **Q: Can you reproduce a number live?**
-Run `.venv/bin/python run_all_modules.py` (about 20 s), then refresh the dashboard. There are 61 automated tests: `.venv/bin/python -m unittest discover -s tests`.
+Run `.venv/bin/python run_all_modules.py` (about 20 s), then refresh the dashboard. There are 64 automated tests: `.venv/bin/python -m unittest discover -s tests`.

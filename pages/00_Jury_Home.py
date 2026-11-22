@@ -64,7 +64,7 @@ st.markdown(f"""
 champ = ccomp[ccomp["champion"]].iloc[0]
 ROWS = [
     ("Warehouse design", "Dashboard 1: Data warehouse", "<b>2</b> fact tables, <b>7</b> dimensions, 12 live OLAP queries", "pages/20_D1_Warehouse_Design.py"),
-    ("Snowflake deployment", "Dashboard 1: Data warehouse", "RAW → CLEAN → DW → ML → ANALYTICS, <b>40</b> objects", "pages/21_D1_Snowflake_Deployment.py"),
+    ("Snowflake deployment", "Dashboard 1: Data warehouse", "RAW → CLEAN → DW → ML → ANALYTICS, <b>39</b> objects", "pages/21_D1_Snowflake_Deployment.py"),
     ("Supervised dataset", "Dashboard 2: Supervised learning", "<b>12,358</b> labelled entries, 16 pre-race features", "pages/22_D2_Supervised_Dataset.py"),
     ("Pattern matching: FP-Growth and Apriori", "Dashboard 2: Supervised learning", f"<b>{bench['itemsets_count']}</b> identical itemsets, {bench['rules_count']:,} rules", "pages/23_D2_Pattern_Mining.py"),
     ("Classifier comparison and validation", "Dashboard 2: Supervised learning", f"<b>{len(comp)}</b> models, bootstrap CI [{sig['ci_low']:+.3f}, {sig['ci_high']:+.3f}]", "pages/24_D2_Classifier_Comparison.py"),

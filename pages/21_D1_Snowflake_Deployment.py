@@ -1,6 +1,8 @@
 import os
 import re
 import sys
+import time
+import sqlite3
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -32,7 +34,84 @@ c3.metric("Tables & Views", int(objs["type"].isin(["TABLE", "VIEW", "DYNAMIC TAB
 c4.metric("Connection", "Live" if live else "Offline", conn_type, delta_color="normal" if live else "off")
 
 st.markdown("---")
-t1, t2, t3, t4 = st.tabs(["Deployment Pipeline", "Object Manifest", "Live Verification", "Deployment SQL"])
+t0, t1, t4, t3, t5, t6, t2 = st.tabs(["Environment", "Deployment Pipeline", "Deployment SQL", "Live Verification",
+                                       "Design → Snowflake", "Run SQL", "Object Manifest"])
+OFFLINE = "Not connected to Snowflake. Inside Snowflake, or with credentials in `.env`, this tab reads the live account."
+
+
+def live_query(sql, cols):
+    """Live result, or None when offline or the query failed (query_snowflake falls back to unrelated local data)."""
+    if not live:
+        return None
+    df = query_snowflake(sql)
+    return df if set(cols) <= set(df.columns) else None
+
+
+with t0:
+    env = live_query("SELECT CURRENT_ORGANIZATION_NAME() || '-' || CURRENT_ACCOUNT_NAME() AS account, CURRENT_REGION() AS region, CURRENT_ROLE() AS role, "
+                     "CURRENT_WAREHOUSE() AS warehouse, CURRENT_DATABASE() AS database, CURRENT_VERSION() AS version",
+                     ["account", "region", "warehouse"])
+    if env is not None:
+        e = env.iloc[0]
+        a, b, c = st.columns(3)
+        a.metric("Account", e["account"], e["region"], delta_color="off")
+        b.metric("Database", e["database"] or "F1_PREDICTION_DB", f"role {e['role']}", delta_color="off")
+        c.metric("Warehouse", e["warehouse"] or "F1_WH", "X-Small · auto-suspend 60 s", delta_color="off")
+        sch = live_query("SELECT table_schema, COUNT_IF(table_type = 'BASE TABLE') AS tables, COUNT_IF(table_type = 'VIEW') AS views "
+                         "FROM F1_PREDICTION_DB.INFORMATION_SCHEMA.TABLES WHERE table_schema IN ('RAW','CLEAN','DW','ML','ANALYTICS') "
+                         "GROUP BY 1", ["table_schema", "tables"])
+        if sch is not None:
+            purpose = {"RAW": "Files exactly as loaded from the stage", "CLEAN": "Typed, validated modelling data",
+                       "DW": "Star and snowflake dimensional model", "ML": "Model results, rules and clusters",
+                       "ANALYTICS": "What users see: secure view, dynamic table"}
+            order = list(purpose)
+            sch = sch.assign(purpose=sch["table_schema"].map(purpose)).sort_values("table_schema", key=lambda c: c.map(order.index))
+            st.markdown("#### Database `F1_PREDICTION_DB`: schemas created")
+            st.dataframe(sch.rename(columns={"table_schema": "Schema"}), width="stretch")
+        st.caption(f"Snowflake {e['version']}. Snowflake separates storage (the database, billed per TB) from compute (the virtual warehouse, billed per "
+                   "second while running). F1_WH is X-Small and suspends after 60 s idle, so it costs nothing between queries.")
+    else:
+        st.info(OFFLINE)
+
+with t5:
+    st.markdown("Every table of the designed warehouse (`f1_warehouse.db`, Dashboard 1) has a counterpart in Snowflake's `DW` schema, "
+                "built by `deploy_to_snowflake.py` step 6b. Row counts are compared live.")
+    PAIRS = [("FACT_RACE_RESULTS_STAR", "DW.FACT_RACE_RESULTS_STAR", "Star"), ("DIM_DRIVER", "DW.DIM_DRIVER", "Star"),
+             ("DIM_CONSTRUCTOR", "DW.DIM_CONSTRUCTOR", "Star"), ("DIM_RACE_STAR", "DW.DIM_RACE_STAR", "Star"),
+             ("DIM_DATE", "DW.DIM_DATE", "Star"), ("FACT_RACE_RESULTS_SNOWFLAKE", "DW.FACT_RACE_RESULTS_SNOWFLAKE", "Snowflake"),
+             ("DIM_RACE_SNOWFLAKE", "DW.DIM_RACE_SNOWFLAKE", "Snowflake"), ("DIM_CIRCUIT_SNOWFLAKE", "DW.DIM_CIRCUIT", "Snowflake"),
+             ("DIM_COUNTRY", "DW.DIM_COUNTRY", "Snowflake")]
+    with sqlite3.connect(os.path.join(ROOT, "f1_warehouse.db")) as db:
+        local = {t: db.execute(f'SELECT COUNT(*) FROM "{t}"').fetchone()[0] for t, _, _ in PAIRS}
+    sf = live_query(" UNION ALL ".join(f"SELECT '{s}' AS tbl, COUNT(*) AS n FROM {s}" for _, s, _ in PAIRS), ["tbl", "n"])
+    sf_n = dict(zip(sf["tbl"], sf["n"])) if sf is not None else {}
+    st.dataframe(pd.DataFrame([(sch, t, local[t], s, sf_n.get(s), ("✓ match" if sf_n.get(s) == local[t] else "✗ differs") if sf_n else "—")
+                               for t, s, sch in PAIRS],
+                              columns=["Schema", "Designed table (SQLite)", "Rows", "Snowflake table", "Snowflake rows", "Check"]), width="stretch")
+    st.markdown("#### Data loading: `COPY INTO` history")
+    loads = live_query("SELECT schema_name || '.' || table_name AS target_table, SPLIT_PART(file_name, '/', -1) AS staged_file, "
+                       "row_count AS rows_loaded, error_count AS errors, status, TO_VARCHAR(last_load_time, 'YYYY-MM-DD HH24:MI') AS loaded_at_utc "
+                       "FROM F1_PREDICTION_DB.INFORMATION_SCHEMA.LOAD_HISTORY ORDER BY last_load_time", ["target_table", "rows_loaded"])
+    if loads is not None:
+        st.dataframe(loads, width="stretch")
+        st.caption("Files are uploaded with `PUT` to the internal stage `@RAW.F1_RAW_STAGE` (gzip-compressed), then bulk-loaded with "
+                   "`COPY INTO`. Snowflake keeps this load history for 14 days.")
+    else:
+        st.info(OFFLINE)
+
+with t6:
+    demo = open(os.path.join(ROOT, "SNOWFLAKE_DEMO_QUERIES.sql"), encoding="utf-8").read()
+    blocks = re.findall(r"^-- (\d)\. ([^\n]+)\n(SELECT.*?;)", demo, re.S | re.M)
+    pick = st.selectbox("Query", range(len(blocks)), format_func=lambda i: f"{blocks[i][0]}. {blocks[i][1]}")
+    st.code(blocks[pick][2], language="sql")
+    if st.button("Run on Snowflake", type="primary", width="stretch"):
+        if live:
+            t_start = time.perf_counter()
+            res = query_snowflake(blocks[pick][2].rstrip(";"))
+            st.success(f"Executed on Snowflake warehouse F1_WH in {(time.perf_counter() - t_start) * 1000:.0f} ms: {len(res)} rows")
+            st.dataframe(res, width="stretch")
+        else:
+            st.info(OFFLINE)
 
 with t1:
     st.markdown("""

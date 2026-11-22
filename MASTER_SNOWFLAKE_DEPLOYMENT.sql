@@ -293,15 +293,6 @@ CREATE OR REPLACE TABLE ML.FEATURE_IMPORTANCE (
     GROUP_NAME              VARCHAR(50)
 );
 
-CREATE OR REPLACE TABLE ML.REGRESSION_METRICS (
-    MODEL_NAME              VARCHAR(100),
-    MAE                     FLOAT,
-    RMSE                    FLOAT,
-    R2_SCORE                FLOAT,
-    WITHIN_1_POSITION_PCT   FLOAT,
-    WITHIN_2_POSITIONS_PCT  FLOAT
-);
-
 
 -- ============================================================================
 -- SOURCE: 03_load_data.sql
