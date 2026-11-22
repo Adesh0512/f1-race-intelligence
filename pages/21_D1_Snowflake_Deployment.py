@@ -90,7 +90,7 @@ with t5:
                               columns=["Schema", "Designed table (SQLite)", "Rows", "Snowflake table", "Snowflake rows", "Check"]), width="stretch")
     st.markdown("#### Data loading: `COPY INTO` history")
     loads = live_query("SELECT schema_name || '.' || table_name AS target_table, SPLIT_PART(file_name, '/', -1) AS staged_file, "
-                       "row_count AS rows_loaded, error_count AS errors, status, TO_VARCHAR(last_load_time, 'YYYY-MM-DD HH24:MI') AS loaded_at_utc "
+                       "row_count AS rows_loaded, error_count AS errors, status, TO_VARCHAR(CONVERT_TIMEZONE('Asia/Kolkata', last_load_time), 'YYYY-MM-DD HH24:MI') AS loaded_at_ist "
                        "FROM F1_PREDICTION_DB.INFORMATION_SCHEMA.LOAD_HISTORY ORDER BY last_load_time", ["target_table", "rows_loaded"])
     if loads is not None:
         st.dataframe(loads, width="stretch")
