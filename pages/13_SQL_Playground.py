@@ -6,7 +6,7 @@ import pandas as pd
 import plotly.express as px
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from db_utils import apply_f1_theme, get_plotly_theme, query_snowflake, get_local_data, F1_RED, page_header
+from db_utils import apply_f1_theme, get_plotly_theme, query_snowflake, get_local_data, F1_RED, page_header, SEQ_SCALE
 
 apply_f1_theme()
 
@@ -160,7 +160,7 @@ query_code = SAVED_QUERIES[selected_title]
 st.markdown("##### SQL Query Text (Snowflake ANSI SQL)")
 st.code(query_code, language="sql")
 
-if st.button("Run query", width="stretch"):
+if st.button("Run query", width="stretch", type="primary"):
     t0 = time.perf_counter()
     res = pd.DataFrame()
     executed_on = "Snowflake Data Cloud"
@@ -215,12 +215,12 @@ if st.button("Run query", width="stretch"):
         if any(c in cols_upper for c in ["TOTAL_WINS", "WINS_ACHIEVED", "IS_WIN"]):
             win_col = next(c for c in res.columns if c.upper() in ["TOTAL_WINS", "WINS_ACHIEVED", "IS_WIN"])
             cat_col = next((c for c in res.columns if c.upper() in ["DRIVER_NAME", "CONSTRUCTOR_NAME"]), res.columns[0])
-            fig = px.bar(res.head(15), x=cat_col, y=win_col, title=f"Telemetry Results ({win_col})", color=win_col, color_continuous_scale=["#333C48", F1_RED])
+            fig = px.bar(res.head(15), x=cat_col, y=win_col, title=f"Telemetry Results ({win_col})", color=win_col, color_continuous_scale=SEQ_SCALE)
             st.plotly_chart(get_plotly_theme(fig), width="stretch")
         elif any(c in cols_upper for c in ["WIN_CONVERSION_PCT", "STRATEGY_WIN_PCT"]):
             pct_col = next(c for c in res.columns if c.upper() in ["WIN_CONVERSION_PCT", "STRATEGY_WIN_PCT"])
             cat_col = next((c for c in res.columns if c.upper() in ["GRID_POSITION", "PIT_STOP_COUNT"]), res.columns[0])
-            fig = px.bar(res, x=cat_col, y=pct_col, title=f"Telemetry Percentages ({pct_col})", color=pct_col, color_continuous_scale=["#333C48", F1_RED])
+            fig = px.bar(res, x=cat_col, y=pct_col, title=f"Telemetry Percentages ({pct_col})", color=pct_col, color_continuous_scale=SEQ_SCALE)
             st.plotly_chart(get_plotly_theme(fig), width="stretch")
         else:
             st.info("Tabular view rendered.")

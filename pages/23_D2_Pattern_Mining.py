@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, page_header
+from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, page_header, SEQ_SCALE
 
 apply_f1_theme()
 
@@ -35,13 +35,14 @@ with t1:
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=sweep["min_support"], y=sweep["apriori_candidates"], name="Apriori candidates", mode="lines+markers", line=dict(color="#8B949E")))
     fig.add_trace(go.Scatter(x=sweep["min_support"], y=sweep["fp_tree_nodes"], name="FP-tree nodes", mode="lines+markers", line=dict(color=F1_RED)))
-    fig.update_layout(title="Search-space cost vs. min_support", xaxis=dict(title="min_support", autorange="reversed", type="log"), yaxis_title="count")
+    ticks = dict(tickvals=sweep["min_support"].tolist(), ticktext=[str(v) for v in sweep["min_support"]], minor=dict(showgrid=False))
+    fig.update_layout(title="Search-space cost vs. min support", xaxis=dict(title="min_support", autorange="reversed", type="log", **ticks), yaxis_title="count")
     a.plotly_chart(get_plotly_theme(fig), width="stretch")
     long = sweep.rename(columns={"apriori_time_sec": "Apriori", "fpgrowth_time_sec": "FP-Growth"}).melt(
         id_vars="min_support", value_vars=["Apriori", "FP-Growth"], var_name="algorithm", value_name="seconds")
     b.plotly_chart(get_plotly_theme(px.line(long, x="min_support", y="seconds", color="algorithm", markers=True, log_x=True,
                                             color_discrete_map={"Apriori": "#8B949E", "FP-Growth": F1_RED},
-                                            title="Wall-clock runtime (mlxtend)").update_xaxes(autorange="reversed")), width="stretch")
+                                            title="Wall-clock runtime (mlxtend)").update_xaxes(autorange="reversed", **ticks)), width="stretch")
     st.dataframe(sweep, width="stretch", hide_index=True)
     st.markdown(f"""
     | | Apriori | FP-Growth |
@@ -59,10 +60,12 @@ with t1:
             + "FP-Growth's cost is bounded by the FP-tree size and 2 database scans, not by the number of candidates.")
 
 with t2:
-    target = st.radio("Consequent", ["Outcome_Winner", "Outcome_Podium", "Outcome_Points", "Outcome_DNF"], horizontal=True)
+    target = st.radio("Consequent", ["Outcome_Winner", "Outcome_Podium", "Outcome_Points", "Outcome_DNF"], horizontal=True,
+                      format_func=lambda t: t.replace("_", " "))
     sub = rules[rules["consequents"].str.contains(target)].sort_values("lift", ascending=False).head(12)
+    sub = sub.assign(antecedents=sub["antecedents"].str.replace("_", " "), consequents=sub["consequents"].str.replace("_", " "))
     st.plotly_chart(get_plotly_theme(px.bar(sub, x="lift", y="antecedents", orientation="h", color="confidence",
-                                            color_continuous_scale="Reds", title=f"Top rules ⇒ {target} (by lift)")
+                                            color_continuous_scale=SEQ_SCALE, title=f"Top rules ⇒ {target.replace('_', ' ')} (by lift)")
                                      .update_yaxes(autorange="reversed")), width="stretch")
     st.dataframe(sub.round(4), width="stretch", hide_index=True)
     st.caption("Lift > 1: the antecedent makes the outcome more likely than its base rate. Example: pole + podium ⇒ winner at 17× the base rate.")
@@ -72,7 +75,7 @@ with t3:
     conf = st.slider("Minimum confidence", 0.25, 1.0, 0.5)
     view = rules[rules["lift"].between(lo, hi) & (rules["confidence"] >= conf)]
     st.plotly_chart(get_plotly_theme(px.scatter(view, x="support", y="confidence", size="lift", color="lift", hover_data=["antecedents", "consequents"],
-                                                color_continuous_scale="Reds", title=f"{len(view)} rules: support vs. confidence")), width="stretch")
+                                                color_continuous_scale=SEQ_SCALE, title=f"{len(view)} rules: support vs. confidence")), width="stretch")
     st.dataframe(view.round(4), width="stretch", hide_index=True, height=300)
 
 with t4:

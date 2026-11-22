@@ -7,7 +7,7 @@ import plotly.express as px
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, TIER_COLORS, page_header
+from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, TIER_COLORS, page_header, SEQ_SCALE
 
 apply_f1_theme()
 
@@ -49,7 +49,7 @@ with t1:
 
 with t2:
     st.markdown("Championship standing was **never used** to fit the clusters — it is only used afterwards to check that the tiers make sense.")
-    st.plotly_chart(get_plotly_theme(px.imshow(cont, text_auto=True, color_continuous_scale="Reds",
+    st.plotly_chart(get_plotly_theme(px.imshow(cont, text_auto=True, color_continuous_scale=SEQ_SCALE,
                                                labels=dict(x="Championship standing", y="Cluster"),
                                                title="Cluster vs. Championship Standing Tier")), width="stretch")
     e1, e2, e3 = st.columns(3)

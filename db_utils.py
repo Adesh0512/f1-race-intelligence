@@ -9,6 +9,7 @@ Manages Snowflake Snowpark Session / Local Connector with seamless offline fallb
 """
 
 import os
+import re
 import json
 import pandas as pd
 import numpy as np
@@ -36,6 +37,11 @@ YELLOW = "#C99700"   # timing yellow: caution, notes
 FLAG_RED = "#D50F1F" # FIA stripe only
 TIER_COLORS = {"Title Contenders": PURPLE, "Midfield Regulars": GREEN, "Backmarkers": "#9AA1AB"}
 DISPLAY_FONT = "'DIN Alternate', 'DIN Condensed', Bahnschrift, 'Roboto Condensed', system-ui, sans-serif"
+COLORWAY = [PURPLE, GREEN, YELLOW, INK, "#9AA1AB", FLAG_RED, "#2F6FDB"]
+SEQ_SCALE = ["#FFFFFF", "#D9C6EE", PURPLE]            # sequential: heatmaps, colour-by-value
+DIV_SCALE = [GREEN, "#FFFFFF", PURPLE]                # diverging: correlations (-1 .. +1)
+px.defaults.color_discrete_sequence = COLORWAY        # charts without explicit colours use the house palette
+px.defaults.color_continuous_scale = SEQ_SCALE
 
 # Legacy names still imported by older pages
 F1_RED = PURPLE
@@ -43,6 +49,54 @@ F1_DARK_BG = "#0B0D10"
 F1_CARD_BG = "#161B22"
 F1_BORDER = "#30363D"
 F1_TEXT_MUTED = "#8B949E"
+
+# Readable names for column / metric identifiers shown to reviewers
+LABELS = {
+    "roc_auc": "ROC-AUC", "pr_auc": "PR-AUC", "f1_score": "F1 score", "f1": "F1",
+    "davies_bouldin": "Davies-Bouldin", "calinski_harabasz": "Calinski-Harabasz",
+    "stability_ari": "Stability (ARI)", "cluster_name": "Tier", "n_clusters": "Clusters",
+    "baseline_roc_auc": "Baseline ROC-AUC", "brier_score": "Brier score",
+}
+TOKENS = {"pct": "%", "ms": "(ms)", "sec": "(s)", "id": "ID", "auc": "AUC", "ari": "ARI", "dnf": "DNF",
+          "pca": "PCA", "gp": "GP", "avg": "avg", "top1": "top-1", "top3": "top-3", "acc": "accuracy",
+          "inf": "inference", "std": "std", "mcc": "MCC", "roc": "ROC", "kpi": "KPI", "sql": "SQL",
+          "fp": "FP", "fpgrowth": "FP-Growth", "ci": "CI", "quali": "qualifying", "p": "p", "olap": "OLAP"}
+
+
+def pretty(name):
+    """'top1_winner_hit_pct' -> 'Top-1 winner hit %'; anything that is not a snake_case identifier is returned unchanged."""
+    if not isinstance(name, str) or not name or name != name.lower() or " " in name or not any(c.isalpha() for c in name):
+        return name
+    if name in LABELS:
+        return LABELS[name]
+    if "_" not in name and name not in TOKENS:
+        return name[0].upper() + name[1:]
+    words = [TOKENS.get(w, w) for w in name.split("_") if w]
+    text = " ".join(words)
+    return text[0].upper() + text[1:]
+
+
+assert pretty("top1_winner_hit_pct") == "Top-1 winner hit %" and pretty("pca_1") == "PCA 1"
+assert pretty("Title Contenders") == "Title Contenders" and pretty("silhouette") == "Silhouette" and pretty(0.5) == 0.5
+
+
+def _pretty_dataframe(original):
+    """Wraps st.dataframe so snake_case column headers read as plain words (data and values are untouched)."""
+    def dataframe(self, data=None, *args, **kwargs):
+        if isinstance(data, pd.DataFrame) and kwargs.get("column_config") is None:
+            data = data.rename(columns=lambda c: pretty(c) if isinstance(c, str) else c)
+            if isinstance(data.index, pd.RangeIndex):  # row numbers 0..n carry no meaning for a reviewer
+                kwargs.setdefault("hide_index", True)
+        return original(self, data, *args, **kwargs)
+    return dataframe
+
+
+if not getattr(st, "_apx_pretty", False):  # patch once per process
+    from streamlit.delta_generator import DeltaGenerator
+    DeltaGenerator.dataframe = _pretty_dataframe(DeltaGenerator.dataframe)
+    st.dataframe = DeltaGenerator.dataframe.__get__(st.dataframe.__self__)
+    st._apx_pretty = True
+
 
 def apply_f1_theme():
     """Applies the light classification-sheet theme to every page."""
@@ -203,18 +257,40 @@ def apply_f1_theme():
     """, unsafe_allow_html=True)
 
 def get_plotly_theme(fig):
-    """Formats a Plotly figure in the light classification-sheet style."""
+    """Formats a Plotly figure in the light classification-sheet style, with readable axis, legend and hover labels."""
     fig.update_layout(
         paper_bgcolor=SURFACE,
         plot_bgcolor=SURFACE,
-        colorway=[PURPLE, GREEN, YELLOW, INK, "#9AA1AB", FLAG_RED, "#2F6FDB"],
+        colorway=COLORWAY,
         font=dict(color=INK, family="system-ui, -apple-system, 'Segoe UI', sans-serif", size=13),
-        title=dict(font=dict(size=16, color=INK, family=DISPLAY_FONT)),
+        title=dict(font=dict(size=16, color=INK, family=DISPLAY_FONT), x=0, xanchor="left"),
         margin=dict(l=40, r=30, t=56, b=40),
         xaxis=dict(gridcolor="#E6E9EE", zerolinecolor=RULE, linecolor=RULE),
         yaxis=dict(gridcolor="#E6E9EE", zerolinecolor=RULE, linecolor=RULE),
         legend=dict(bgcolor="rgba(0,0,0,0)"),
+        hoverlabel=dict(bgcolor=SURFACE, bordercolor=RULE, font=dict(color=INK)),
     )
+    lay = fig.layout
+    if lay.title.text:
+        lay.title.text = " ".join(pretty(w) if "_" in w else w for w in lay.title.text.split(" "))
+    for ax in [k for k in lay.to_plotly_json() if k.startswith(("xaxis", "yaxis"))]:
+        if lay[ax].title.text:
+            lay[ax].title.text = "" if lay[ax].title.text in ("variable", "index") else pretty(lay[ax].title.text)
+    if lay.legend.title.text:
+        lay.legend.title.text = "" if lay.legend.title.text in ("color", "variable") else pretty(lay.legend.title.text)
+    if lay.coloraxis.colorbar.title.text:
+        lay.coloraxis.colorbar.title.text = pretty(lay.coloraxis.colorbar.title.text)
+    for axis, attr in (("xaxis", "x"), ("yaxis", "y")):  # display-only relabel of snake_case category ticks
+        cats = {v for tr in fig.data for v in (getattr(tr, attr, None) if getattr(tr, attr, None) is not None else []) if isinstance(v, str)}
+        alias = {c: pretty(c) for c in cats if pretty(c) != c}
+        if alias:
+            fig.update_layout({axis: dict(labelalias=alias)})
+    for tr in fig.data:  # radar charts label their spokes from theta
+        if getattr(tr, "theta", None) is not None:
+            tr.theta = [pretty(t) for t in tr.theta]
+    for tr in fig.data:  # plotly express hover text reads "col_name=%{x}"
+        if getattr(tr, "hovertemplate", None):
+            tr.hovertemplate = re.sub(r"([a-z0-9_]+)=%", lambda m: pretty(m.group(1)) + "=%", tr.hovertemplate)
     return fig
 
 

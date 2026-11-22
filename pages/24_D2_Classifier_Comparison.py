@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, page_header
+from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, page_header, pretty
 
 apply_f1_theme()
 
@@ -31,11 +31,14 @@ st.markdown("---")
 t1, t2, t3, t4 = st.tabs(["Holdout Benchmark", "Expanding-Window Validation", "Significance Test", "Why These Models"])
 
 with t1:
-    metric = st.radio("Metric", ["roc_auc", "pr_auc", "balanced_acc_pct", "recall", "f1_score", "top1_winner_hit_pct", "top3_podium_hit_pct", "brier_score"], horizontal=True)
+    metric = st.radio("Metric", ["roc_auc", "pr_auc", "balanced_acc_pct", "recall", "f1_score", "top1_winner_hit_pct", "top3_podium_hit_pct", "brier_score"], horizontal=True, format_func=pretty)
     order = res.sort_values(metric, ascending=(metric == "brier_score"))
-    fig = px.bar(order, x=metric, y="model", orientation="h", title=f"{metric} on 2022–2024 holdout",
+    fig = px.bar(order, x=metric, y="model", orientation="h", title=f"{pretty(metric)} on 2022–2024 holdout",
                  color=order["algorithm"].str.contains("Champion").map({True: "Champion", False: "Other"}),
-                 color_discrete_map={"Champion": F1_RED, "Other": "#C3C8CF"})
+                 color_discrete_map={"Champion": F1_RED, "Other": "#C3C8CF"}, text_auto=".3~f")
+    lo, hi = order[metric].min(), order[metric].max()
+    fig.update_xaxes(range=[max(0, lo - 0.15 * (hi - lo) - 0.02 * hi), hi * 1.06])  # zoom so small gaps between models are visible
+    fig.update_traces(textposition="outside", cliponaxis=False).update_layout(showlegend=False, yaxis_title=None)
     st.plotly_chart(get_plotly_theme(fig.update_yaxes(autorange="reversed")), width="stretch")
     st.dataframe(res.drop(columns=["model"]), width="stretch", hide_index=True)
     st.caption("Accuracy is misleading at 20:1 imbalance: the grid-only baseline scores 95% accuracy by predicting 'no win' for everyone (recall 0). "

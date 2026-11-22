@@ -107,6 +107,7 @@ def deploy():
     ]
     sql_dir = next((os.path.join(b, "sql") for b in base_candidates if os.path.exists(os.path.join(b, "sql"))), None)
     data_dir = next((os.path.join(b, "data") for b in base_candidates if os.path.exists(os.path.join(b, "data", "clean_f1_modeling_master.csv"))), None)
+    ROOT = os.path.dirname(os.path.abspath(__file__))
     reports_dir = next((os.path.join(b, "reports") for b in base_candidates if os.path.exists(os.path.join(b, "reports", "model_comparison.csv"))), None)
 
     print(f"[*] Paths resolved:")
@@ -144,11 +145,10 @@ def deploy():
         os.path.join(data_dir, "raw_constructors.csv"),
         os.path.join(data_dir, "raw_circuits.csv"),
         os.path.join(data_dir, "raw_race_results.csv"),
-        os.path.join(reports_dir, "model_comparison.csv"),
-        os.path.join(reports_dir, "f1_frequent_itemsets.csv"),
-        os.path.join(reports_dir, "feature_importance.csv"),
-        os.path.join(reports_dir, "regression_comparison.csv"),
-        os.path.join(reports_dir, "ablation_study.csv")
+        # ML results come from the module pipeline so Snowflake matches the dashboard
+        os.path.join(ROOT, "05_algorithm_comparison", "comparison_results.csv"),
+        os.path.join(ROOT, "04_pattern_mining", "frequent_itemsets.csv"),
+        os.path.join(ROOT, "06_classification_algorithm", "feature_importance.csv"),
     ]
 
     cs.execute("USE SCHEMA RAW;")
@@ -158,15 +158,13 @@ def deploy():
             fname = os.path.basename(fpath)
             sz = os.path.getsize(fpath) / 1024
             print(f"  * PUT file://{fname} ({sz:.1f} KB) -> @RAW.F1_RAW_STAGE ...", flush=True)
-            cs.execute(f"PUT file://{norm_path} @RAW.F1_RAW_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
+            cs.execute(f"PUT 'file://{norm_path}' @RAW.F1_RAW_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
 
     # Stage ML models to @ML.F1_MODEL_STAGE
     cs.execute("USE SCHEMA ML;")
     model_files = [
-        os.path.join(reports_dir, "champion_f1_xgb.joblib"),
-        os.path.join(reports_dir, "champion_regression_model.joblib"),
-        os.path.join(reports_dir, "metrics.json"),
-        os.path.join(reports_dir, "validation_report.json")
+        os.path.join(ROOT, "models", "champion_xgboost_classifier.joblib"),
+        os.path.join(ROOT, "models", "champion_kmeans_clusterer.joblib"),
     ]
     for mpath in model_files:
         if os.path.exists(mpath):
@@ -174,7 +172,7 @@ def deploy():
             mname = os.path.basename(mpath)
             sz = os.path.getsize(mpath) / 1024
             print(f"  * PUT file://{mname} ({sz:.1f} KB) -> @ML.F1_MODEL_STAGE ...", flush=True)
-            cs.execute(f"PUT file://{norm_path} @ML.F1_MODEL_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
+            cs.execute(f"PUT 'file://{norm_path}' @ML.F1_MODEL_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
 
     # Stage Association Rules (use the 230KB evaluation dataset for fast ingestion or large)
     rules_src = os.path.join(os.path.dirname(__file__), "04_pattern_mining", "association_rules.csv")
@@ -185,7 +183,7 @@ def deploy():
         fname = os.path.basename(rules_src)
         sz = os.path.getsize(rules_src) / 1024
         print(f"  * PUT file://{fname} ({sz:.1f} KB) -> @RAW.F1_RAW_STAGE ...", flush=True)
-        cs.execute(f"PUT file://{norm_path} @RAW.F1_RAW_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
+        cs.execute(f"PUT 'file://{norm_path}' @RAW.F1_RAW_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
 
     print("  [+] Staging completed successfully.\n", flush=True)
 
@@ -202,10 +200,9 @@ def deploy():
         ("RAW.RAW_RACE_RESULTS", "COPY INTO RAW.RAW_RACE_RESULTS FROM @RAW.F1_RAW_STAGE/raw_race_results.csv FILE_FORMAT = (FORMAT_NAME = 'RAW.F1_CSV_FORMAT') ON_ERROR = 'CONTINUE';"),
         ("RAW.RAW_MODELING_MASTER", "COPY INTO RAW.RAW_MODELING_MASTER FROM @RAW.F1_RAW_STAGE/clean_f1_modeling_master.csv FILE_FORMAT = (FORMAT_NAME = 'RAW.F1_CSV_FORMAT') ON_ERROR = 'CONTINUE';"),
         ("CLEAN.F1_MODELING_MASTER", "INSERT OVERWRITE INTO CLEAN.F1_MODELING_MASTER SELECT * FROM RAW.RAW_MODELING_MASTER;"),
-        ("ML.MODEL_COMPARISON", "COPY INTO ML.MODEL_COMPARISON FROM @RAW.F1_RAW_STAGE/model_comparison.csv FILE_FORMAT = (FORMAT_NAME = 'RAW.F1_CSV_FORMAT') ON_ERROR = 'CONTINUE';"),
-        ("ML.FEATURE_IMPORTANCE", "COPY INTO ML.FEATURE_IMPORTANCE (FEATURE, IMPORTANCE, GROUP_NAME) FROM (SELECT $1, $2, $3 FROM @RAW.F1_RAW_STAGE/feature_importance.csv) FILE_FORMAT = (FORMAT_NAME = 'RAW.F1_CSV_FORMAT') ON_ERROR = 'CONTINUE';"),
-        ("ML.FREQUENT_ITEMSETS", "COPY INTO ML.FREQUENT_ITEMSETS (ITEMSETS, SUPPORT, LENGTH) FROM (SELECT $2, $1, $3 FROM @RAW.F1_RAW_STAGE/f1_frequent_itemsets.csv) FILE_FORMAT = (FORMAT_NAME = 'RAW.F1_CSV_FORMAT') ON_ERROR = 'CONTINUE';"),
-        ("ML.REGRESSION_METRICS", "COPY INTO ML.REGRESSION_METRICS FROM @RAW.F1_RAW_STAGE/regression_comparison.csv FILE_FORMAT = (FORMAT_NAME = 'RAW.F1_CSV_FORMAT') ON_ERROR = 'CONTINUE';")
+        ("ML.MODEL_COMPARISON", "COPY INTO ML.MODEL_COMPARISON (MODEL_NAME, CATEGORY, TEST_ROC_AUC, TEST_PR_AUC, TEST_ACCURACY_PCT, TEST_PRECISION, TEST_RECALL, TEST_F1, TOP1_WINNER_HIT_PCT, TOP3_PODIUM_HIT_PCT) FROM (SELECT $1, 'Holdout 2022-2024', $2, $3, $4, $6, $7, $8, $9, $11 FROM @RAW.F1_RAW_STAGE/comparison_results.csv) FILE_FORMAT = (FORMAT_NAME = 'RAW.F1_CSV_FORMAT') ON_ERROR = 'ABORT_STATEMENT';"),
+        ("ML.FEATURE_IMPORTANCE", "COPY INTO ML.FEATURE_IMPORTANCE (FEATURE, IMPORTANCE) FROM (SELECT $1, $2 FROM @RAW.F1_RAW_STAGE/feature_importance.csv) FILE_FORMAT = (FORMAT_NAME = 'RAW.F1_CSV_FORMAT') ON_ERROR = 'ABORT_STATEMENT';"),
+        ("ML.FREQUENT_ITEMSETS", "COPY INTO ML.FREQUENT_ITEMSETS (ITEMSETS, SUPPORT, LENGTH) FROM (SELECT $2, $1, $3 FROM @RAW.F1_RAW_STAGE/frequent_itemsets.csv) FILE_FORMAT = (FORMAT_NAME = 'RAW.F1_CSV_FORMAT') ON_ERROR = 'ABORT_STATEMENT';"),
     ]
 
     for tbl, query in copy_commands:
@@ -426,7 +423,7 @@ def deploy():
     print("[6b/7] Building DW star & snowflake schemas and loading driver-season clusters...", flush=True)
     clusters_csv = os.path.join(os.path.dirname(os.path.abspath(__file__)), "11_clustering_algorithm", "driver_season_clusters.csv")
     if os.path.exists(clusters_csv):
-        cs.execute(f"PUT file://{clusters_csv.replace(os.sep, '/')} @RAW.F1_RAW_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
+        cs.execute(f"PUT 'file://{clusters_csv.replace(os.sep, "/")}' @RAW.F1_RAW_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
     for cmd in clean_sql_commands(master_section("07_DIMENSIONAL_MODEL.SQL")):
         try:
             cs.execute(cmd)
@@ -453,7 +450,6 @@ def deploy():
         ("ML.MODEL_COMPARISON", "SELECT COUNT(*) FROM ML.MODEL_COMPARISON;"),
         ("ML.FEATURE_IMPORTANCE", "SELECT COUNT(*) FROM ML.FEATURE_IMPORTANCE;"),
         ("ML.FREQUENT_ITEMSETS", "SELECT COUNT(*) FROM ML.FREQUENT_ITEMSETS;"),
-        ("ML.REGRESSION_METRICS", "SELECT COUNT(*) FROM ML.REGRESSION_METRICS;"),
         ("ML.ASSOCIATION_RULES", "SELECT COUNT(*) FROM ML.ASSOCIATION_RULES;"),
         ("DW.FACT_RACE_RESULTS_STAR", "SELECT COUNT(*) FROM DW.FACT_RACE_RESULTS_STAR;"),
         ("DW.DIM_DRIVER", "SELECT COUNT(*) FROM DW.DIM_DRIVER;"),

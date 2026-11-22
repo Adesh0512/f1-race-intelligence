@@ -52,12 +52,12 @@ with t1:
     st.code("python3 deploy_to_snowflake.py   # reads SNOWFLAKE_ACCOUNT / USER / PASSWORD from .env", language="bash")
     st.markdown("""
     #### Streamlit in Snowflake (SiS)
-    The dashboard itself was also deployed **inside Snowflake** as the native Streamlit app `F1_RACE_INTELLIGENCE`,
+    This dashboard is also deployed **inside Snowflake** as the native Streamlit app `F1_RACE_INTELLIGENCE`,
     served from the stage `F1_PREDICTION_DB.ANALYTICS.F1_STREAMLIT_STAGE` and running on warehouse `F1_WH`:
-    `PUT` every app file to the stage → `CREATE STREAMLIT … ROOT_LOCATION = '@F1_STREAMLIT_STAGE' MAIN_FILE = 'streamlit_app.py'`.
-    Read-only scripts in `00_data_warehouse/snowflake_streamlit_deployment/` prove what is live
+    `deploy_streamlit_app.py` uploads every app file with `PUT` → `CREATE STREAMLIT … FROM '@F1_STREAMLIT_STAGE' MAIN_FILE = 'streamlit_app.py'`.
+    Inside Snowflake the pages read live tables through the app's own Snowpark session, with no password stored.
+    Read-only scripts in `00_data_warehouse/snowflake_streamlit_deployment/` show what is live
     (`SHOW STREAMLITS`, `DESCRIBE STREAMLIT`, `LIST @F1_STREAMLIT_STAGE`, `GET` the deployed `streamlit_app.py`).
-    The deployed app is an earlier version of this dashboard.
     """)
 
 with t2:

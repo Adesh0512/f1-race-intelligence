@@ -7,7 +7,7 @@ import plotly.express as px
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "09_unsupervised_dataset"))
-from db_utils import apply_f1_theme, get_plotly_theme, page_header
+from db_utils import apply_f1_theme, get_plotly_theme, page_header, DIV_SCALE
 from build_unsupervised_dataset import CLUSTER_FEATURE_COLS, MIN_STARTS
 
 apply_f1_theme()
@@ -51,5 +51,6 @@ with t2:
 
 with t3:
     corr = prof[CLUSTER_FEATURE_COLS].corr().round(2)
-    st.plotly_chart(get_plotly_theme(px.imshow(corr, text_auto=True, color_continuous_scale="RdBu_r", zmin=-1, zmax=1,
-                                               title="Pearson Correlation Between Clustering Features")), width="stretch")
+    st.plotly_chart(get_plotly_theme(px.imshow(corr, text_auto=".2f", color_continuous_scale=DIV_SCALE, zmin=-1, zmax=1,
+                                               title="Pearson Correlation Between Clustering Features", aspect="auto", height=560)
+                                     .update_xaxes(tickangle=-30)), width="stretch")

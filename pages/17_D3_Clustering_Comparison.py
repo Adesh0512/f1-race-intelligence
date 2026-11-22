@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, page_header
+from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, page_header, pretty, GREEN
 
 apply_f1_theme()
 
@@ -32,9 +32,10 @@ t1, t2, t5, t4, t3 = st.tabs(["Benchmark Table", "Choosing k", "Tuning GMM & DBS
 
 with t1:
     st.dataframe(res.drop(columns=["champion"]), width="stretch", hide_index=True)
-    metric = st.radio("Metric", ["silhouette", "davies_bouldin", "calinski_harabasz", "stability_ari", "runtime_ms"], horizontal=True)
-    fig = px.bar(res, x="algorithm", y=metric, color="algorithm", title=f"{metric} by algorithm",
-                 color_discrete_map={"K-Means": F1_RED}, color_discrete_sequence=["#9AA1AB"])
+    metric = st.radio("Metric", ["silhouette", "davies_bouldin", "calinski_harabasz", "stability_ari", "runtime_ms"], horizontal=True, format_func=pretty)
+    fig = px.bar(res, x="algorithm", y=metric, color="algorithm", title=f"{pretty(metric)} by algorithm",
+                 color_discrete_map={"K-Means": F1_RED}, color_discrete_sequence=["#9AA1AB"], text_auto=".3~f")
+    fig.update_traces(textposition="outside", cliponaxis=False).update_layout(showlegend=False, xaxis_title=None)
     st.plotly_chart(get_plotly_theme(fig), width="stretch")
     st.info("**Ranking rule:** mean rank across Silhouette (↑), Davies-Bouldin (↓), Calinski-Harabasz (↑), "
             "bootstrap stability ARI (↑) and noise % (↓). DBSCAN's metrics are computed on non-noise points only.")
@@ -42,7 +43,7 @@ with t1:
 with t2:
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=ks["k"], y=ks["inertia"], name="Inertia (WCSS)", mode="lines+markers", line=dict(color=F1_RED)))
-    fig.add_trace(go.Scatter(x=ks["k"], y=ks["silhouette"], name="Silhouette", mode="lines+markers", yaxis="y2", line=dict(color="#00BDAE")))
+    fig.add_trace(go.Scatter(x=ks["k"], y=ks["silhouette"], name="Silhouette", mode="lines+markers", yaxis="y2", line=dict(color=GREEN)))
     fig.update_layout(title="Elbow & Silhouette Methods (K-Means, k = 2..8)", xaxis_title="k",
                       yaxis=dict(title="Inertia"), yaxis2=dict(title="Silhouette", overlaying="y", side="right"))
     st.plotly_chart(get_plotly_theme(fig), width="stretch")

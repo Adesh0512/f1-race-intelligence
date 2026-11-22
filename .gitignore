@@ -24,3 +24,6 @@ derby.log
 # Pre-end-sem copies: the originals are in this repo's first commit
 *_JURY2_BACKUP.*
 00_data_warehouse/snowflake_streamlit_deployment/downloaded_stage/
+
+# local editor / agent config
+.claude/

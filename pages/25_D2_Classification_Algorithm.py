@@ -9,7 +9,7 @@ from sklearn.metrics import roc_curve, precision_recall_curve, confusion_matrix
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
-from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, page_header
+from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, page_header, SEQ_SCALE
 
 apply_f1_theme()
 
@@ -65,7 +65,7 @@ with t2:
     m2.metric("Recall", f"{tp / max(tp + fn, 1):.3f}")
     m3.metric("F1", f"{2 * tp / max(2 * tp + fp + fn, 1):.3f}")
     m4.metric("Accuracy", f"{(tp + tn) / len(y) * 100:.2f}%")
-    st.plotly_chart(get_plotly_theme(px.imshow([[tn, fp], [fn, tp]], text_auto=True, color_continuous_scale="Reds",
+    st.plotly_chart(get_plotly_theme(px.imshow([[tn, fp], [fn, tp]], text_auto=True, color_continuous_scale=SEQ_SCALE,
                                                x=["Pred: non-winner", "Pred: winner"], y=["Actual: non-winner", "Actual: winner"],
                                                title=f"Confusion matrix @ threshold {thr:.2f}")), width="stretch")
 
