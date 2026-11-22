@@ -1,28 +1,28 @@
-relationship 440b9f5b-4418-4df9-bd2d-02407b597fb4
+relationship c490aa50-d27f-4be8-844b-1d590c5a088b
 	fromColumn: Fact_Race_Results.race_id
 	toColumn: Dim_Race.race_id
 
-relationship 4544910c-100b-4763-987a-5e872a22cf73
+relationship 2b6be984-5213-44b3-92ae-0b520fc8a178
 	fromColumn: Fact_Race_Results.driver_id
 	toColumn: Dim_Driver.driver_id
 
-relationship e69a7c1e-518c-429f-a4fe-973a4bbb1471
+relationship 5f6a5d07-0f30-4540-a663-1b3d7057937e
 	fromColumn: Fact_Race_Results.constructor_id
 	toColumn: Dim_Constructor.constructor_id
 
-relationship 66ce88a6-c843-466e-887d-bea040e92258
+relationship a9e89c4d-4fe2-4bb7-af67-85b23a74d8d4
 	fromColumn: Dim_Race.season
 	toColumn: Dim_Season.season
 
-relationship d7ad557f-9f89-4a75-b876-f77ce204d3d4
+relationship a3fb7ce0-6b81-4c6e-88c6-a0c3e6a5c8c5
 	fromColumn: Race_Predictions.season
 	toColumn: Dim_Season.season
 
-relationship d67868f2-6867-4906-ae4b-01324d96e2ad
+relationship e443ac1c-5140-48e7-8efd-94231db18fc6
 	fromColumn: Driver_Season_Tiers.season
 	toColumn: Dim_Season.season
 
-relationship 9a67e6e3-86b7-442d-851b-0cd627d968ef
+relationship fde68201-365e-4fe8-b731-b183b62f25ae
 	fromColumn: Season_Entries.season
 	toColumn: Dim_Season.season
 

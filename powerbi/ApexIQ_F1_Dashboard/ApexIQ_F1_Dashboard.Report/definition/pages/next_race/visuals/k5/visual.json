@@ -3,7 +3,7 @@
   "name": "k5",
   "position": {
     "x": 1020,
-    "y": 395,
+    "y": 80,
     "z": 1000,
     "height": 100,
     "width": 240,
@@ -20,14 +20,14 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Real_World_Test"
+                      "Entity": "Forecast_Upcoming"
                     }
                   },
-                  "Property": "Model Correct"
+                  "Property": "Last Race Winner"
                 }
               },
-              "queryRef": "Real_World_Test.Model Correct",
-              "nativeQueryRef": "Model Correct"
+              "queryRef": "Forecast_Upcoming.Last Race Winner",
+              "nativeQueryRef": "Last Race Winner"
             }
           ]
         }
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A66CFF'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -87,7 +87,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Model called the winner'"
+                  "Value": "'Last race'"
                 }
               }
             },

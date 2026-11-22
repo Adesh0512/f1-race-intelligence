@@ -1,66 +1,20 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
-  "name": "rw_cards",
+  "name": "k7",
   "position": {
-    "x": 520,
-    "y": 195,
+    "x": 1020,
+    "y": 545,
     "z": 1000,
-    "height": 120,
-    "width": 480,
+    "height": 100,
+    "width": 240,
     "tabOrder": 0
   },
   "visual": {
-    "visualType": "pivotTable",
+    "visualType": "card",
     "query": {
       "queryState": {
-        "Rows": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Real_World_Test"
-                    }
-                  },
-                  "Property": "season"
-                }
-              },
-              "queryRef": "Real_World_Test.season",
-              "nativeQueryRef": "season"
-            }
-          ]
-        },
         "Values": {
           "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Real_World_Test"
-                    }
-                  },
-                  "Property": "Races Tested"
-                }
-              },
-              "queryRef": "Real_World_Test.Races Tested",
-              "nativeQueryRef": "Races Tested"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Real_World_Test"
-                    }
-                  },
-                  "Property": "Model Correct"
-                }
-              },
-              "queryRef": "Real_World_Test.Model Correct",
-              "nativeQueryRef": "Model Correct"
-            },
             {
               "field": {
                 "Measure": {
@@ -80,6 +34,45 @@
       }
     },
     "drillFilterOtherVisuals": true,
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "26D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "visualContainerObjects": {
       "title": [
         {
@@ -94,7 +87,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Real-world test: races called before they happened'"
+                  "Value": "'Pole-sitter won, same races'"
                 }
               }
             },

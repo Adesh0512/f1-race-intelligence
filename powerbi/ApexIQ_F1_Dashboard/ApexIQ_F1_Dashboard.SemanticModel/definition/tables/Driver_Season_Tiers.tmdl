@@ -1,89 +1,89 @@
 table Driver_Season_Tiers
-	lineageTag: f53c28ed-2880-400c-b24d-d852cca8c04a
+	lineageTag: 540a4a1e-ff0b-4091-abf8-a635e6e3b37f
 
 	measure 'Driver Seasons' = COUNTROWS(Driver_Season_Tiers)
 		formatString: 0
-		lineageTag: 1f7e4266-7501-4b03-936a-06ee98a29a05
+		lineageTag: 4bd3363e-b06a-464f-a3f3-302a7b144217
 
 	measure 'Tiers' = DISTINCTCOUNT(Driver_Season_Tiers[cluster_name])
 		formatString: 0
-		lineageTag: 20fc8b14-df70-4bb0-b1ff-ff9ac4dcba32
+		lineageTag: cc0cd17b-802a-4fe6-9890-fd6d02a5a75d
 
 	measure 'Title Contender Seasons' = CALCULATE(COUNTROWS(Driver_Season_Tiers), Driver_Season_Tiers[cluster_name] = "Title Contenders")
 		formatString: 0
-		lineageTag: bd364bda-8376-4286-ba21-55e550c4a00d
+		lineageTag: fef03558-5e44-4789-9691-48e9d70094f1
 
 	measure 'Avg Win Rate %' = AVERAGE(Driver_Season_Tiers[win_rate]) * 100
 		formatString: 0.0
-		lineageTag: bbc87b7b-839e-4be7-bae4-5f8f02f52e9a
+		lineageTag: f23f6d27-1ad6-44ad-a306-65cc301da3dd
 
 	measure 'Avg Finish Position' = AVERAGE(Driver_Season_Tiers[avg_finish])
 		formatString: 0.0
-		lineageTag: ab6e8978-2f8e-488f-a47a-2eb3941af57a
+		lineageTag: 23f2ccb6-7c5a-4d4b-ad5c-b9a8fc33ef73
 
 	column 'driver_season'
 		dataType: string
-		lineageTag: 6c5f0c4b-a10b-4b30-8ab7-4066ca3bdc18
+		lineageTag: 0e96ffef-857c-4c84-8937-88a02bd48b8e
 		summarizeBy: none
 		sourceColumn: driver_season
 
 	column 'driver_name'
 		dataType: string
-		lineageTag: 2f7a713c-fa79-4acc-80fc-be0d0f38264b
+		lineageTag: ccdf467b-a5ca-484b-a1c0-7f8e0fad255e
 		summarizeBy: none
 		sourceColumn: driver_name
 
 	column 'season'
 		dataType: int64
-		lineageTag: 76d6ea20-13a7-4520-bfc2-a75e6888290f
+		lineageTag: 43ff3d75-cca6-40ce-b416-0f7352098c4d
 		summarizeBy: none
 		sourceColumn: season
 
 	column 'constructor_name'
 		dataType: string
-		lineageTag: 277ba20f-845f-49cb-81a6-41eaea5f6bca
+		lineageTag: 2e276a20-cb84-4883-96e3-c83127988f08
 		summarizeBy: none
 		sourceColumn: constructor_name
 
 	column 'cluster_name'
 		dataType: string
-		lineageTag: 9eecd997-7423-481e-b173-11e60037c00d
+		lineageTag: bce20974-3bca-4a34-a27a-a9e1f16f5faa
 		summarizeBy: none
 		sourceColumn: cluster_name
 
 	column 'avg_grid'
 		dataType: double
-		lineageTag: 48eb198a-0ecf-4278-9213-1fcab3a4c3fb
+		lineageTag: c722afea-728a-4007-9f6c-a125de26974d
 		summarizeBy: none
 		sourceColumn: avg_grid
 
 	column 'avg_finish'
 		dataType: double
-		lineageTag: 0faddac3-d37c-4032-a5fc-520223bf5120
+		lineageTag: ac74a5c3-d04f-4357-bc93-78b22744f17a
 		summarizeBy: none
 		sourceColumn: avg_finish
 
 	column 'win_rate'
 		dataType: double
-		lineageTag: d4b5cbfd-1d63-4c43-a071-f3d91956fcc1
+		lineageTag: 261c54a4-4e9f-4e22-b494-203ddf0cec3c
 		summarizeBy: none
 		sourceColumn: win_rate
 
 	column 'podium_rate'
 		dataType: double
-		lineageTag: f6595ea7-4ba5-4a20-b444-e9c371953214
+		lineageTag: 83c6424a-5348-4d69-b94a-9a03851be20e
 		summarizeBy: none
 		sourceColumn: podium_rate
 
 	column 'pca_1'
 		dataType: double
-		lineageTag: ba412665-aef6-4ec6-9c1a-5017f428d73b
+		lineageTag: 0cc54994-0337-4ba4-8cb2-e1d71451786b
 		summarizeBy: none
 		sourceColumn: pca_1
 
 	column 'pca_2'
 		dataType: double
-		lineageTag: 4cbd520b-3285-4aa9-862c-008214a9e181
+		lineageTag: e8d017fc-d6da-40aa-be23-5b3ab9c0bc4f
 		summarizeBy: none
 		sourceColumn: pca_2
 

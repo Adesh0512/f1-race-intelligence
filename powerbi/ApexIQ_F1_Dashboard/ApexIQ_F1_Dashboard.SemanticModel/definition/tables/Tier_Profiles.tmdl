@@ -1,75 +1,75 @@
 table Tier_Profiles
-	lineageTag: 963176f1-aab1-47e6-831c-c68971f1af7a
+	lineageTag: 0c8908d3-1a27-4423-8da2-d154bc346ff8
 
 	column 'cluster'
 		dataType: int64
-		lineageTag: 4ed1d294-4045-4415-aeae-d8c69fb47cde
+		lineageTag: ffd32aa3-15e5-431a-9d9c-723dbf541804
 		summarizeBy: none
 		sourceColumn: cluster
 
 	column 'cluster_name'
 		dataType: string
-		lineageTag: 0ae4ac48-875c-4331-8e0e-8884e3b5c36f
+		lineageTag: 8002ed5c-5b6e-478c-b257-d5aec2534931
 		summarizeBy: none
 		sourceColumn: cluster_name
 
 	column 'avg_grid'
 		dataType: double
-		lineageTag: 2355ea09-b6d0-4ea1-a82a-265540c389f9
+		lineageTag: d8d96435-275e-4507-b510-1c7250059511
 		summarizeBy: none
 		sourceColumn: avg_grid
 
 	column 'avg_finish'
 		dataType: double
-		lineageTag: f2cdca79-0a12-461e-8a92-c9decd43fc7c
+		lineageTag: 2495e668-5fc1-45a8-b218-6b5fdd6a7cf8
 		summarizeBy: none
 		sourceColumn: avg_finish
 
 	column 'finish_std'
 		dataType: double
-		lineageTag: a8d36b28-c63d-435f-a1d6-5d4bcb2019d8
+		lineageTag: e2b1229d-605b-4f46-8aa4-c3343a7521a3
 		summarizeBy: none
 		sourceColumn: finish_std
 
 	column 'win_rate'
 		dataType: double
-		lineageTag: df646a87-a5c5-47cc-8903-b2fbd1559ff3
+		lineageTag: 19f8eda9-4af9-4eac-9fd6-3c6b30842fbb
 		summarizeBy: none
 		sourceColumn: win_rate
 
 	column 'podium_rate'
 		dataType: double
-		lineageTag: 018a2462-7382-4d45-8d1a-b4e6034a00c8
+		lineageTag: 19fb3a2c-56ed-493c-8172-98526f3e71ca
 		summarizeBy: none
 		sourceColumn: podium_rate
 
 	column 'points_rate'
 		dataType: double
-		lineageTag: 34636848-1a16-4868-83ab-438f8b6c5272
+		lineageTag: a29c3a04-ac2e-4e94-94e6-df5542b213c5
 		summarizeBy: none
 		sourceColumn: points_rate
 
 	column 'dnf_rate'
 		dataType: double
-		lineageTag: ef5ec1a5-f217-4772-975f-2152658aa9dd
+		lineageTag: 363ef3c3-47e1-4834-80b0-f604e21e6eca
 		summarizeBy: none
 		sourceColumn: dnf_rate
 
 	column 'teammate_quali_rate'
 		dataType: double
-		lineageTag: 5c52ab3c-5a16-4171-b1b0-2083629c5905
+		lineageTag: d603f088-a95f-404b-992e-00a1bf28434a
 		summarizeBy: none
 		sourceColumn: teammate_quali_rate
 
 	column 'starts'
 		dataType: double
-		lineageTag: 094d0a9e-64b3-4c0e-84ee-5a859f4fa754
+		lineageTag: 0a2845de-bec9-4a7e-9c5a-dad7c882e14f
 		summarizeBy: none
 		sourceColumn: starts
 
 	column 'size'
 		dataType: int64
-		lineageTag: fb7976b5-a037-4890-ba1a-f8dbeee69508
+		lineageTag: bb9a336a-30ed-404a-b6e2-5cd761d72e14
 		summarizeBy: none
 		sourceColumn: size
 

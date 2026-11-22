@@ -1,112 +1,112 @@
 table Race_Predictions
-	lineageTag: 75cffdf2-d251-42a9-b495-626abd414a32
+	lineageTag: 8a63358f-2241-4df6-b2b9-8e02fc16f126
 
 	measure 'Grands Prix' = DISTINCTCOUNT(Race_Predictions[race_id])
 		formatString: 0
-		lineageTag: 2e06cfe1-f945-487e-974c-84e0795798c3
+		lineageTag: 73e803bd-b796-4d3e-b840-1a1f11d16958
 
 	measure 'Gauge Max' = 100
 		formatString: 0
-		lineageTag: 92e7de71-7954-419a-bfa5-ab7927206f8b
+		lineageTag: d414dddb-532e-42bb-88fa-3a9c03d2d3c9
 
 	measure 'Pole Baseline %' = 51.47
 		formatString: 0.0
-		lineageTag: 234ca804-614a-4ccf-bb18-eecc4417c934
+		lineageTag: 73980d24-9416-4ef4-ab5e-a479fa846694
 
 	measure 'Predicted Winner' = IF(HASONEVALUE(Race_Predictions[race]), CALCULATE(MAX(Race_Predictions[driver_name]), Race_Predictions[predicted_rank] = 1), "Pick one race")
-		lineageTag: ccbd5a9b-81f4-4a7c-99dd-796ef9f0552c
+		lineageTag: 69055ad1-b0b3-42f6-b281-53f68c982be0
 
 	measure 'Predicted Win %' = IF(HASONEVALUE(Race_Predictions[race]), CALCULATE(MAX(Race_Predictions[win_probability_pct]), Race_Predictions[predicted_rank] = 1))
 		formatString: 0.0
-		lineageTag: 4f34371f-2f1c-4e23-a4d4-fa5092241c4e
+		lineageTag: 055f2861-69de-46de-b0a7-ea63df36a358
 
 	measure 'Actual Winner' = IF(HASONEVALUE(Race_Predictions[race]), CALCULATE(MAX(Race_Predictions[driver_name]), Race_Predictions[target_is_win] = 1), "Pick one race")
-		lineageTag: 5b1a35cd-506f-42f6-9466-1aac46dc3304
+		lineageTag: c34c5547-eb9e-4cb6-bee9-323085d50dc6
 
 	measure 'Prediction Result' = IF(HASONEVALUE(Race_Predictions[race]), IF([Predicted Winner] = [Actual Winner], "Correct", "Missed"), "Pick one race")
-		lineageTag: 15a45b27-d1f8-49d2-b7f5-130a198b9fa3
+		lineageTag: 2a9b181f-3b08-43be-970b-0966a3cc9639
 
 	measure 'Winners Picked' = SUM(Race_Predictions[is_winner_hit])
 		formatString: 0
-		lineageTag: b45e4aa2-0b07-45d4-a927-e0ed9aa3f4ca
+		lineageTag: f27a3844-da9d-491d-abcb-953a31a304a7
 
 	measure 'Winner Hit Rate %' = DIVIDE([Winners Picked], [Grands Prix]) * 100
 		formatString: 0.0
-		lineageTag: bff50fc2-f4c6-464d-8602-88d3ae0af827
+		lineageTag: 02550cb6-717c-4792-83e6-c810d94a90ed
 
 	measure 'Winner In Top 3 %' = DIVIDE(SUM(Race_Predictions[winner_in_top3]), [Grands Prix]) * 100
 		formatString: 0.0
-		lineageTag: e3b69684-7096-4f18-9c4a-98beac3f8df8
+		lineageTag: 976aed26-c3b6-460f-9bc2-c382fd16e96c
 
 	column 'race_id'
 		dataType: int64
-		lineageTag: 2a0ed24c-d49a-4eb8-853c-ea5973963574
+		lineageTag: a55816e5-770d-4bcd-8fbf-a894eb98e31b
 		summarizeBy: none
 		sourceColumn: race_id
 
 	column 'season'
 		dataType: int64
-		lineageTag: 511be269-c8f7-48db-ace2-d1a6a47cb940
+		lineageTag: 053efdfe-b359-43cb-a3a5-b846b0a58345
 		summarizeBy: none
 		sourceColumn: season
 
 	column 'race'
 		dataType: string
-		lineageTag: c2d3faf9-08a5-43c1-99ae-48b8c3e6861e
+		lineageTag: f7cd1957-c8a0-4e71-9d7b-5dedb7cde08d
 		summarizeBy: none
 		sourceColumn: race
 
 	column 'driver_name'
 		dataType: string
-		lineageTag: 99701299-fdb8-4a22-add0-f64cbe21ae28
+		lineageTag: 4613b331-bd67-432a-a718-33b202c18e8c
 		summarizeBy: none
 		sourceColumn: driver_name
 
 	column 'constructor_name'
 		dataType: string
-		lineageTag: 8a6ad410-02a2-477a-8637-51da0b2ee4ed
+		lineageTag: a0fe8060-a3f4-48cb-bc2a-09e01c1f215b
 		summarizeBy: none
 		sourceColumn: constructor_name
 
 	column 'grid_position'
 		dataType: int64
-		lineageTag: 16473de9-c39e-49bf-ae29-95f949b118be
+		lineageTag: 0eee737b-05a3-4cf5-8a69-118b0f4753fe
 		summarizeBy: none
 		sourceColumn: grid_position
 
 	column 'target_finish_position'
 		dataType: int64
-		lineageTag: eacd7379-2a30-490c-8112-957f54bc7504
+		lineageTag: 54e79f53-0c88-4233-8373-7ba1f91ff9d2
 		summarizeBy: none
 		sourceColumn: target_finish_position
 
 	column 'target_is_win'
 		dataType: int64
-		lineageTag: 7baf079c-b757-4aa5-a8bf-9d8a83677f75
+		lineageTag: 95807310-81e2-4442-b7af-f5c1b1ee65b2
 		summarizeBy: none
 		sourceColumn: target_is_win
 
 	column 'win_probability_pct'
 		dataType: double
-		lineageTag: 7da0cec2-42ba-4120-a117-2c84cd28feb5
+		lineageTag: 8ced7bcd-7111-4352-8d4f-c7f2b0182a81
 		summarizeBy: none
 		sourceColumn: win_probability_pct
 
 	column 'predicted_rank'
 		dataType: int64
-		lineageTag: d65ec87d-5475-4ecd-8137-ae97a9630e60
+		lineageTag: 3cdbe1b3-d9e1-40da-8f49-2991e22228f9
 		summarizeBy: none
 		sourceColumn: predicted_rank
 
 	column 'is_winner_hit'
 		dataType: int64
-		lineageTag: dfad34f1-161e-42cd-b5bd-ad43a9c9d17e
+		lineageTag: 017fdce3-a838-4995-abbe-1e089b0fe255
 		summarizeBy: none
 		sourceColumn: is_winner_hit
 
 	column 'winner_in_top3'
 		dataType: int64
-		lineageTag: 9e89d466-95e9-4b22-9458-da45c3fe9407
+		lineageTag: 94e62211-5e47-4567-aba2-a3be74381060
 		summarizeBy: none
 		sourceColumn: winner_in_top3
 

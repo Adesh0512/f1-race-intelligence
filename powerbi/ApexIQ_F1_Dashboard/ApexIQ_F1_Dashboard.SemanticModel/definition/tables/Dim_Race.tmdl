@@ -1,39 +1,39 @@
 table Dim_Race
-	lineageTag: 6e04e526-6251-4c0f-a376-51e68ab88fe9
+	lineageTag: a8fe07b4-5251-4a91-ba63-432a822d1af1
 
 	column 'race_id'
 		dataType: int64
-		lineageTag: a34b6826-8bf1-4dc9-a75e-49084741eb4b
+		lineageTag: 9e43ea0b-f8f5-47bf-b8f5-8795b6ddf452
 		summarizeBy: none
 		sourceColumn: race_id
 
 	column 'season'
 		dataType: int64
-		lineageTag: f0331fc4-61ec-406a-8b4f-fd211d4139d8
+		lineageTag: cbd60c3f-9cee-4340-a551-55f9eb9d06bc
 		summarizeBy: none
 		sourceColumn: season
 
 	column 'round'
 		dataType: int64
-		lineageTag: f7002d8c-2f55-44ec-95ff-9df5d5474258
+		lineageTag: 16ffd31c-8987-4aa2-a993-40d4d4a7b8fc
 		summarizeBy: none
 		sourceColumn: round
 
 	column 'race_name'
 		dataType: string
-		lineageTag: 3c9384e6-c95d-4f3e-9d5a-515c70b70efe
+		lineageTag: 0af1359f-bc98-4fc5-b498-ad6445440b8b
 		summarizeBy: none
 		sourceColumn: race_name
 
 	column 'circuit_name'
 		dataType: string
-		lineageTag: bb74c618-52c9-46e0-b667-075f70ec765e
+		lineageTag: bc1904d6-a784-4abc-8829-940dc8259969
 		summarizeBy: none
 		sourceColumn: circuit_name
 
 	column 'circuit_country'
 		dataType: string
-		lineageTag: 06d2a824-99cd-43df-9269-f28fcaf52ac6
+		lineageTag: 9e3501ae-4ef7-4fd4-8f85-127de7a8ec7e
 		summarizeBy: none
 		sourceColumn: circuit_country
 

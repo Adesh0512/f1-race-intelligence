@@ -1,21 +1,21 @@
 table Championship_Check
-	lineageTag: e4c04a71-94d9-40de-8653-2900db1f80de
+	lineageTag: 4528933d-d672-4c84-bdee-748c564f3248
 
 	column 'cluster_name'
 		dataType: string
-		lineageTag: 4cc64f59-7d77-484b-8a89-333344fa42ce
+		lineageTag: e97d24eb-b60f-4d03-9060-18a71b659d69
 		summarizeBy: none
 		sourceColumn: cluster_name
 
 	column 'championship_position'
 		dataType: string
-		lineageTag: bdcdd761-b44a-4244-9d4b-ef1d24458150
+		lineageTag: 2f04a0d7-0b5b-4907-9f67-a3224c2f2b88
 		summarizeBy: none
 		sourceColumn: championship_position
 
 	column 'driver_seasons'
 		dataType: int64
-		lineageTag: bda230e0-227a-45b7-a38c-d2ec236e891d
+		lineageTag: d144fc03-7630-4b58-821a-7cb65f7b5772
 		summarizeBy: none
 		sourceColumn: driver_seasons
 

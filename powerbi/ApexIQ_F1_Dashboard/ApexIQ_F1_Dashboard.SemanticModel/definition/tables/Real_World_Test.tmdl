@@ -1,79 +1,79 @@
 table Real_World_Test
-	lineageTag: a42d86c8-2a9f-4665-b43c-82d6993bcc58
+	lineageTag: 3b0c0a6a-d4cb-4210-a301-34de0f30d9ee
 
 	measure 'Races Tested' = COUNTROWS(Real_World_Test)
 		formatString: 0
-		lineageTag: 1c9f4cce-f5d5-45de-9c69-238a30509859
+		lineageTag: 1b4783ec-4b30-49d7-bb3e-9c36f58d9fa5
 
 	measure 'Model Correct' = SUM(Real_World_Test[model_correct])
 		formatString: 0
-		lineageTag: 86ca6b5d-131a-41a1-88ca-0535f5952e9d
+		lineageTag: c90efc0c-095c-43ea-8337-d687ff7c8123
 
 	measure 'Pole Correct' = SUM(Real_World_Test[pole_correct])
 		formatString: 0
-		lineageTag: 59c8d06f-cad0-45e6-a5b9-7f45529b3a29
+		lineageTag: 31f92799-1d9c-4c92-b561-44e12d4f49c1
 
 	measure 'Model Hit %' = DIVIDE([Model Correct], [Races Tested]) * 100
 		formatString: 0.0
-		lineageTag: 6fd72b9c-295d-42b6-bbf0-d898bb382b24
+		lineageTag: 1fdf7cd2-d80f-4cc3-9c39-bd7c77895df3
 
 	column 'season'
 		dataType: int64
-		lineageTag: 4c16740c-ac0c-43b3-91a2-dc4afd2b3680
+		lineageTag: 27c7879f-dd8e-4620-b630-d43c9227d009
 		summarizeBy: none
 		sourceColumn: season
 
 	column 'round'
 		dataType: int64
-		lineageTag: d2590a5e-b745-4057-84f0-671ecdf395a8
+		lineageTag: 8d57aa1d-3fab-4d2f-930a-131c7fad3529
 		summarizeBy: none
 		sourceColumn: round
 
 	column 'race_name'
 		dataType: string
-		lineageTag: 08cee39c-2a25-495e-a2f8-1717106de4c3
+		lineageTag: 1857beb7-00fc-417e-9d7c-4af2f2cfda17
 		summarizeBy: none
 		sourceColumn: race_name
 
 	column 'predicted_winner'
 		dataType: string
-		lineageTag: 21862410-7348-4c90-b237-687e1c3491ba
+		lineageTag: f254ef9e-1409-4b01-a312-d5cdfec37d8b
 		summarizeBy: none
 		sourceColumn: predicted_winner
 
 	column 'win_probability'
 		dataType: double
-		lineageTag: 506e3405-4a82-42c1-aca7-099744bac08b
+		lineageTag: f37a683a-266d-4216-87fb-86d2783bd652
 		summarizeBy: none
 		sourceColumn: win_probability
 
 	column 'actual_winner'
 		dataType: string
-		lineageTag: 0f9a8ead-4d0d-4be3-a7e1-f773d72f2e7b
+		lineageTag: b91e933d-d9e3-4a49-a55b-7b3f791976fa
 		summarizeBy: none
 		sourceColumn: actual_winner
 
 	column 'pole_sitter'
 		dataType: string
-		lineageTag: c51fcc18-0adf-47b8-9ee5-38b08ca7d050
+		lineageTag: eca00d26-84ec-48d1-9608-94abeea98e49
 		summarizeBy: none
 		sourceColumn: pole_sitter
 
 	column 'model_correct'
 		dataType: int64
-		lineageTag: 974f2d58-c22e-4757-a798-1bcb71631cfb
+		lineageTag: 28df6ae8-e3e9-470f-8c76-635b08e1f882
 		summarizeBy: none
 		sourceColumn: model_correct
 
 	column 'pole_correct'
 		dataType: int64
-		lineageTag: 1adbf559-6fd5-46d2-b94d-16412d517617
+		lineageTag: aebaa88e-1596-4b9d-9e8e-93cb93561154
 		summarizeBy: none
 		sourceColumn: pole_correct
 
 	column 'race'
 		dataType: string
-		lineageTag: 167c0dc8-36fb-4202-b7bf-6f1fbb9d62a7
+		lineageTag: a3fa156c-273d-4b37-baab-cc9110078120
 		summarizeBy: none
 		sourceColumn: race
 

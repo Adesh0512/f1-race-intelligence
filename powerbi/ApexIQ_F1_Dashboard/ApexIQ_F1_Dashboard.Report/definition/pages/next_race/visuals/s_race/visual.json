@@ -3,9 +3,9 @@
   "name": "s_race",
   "position": {
     "x": 1020,
-    "y": 80,
+    "y": 195,
     "z": 1000,
-    "height": 300,
+    "height": 130,
     "width": 240,
     "tabOrder": 0
   },
@@ -104,7 +104,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Upcoming Grand Prix (pick one)'"
+                  "Value": "'Grand Prix (pick one)'"
                 }
               }
             },

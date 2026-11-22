@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "k4",
   "position": {
-    "x": 830,
+    "x": 780,
     "y": 80,
     "z": 1000,
     "height": 100,
-    "width": 180,
+    "width": 230,
     "tabOrder": 0
   },
   "visual": {
@@ -20,14 +20,14 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Real_World_Test"
+                      "Entity": "Forecast_Upcoming"
                     }
                   },
-                  "Property": "Model Hit %"
+                  "Property": "Main Rival"
                 }
               },
-              "queryRef": "Real_World_Test.Model Hit %",
-              "nativeQueryRef": "Model Hit %"
+              "queryRef": "Forecast_Upcoming.Main Rival",
+              "nativeQueryRef": "Main Rival"
             }
           ]
         }
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#2ECC71'"
                     }
                   }
                 }
@@ -87,7 +87,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Real-world hit % since 2024'"
+                  "Value": "'Main rival'"
                 }
               }
             },

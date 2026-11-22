@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "k3",
   "position": {
-    "x": 540,
+    "x": 620,
     "y": 80,
     "z": 1000,
     "height": 100,
-    "width": 280,
+    "width": 150,
     "tabOrder": 0
   },
   "visual": {
@@ -23,11 +23,11 @@
                       "Entity": "Forecast_Upcoming"
                     }
                   },
-                  "Property": "Main Rival"
+                  "Property": "Forecast Win %"
                 }
               },
-              "queryRef": "Forecast_Upcoming.Main Rival",
-              "nativeQueryRef": "Main Rival"
+              "queryRef": "Forecast_Upcoming.Forecast Win %",
+              "nativeQueryRef": "Forecast Win %"
             }
           ]
         }
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2ECC71'"
+                      "Value": "'#A66CFF'"
                     }
                   }
                 }
@@ -87,7 +87,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Main rival'"
+                  "Value": "'Chance to win %'"
                 }
               }
             },

@@ -6,7 +6,7 @@
     "y": 80,
     "z": 1000,
     "height": 100,
-    "width": 200,
+    "width": 280,
     "tabOrder": 0
   },
   "visual": {
@@ -23,11 +23,11 @@
                       "Entity": "Forecast_Upcoming"
                     }
                   },
-                  "Property": "Forecast Win %"
+                  "Property": "Forecast Winner"
                 }
               },
-              "queryRef": "Forecast_Upcoming.Forecast Win %",
-              "nativeQueryRef": "Forecast Win %"
+              "queryRef": "Forecast_Upcoming.Forecast Winner",
+              "nativeQueryRef": "Forecast Winner"
             }
           ]
         }
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#A66CFF'"
                     }
                   }
                 }
@@ -87,7 +87,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Win probability %'"
+                  "Value": "'Predicted winner'"
                 }
               }
             },

@@ -1,53 +1,53 @@
 table Clustering_Comparison
-	lineageTag: 6a8b62e7-5633-4b3d-91d0-5ce016848169
+	lineageTag: c85a0b60-e54b-49ca-be4d-7789e6ba027d
 
 	measure 'Algorithms' = COUNTROWS(Clustering_Comparison)
 		formatString: 0
-		lineageTag: 6f1bafbe-c43f-40f0-8402-0d2013e6f2bf
+		lineageTag: cff99509-8573-4fb0-94fc-2245c050ce21
 
 	measure 'Best Silhouette' = MAX(Clustering_Comparison[silhouette])
 		formatString: 0.000
-		lineageTag: 5c32be11-723b-42e2-b90c-219d11b47ccd
+		lineageTag: bac4793b-f41f-455f-b1af-e8d8eb482d98
 
 	column 'algorithm'
 		dataType: string
-		lineageTag: 0e63efbd-ba51-4d15-a71c-60aefbb548e0
+		lineageTag: 4ae955a7-a11e-4cf2-b3cb-0b0ae9880901
 		summarizeBy: none
 		sourceColumn: algorithm
 
 	column 'n_clusters'
 		dataType: int64
-		lineageTag: 5ac80dc9-3971-4bc5-bb4d-16e2057a76e7
+		lineageTag: 20a29e2c-6a0e-4ac2-af59-2ea66559c338
 		summarizeBy: none
 		sourceColumn: n_clusters
 
 	column 'noise_pct'
 		dataType: double
-		lineageTag: 40cec61e-9031-4e4a-8a6d-840baab659f4
+		lineageTag: a6385742-3d3c-44f5-abde-7ee67365d7ed
 		summarizeBy: none
 		sourceColumn: noise_pct
 
 	column 'silhouette'
 		dataType: double
-		lineageTag: 091b4493-5340-4de9-8c1d-81f85bac57ff
+		lineageTag: 1e91da57-b7ef-4954-8818-8271dcab3c12
 		summarizeBy: none
 		sourceColumn: silhouette
 
 	column 'davies_bouldin'
 		dataType: double
-		lineageTag: 78999a28-0c60-4ff0-9f28-b705e41f643a
+		lineageTag: 04975ba1-b142-4a0c-a53a-a753796c2aad
 		summarizeBy: none
 		sourceColumn: davies_bouldin
 
 	column 'calinski_harabasz'
 		dataType: double
-		lineageTag: f4a6bc33-7e37-405f-853a-018e97301b08
+		lineageTag: fbe7a1bf-d734-4021-9995-9d8c8d0a159d
 		summarizeBy: none
 		sourceColumn: calinski_harabasz
 
 	column 'stability_ari'
 		dataType: double
-		lineageTag: 248240a4-9108-47f5-8907-1843b8bae6f0
+		lineageTag: 717b8638-a334-4950-bae6-8143e4d555c3
 		summarizeBy: none
 		sourceColumn: stability_ari
 

@@ -6,7 +6,7 @@
     "y": 195,
     "z": 1000,
     "height": 505,
-    "width": 480,
+    "width": 440,
     "tabOrder": 0
   },
   "visual": {
@@ -35,22 +35,17 @@
           "projections": [
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Forecast_Upcoming"
-                        }
-                      },
-                      "Property": "win_probability"
+                    "SourceRef": {
+                      "Entity": "Forecast_Upcoming"
                     }
                   },
-                  "Function": 1
+                  "Property": "Win Chance %"
                 }
               },
-              "queryRef": "Avg(Forecast_Upcoming.win_probability)",
-              "nativeQueryRef": "Avg of win_probability"
+              "queryRef": "Forecast_Upcoming.Win Chance %",
+              "nativeQueryRef": "Win Chance %"
             }
           ]
         }
@@ -59,18 +54,13 @@
         "sort": [
           {
             "field": {
-              "Aggregation": {
+              "Measure": {
                 "Expression": {
-                  "Column": {
-                    "Expression": {
-                      "SourceRef": {
-                        "Entity": "Forecast_Upcoming"
-                      }
-                    },
-                    "Property": "win_probability"
+                  "SourceRef": {
+                    "Entity": "Forecast_Upcoming"
                   }
                 },
-                "Function": 1
+                "Property": "Win Chance %"
               }
             },
             "direction": "Descending"
@@ -127,7 +117,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Win probability (%), selected race'"
+                  "Value": "'Chance to win (%), every driver'"
                 }
               }
             },

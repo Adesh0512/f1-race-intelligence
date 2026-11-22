@@ -219,6 +219,27 @@ if __name__ == "__main__":
     fc = fc[["season", "round", "race_name", "race_date", "circuit_name", "driver_name", "constructor_name", "grid_position",
              "win_probability", "predicted_rank"]]
     fc.to_csv(os.path.join(BASE, "forecast_upcoming.csv"), index=False)
+
+    # Power BI cannot run the model, so precompute every race x pole-sitter scenario for its slicers
+    last_win = history[(history["race_date"] == history["race_date"].max()) & (history["target_is_win"] == 1)].iloc[0]
+    rows = []
+    for race in upcoming_calendar().itertuples(index=False):
+        for pole in [None] + list(lineup.sort_values("grid_position")["driver_id"].iloc[1:]):
+            grid = lineup if pole is None else move_to_grid(lineup, pole, 1)
+            f = forecast(history, dob, model, grid, race.circuit_id, race.race_date)
+            rows.append(f.assign(
+                race=f"{race.race_name}, {race.race_date:%d %b %Y}", race_date=race.race_date.date(), circuit_name=race.circuit_name,
+                pole_scenario=f"Projected grid ({f.iloc[f['grid_position'].argmin()]['driver_name']} on pole)" if pole is None
+                else f"{f.loc[f['driver_id'] == pole, 'driver_name'].iat[0]} on pole", is_default=int(pole is None),
+                last_race=f"{last_win['race_name']}, {last_win['race_date']:%d %b}: {last_win['driver_name']}"))
+    sc = pd.concat(rows, ignore_index=True).rename(columns={"rank": "predicted_rank"})
+    sc["career_win_rate"] *= 100
+    sc = sc[["race", "race_date", "circuit_name", "pole_scenario", "is_default", "last_race", "driver_name", "constructor_name",
+             "grid_position", "win_probability", "predicted_rank", "driver_rolling_finish_5", "constructor_rolling_points_10",
+             "circuit_experience", "circuit_avg_finish", "career_win_rate"]].round(2)
+    assert sc.groupby(["race", "pole_scenario"])["win_probability"].sum().between(99.5, 100.5).all()
+    sc.to_csv(os.path.join(BASE, "forecast_scenarios.csv"), index=False)
+    print(f"[+] forecast_scenarios.csv: {sc.groupby(['race', 'pole_scenario']).ngroups} race x pole scenarios for Power BI")
     last = history.iloc[-1]
     print(f"[+] forecast_upcoming.csv: {fc.groupby(['season', 'round']).ngroups} upcoming races x {len(lineup)} drivers "
           f"(history up to {last['season']} {last['race_name']})")

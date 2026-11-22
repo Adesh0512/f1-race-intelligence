@@ -1,96 +1,155 @@
 table Forecast_Upcoming
-	lineageTag: 868aaf0e-d2bd-4cc8-acef-aa4cf0d24947
+	lineageTag: ffcf813b-0780-437b-9081-9d1d1d9530df
 
-	measure 'Forecast Winner' = IF(HASONEVALUE(Forecast_Upcoming[race]), CALCULATE(MAX(Forecast_Upcoming[driver_name]), Forecast_Upcoming[predicted_rank] = 1), "Pick one race")
-		lineageTag: 0ce7881d-7650-44d1-b6f2-b353189da3b3
+	measure 'Selected Race' = IF(HASONEVALUE(Forecast_Upcoming[race]), VALUES(Forecast_Upcoming[race]), "Qatar Grand Prix, 29 Nov 2026")
+		lineageTag: a16d4906-3015-4a2e-9467-889bb3b5ed76
 
-	measure 'Forecast Win %' = IF(HASONEVALUE(Forecast_Upcoming[race]), CALCULATE(MAX(Forecast_Upcoming[win_probability]), Forecast_Upcoming[predicted_rank] = 1))
+	measure 'Selected Pole' = IF(HASONEVALUE(Forecast_Upcoming[pole_scenario]), VALUES(Forecast_Upcoming[pole_scenario]), "Projected grid (Andrea Kimi Antonelli on pole)")
+		lineageTag: fffd0682-a268-4749-a4d6-532a0f8382b2
+
+	measure 'Last Race Winner' = MAX(Forecast_Upcoming[last_race])
+		lineageTag: b492a7e0-496d-4607-9e78-077e27ef5e06
+
+	measure 'Forecast Winner' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(MAX(Forecast_Upcoming[driver_name]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p, Forecast_Upcoming[predicted_rank] = 1)
+		lineageTag: f8840857-1242-4448-889c-0de6a1e564b6
+
+	measure 'Forecast Win %' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(MAX(Forecast_Upcoming[win_probability]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p, Forecast_Upcoming[predicted_rank] = 1)
 		formatString: 0.0
-		lineageTag: 1a37820c-6259-4a66-a783-043f414b9d01
+		lineageTag: 55a6ccde-a75b-47ac-9127-321fee335a34
 
-	measure 'Main Rival' = IF(HASONEVALUE(Forecast_Upcoming[race]), CALCULATE(MAX(Forecast_Upcoming[driver_name]), Forecast_Upcoming[predicted_rank] = 2), "Pick one race")
-		lineageTag: 389ff77c-136e-4afa-af18-4512b9a94bd1
+	measure 'Main Rival' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(MAX(Forecast_Upcoming[driver_name]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p, Forecast_Upcoming[predicted_rank] = 2)
+		lineageTag: 6bf90cc5-de50-4bed-a669-70e5746a1039
 
-	measure 'Expected Wins' = SUM(Forecast_Upcoming[win_probability]) / 100
+	measure 'Win Chance %' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(AVERAGE(Forecast_Upcoming[win_probability]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
 		formatString: 0.0
-		lineageTag: 2be704ef-536d-4276-aa0f-a62230ec3ff5
+		lineageTag: f500d68b-6207-44ec-8b03-6faa94b1e9c2
 
-	measure 'Races Forecast' = DISTINCTCOUNT(Forecast_Upcoming[round])
+	measure 'Predicted Position' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(MIN(Forecast_Upcoming[predicted_rank]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
 		formatString: 0
-		lineageTag: d2e55be3-0030-49ab-9bf6-357f2d088358
+		lineageTag: ceb7fcda-2fb4-4ff9-848d-9ac1bbbb6b06
 
-	column 'season'
-		dataType: int64
-		lineageTag: 28e7fea6-09ef-465d-88c9-53011e563f65
-		summarizeBy: none
-		sourceColumn: season
+	measure 'Starting Position' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(MIN(Forecast_Upcoming[grid_position]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
+		formatString: 0
+		lineageTag: b93cabee-1838-435e-a385-0f1da4c3cac0
 
-	column 'round'
-		dataType: int64
-		lineageTag: 95f7da85-bdd4-4184-8b95-a098d3165519
-		summarizeBy: none
-		sourceColumn: round
+	measure 'Avg Finish Last 5' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(AVERAGE(Forecast_Upcoming[driver_rolling_finish_5]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
+		formatString: 0.0
+		lineageTag: d52ad215-be35-484d-b132-48373014270e
 
-	column 'race_name'
+	measure 'Team Points Per Race' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(AVERAGE(Forecast_Upcoming[constructor_rolling_points_10]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
+		formatString: 0.0
+		lineageTag: 6ab4b543-85b5-44e2-80d8-ebc152024f4d
+
+	measure 'Starts At Track' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(MIN(Forecast_Upcoming[circuit_experience]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
+		formatString: 0
+		lineageTag: fa3954aa-cd39-4100-9330-2a3e54ecfab4
+
+	measure 'Career Win Pct' = VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE(AVERAGE(Forecast_Upcoming[career_win_rate]), Forecast_Upcoming[race] = r, Forecast_Upcoming[pole_scenario] = p)
+		formatString: 0.0
+		lineageTag: 3c8049e0-1044-4445-a33a-a83f4c026792
+
+	column 'race'
 		dataType: string
-		lineageTag: deb3d21d-d881-4adc-be25-79fb11764f3e
+		lineageTag: c18d8c08-1fa1-45ce-a005-9d9f3a9a1cae
 		summarizeBy: none
-		sourceColumn: race_name
+		sourceColumn: race
 
 	column 'race_date'
 		dataType: string
-		lineageTag: 974cf9d7-60f7-4cf8-b3f3-aa261c4b1d0b
+		lineageTag: bc93ea37-bc1c-492e-9b50-bc123b037159
 		summarizeBy: none
 		sourceColumn: race_date
 
 	column 'circuit_name'
 		dataType: string
-		lineageTag: a2655b04-8343-41af-9075-587687d9656b
+		lineageTag: dcdc8498-b2c4-409b-ae24-d0ec0effe87f
 		summarizeBy: none
 		sourceColumn: circuit_name
 
+	column 'pole_scenario'
+		dataType: string
+		lineageTag: 9829ab88-c1df-48ae-9454-ddbd512723f0
+		summarizeBy: none
+		sourceColumn: pole_scenario
+
+	column 'is_default'
+		dataType: int64
+		lineageTag: 96c7e49f-61bd-4e7a-8b7c-9408b507d1d4
+		summarizeBy: none
+		sourceColumn: is_default
+
+	column 'last_race'
+		dataType: string
+		lineageTag: 7374a0fd-fd3b-4985-a8e7-3124c184346a
+		summarizeBy: none
+		sourceColumn: last_race
+
 	column 'driver_name'
 		dataType: string
-		lineageTag: 042f644c-42fb-4fd8-88cf-77e18be79875
+		lineageTag: 80fdbd22-4dbe-434b-92fb-1661c7f71892
 		summarizeBy: none
 		sourceColumn: driver_name
 
 	column 'constructor_name'
 		dataType: string
-		lineageTag: 7482111e-ae47-40aa-8498-4195ec46856d
+		lineageTag: 0757075c-57db-4efb-9084-decc62fa6d19
 		summarizeBy: none
 		sourceColumn: constructor_name
 
-	column 'projected_grid'
+	column 'grid_position'
 		dataType: int64
-		lineageTag: 2a60510e-d1b4-4e38-b739-650fb14d9a68
+		lineageTag: 3fb49ade-ac61-4d80-be8d-bfaccd2eaf40
 		summarizeBy: none
-		sourceColumn: projected_grid
+		sourceColumn: grid_position
 
 	column 'win_probability'
 		dataType: double
-		lineageTag: 0fbe3655-5829-42db-9d76-2dc11d3b556b
+		lineageTag: ca927597-e4e9-423b-9d2d-bebc0faf189d
 		summarizeBy: none
 		sourceColumn: win_probability
 
 	column 'predicted_rank'
 		dataType: int64
-		lineageTag: 80dba7da-ddb9-414f-b8ab-ebad5d430a2f
+		lineageTag: 69a3a157-0ffc-498b-ba78-3bdd6e57555c
 		summarizeBy: none
 		sourceColumn: predicted_rank
 
-	column 'race'
-		dataType: string
-		lineageTag: 4835c745-50b1-4ece-befd-8072be258af7
+	column 'driver_rolling_finish_5'
+		dataType: double
+		lineageTag: 0d23ac8f-58e4-4987-a5a0-f7bbcd61270f
 		summarizeBy: none
-		sourceColumn: race
+		sourceColumn: driver_rolling_finish_5
+
+	column 'constructor_rolling_points_10'
+		dataType: double
+		lineageTag: b45edeb4-9c59-4ede-8246-de83cfd32d46
+		summarizeBy: none
+		sourceColumn: constructor_rolling_points_10
+
+	column 'circuit_experience'
+		dataType: int64
+		lineageTag: ff8edff6-2525-4483-b4b9-e1e2d28d22ea
+		summarizeBy: none
+		sourceColumn: circuit_experience
+
+	column 'circuit_avg_finish'
+		dataType: double
+		lineageTag: 64827018-74b3-435b-b50c-61fd3d3cbfc7
+		summarizeBy: none
+		sourceColumn: circuit_avg_finish
+
+	column 'career_win_rate'
+		dataType: double
+		lineageTag: d74648e3-4888-4fdf-81f1-34123a8a57f7
+		summarizeBy: none
+		sourceColumn: career_win_rate
 
 	partition Forecast_Upcoming = m
 		mode: import
 		source =
 				let
-					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("xZhdT9swFIb/isX1iPLRNsnu2k4UtBY6mJgmxsVpYsDDdZDtAuPXz7GjpnFBJBuKb5CdYPvp8etz/Obq6iD0w9HBJ3QQhuXfbyCBoxkHlqMlJ8/6jfqPwyA4DNOyN98IIBSdMIk5A0kKBhRNCc82RJbvF/CMLjEXEh4eMCufnOMcTTaUlu1ITxh5cVr3ttN/RmUb7TFcf0IfzznDBb/F6HwjBDZsC8wznGNRtocaz0u2bUeUczW0QKcF50RzLbI5cBNWvUI48EZB3XMDeSIgu0fHkP8Gbm+4XijwBnqpxCHkmD+SHM0Jy1cUco05QUcB+o5hrRn1Or4XDOueK1SWcwzoK1kTNGayYEqgxFao2fXUS5K650ijBNZoDk+iYPthTUxUh3rF1CHlkmDOMZqBoH90kOkDYbihAL9SQFr3HMEeqbFZgaYFBUUpizeAhw1glxqY3gGnWKA5zqgSqf4NKt7AtW4HJqCemWvgUqv4iQiVqtaESiPXHczY5Ko43HYcUZ4StfnHvza+f5PRe8xWmN9qCWxysj1Hat9NXF3GcwYrTjBFk4LLguJKqRVmUHH6JqU6zf4UP6vRmKMxXZmN/0FUVoW1SaajinRUnytHpOdwAyqgU1gDh/LBMYBonPpBI6ouc+qF0iUp0LJUKk45ftGpAHIVWch2mUO/Ed+RQ+YzkakZlgSENKd+50pVpVBvlG6vLq4KQPm4vPqNacGEOVVCZSy0AC6JgY13dRC6LFeXQKV6RVQakBLEmyoIGsRO65UqV4VAF0DYy14ySBpidVkIzih5VDlrgoGvgb2aDaLGtTVy61UyjC4kL8zV3xZsWN2w/ajudUXVQ8erDfpyByvyKm54aDbupwqUWpww6G5Po8Syp+WkFeGrq38wZQtzOvCS1HKnPUO28KZRZHnTnhFbONPQdqY9I3b0pe402cmVmo0P3GmzhSc1VT51xtjBkQ7ti37PqB39aGIb6J5x27lRc7LcBfV9Lxp65pIUO2Ns60RH9kezvgtmKx8a2+6j7xTa0oUmtgvtmfM/PGjPpN0d6J5b6pm4jf8cDi3/2Xe67+w+3VX6rt4ztk1d37WpjfOM7Q9mfYu0ve9M7G/P/buQf3Sd74Je/wU=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [season = _t, round = _t, race_name = _t, race_date = _t, circuit_name = _t, driver_name = _t, constructor_name = _t, projected_grid = _t, win_probability = _t, predicted_rank = _t, race = _t]),
-					#"Changed Type" = Table.TransformColumnTypes(Source, {{"season", Int64.Type}, {"round", Int64.Type}, {"race_name", type text}, {"race_date", type text}, {"circuit_name", type text}, {"driver_name", type text}, {"constructor_name", type text}, {"projected_grid", Int64.Type}, {"win_probability", type number}, {"predicted_rank", Int64.Type}, {"race", type text}}, "en-US")
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("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", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [race = _t, race_date = _t, circuit_name = _t, pole_scenario = _t, is_default = _t, last_race = _t, driver_name = _t, constructor_name = _t, grid_position = _t, win_probability = _t, predicted_rank = _t, driver_rolling_finish_5 = _t, constructor_rolling_points_10 = _t, circuit_experience = _t, circuit_avg_finish = _t, career_win_rate = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"race", type text}, {"race_date", type text}, {"circuit_name", type text}, {"pole_scenario", type text}, {"is_default", Int64.Type}, {"last_race", type text}, {"driver_name", type text}, {"constructor_name", type text}, {"grid_position", Int64.Type}, {"win_probability", type number}, {"predicted_rank", Int64.Type}, {"driver_rolling_finish_5", type number}, {"constructor_rolling_points_10", type number}, {"circuit_experience", Int64.Type}, {"circuit_avg_finish", type number}, {"career_win_rate", type number}}, "en-US")
 				in
 					#"Changed Type"
 

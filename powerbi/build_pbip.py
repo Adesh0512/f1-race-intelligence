@@ -109,8 +109,11 @@ def tables():
     global POLE_BASELINE_PCT
     POLE_BASELINE_PCT = float(src("05_algorithm_comparison", "comparison_results.csv")
                               .set_index("algorithm").filter(like="Grid Only", axis=0)["top1_winner_hit_pct"].iat[0])
-    forecast = src("06_classification_algorithm", "forecast_upcoming.csv").rename(columns={"grid_position": "projected_grid"})
-    forecast["race"] = forecast["race_date"] + ": " + forecast["season"].astype(str) + " " + forecast["race_name"]
+    forecast = src("06_classification_algorithm", "forecast_scenarios.csv")  # every upcoming race x pole-sitter scenario
+    global NEXT_RACE, DEFAULT_POLE
+    NEXT_RACE = forecast.sort_values("race_date")["race"].iat[0]
+    DEFAULT_POLE = forecast.loc[forecast["is_default"] == 1, "pole_scenario"].iat[0]
+    MEASURES["Forecast_Upcoming"] = forecast_measures()  # needs the race names above
     rwt = src("06_classification_algorithm", "real_world_test.csv")
     rwt["race"] = rwt["season"].astype(str) + " R" + rwt["round"].astype(str).str.zfill(2) + " " + rwt["race_name"]
     return {"Forecast_Upcoming": forecast, "Real_World_Test": rwt, "Dim_Season": dim_season, "Race_Predictions": fact, "Classifier_Comparison": models, "Season_Validation": folds,
@@ -148,13 +151,6 @@ MEASURES = {
                             ("Title Contender Seasons", 'CALCULATE(COUNTROWS(Driver_Season_Tiers), Driver_Season_Tiers[cluster_name] = "Title Contenders")', "0"),
                             ("Avg Win Rate %", "AVERAGE(Driver_Season_Tiers[win_rate]) * 100", "0.0"),
                             ("Avg Finish Position", "AVERAGE(Driver_Season_Tiers[avg_finish])", "0.0")],
-    "Forecast_Upcoming": [
-        ("Forecast Winner", 'IF(HASONEVALUE(Forecast_Upcoming[race]), CALCULATE(MAX(Forecast_Upcoming[driver_name]), Forecast_Upcoming[predicted_rank] = 1), "Pick one race")', None),
-        ("Forecast Win %", 'IF(HASONEVALUE(Forecast_Upcoming[race]), CALCULATE(MAX(Forecast_Upcoming[win_probability]), Forecast_Upcoming[predicted_rank] = 1))', "0.0"),
-        ("Main Rival", 'IF(HASONEVALUE(Forecast_Upcoming[race]), CALCULATE(MAX(Forecast_Upcoming[driver_name]), Forecast_Upcoming[predicted_rank] = 2), "Pick one race")', None),
-        ("Expected Wins", "SUM(Forecast_Upcoming[win_probability]) / 100", "0.0"),
-        ("Races Forecast", "DISTINCTCOUNT(Forecast_Upcoming[round])", "0"),
-    ],
     "Real_World_Test": [("Races Tested", "COUNTROWS(Real_World_Test)", "0"), ("Model Correct", "SUM(Real_World_Test[model_correct])", "0"),
                         ("Pole Correct", "SUM(Real_World_Test[pole_correct])", "0"),
                         ("Model Hit %", "DIVIDE([Model Correct], [Races Tested]) * 100", "0.0")],
@@ -175,6 +171,28 @@ MEASURES = {
     "Clustering_Comparison": [("Algorithms", "COUNTROWS(Clustering_Comparison)", "0"),
                               ("Best Silhouette", "MAX(Clustering_Comparison[silhouette])", "0.000")],
 }
+
+
+def forecast_measures():
+    """With nothing picked, the page shows the next race on the projected grid; the slicers swap in any other scenario."""
+    fu = "Forecast_Upcoming"
+    pick = lambda expr, extra="": (f"VAR r = [Selected Race] VAR p = [Selected Pole] RETURN CALCULATE({expr}, {fu}[race] = r, "
+                                   f"{fu}[pole_scenario] = p{extra})")
+    return [
+        ("Selected Race", f'IF(HASONEVALUE({fu}[race]), VALUES({fu}[race]), "{NEXT_RACE}")', None),
+        ("Selected Pole", f'IF(HASONEVALUE({fu}[pole_scenario]), VALUES({fu}[pole_scenario]), "{DEFAULT_POLE}")', None),
+        ("Last Race Winner", f"MAX({fu}[last_race])", None),
+        ("Forecast Winner", pick(f"MAX({fu}[driver_name])", f", {fu}[predicted_rank] = 1"), None),
+        ("Forecast Win %", pick(f"MAX({fu}[win_probability])", f", {fu}[predicted_rank] = 1"), "0.0"),
+        ("Main Rival", pick(f"MAX({fu}[driver_name])", f", {fu}[predicted_rank] = 2"), None),
+        ("Win Chance %", pick(f"AVERAGE({fu}[win_probability])"), "0.0"),
+        ("Predicted Position", pick(f"MIN({fu}[predicted_rank])"), "0"),
+        ("Starting Position", pick(f"MIN({fu}[grid_position])"), "0"),
+        ("Avg Finish Last 5", pick(f"AVERAGE({fu}[driver_rolling_finish_5])"), "0.0"),
+        ("Team Points Per Race", pick(f"AVERAGE({fu}[constructor_rolling_points_10])"), "0.0"),
+        ("Starts At Track", pick(f"MIN({fu}[circuit_experience])"), "0"),
+        ("Career Win Pct", pick(f"AVERAGE({fu}[career_win_rate])"), "0.0"),
+    ]
 
 
 def tmdl_type(s):
@@ -421,20 +439,23 @@ def pages():
                   "Winners picked per season"),
         ]),
         ("next_race", "2. Next race forecast", [
-            header("hdr", "2. Next race forecast: upcoming Grands Prix", "History = f1.zip 1994-2024 + Jolpica-F1 results to the latest race; champion retrained on all of it; grid projected from recent starts"),
-            card("k1", 20, 80, fc, "Forecast Winner", "Forecast winner", 300, PURPLE),
-            card("k2", 330, 80, fc, "Forecast Win %", "Win probability %", 200),
-            card("k3", 540, 80, fc, "Main Rival", "Main rival", 280, GREEN),
-            card("k4", 830, 80, rw, "Model Hit %", "Real-world hit % since 2024", 180),
-            slicer("s_race", 1020, 80, 240, 300, col(fc, "race"), "Upcoming Grand Prix (pick one)"),
-            chart("prob", "clusteredBarChart", 20, 195, 480, 505, {"Category": [col(fc, "driver_name")], "Y": [agg(fc, "win_probability", 1, "Avg")]},
-                  "Win probability (%), selected race", sort=agg(fc, "win_probability", 1, "Avg")),
-            visual("rw_cards", "pivotTable", 520, 195, 480, 120, {"Rows": [col(rw, "season")], "Values": [meas(rw, "Races Tested"),
-                   meas(rw, "Model Correct"), meas(rw, "Pole Correct")]}, "Real-world test: races called before they happened"),
-            table("rw_table", 520, 330, 480, 370, rw, ["race", "predicted_winner", "actual_winner", "model_correct"],
-                  "Every race since 2024: prediction vs. result"),
-            card("k5", 1020, 395, rw, "Model Correct", "Model called the winner", 240, PURPLE),
-            card("k6", 1020, 510, rw, "Pole Correct", "Pole-sitter won", 240),
+            header("hdr", "2. Next race forecast: who wins the next Grand Prix?",
+                   "Predicted from every race up to the latest one. Pick a race and who takes pole; every visual updates."),
+            card("k1", 20, 80, fc, "Selected Race", "Race", 300),
+            card("k2", 330, 80, fc, "Forecast Winner", "Predicted winner", 280, PURPLE),
+            card("k3", 620, 80, fc, "Forecast Win %", "Chance to win %", 150, PURPLE),
+            card("k4", 780, 80, fc, "Main Rival", "Main rival", 230, GREEN),
+            card("k5", 1020, 80, fc, "Last Race Winner", "Last race", 240),
+            slicer("s_race", 1020, 195, 240, 130, col(fc, "race"), "Grand Prix (pick one)"),
+            slicer("s_pole", 1020, 335, 240, 90, col(fc, "pole_scenario"), "Who takes pole? (pick one)"),
+            card("k6", 1020, 435, rw, "Model Correct", "Winners called since 2024", 240),
+            card("k7", 1020, 545, rw, "Pole Correct", "Pole-sitter won, same races", 240),
+            chart("prob", "clusteredBarChart", 20, 195, 440, 505, {"Category": [col(fc, "driver_name")], "Y": [meas(fc, "Win Chance %")]},
+                  "Chance to win (%), every driver", sort=meas(fc, "Win Chance %")),
+            visual("order", "tableEx", 480, 195, 520, 505, {"Values": [col(fc, "driver_name"), col(fc, "constructor_name"),
+                   meas(fc, "Predicted Position"), meas(fc, "Starting Position"), meas(fc, "Win Chance %"), meas(fc, "Avg Finish Last 5"),
+                   meas(fc, "Team Points Per Race"), meas(fc, "Starts At Track"), meas(fc, "Career Win Pct")]},
+                   "Predicted order and the parameters behind it", sort=meas(fc, "Win Chance %")),
         ]),
         ("clustering_comparison", "3. Clustering comparison", [
             header("hdr", "3. Clustering comparison: six algorithms", "K-Means, K-Medoids, Ward, Gaussian Mixture, BIRCH and DBSCAN on the same 703 standardised driver-season profiles"),

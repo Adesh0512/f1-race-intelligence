@@ -1,0 +1,208 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "order",
+  "position": {
+    "x": 480,
+    "y": 195,
+    "z": 1000,
+    "height": 505,
+    "width": 520,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_Upcoming"
+                    }
+                  },
+                  "Property": "driver_name"
+                }
+              },
+              "queryRef": "Forecast_Upcoming.driver_name",
+              "nativeQueryRef": "driver_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_Upcoming"
+                    }
+                  },
+                  "Property": "constructor_name"
+                }
+              },
+              "queryRef": "Forecast_Upcoming.constructor_name",
+              "nativeQueryRef": "constructor_name"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_Upcoming"
+                    }
+                  },
+                  "Property": "Predicted Position"
+                }
+              },
+              "queryRef": "Forecast_Upcoming.Predicted Position",
+              "nativeQueryRef": "Predicted Position"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_Upcoming"
+                    }
+                  },
+                  "Property": "Starting Position"
+                }
+              },
+              "queryRef": "Forecast_Upcoming.Starting Position",
+              "nativeQueryRef": "Starting Position"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_Upcoming"
+                    }
+                  },
+                  "Property": "Win Chance %"
+                }
+              },
+              "queryRef": "Forecast_Upcoming.Win Chance %",
+              "nativeQueryRef": "Win Chance %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_Upcoming"
+                    }
+                  },
+                  "Property": "Avg Finish Last 5"
+                }
+              },
+              "queryRef": "Forecast_Upcoming.Avg Finish Last 5",
+              "nativeQueryRef": "Avg Finish Last 5"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_Upcoming"
+                    }
+                  },
+                  "Property": "Team Points Per Race"
+                }
+              },
+              "queryRef": "Forecast_Upcoming.Team Points Per Race",
+              "nativeQueryRef": "Team Points Per Race"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_Upcoming"
+                    }
+                  },
+                  "Property": "Starts At Track"
+                }
+              },
+              "queryRef": "Forecast_Upcoming.Starts At Track",
+              "nativeQueryRef": "Starts At Track"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_Upcoming"
+                    }
+                  },
+                  "Property": "Career Win Pct"
+                }
+              },
+              "queryRef": "Forecast_Upcoming.Career Win Pct",
+              "nativeQueryRef": "Career Win Pct"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Forecast_Upcoming"
+                  }
+                },
+                "Property": "Win Chance %"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Predicted order and the parameters behind it'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

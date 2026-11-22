@@ -23,11 +23,11 @@
                       "Entity": "Forecast_Upcoming"
                     }
                   },
-                  "Property": "Forecast Winner"
+                  "Property": "Selected Race"
                 }
               },
-              "queryRef": "Forecast_Upcoming.Forecast Winner",
-              "nativeQueryRef": "Forecast Winner"
+              "queryRef": "Forecast_Upcoming.Selected Race",
+              "nativeQueryRef": "Selected Race"
             }
           ]
         }
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A66CFF'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -87,7 +87,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Forecast winner'"
+                  "Value": "'Race'"
                 }
               }
             },

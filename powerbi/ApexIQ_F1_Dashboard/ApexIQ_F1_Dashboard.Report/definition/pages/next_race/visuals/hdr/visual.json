@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "2. Next race forecast: upcoming Grands Prix",
+                    "value": "2. Next race forecast: who wins the next Grand Prix?",
                     "textStyle": {
                       "fontSize": "20pt",
                       "color": "#FFFFFF",
@@ -31,7 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "History = f1.zip 1994-2024 + Jolpica-F1 results to the latest race; champion retrained on all of it; grid projected from recent starts",
+                    "value": "Predicted from every race up to the latest one. Pick a race and who takes pole; every visual updates.",
                     "textStyle": {
                       "fontSize": "10pt",
                       "color": "#8B95A5"
