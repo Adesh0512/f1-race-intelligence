@@ -30,7 +30,54 @@ c3.metric("Pre-Race Features", len(ENGINEERED_FEATURE_COLS), "No in-race leakage
 c4.metric("Class Imbalance", f"{(len(df) - wins) / wins:.2f} : 1", f"{wins} winners", delta_color="off")
 
 st.markdown("---")
-t1, t2, t3, t4 = st.tabs(["Class Labels", "16 Features", "Chronological Split", "Sample Rows"])
+t0, t1, t2, t3, t4 = st.tabs(["Dataset Overview", "Class Labels", "16 Features", "Chronological Split", "Sample Rows"])
+
+FEATURES = {  # input feature: (group, what it measures), all known before the race starts
+    "grid_position": ("Grid", "Starting grid slot (1 = pole)"),
+    "ahead_of_teammate_grid": ("Grid", "1 if the driver out-qualified their teammate"),
+    "grid_vs_form_gap": ("Grid", "Grid slot minus recent average finish"),
+    "driver_rolling_finish_5": ("Driver form", "Average finish over the previous 5 races"),
+    "driver_rolling_points_5": ("Driver form", "Average points over the previous 5 races"),
+    "season_points_before": ("Driver form", "Championship points before this round"),
+    "constructor_rolling_finish_10": ("Team form", "Team's average finish over its previous 10 entries"),
+    "constructor_rolling_points_10": ("Team form", "Team's average points over its previous 10 entries"),
+    "circuit_avg_finish": ("Circuit history", "Driver's average finish at this circuit"),
+    "circuit_win_rate": ("Circuit history", "Driver's win rate at this circuit"),
+    "circuit_podium_rate": ("Circuit history", "Driver's podium rate at this circuit"),
+    "circuit_experience": ("Circuit history", "Previous starts at this circuit"),
+    "career_starts": ("Career", "Grands Prix started before this race"),
+    "career_win_rate": ("Career", "Career win rate before this race"),
+    "career_dnf_rate": ("Career", "Career retirement rate before this race"),
+    "driver_age": ("Career", "Age in years on race day"),
+}
+assert set(FEATURES) == set(ENGINEERED_FEATURE_COLS), "every model feature needs a description"
+LABEL_COLS = [c for c in df.columns if c.startswith("target_")]
+ID_COLS = [c for c in df.columns if c not in FEATURES and c not in LABEL_COLS]
+
+with t0:
+    st.markdown(f"""
+    #### F1 Race Lab feature store, 1994–2024
+    **File:** `data/processed/F1_RACE_LAB_FEATURES_1994_2024.csv` · **Source:** Ergast Formula 1 historical results
+    (races, drivers, constructors, circuits, results, qualifying, standings), cleaned and joined by the module pipeline.
+
+    **Application:** predict, *before the lights go out*, which driver will win a Grand Prix. The classifier gives each driver
+    a win probability and the probabilities in one race add up to 1, so teams, broadcasters and fans get a ranked
+    favourite list. Because every feature is known before the race, the model can be used on a real upcoming race.
+    """)
+    a, b, c, d = st.columns(4)
+    a.metric("Records", f"{len(df):,}", "driver × race", delta_color="off")
+    b.metric("Attributes", len(df.columns))
+    c.metric("Input features", len(FEATURES), "all pre-race", delta_color="off")
+    d.metric("Target", "Winner", "target_is_win: 1 / 0", delta_color="off")
+    st.dataframe(pd.DataFrame([("Input features (X)", len(FEATURES), "Grid, driver form, team form, circuit history, career: listed below"),
+                               ("Target / class labels (y)", len(LABEL_COLS), ", ".join(LABEL_COLS) + " — primary: target_is_win"),
+                               ("Identifiers (not used for learning)", len(ID_COLS), ", ".join(ID_COLS))],
+                              columns=["Attribute role", "Count", "Columns"]), width="stretch")
+    st.markdown("#### Input features")
+    st.dataframe(pd.DataFrame([(f, g, d) for f, (g, d) in FEATURES.items()], columns=["Feature", "Group", "What it measures"]),
+                 width="stretch")
+    st.caption("Identifiers such as driver and team names are kept only to display results; the model never sees them, "
+               "so it cannot simply memorise who is famous.")
 
 with t1:
     labels = pd.DataFrame([

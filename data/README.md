@@ -12,7 +12,7 @@ data/
 ## 2. Dataset Overview
 
 * **Temporal Coverage:** 1994 to 2024 FIA Formula 1 World Championship (31 seasons).
-* **Scope:** 598 Championship Grands Prix, 13,248 driver race entries.
+* **Scope:** 577 Championship Grands Prix, 12,358 driver race entries.
 * **Grain:** 1 record per driver per Grand Prix.
 * **Master Feature Store:** `data/processed/F1_RACE_LAB_FEATURES_1994_2024.csv` (35 columns).
 

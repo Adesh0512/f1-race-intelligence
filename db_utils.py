@@ -104,13 +104,14 @@ def html_table(df, hide_index=True):
     head = "".join(f'<th class="{"n" if n else ""}">{html.escape(str(c))}</th>' for c, n in zip(df.columns, num))
     rows = []
     for r in df.itertuples(index=False):
-        hot = any(isinstance(v, str) and "Champion" in v for v in r)
+        hot = any(isinstance(v, str) and "(Champion)" in v for v in r)
         cells = "".join(f'<td class="{"n" if n else ""}">{_cell(v)}</td>' for v, n in zip(r, num))
         rows.append(f'<tr class="{"hot" if hot else ""}">{cells}</tr>')
     return f'<div class="apx-table"><table><thead><tr>{head}</tr></thead><tbody>{"".join(rows)}</tbody></table></div>'
 
 
 assert "<b>" not in html_table(pd.DataFrame({"a": ["<b>"]})) and _cell(0.12345) == "0.1235" and _cell(12358) == "12,358"
+assert 'class="hot"' not in html_table(pd.DataFrame({"a": ["Championship points"]}))
 
 
 def _pretty_dataframe(original):
