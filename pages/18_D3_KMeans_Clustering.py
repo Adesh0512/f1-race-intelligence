@@ -25,7 +25,38 @@ for col, r in zip(cols, cent.itertuples()):
     col.metric(r.cluster_name, f"{r.size} seasons", f"avg finish P{r.avg_finish:.1f} · win {r.win_rate*100:.1f}%")
 
 st.markdown("---")
-t1, t2, t5, t3, t6, t4 = st.tabs(["Cluster Map (PCA)", "Centroid Profiles", "Tiers by Era", "Driver Explorer", "Classify a Season", "How K-Means Works"])
+t4, t1, t2, t7, t5, t3, t6 = st.tabs(["How K-Means Works", "Cluster Map (PCA)", "Centroid Profiles", "What the Tiers Mean",
+                                       "Tiers by Era", "Driver Explorer", "Classify a Season"])
+
+with t7:
+    import json
+    from sklearn.preprocessing import StandardScaler
+    FEATS = ["avg_grid", "avg_finish", "finish_std", "win_rate", "podium_rate", "points_rate", "dnf_rate", "teammate_quali_rate", "starts"]
+    Z = pd.DataFrame(StandardScaler().fit_transform(cl[FEATS]), columns=FEATS)
+    cl_d = cl.assign(dist=np.linalg.norm(Z.values - Z.groupby(cl["cluster"]).transform("mean").values, axis=1))
+    metrics = json.load(open(os.path.join(ROOT, "12_clustering_metrics", "clustering_metrics.json")))
+    link = pd.read_csv(os.path.join(ROOT, "12_clustering_metrics", "cluster_feature_experiment.csv")).set_index("model")
+    MEANING = {
+        "Title Contenders": "Start near the front and finish on the podium more often than not. These are the drivers fighting for the championship.",
+        "Midfield Regulars": "Solid points scorers in mid-grid cars: rarely win, often finish in the top 10, and retire more often than the leaders.",
+        "Backmarkers": "Start and finish at the back, score points rarely and retire most often: usually the slowest cars on the grid.",
+    }
+    for r in cent.itertuples():
+        typical = cl_d[cl_d["cluster"] == r.cluster].nsmallest(3, "dist")
+        st.markdown(f"##### {r.cluster_name} · {r.size} driver-seasons")
+        st.markdown(f"{MEANING[r.cluster_name]} Average grid **P{r.avg_grid:.1f}**, average finish **P{r.avg_finish:.1f}**, "
+                    f"wins **{r.win_rate:.0%}**, podiums **{r.podium_rate:.0%}**, points **{r.points_rate:.0%}**, retirements **{r.dnf_rate:.0%}** of starts. "
+                    f"Most typical seasons (closest to the centre): " + ", ".join(f"{t.driver_name} {t.season} ({t.constructor_name})" for t in typical.itertuples()) + ".")
+    st.markdown("#### Why the tiers matter in practice")
+    st.markdown(f"""
+    - **They match reality without being told it:** {metrics['contenders_in_top3_standing_pct']:.0f}% of Title Contender seasons ended in the
+      championship top 3, although the standings were never used for clustering.
+    - **They help prediction:** adding a driver's previous-season tier to grid position raises the winner classifier's PR-AUC from
+      {link.loc['Grid only', 'pr_auc']:.2f} to {link.loc['Grid + previous-season tier', 'pr_auc']:.2f} (Clustering Metrics → Clusters → Classifier).
+    - **They measure how competitive an era is:** the share of Title Contenders per season (Tiers by Era tab) shows dominant eras vs. open fights.
+    - **They support scouting and team decisions:** a driver who keeps out-qualifying a teammate while in the Midfield tier is performing above the car.
+    - **They track careers:** the Driver Explorer shows a driver moving between tiers as their car improves or declines.
+    """)
 
 with t1:
     seasons = st.slider("Seasons", int(cl["season"].min()), int(cl["season"].max()), (1994, 2024))
@@ -102,6 +133,21 @@ with t4:
 
     Objective (inertia / WCSS): $J = \sum_{j=1}^{k} \sum_{x_i \in C_j} \lVert x_i - \mu_j \rVert^2$
 
+    **Parameter selection**
+
+    | Parameter | Value | Why |
+    |---|---|---|
+    | k (clusters) | 3 | Elbow of the inertia curve; the Ward dendrogram's largest gap also gives 3; k = 2 only splits winners from the rest |
+    | Features | 9, z-score standardised | Euclidean distance needs equal scales |
+    | Initialisation | k-means++ | Spreads the starting centroids out, so it avoids poor local minima |
+    | Restarts (n_init) | 10 | Keeps the run with the lowest inertia |
+    | random_state | 42 | Same result every run (reproducible) |
+
     **Why K-Means won:** best Silhouette, Davies-Bouldin and Calinski-Harabasz among the 4 algorithms that assign every point,
     high stability across seeds, and centroids that read directly as performance tiers.
     """)
+    st.code("""X = StandardScaler().fit_transform(profiles[FEATURES])          # 703 × 9, mean 0, sd 1
+km = KMeans(n_clusters=3, init="k-means++", n_init=10, random_state=42).fit(X)
+labels = km.labels_                     # tier of every driver-season
+centres = km.cluster_centers_           # one average profile per tier
+# clusters are renamed by average finish: best = Title Contenders""", language="python")

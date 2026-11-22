@@ -67,7 +67,7 @@ c1, c2, c3, c4 = st.columns(4)
 c1.metric("Warehouse Tables", len(counts))
 c2.metric("Fact Rows (Star)", f"{star_fact:,}", "1 row = driver × Grand Prix")
 c3.metric("Lap-Time Fact Rows", f"{int(counts.loc[counts['table'] == 'FACT_LAP_TIMES', 'rows'].iat[0]):,}")
-c4.metric("OLAP Queries", len(olap_queries()), "Roll-up · Drill-down · Slice · Dice · Pivot")
+c4.metric("OLAP Queries", len(olap_queries()), "5 OLAP operations")
 
 st.markdown("---")
 t0, t1, t2, t3, t4, t5 = st.tabs(["Problem & Model", "Star Schema", "Snowflake Schema", "Star vs. Snowflake", "Live OLAP Queries", "Tables & ETL"])

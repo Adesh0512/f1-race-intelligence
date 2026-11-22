@@ -7,6 +7,12 @@ import plotly.graph_objects as go
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
+sys.path.insert(0, os.path.join(ROOT, "09_unsupervised_dataset"))
+sys.path.insert(0, os.path.join(ROOT, "10_clustering_comparison"))
+import numpy as np
+from sklearn.decomposition import PCA
+from build_unsupervised_dataset import load_profiles
+from clustering_comparison import make_models, tune_dbscan
 from db_utils import apply_f1_theme, get_plotly_theme, F1_RED, page_header, pretty, GREEN
 
 apply_f1_theme()
@@ -28,7 +34,67 @@ c3.metric("Champion", champ["algorithm"])
 c4.metric("Champion Silhouette", f"{champ['silhouette']:.4f}")
 
 st.markdown("---")
-t1, t2, t5, t4, t3 = st.tabs(["Benchmark Table", "Choosing k", "Tuning GMM & DBSCAN", "Hierarchical Dendrogram", "Why These 6 Algorithms"])
+t3, t0, t1, t2, t5, t4 = st.tabs(["Why These 6 Algorithms", "Clusters Side by Side", "Benchmark Table", "Choosing k",
+                                   "Tuning GMM & DBSCAN", "Hierarchical Dendrogram"])
+
+
+@st.cache_data
+def fit_all(k):
+    """Refits all six algorithms with the module's own settings and returns labels on one shared 2-D PCA map."""
+    prof, X = load_profiles()
+    eps, ms = tune_dbscan(X)
+    xy = PCA(n_components=2, random_state=42).fit_transform(X)
+    frames = []
+    for name, make in make_models(k, eps, ms).items():
+        lab = np.asarray(make(42).fit_predict(X))
+        frames.append(pd.DataFrame({"algorithm": name, "PC 1": xy[:, 0], "PC 2": xy[:, 1], "driver": prof["driver_name"],
+                                    "season": prof["season"], "cluster": np.where(lab == -1, "Noise", "Cluster " + (lab + 1).astype(str))}))
+    return pd.concat(frames, ignore_index=True), eps, ms
+
+
+with t0:
+    k = int(champ["n_clusters"])
+    pts, eps, ms = fit_all(k)
+    st.markdown("#### Parameters used")
+    st.dataframe(pd.DataFrame([
+        ("K-Means", f"k = {k}, init = k-means++, 10 restarts, seed 42", "k from the elbow method (Choosing k tab)"),
+        ("K-Medoids (PAM)", f"k = {k}, 10 restarts, seed 42", "same k, so the comparison is like for like"),
+        ("Agglomerative (Ward)", f"k = {k}, linkage = ward", "Ward merges the pair that adds least variance; cut at k"),
+        ("Gaussian Mixture", f"k = {k} components, full covariance, seed 42", "BIC/AIC checked (Tuning tab); same k for a fair comparison"),
+        ("BIRCH", f"k = {k}, threshold = 0.5", "threshold sets how tightly the CF-tree summarises points"),
+        ("DBSCAN", f"eps = {eps}, min_samples = {ms}", "grid search: ≥ 3 clusters, ≤ 15% noise, best silhouette; k-distance curve"),
+    ], columns=["Algorithm", "Parameters", "How they were chosen"]), width="stretch")
+
+    st.markdown("#### Clusters each algorithm produced")
+    sizes = (pts.groupby(["algorithm", "cluster"]).size().reset_index(name="n")
+             .sort_values(["algorithm", "n"], ascending=[True, False]))
+    summary = sizes.groupby("algorithm").apply(
+        lambda g: " / ".join(f"{n}" for c, n in zip(g["cluster"], g["n"]) if c != "Noise")
+        + (f"  + {int(g.loc[g['cluster'] == 'Noise', 'n'].sum())} noise" if (g["cluster"] == "Noise").any() else ""), include_groups=False)
+    st.dataframe(res[["algorithm", "n_clusters", "silhouette", "stability_ari"]].assign(
+        cluster_sizes=res["algorithm"].map(summary)), width="stretch")
+    order = res["algorithm"].tolist()
+    palette = {f"Cluster {i}": c for i, c in enumerate([F1_RED, GREEN, "#9AA1AB", "#C99700", "#2F6FDB"], start=1)} | {"Noise": "#15181D"}
+    fig = px.scatter(pts, x="PC 1", y="PC 2", color="cluster", facet_col="algorithm", facet_col_wrap=3,
+                     category_orders={"algorithm": order, "cluster": sorted(pts["cluster"].unique())},
+                     color_discrete_map=palette, hover_data=["driver", "season"], height=640, opacity=0.75,
+                     title="The same 703 driver-seasons on one 2-D map (PCA), coloured by each algorithm's clusters")
+    fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
+    st.plotly_chart(get_plotly_theme(fig.update_traces(marker_size=4)).update_layout(margin=dict(t=120)), width="stretch")
+    st.caption("Cluster numbers are arbitrary per algorithm; compare the shapes. The map is only for viewing: "
+               "every algorithm clustered all 9 standardised features.")
+
+    best = res.loc[res["rank_score"].idxmin()]
+    km = res.set_index("algorithm")
+    big = sizes[(sizes["algorithm"] == "DBSCAN") & (sizes["cluster"] != "Noise")]["n"].max()
+    st.success(f"""**Most suitable: {best['algorithm']}.** It has the best mean rank ({best['rank_score']}) across the five ranking measures.
+Among the algorithms that place every driver-season in a cluster it has the highest silhouette ({best['silhouette']:.3f}) and
+Calinski-Harabasz ({best['calinski_harabasz']:.0f}) and the lowest Davies-Bouldin ({best['davies_bouldin']:.3f}), and it stays
+stable when rerun (ARI {best['stability_ari']:.2f}). K-Medoids is a close second but slower. Ward and BIRCH split the midfield
+differently each run (ARI ≈ {km.loc['BIRCH', 'stability_ari']:.2f}). The Gaussian Mixture is stable but its clusters overlap
+(silhouette {km.loc['Gaussian Mixture', 'silhouette']:.3f}). DBSCAN finds no real density gaps: it puts {big} of {len(pts) // len(res)}
+seasons in one cluster and labels {km.loc['DBSCAN', 'noise_pct']:.1f}% as noise. K-Means centroids also read directly as tiers:
+contender, midfield, backmarker.""")
 
 with t1:
     st.dataframe(res.assign(algorithm=res["algorithm"].where(~res["champion"].astype(bool), res["algorithm"] + " (Champion)"))

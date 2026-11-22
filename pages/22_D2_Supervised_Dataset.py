@@ -64,11 +64,9 @@ with t0:
     a win probability and the probabilities in one race add up to 1, so teams, broadcasters and fans get a ranked
     favourite list. Because every feature is known before the race, the model can be used on a real upcoming race.
     """)
-    a, b, c, d = st.columns(4)
-    a.metric("Records", f"{len(df):,}", "driver × race", delta_color="off")
-    b.metric("Attributes", len(df.columns))
-    c.metric("Input features", len(FEATURES), "all pre-race", delta_color="off")
-    d.metric("Target", "Winner", "target_is_win: 1 / 0", delta_color="off")
+    a, b, _ = st.columns([1, 1, 2])  # records and feature counts are already in the header row
+    a.metric("Attributes", len(df.columns), f"{len(df):,} records × {len(df.columns)} columns", delta_color="off")
+    b.metric("Target", "Winner", "target_is_win: 1 / 0", delta_color="off")
     st.dataframe(pd.DataFrame([("Input features (X)", len(FEATURES), "Grid, driver form, team form, circuit history, career: listed below"),
                                ("Target / class labels (y)", len(LABEL_COLS), ", ".join(LABEL_COLS) + " — primary: target_is_win"),
                                ("Identifiers (not used for learning)", len(ID_COLS), ", ".join(ID_COLS))],
