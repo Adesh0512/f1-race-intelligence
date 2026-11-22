@@ -23,6 +23,7 @@ nav = st.navigation({
         P("pages/23_D2_Pattern_Mining.py", title="Pattern Mining: FP-Growth", icon=":material/hub:"),
         P("pages/24_D2_Classifier_Comparison.py", title="Classifier Comparison & Validation", icon=":material/leaderboard:"),
         P("pages/25_D2_Classification_Algorithm.py", title="Classification Algorithm", icon=":material/sports_score:"),
+        P("pages/26_D2_Race_Predictor.py", title="Race Predictor", icon=":material/online_prediction:"),
     ],
     "Dashboard 3: Unsupervised learning": [
         P("pages/16_D3_Unsupervised_Dataset.py", title="Dataset (Unsupervised)", icon=":material/table_rows:"),

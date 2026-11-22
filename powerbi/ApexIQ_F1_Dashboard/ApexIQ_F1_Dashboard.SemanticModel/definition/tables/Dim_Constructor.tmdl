@@ -1,0 +1,31 @@
+table Dim_Constructor
+	lineageTag: 63335548-88b5-4f98-86c4-fb4b2c7c9165
+
+	column 'constructor_id'
+		dataType: int64
+		lineageTag: a823fc6c-a7ec-4181-adff-78bc489ea349
+		summarizeBy: none
+		sourceColumn: constructor_id
+
+	column 'constructor_name'
+		dataType: string
+		lineageTag: 4cf6a462-c53e-4b35-9904-33b7efceab64
+		summarizeBy: none
+		sourceColumn: constructor_name
+
+	column 'constructor_nationality'
+		dataType: string
+		lineageTag: 00a697f1-da4e-4078-b34f-f8800cddcfd0
+		summarizeBy: none
+		sourceColumn: constructor_nationality
+
+	partition Dim_Constructor = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("bZPBTsMwDIZfJeqZQ9vBYMcOBBuiEuomOEwcTBu2iDaZnERob09jb2u39pba8W/n89/NJkqiGxHl5Rug1OE4R+WU3UVfN2ITpRTJP8UK/LfE8PUisQHN6UkIfKq6VtDYQfFtiBRSg69dOD63Hcpj7i4E1gaNKIy1JnwtHbQ6R+UpFUhEQDVI3nPxwTgIp1fYg5ZWcvIhhFZ+L1FkW8/VlzdmPFcl5r6uwznz1uFZPYmpt8FSiqWuFPWgw+kCIVsYXY20TwjZan/4ZVxP3p3enBCu/JnKC29tp3jbFYnjhX4h0epWsPpT1h5TBGqeFQP6CVF6NVgB7XWJXYoY5UoDVkO6yYxftfWAQ0NMOAR/Q7MkE/aSbMlV0l6bJY3pGW/GecrlUMOhx2BKEBbFmlmA7oSn9MoPhVs14tH44awrmN1VfsrtkJAP4KcxkXoEJ3EHzchoaTzjqDbteno6l33YOAuAMIZYS9bKGomqPEnd0XxZ/QOt8RtprtaZsrcKKJXeinejtBvpM2GN/Q7W4Ef+j4R3n1lndJjXjVFjz7UqSsv+vP2/NGXnFfP+hXOrr38=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [constructor_id = _t, constructor_name = _t, constructor_nationality = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"constructor_id", Int64.Type}, {"constructor_name", type text}, {"constructor_nationality", type text}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

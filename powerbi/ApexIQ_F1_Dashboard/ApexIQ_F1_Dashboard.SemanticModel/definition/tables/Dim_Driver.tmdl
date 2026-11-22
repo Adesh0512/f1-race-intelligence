@@ -1,0 +1,37 @@
+table Dim_Driver
+	lineageTag: c26b12ac-e5ad-4190-946b-f1b0ba6bc289
+
+	column 'driver_id'
+		dataType: int64
+		lineageTag: b359e934-9c9d-4a4e-b5b7-6e60fec3dead
+		summarizeBy: none
+		sourceColumn: driver_id
+
+	column 'driver_name'
+		dataType: string
+		lineageTag: 28cf6c7b-0663-490c-bd10-34bb0196d71c
+		summarizeBy: none
+		sourceColumn: driver_name
+
+	column 'driver_code'
+		dataType: string
+		lineageTag: 70e5bd13-bf35-4c92-88e2-9869df132441
+		summarizeBy: none
+		sourceColumn: driver_code
+
+	column 'driver_nationality'
+		dataType: string
+		lineageTag: cf13c896-d3d1-4e93-80b5-d336a4b15172
+		summarizeBy: none
+		sourceColumn: driver_nationality
+
+	partition Dim_Driver = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("hVjJduO2Ev0VHG/eJsmxNTV7SQ2WaI0hZfm0O1lAFCyhBRJ+IKhu6etTqCI1kTlZ0aZBoHBv1a1b/v794enhN/YwET9lxkY8kcrq1L0Z+VP36BppZbZ7+Ps39v2h4d7MZLxnIyE3H0JtcOUgcI+hMAlPaWGzWKhZqLO1MFv3eziP7te13ItnYVKebjTzlU4z7V75k7l7RJ88PR/exrOE3O8lG+sDV1ymAkMdz1e4j0wvqzv4B37KYfWM7/kPmXAMyh+7xwuHrUUmaPEXPOyv/PFRfF3zzEqRsq7OzYbLDEGYv+IBRqRxsb+H+8tEshC/a0Fc7oePThFU6AeVoL7iHzQAYtk4X8sYQxq/dt1jodV54dOje7OUiWZDpeM94kaYXMP3hNwt+T5POIu4Rewif1m94RNRJ1SmU7aQ/8+FZS/mDzw3+JOI5iep5HnrJlGj5KdgU55lGOrUj+rWIo19fpAb1tO5sjtuMDN6hNtNDj21KTqTarY0uVIS7xDiysDyq22RQ39j4A2LcisVXu91WYEB+Ztys2dvYg3oul/fBoiqn2fWXG+KxL2I1AHRzW2R7V3a9TZSpMtP7U6nR4bXy2h1319VawMpiwTmDwS8EtYKjHg1qETcQOKGsC7mRmn2LDMZ74RSiPJzEFXAaCCBYb6GyFmXG0PrkfGuH9aw0kAGQ64+WBTvIEPgA0Qm6o0q8SCDK2l5CoBIzSYyP52QmUlQZaaBHPpK/IK6FYa95eaEmL+GZ8wvi5HGKNbWsuhTCMyMaDHAlYmAi5xXIo+9nZEA4Q/A0FdAZkaCgGz2c1sWYMMrSc8z9ibTvVC7olLeglnlgshlxPfA+jee8ERTsXwjlbstliZSOQWEuVB34E2jXkXskMyXHAJe8DWwOdWA4pEKZo6h9LTSyfoMSbNxdVH4bKxkoWSToApgs0liwLe0tZAGY19O56Qbxubb/BI9cvkt/yFZsBHIXX9Qc8miDmPQgoytpFIiFfkBP1gFEwyQp3xzCaNDGgg5u8c4+DY94iuK41odm8jkQmyMZhvBFHd9AAHpT8KKsje9K13sa23StUbW+/P5HetN5HHGDYg/G3Njd3IvjpzAozII0kvMLWRywQFNCPrZSJGdmXwOa7BuIZch5KSBhvTubulevBONdxXWahQCgcLfcnWzkKcTFBAnYX2v+wjZ7BXUAzwc5NXaQl6XdV8goXMlDxJqbeGAw+392T3srTbJijZbFwsUM5xwtfamiFudUoMSDgCwrslTrPhujRa3kND3TCsL6pMnW4A+JRy7Pi4f5emWXwFZlmfMhiKl1ornDWYV/ju1/TcXCYXzitkbgUHJyhbSpNyViQCNgNw3WQ5nk1AMK/s/tVuUYInLmqHR2Q9BKTMMK6nbwTAneQyI8I0u79ivtqd2mzxGkjtDsuZHnu0k+ZFutd68xy9nUzTChInVXqSlORq9Tu51xaP27njRLBJpijkSDepS0Xv0SgVXR7YQ1ugDEk+9J8yz7LKW3IW7YsY2EgCB9o6B94Nh3d5kHqDa8pT1diD5O4062xv59wXnkRdY8Fy5rUORUWb3g7DSMT1q8C/Eu6EiAkY3//OTNZAkNfVa8qFCba9OadIpmdUGykdtNCiVphJCHFcgZqdcqMsXbWrPVBnFkeJEGGFsU/Hr0oo88hR9yCJoAaAHsXSKgFgGvTpj4ZXOgqe/u+3jr6A54ALMNiVNpVNuPCQ5DIDUKNDghYxJNnqVheQXBpkFewEZDF6ouEFxhSHZl9srkGVYcQVGxEgwtKAyhZ1dVqypRxbgJXeRdJ0xoVzuBn41GuqP/Bdkw3le6I2CKsPkQYZSgJgeIHJnFoYAJCHSH96pu0fGYiwOUKdT6C+QttQYp/6w5OOyead8JRUbH47c4serb9WMP5uFGMzCAIjJCic3oCYQ/RSbq42/kK5vDKHMJtpBSFIwmVfcnEfu4g16KIusOIBFw02XgyoiZBYKXz3jmaGhpM5We4VNcA4xA3sv0xP5+6CicF7zTAlkHNTc5yfhVmTdNcZkJ6jbgqEQhoieDsKabVu3Rg+6OClFGEVV/+YVnkKro5syuEoIsgXV5B0QnaKEY67Atu+gBGRKxr1iTz3yEyGU7oibozOpNKKWDV+Dzl7hhmxHVn/AiMpWbrYET0E5R43wVk3IVJTVNY8pNea9Sm/wyB74hUmGRguJygujPAzmlR7hkQGZQDkJSA2jFc0wy7DqrzyyEwto8kZAlWQK3dWQcuM2jCbhKdzNHSRWieMVIjPxk70LmJAdaeU3rWutmYhYCYN6Mxmg3oCjE1uegRssPzgrpjiyCDyn3RNBEWn5bYWRm5jgHD/TMJ5gCczmNbJP1uCSVODyCfHC5C93XJZLv1AqgKERzB0oCMDwNarZ92vRYHdaQWebcCs/aIQhW3UHd/upMMB75ku7p3rxg+oc6LUfC2KAQBjVrJWf0HIkjWp1js1rN8iD7yVbZtC+N9gEl9FrjS8gczJ1BvU/Rw2vXfxnZQ+NHhTyJD5loY/vVU7IoAxhMDnm7H2nc/RwozklgryOAdmbHSEGsOsr55NRNgare/VoI3kTvXUzOQdaoBhJlcIaQWgjf3OocTCukjunTS3Or22hbfJekifA3s9Coif+27/ldOexdMaQRl3BEShHx8Cvsth5Os8vmsFAxgE60pHeHPXJh9ukVqZuIiu/aZxzBOaSHe1eTCXX0f/9Dw==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [driver_id = _t, driver_name = _t, driver_code = _t, driver_nationality = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"driver_id", Int64.Type}, {"driver_name", type text}, {"driver_code", type text}, {"driver_nationality", type text}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

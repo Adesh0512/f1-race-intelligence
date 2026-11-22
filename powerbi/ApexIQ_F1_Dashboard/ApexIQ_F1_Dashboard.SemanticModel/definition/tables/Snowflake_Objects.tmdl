@@ -1,0 +1,53 @@
+table Snowflake_Objects
+	lineageTag: b56eca87-5d99-4e45-b3c9-4e7193d09bc2
+
+	measure 'Snowflake Objects' = COUNTROWS(Snowflake_Objects)
+		formatString: 0
+		lineageTag: db42325d-0472-46f9-89fd-4ed532bb89d7
+
+	column 'schema_name'
+		dataType: string
+		lineageTag: d7f49e66-9820-4600-9328-d8a1534278c8
+		summarizeBy: none
+		sourceColumn: schema_name
+
+	column 'table_name'
+		dataType: string
+		lineageTag: 251347a6-6318-403d-8149-eada2b05e089
+		summarizeBy: none
+		sourceColumn: table_name
+
+	column 'table_type'
+		dataType: string
+		lineageTag: 9db8d0d3-b34c-4706-9362-c407b3bd886b
+		summarizeBy: none
+		sourceColumn: table_type
+
+	column 'row_count'
+		dataType: int64
+		lineageTag: 9da9afd6-0774-42ca-aee4-f675b171ed0f
+		summarizeBy: none
+		sourceColumn: row_count
+
+	column 'layer_order'
+		dataType: int64
+		lineageTag: 72501a86-1bd5-4a84-b740-c9adeb8c6eb7
+		summarizeBy: none
+		sourceColumn: layer_order
+
+	column 'snapshot_date'
+		dataType: string
+		lineageTag: 3105ebca-808d-4aa3-972b-b06bf4ba5c7d
+		summarizeBy: none
+		sourceColumn: snapshot_date
+
+	partition Snowflake_Objects = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("nZTLbtswEEV/xfA6AUT50WQ5pkYFEz7cmaGFIAj4A0F3/f+KMozCDRXK3oiSiHswz/v+vgYP9k2M5vXDat1J6sickBIjcPCpD+TyxQEYVwIHi/nrab9r8rnLj7Zp949KPbbt+uNh9R+QUUfC1Kt0jAdrdLIIHdIhAHX5/mRwGM/ffz4/53h6lPh8MUJc6NAa/zM5YEGaj6y9kZQ6PCVtg8cbmd0w1c24pA3paOSrfvM0PSvq4FkoagmFrDa7RYTohd4K6maBugMppL5V7RLtNDJf1apZkjmBxsQ+DL2F17tjOFME6B5AD1rOBEKOVvg6nushvY1TjOgyUUWUs/kvMAdtQMy4hBQtcqG8m+cJsP2GEiUk1oGwS4Px6Ti+GJ2hBV5TgV07g7YxL06B86OphdUjSLYF446BBLwutF3taxDCXxG9JCPoGIVLnd9WIJMNjKvjjkBmTKuQTYUwtfvbuqrN7nkWQjCcKcPFQHjOQVRN/89CeM5Daoxzj3l2l2v6xQZdA+Wy8uwuL1FfdvD+GAQtOhw9Nb0UR0MVIR9/AQ==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [schema_name = _t, table_name = _t, table_type = _t, row_count = _t, layer_order = _t, snapshot_date = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"schema_name", type text}, {"table_name", type text}, {"table_type", type text}, {"row_count", Int64.Type}, {"layer_order", Int64.Type}, {"snapshot_date", type text}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

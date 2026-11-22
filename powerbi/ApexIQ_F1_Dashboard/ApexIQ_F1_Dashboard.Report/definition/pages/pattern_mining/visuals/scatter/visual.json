@@ -1,0 +1,147 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "scatter",
+  "position": {
+    "x": 20,
+    "y": 195,
+    "z": 1000,
+    "height": 300,
+    "width": 620,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Association_Rules"
+                    }
+                  },
+                  "Property": "rule"
+                }
+              },
+              "queryRef": "Association_Rules.rule",
+              "nativeQueryRef": "rule"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Association_Rules"
+                        }
+                      },
+                      "Property": "support"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Association_Rules.support)",
+              "nativeQueryRef": "Sum of support"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Association_Rules"
+                        }
+                      },
+                      "Property": "confidence"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Association_Rules.confidence)",
+              "nativeQueryRef": "Sum of confidence"
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Association_Rules"
+                        }
+                      },
+                      "Property": "lift"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Association_Rules.lift)",
+              "nativeQueryRef": "Sum of lift"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Every rule: support vs. confidence (bubble size = lift)'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

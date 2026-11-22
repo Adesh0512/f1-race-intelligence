@@ -64,11 +64,12 @@ st.markdown(f"""
 champ = ccomp[ccomp["champion"]].iloc[0]
 ROWS = [
     ("Warehouse design", "Dashboard 1: Data warehouse", "<b>2</b> fact tables, <b>7</b> dimensions, 12 live OLAP queries", "pages/20_D1_Warehouse_Design.py"),
-    ("Snowflake deployment", "Dashboard 1: Data warehouse", "RAW → CLEAN → DW → ML → ANALYTICS, <b>39</b> objects", "pages/21_D1_Snowflake_Deployment.py"),
+    ("Snowflake deployment", "Dashboard 1: Data warehouse", "RAW → CLEAN → DW → ML → ANALYTICS, <b>40</b> objects", "pages/21_D1_Snowflake_Deployment.py"),
     ("Supervised dataset", "Dashboard 2: Supervised learning", "<b>12,358</b> labelled entries, 16 pre-race features", "pages/22_D2_Supervised_Dataset.py"),
     ("Pattern matching: FP-Growth and Apriori", "Dashboard 2: Supervised learning", f"<b>{bench['itemsets_count']}</b> identical itemsets, {bench['rules_count']:,} rules", "pages/23_D2_Pattern_Mining.py"),
     ("Classifier comparison and validation", "Dashboard 2: Supervised learning", f"<b>{len(comp)}</b> models, bootstrap CI [{sig['ci_low']:+.3f}, {sig['ci_high']:+.3f}]", "pages/24_D2_Classifier_Comparison.py"),
     ("Classification algorithm", "Dashboard 2: Supervised learning", f"XGBoost, recall <b>{ho['recall_class_1'] * 100:.1f}%</b>", "pages/25_D2_Classification_Algorithm.py"),
+    ("Race predictor", "Dashboard 2: Supervised learning", f"Pick a 2022–2024 race, change the inputs: <b>{int(ho['top1_hits'])}/{int(ho['total_gps'])}</b> winners called", "pages/26_D2_Race_Predictor.py"),
     ("Unsupervised dataset", "Dashboard 3: Unsupervised learning", f"<b>{prof_n}</b> driver-season profiles, 9 features", "pages/16_D3_Unsupervised_Dataset.py"),
     ("Clustering comparison", "Dashboard 3: Unsupervised learning", f"<b>{len(ccomp)}</b> algorithms, {champ['algorithm']} chosen at k = {int(champ['n_clusters'])}", "pages/17_D3_Clustering_Comparison.py"),
     ("Clustering algorithm: K-Means", "Dashboard 3: Unsupervised learning", "Title Contenders, Midfield Regulars, Backmarkers", "pages/18_D3_KMeans_Clustering.py"),

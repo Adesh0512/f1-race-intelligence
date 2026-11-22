@@ -1,0 +1,162 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "algos",
+  "position": {
+    "x": 20,
+    "y": 510,
+    "z": 1000,
+    "height": 190,
+    "width": 1240,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Clustering_Comparison"
+                    }
+                  },
+                  "Property": "algorithm"
+                }
+              },
+              "queryRef": "Clustering_Comparison.algorithm",
+              "nativeQueryRef": "algorithm"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Clustering_Comparison"
+                    }
+                  },
+                  "Property": "n_clusters"
+                }
+              },
+              "queryRef": "Clustering_Comparison.n_clusters",
+              "nativeQueryRef": "n_clusters"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Clustering_Comparison"
+                    }
+                  },
+                  "Property": "noise_pct"
+                }
+              },
+              "queryRef": "Clustering_Comparison.noise_pct",
+              "nativeQueryRef": "noise_pct"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Clustering_Comparison"
+                    }
+                  },
+                  "Property": "silhouette"
+                }
+              },
+              "queryRef": "Clustering_Comparison.silhouette",
+              "nativeQueryRef": "silhouette"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Clustering_Comparison"
+                    }
+                  },
+                  "Property": "davies_bouldin"
+                }
+              },
+              "queryRef": "Clustering_Comparison.davies_bouldin",
+              "nativeQueryRef": "davies_bouldin"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Clustering_Comparison"
+                    }
+                  },
+                  "Property": "calinski_harabasz"
+                }
+              },
+              "queryRef": "Clustering_Comparison.calinski_harabasz",
+              "nativeQueryRef": "calinski_harabasz"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Clustering_Comparison"
+                    }
+                  },
+                  "Property": "stability_ari"
+                }
+              },
+              "queryRef": "Clustering_Comparison.stability_ari",
+              "nativeQueryRef": "stability_ari"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'All six algorithms, every metric'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1152,7 +1152,7 @@ All results are served by a Streamlit app (`streamlit_app.py`) whose sidebar mir
 | Section | Pages |
 | :--- | :--- |
 | **Jury Overview** | Rubric scorecard with live headline metrics and links to every rubric item |
-| **Dashboard 1 · Data Warehouse** | Warehouse Design (star & snowflake ER diagrams, 12 live OLAP queries) · Snowflake Deployment (7-step pipeline, 39-object manifest, live verification) · Snowflake Advanced Features · Pipeline Architecture |
+| **Dashboard 1 · Data Warehouse** | Warehouse Design (star & snowflake ER diagrams, 12 live OLAP queries) · Snowflake Deployment (7-step pipeline, 40-object manifest, live verification) · Snowflake Advanced Features · Pipeline Architecture |
 | **Dashboard 2 · Supervised Learning** | Dataset · Pattern Matching (FP-Growth vs. Apriori) · Classifier Comparison & Validation · Classification Algorithm (ROC/PR curves, threshold tuner, race explorer) |
 | **Dashboard 3 · Unsupervised Learning** | Dataset · Clustering Comparison (6 algorithms, elbow, BIC/AIC, k-distance, dendrogram) · K-Means Clustering (PCA map, tiers by era, live tier classifier) · Clustering Metrics (silhouette plot, stability, championship check, clusters → classifier) |
 | **Extras** | SQL Playground · Warehouse Data Explorer · Race Predictor |

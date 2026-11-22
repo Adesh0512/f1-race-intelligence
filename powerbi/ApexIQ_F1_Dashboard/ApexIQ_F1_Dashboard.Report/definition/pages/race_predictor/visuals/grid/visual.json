@@ -1,0 +1,152 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "grid",
+  "position": {
+    "x": 600,
+    "y": 195,
+    "z": 1000,
+    "height": 300,
+    "width": 400,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Race_Predictions"
+                    }
+                  },
+                  "Property": "driver_name"
+                }
+              },
+              "queryRef": "Race_Predictions.driver_name",
+              "nativeQueryRef": "driver_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Race_Predictions"
+                    }
+                  },
+                  "Property": "grid_position"
+                }
+              },
+              "queryRef": "Race_Predictions.grid_position",
+              "nativeQueryRef": "grid_position"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Race_Predictions"
+                    }
+                  },
+                  "Property": "win_probability_pct"
+                }
+              },
+              "queryRef": "Race_Predictions.win_probability_pct",
+              "nativeQueryRef": "win_probability_pct"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Race_Predictions"
+                    }
+                  },
+                  "Property": "predicted_rank"
+                }
+              },
+              "queryRef": "Race_Predictions.predicted_rank",
+              "nativeQueryRef": "predicted_rank"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Race_Predictions"
+                    }
+                  },
+                  "Property": "target_finish_position"
+                }
+              },
+              "queryRef": "Race_Predictions.target_finish_position",
+              "nativeQueryRef": "target_finish_position"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Race_Predictions"
+                  }
+                },
+                "Property": "win_probability_pct"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Grid, prediction and result'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

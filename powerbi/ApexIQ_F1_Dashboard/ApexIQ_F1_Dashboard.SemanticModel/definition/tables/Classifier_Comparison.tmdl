@@ -1,39 +1,55 @@
 table Classifier_Comparison
-	lineageTag: 8ed483ad-56f6-47f5-ac98-5ffe657ef6e8
+	lineageTag: 294a6381-109a-4515-9e24-8cd6bb3a8076
+
+	measure 'Champion ROC-AUC' = CALCULATE(SUM(Classifier_Comparison[roc_auc]), CONTAINSSTRING(Classifier_Comparison[model], "Champion"))
+		formatString: 0.0000
+		lineageTag: 5c9ae2d1-180e-487e-b8bc-dbecd7fb675e
+
+	measure 'Models' = COUNTROWS(Classifier_Comparison)
+		formatString: 0
+		lineageTag: 20c1c307-f8f8-4436-affa-65ffd0bf08d9
+
+	measure 'Best ROC-AUC' = MAX(Classifier_Comparison[roc_auc])
+		formatString: 0.0000
+		lineageTag: bfde62bf-43d5-4503-b3e4-221d8dfd0e3e
+
+	measure 'Best Winner Pick %' = MAX(Classifier_Comparison[top1_winner_hit_pct])
+		formatString: 0.0
+		lineageTag: f2cf3800-a2a2-45f2-abf8-000add1da0e2
 
 	column 'model'
 		dataType: string
-		lineageTag: 4e37d91b-5518-47ae-8df0-408cf5520b67
+		lineageTag: 33f1ddfb-145f-4b59-b330-0e7f465205db
 		summarizeBy: none
 		sourceColumn: model
 
 	column 'roc_auc'
 		dataType: double
-		lineageTag: 623f5c07-fa0c-4e18-bc91-7b7e8fd9ba17
+		lineageTag: 029f95cb-787b-46d3-982c-e0b4f145047d
 		summarizeBy: none
 		sourceColumn: roc_auc
 
 	column 'pr_auc'
 		dataType: double
-		lineageTag: ffd9b1f9-386e-4c99-9e8b-c911e3304e46
+		lineageTag: a688c0d6-273e-4b4d-b5fc-8f979f611f1e
 		summarizeBy: none
 		sourceColumn: pr_auc
 
 	column 'recall'
 		dataType: double
-		lineageTag: 2e6998fb-5c9f-43d4-b04b-be0d101cec86
+		lineageTag: a5725bb5-5d62-4d91-9659-2f11dba50abc
 		summarizeBy: none
 		sourceColumn: recall
 
 	column 'top1_winner_hit_pct'
 		dataType: double
-		lineageTag: c83ceaa9-e81f-4b7f-bb16-198db528038f
+		lineageTag: 83596a05-c293-4699-b7b4-124e681e599e
 		summarizeBy: none
 		sourceColumn: top1_winner_hit_pct
 
 	column 'top3_podium_hit_pct'
 		dataType: double
-		lineageTag: 91058820-d485-4462-85e6-748a70499e33
+		lineageTag: e4c4b165-a008-4c1f-94fe-5ece4b363992
 		summarizeBy: none
 		sourceColumn: top3_podium_hit_pct
 

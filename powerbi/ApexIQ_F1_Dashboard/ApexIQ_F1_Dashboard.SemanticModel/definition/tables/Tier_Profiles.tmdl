@@ -1,0 +1,85 @@
+table Tier_Profiles
+	lineageTag: 4d0a097e-ee0a-46ee-999e-cbc21e8e0803
+
+	column 'cluster'
+		dataType: int64
+		lineageTag: ae179a85-eca1-4b35-8073-e141c2412d76
+		summarizeBy: none
+		sourceColumn: cluster
+
+	column 'cluster_name'
+		dataType: string
+		lineageTag: 859c631f-2e6e-4385-851e-498185cebb54
+		summarizeBy: none
+		sourceColumn: cluster_name
+
+	column 'avg_grid'
+		dataType: double
+		lineageTag: 0db7c153-a61e-46bb-89e6-a2c65876128d
+		summarizeBy: none
+		sourceColumn: avg_grid
+
+	column 'avg_finish'
+		dataType: double
+		lineageTag: b78883f6-2946-4546-80af-88091f2993bd
+		summarizeBy: none
+		sourceColumn: avg_finish
+
+	column 'finish_std'
+		dataType: double
+		lineageTag: af77bcfe-633d-4370-bc83-40ec1ffe2cb9
+		summarizeBy: none
+		sourceColumn: finish_std
+
+	column 'win_rate'
+		dataType: double
+		lineageTag: 874bb06f-720b-4dd1-bf01-b362b2131756
+		summarizeBy: none
+		sourceColumn: win_rate
+
+	column 'podium_rate'
+		dataType: double
+		lineageTag: 76e85535-312a-4271-9aef-6736c41fb9e1
+		summarizeBy: none
+		sourceColumn: podium_rate
+
+	column 'points_rate'
+		dataType: double
+		lineageTag: 67f71d22-ff8c-477d-b0bf-a53009bc6b2e
+		summarizeBy: none
+		sourceColumn: points_rate
+
+	column 'dnf_rate'
+		dataType: double
+		lineageTag: c529bca5-c352-4c51-8613-9d36311eee2c
+		summarizeBy: none
+		sourceColumn: dnf_rate
+
+	column 'teammate_quali_rate'
+		dataType: double
+		lineageTag: a6ab2c16-4e54-4d86-9bea-c1f1b4d16f0a
+		summarizeBy: none
+		sourceColumn: teammate_quali_rate
+
+	column 'starts'
+		dataType: double
+		lineageTag: 739a9074-1d36-4082-992e-7df4442c508d
+		summarizeBy: none
+		sourceColumn: starts
+
+	column 'size'
+		dataType: int64
+		lineageTag: ecb463d8-10a3-43f8-be62-14adfda3ab72
+		summarizeBy: none
+		sourceColumn: size
+
+	partition Tier_Profiles = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("NY+xDsMgDER/BTFXlsFxgLWdu1TdogxRQ6soaSql6f+XYJh4wNl313Ua9Unp+7QvUV0+6x7XMW7f460BxOYABqRWwKI5AMGyFeBAAr4JAkbE6cvnceOhDULodX9Snc5LrtP4nOIyqlt8/ZZBTEOacqIF8tWVWTaiKa4YSg52NZCrrkTF1VBWk2Vxzbfz8JjfwzaXkqYFRhloQFJSDZ5syoGlo6mtS7QEVpoxeJ9DWoe67/8=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [cluster = _t, cluster_name = _t, avg_grid = _t, avg_finish = _t, finish_std = _t, win_rate = _t, podium_rate = _t, points_rate = _t, dnf_rate = _t, teammate_quali_rate = _t, starts = _t, size = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"cluster", Int64.Type}, {"cluster_name", type text}, {"avg_grid", type number}, {"avg_finish", type number}, {"finish_std", type number}, {"win_rate", type number}, {"podium_rate", type number}, {"points_rate", type number}, {"dnf_rate", type number}, {"teammate_quali_rate", type number}, {"starts", type number}, {"size", Int64.Type}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

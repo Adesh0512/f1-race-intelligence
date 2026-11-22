@@ -1,0 +1,25 @@
+table Dim_Season
+	lineageTag: fca47e4e-5850-4290-aa33-d649b68b08fc
+
+	column 'season'
+		dataType: int64
+		lineageTag: 789f5dff-1977-477a-8e6f-eee83d8ce0ae
+		summarizeBy: none
+		sourceColumn: season
+
+	column 'era'
+		dataType: string
+		lineageTag: 7d0bb3ab-281e-4cb5-bd0a-b5b768aacd80
+		summarizeBy: none
+		sourceColumn: era
+
+	partition Dim_Season = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("hdAxDoMwDIXhq0SZQKKS7SQkvkFP0AWxoC5du/X2hVQqy8OebP3fZC9LZNUcp9DnTYhKXKfQc8F5xrni3HBWkPeNcGacBeeEc8a54NyvPOaeOYXh0ca/VcOaYXptTIaxYWJYMiz/jI+zJYfh/tner+fpxfHZ8ep4c1xtF3KcHRfHk+OX/1u/", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [season = _t, era = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"season", Int64.Type}, {"era", type text}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

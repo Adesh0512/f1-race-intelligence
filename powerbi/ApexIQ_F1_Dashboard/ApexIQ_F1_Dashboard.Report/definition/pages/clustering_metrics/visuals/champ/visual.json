@@ -1,0 +1,119 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "champ",
+  "position": {
+    "x": 640,
+    "y": 80,
+    "z": 1000,
+    "height": 300,
+    "width": 620,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Championship_Check"
+                    }
+                  },
+                  "Property": "cluster_name"
+                }
+              },
+              "queryRef": "Championship_Check.cluster_name",
+              "nativeQueryRef": "cluster_name"
+            }
+          ]
+        },
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Championship_Check"
+                    }
+                  },
+                  "Property": "championship_position"
+                }
+              },
+              "queryRef": "Championship_Check.championship_position",
+              "nativeQueryRef": "championship_position"
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Championship_Check"
+                        }
+                      },
+                      "Property": "driver_seasons"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Championship_Check.driver_seasons)",
+              "nativeQueryRef": "Sum of driver_seasons"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Tier vs. championship position'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

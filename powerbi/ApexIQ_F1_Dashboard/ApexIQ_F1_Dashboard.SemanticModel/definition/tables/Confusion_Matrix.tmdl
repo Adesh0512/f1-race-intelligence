@@ -1,0 +1,31 @@
+table Confusion_Matrix
+	lineageTag: 830c0d0b-89c9-43b4-b178-59b8fb950095
+
+	column 'actual'
+		dataType: string
+		lineageTag: dde2f9b5-e96b-4de7-9e41-e2d72105646c
+		summarizeBy: none
+		sourceColumn: actual
+
+	column 'predicted'
+		dataType: string
+		lineageTag: e96a1073-dd4d-4eb3-b640-3313eedfea97
+		summarizeBy: none
+		sourceColumn: predicted
+
+	column 'driver_races'
+		dataType: int64
+		lineageTag: 4696dd85-6e27-49c3-9261-686a2bbbe33a
+		summarizeBy: none
+		sourceColumn: driver_races
+
+	partition Confusion_Matrix = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WckwuKU3MsVJIyUxRyMsvUSjPzFPSUVAKKEpNyUwuSU2xgonmpRaBJAwNzSyVYnUUEDrL8wnoMEBVj9smJD1GRoQsQSg2tVCKjQUA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [actual = _t, predicted = _t, driver_races = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"actual", type text}, {"predicted", type text}, {"driver_races", Int64.Type}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

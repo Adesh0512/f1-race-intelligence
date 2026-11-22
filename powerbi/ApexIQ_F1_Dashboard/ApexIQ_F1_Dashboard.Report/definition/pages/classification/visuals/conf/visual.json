@@ -1,0 +1,119 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "conf",
+  "position": {
+    "x": 540,
+    "y": 195,
+    "z": 1000,
+    "height": 150,
+    "width": 400,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Confusion_Matrix"
+                    }
+                  },
+                  "Property": "actual"
+                }
+              },
+              "queryRef": "Confusion_Matrix.actual",
+              "nativeQueryRef": "actual"
+            }
+          ]
+        },
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Confusion_Matrix"
+                    }
+                  },
+                  "Property": "predicted"
+                }
+              },
+              "queryRef": "Confusion_Matrix.predicted",
+              "nativeQueryRef": "predicted"
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Confusion_Matrix"
+                        }
+                      },
+                      "Property": "driver_races"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Confusion_Matrix.driver_races)",
+              "nativeQueryRef": "Sum of driver_races"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Confusion matrix (threshold 0.5)'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "models_t",
+  "position": {
+    "x": 660,
+    "y": 510,
+    "z": 1000,
+    "height": 190,
+    "width": 600,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Classifier_Comparison"
+                    }
+                  },
+                  "Property": "model"
+                }
+              },
+              "queryRef": "Classifier_Comparison.model",
+              "nativeQueryRef": "model"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Classifier_Comparison"
+                    }
+                  },
+                  "Property": "roc_auc"
+                }
+              },
+              "queryRef": "Classifier_Comparison.roc_auc",
+              "nativeQueryRef": "roc_auc"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Classifier_Comparison"
+                    }
+                  },
+                  "Property": "pr_auc"
+                }
+              },
+              "queryRef": "Classifier_Comparison.pr_auc",
+              "nativeQueryRef": "pr_auc"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Classifier_Comparison"
+                    }
+                  },
+                  "Property": "recall"
+                }
+              },
+              "queryRef": "Classifier_Comparison.recall",
+              "nativeQueryRef": "recall"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Classifier_Comparison"
+                    }
+                  },
+                  "Property": "top1_winner_hit_pct"
+                }
+              },
+              "queryRef": "Classifier_Comparison.top1_winner_hit_pct",
+              "nativeQueryRef": "top1_winner_hit_pct"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Classifier_Comparison"
+                  }
+                },
+                "Property": "roc_auc"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'All seven models'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

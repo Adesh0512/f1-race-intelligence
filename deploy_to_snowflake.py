@@ -427,12 +427,15 @@ def deploy():
     clusters_csv = os.path.join(os.path.dirname(os.path.abspath(__file__)), "11_clustering_algorithm", "driver_season_clusters.csv")
     if os.path.exists(clusters_csv):
         cs.execute(f"PUT 'file://{clusters_csv.replace(os.sep, "/")}' @RAW.F1_RAW_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
+    preds_csv = os.path.join(os.path.dirname(os.path.abspath(__file__)), "06_classification_algorithm", "holdout_predictions.csv")
+    if os.path.exists(preds_csv):
+        cs.execute(f"PUT 'file://{preds_csv.replace(os.sep, "/")}' @RAW.F1_RAW_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
     for cmd in clean_sql_commands(master_section("07_DIMENSIONAL_MODEL.SQL")):
         try:
             cs.execute(cmd)
         except Exception as e:
             print(f"  [-] {cmd.splitlines()[0][:70]}... : {e}", flush=True)
-    print("  [+] DW schema (5 star tables, 3 snowflake tables + view) and ML.DRIVER_SEASON_CLUSTERS deployed.\n", flush=True)
+    print("  [+] DW schema (5 star tables, 3 snowflake tables + view) ML.DRIVER_SEASON_CLUSTERS and ML.RACE_PREDICTIONS deployed.\n", flush=True)
 
     # -------------------------------------------------------------------------
     # STEP 7: Full Deployment Verification Scorecard
@@ -457,7 +460,8 @@ def deploy():
         ("DW.FACT_RACE_RESULTS_STAR", "SELECT COUNT(*) FROM DW.FACT_RACE_RESULTS_STAR;"),
         ("DW.DIM_DRIVER", "SELECT COUNT(*) FROM DW.DIM_DRIVER;"),
         ("DW.DIM_CIRCUIT", "SELECT COUNT(*) FROM DW.DIM_CIRCUIT;"),
-        ("ML.DRIVER_SEASON_CLUSTERS", "SELECT COUNT(*) FROM ML.DRIVER_SEASON_CLUSTERS;")
+        ("ML.DRIVER_SEASON_CLUSTERS", "SELECT COUNT(*) FROM ML.DRIVER_SEASON_CLUSTERS;"),
+        ("ML.RACE_PREDICTIONS", "SELECT COUNT(*) FROM ML.RACE_PREDICTIONS;")
     ]
 
     for label, qry in verification_queries:

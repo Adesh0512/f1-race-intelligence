@@ -1,0 +1,25 @@
+table Clustering_Metrics
+	lineageTag: 6e28e957-d42c-40a1-bb2c-47ebd6f2db9f
+
+	column 'metric'
+		dataType: string
+		lineageTag: c8964b2f-9fd2-4033-9893-c50c6dc7e618
+		summarizeBy: none
+		sourceColumn: metric
+
+	column 'value'
+		dataType: double
+		lineageTag: 56080814-732c-43d5-850f-ec6da09fb84d
+		summarizeBy: none
+		sourceColumn: value
+
+	partition Clustering_Metrics = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("dY/LCsIwFER/5RIQKtjSh+lj6WOhW10WF6m9mIsxKUlU9OutxI2I2+EMZ6Zt2Z6UNFf0HiGSdJJogRx078BO2QxYmuRlUbLDDFq2FjdCFy/NVfWkIVLm/sNnSV7xJvAroUi7M8UbYUUn3POPo5hXCc9CZ4/Yg/OiI0X+AYvdNqxo8oIHYozg5uAoxWUgo52kATyhDdycZ/XHbrRH3aN1MI79xs0ABUzejTpN+Hjv8AI=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [metric = _t, value = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"metric", type text}, {"value", type number}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

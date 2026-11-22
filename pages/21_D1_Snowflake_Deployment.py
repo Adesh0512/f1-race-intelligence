@@ -101,7 +101,7 @@ with t5:
 
 with t6:
     demo = open(os.path.join(ROOT, "SNOWFLAKE_DEMO_QUERIES.sql"), encoding="utf-8").read()
-    blocks = re.findall(r"^-- (\d)\. ([^\n]+)\n(SELECT.*?;)", demo, re.S | re.M)
+    blocks = re.findall(r"^-- (\d+)\. ([^\n]+)\n(SELECT.*?;)", demo, re.S | re.M)
     pick = st.selectbox("Query", range(len(blocks)), format_func=lambda i: f"{blocks[i][0]}. {blocks[i][1]}")
     st.code(blocks[pick][2], language="sql")
     if st.button("Run on Snowflake", type="primary", width="stretch"):

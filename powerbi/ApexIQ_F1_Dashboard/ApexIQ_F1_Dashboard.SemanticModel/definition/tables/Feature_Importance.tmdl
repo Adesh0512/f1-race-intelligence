@@ -1,15 +1,15 @@
 table Feature_Importance
-	lineageTag: 3db176ff-b095-4100-82f4-12ab624206c9
+	lineageTag: 0a76dee1-ff62-4051-ad64-df30673e06a0
 
 	column 'feature'
 		dataType: string
-		lineageTag: 5759333a-d6df-4b0a-a523-25f24299cf54
+		lineageTag: 25c85b35-4b4f-4447-8a4d-41aa142a69f3
 		summarizeBy: none
 		sourceColumn: feature
 
 	column 'importance_pct'
 		dataType: double
-		lineageTag: 84f3a034-6602-43c5-bc8e-f76129420d0d
+		lineageTag: 18b9c6b2-8c0f-4949-8b74-4204cc1baafd
 		summarizeBy: none
 		sourceColumn: importance_pct
 

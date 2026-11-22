@@ -79,3 +79,10 @@ SHOW STREAMS IN DATABASE F1_PREDICTION_DB;
 SHOW DYNAMIC TABLES IN DATABASE F1_PREDICTION_DB;
 -- The dashboard itself, running inside Snowflake
 SHOW STREAMLITS IN ACCOUNT;
+
+-- 10. Race predictor: the model's pick for each unseen 2022-2024 race and whether it was right
+SELECT season, race_name, driver_name AS predicted_winner, ROUND(win_probability * 100, 1) AS win_pct,
+       IFF(is_win = 1, 'correct', 'missed') AS result
+FROM ML.RACE_PREDICTIONS
+QUALIFY ROW_NUMBER() OVER (PARTITION BY race_id ORDER BY win_probability DESC) = 1
+ORDER BY season DESC, round DESC;

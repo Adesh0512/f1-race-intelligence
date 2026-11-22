@@ -1,10 +1,17 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.0.0/schema.json",
   "pageOrder": [
-    "race_predictor",
-    "classifier_comparison",
+    "overview",
+    "warehouse",
+    "snowflake",
+    "supervised_dataset",
     "pattern_mining",
-    "driver_tiers"
+    "classifier_comparison",
+    "classification",
+    "race_predictor",
+    "clustering_comparison",
+    "driver_tiers",
+    "clustering_metrics"
   ],
-  "activePageName": "race_predictor"
+  "activePageName": "overview"
 }

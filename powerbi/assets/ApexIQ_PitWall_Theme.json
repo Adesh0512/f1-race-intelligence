@@ -1,0 +1,204 @@
+{
+ "name": "ApexIQ Pit Wall",
+ "dataColors": [
+  "#A66CFF",
+  "#2ECC71",
+  "#F2C811",
+  "#4CC9F0",
+  "#FF7A59",
+  "#8B95A5",
+  "#E15BA3",
+  "#5B8DEF",
+  "#C9D1DB"
+ ],
+ "background": "#0B0E14",
+ "foreground": "#FFFFFF",
+ "tableAccent": "#A66CFF",
+ "visualStyles": {
+  "*": {
+   "*": {
+    "background": [
+     {
+      "color": {
+       "solid": {
+        "color": "#131823"
+       }
+      },
+      "transparency": 0
+     }
+    ],
+    "border": [
+     {
+      "color": {
+       "solid": {
+        "color": "#1E2536"
+       }
+      },
+      "radius": 10
+     }
+    ],
+    "title": [
+     {
+      "color": {
+       "solid": {
+        "color": "#FFFFFF"
+       }
+      },
+      "fontFamily": "Segoe UI",
+      "fontSize": 13,
+      "bold": true
+     }
+    ],
+    "legend": [
+     {
+      "labelColor": {
+       "solid": {
+        "color": "#8B95A5"
+       }
+      },
+      "fontFamily": "Segoe UI"
+     }
+    ],
+    "categoryAxis": [
+     {
+      "labelColor": {
+       "solid": {
+        "color": "#8B95A5"
+       }
+      },
+      "titleColor": {
+       "solid": {
+        "color": "#8B95A5"
+       }
+      },
+      "gridlineColor": {
+       "solid": {
+        "color": "#1E2536"
+       }
+      }
+     }
+    ],
+    "valueAxis": [
+     {
+      "labelColor": {
+       "solid": {
+        "color": "#8B95A5"
+       }
+      },
+      "titleColor": {
+       "solid": {
+        "color": "#8B95A5"
+       }
+      },
+      "gridlineColor": {
+       "solid": {
+        "color": "#1E2536"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "page": {
+   "*": {
+    "background": [
+     {
+      "color": {
+       "solid": {
+        "color": "#0B0E14"
+       }
+      },
+      "transparency": 0
+     }
+    ]
+   }
+  },
+  "card": {
+   "*": {
+    "labels": [
+     {
+      "color": {
+       "solid": {
+        "color": "#8B95A5"
+       }
+      },
+      "fontSize": 10,
+      "fontFamily": "Segoe UI"
+     }
+    ],
+    "cardValue": [
+     {
+      "color": {
+       "solid": {
+        "color": "#FFFFFF"
+       }
+      },
+      "fontSize": 26,
+      "fontFamily": "Segoe UI",
+      "bold": true
+     }
+    ]
+   }
+  },
+  "tableEx": {
+   "*": {
+    "columnHeaders": [
+     {
+      "fontColor": {
+       "solid": {
+        "color": "#8B95A5"
+       }
+      },
+      "backColor": {
+       "solid": {
+        "color": "#131823"
+       }
+      },
+      "fontSize": 10,
+      "fontFamily": "Segoe UI",
+      "bold": true
+     }
+    ],
+    "values": [
+     {
+      "fontColorPrimary": {
+       "solid": {
+        "color": "#FFFFFF"
+       }
+      },
+      "backColorPrimary": {
+       "solid": {
+        "color": "#131823"
+       }
+      },
+      "fontColorSecondary": {
+       "solid": {
+        "color": "#FFFFFF"
+       }
+      },
+      "backColorSecondary": {
+       "solid": {
+        "color": "#161C28"
+       }
+      },
+      "fontSize": 10
+     }
+    ],
+    "grid": [
+     {
+      "gridHorizontalColor": {
+       "solid": {
+        "color": "#1E2536"
+       }
+      },
+      "gridVerticalColor": {
+       "solid": {
+        "color": "#1E2536"
+       }
+      }
+     }
+    ]
+   }
+  }
+ }
+}

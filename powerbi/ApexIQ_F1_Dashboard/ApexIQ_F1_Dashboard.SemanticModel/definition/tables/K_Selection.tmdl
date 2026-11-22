@@ -1,0 +1,31 @@
+table K_Selection
+	lineageTag: f73ac58b-74cc-43fb-9ebc-d6f0728d4711
+
+	column 'k'
+		dataType: int64
+		lineageTag: 9176f6b0-2561-4ef2-9b21-41c8b4150f58
+		summarizeBy: none
+		sourceColumn: k
+
+	column 'inertia'
+		dataType: double
+		lineageTag: e67de850-ff4a-4f44-9b22-da7419714094
+		summarizeBy: none
+		sourceColumn: inertia
+
+	column 'silhouette'
+		dataType: double
+		lineageTag: ba87fb5d-2ac7-4867-81fb-61af5d1cfcf2
+		summarizeBy: none
+		sourceColumn: silhouette
+
+	partition K_Selection = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("Tc7bCcAwCEDRVYrfReor2llC9l+jJiZQv8I9ROwdGO4L9HFFs/l8UCgCxn11kBmE0oLKuEkr0xnYlbDFNuVtaxHnUoy2TVTLVmCy37+cMp+B3hCkY+RWtgKFZ7NjefEYHw==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [k = _t, inertia = _t, silhouette = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"k", Int64.Type}, {"inertia", type number}, {"silhouette", type number}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

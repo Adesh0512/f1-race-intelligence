@@ -1,0 +1,31 @@
+table Championship_Check
+	lineageTag: 9aad915f-e7e9-42c3-ac0f-7f4230ee000d
+
+	column 'cluster_name'
+		dataType: string
+		lineageTag: 8eef879b-7e90-42de-82e5-5ebcc565e563
+		summarizeBy: none
+		sourceColumn: cluster_name
+
+	column 'championship_position'
+		dataType: string
+		lineageTag: 6139a4b0-4278-4aa4-bc46-99a2685f0603
+		summarizeBy: none
+		sourceColumn: championship_position
+
+	column 'driver_seasons'
+		dataType: int64
+		lineageTag: c637e271-2af0-43c3-8314-3eeb2c2c0c02
+		summarizeBy: none
+		sourceColumn: driver_seasons
+
+	partition Championship_Check = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCsksyUlVcM7PK0nNS0ktKlbSUVAKMNQNMAYxLMyVYnUUopV8M1PSMlNzUhSCUtNLcxLRVJlBFDklJmfnJhZloxtiAJHGapGJboChAYhlZIjPJoQyAwPsliFU4LHN0FAbyUE4PAVRY2hoicNXEHkjMwul2FgA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [cluster_name = _t, championship_position = _t, driver_seasons = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"cluster_name", type text}, {"championship_position", type text}, {"driver_seasons", Int64.Type}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

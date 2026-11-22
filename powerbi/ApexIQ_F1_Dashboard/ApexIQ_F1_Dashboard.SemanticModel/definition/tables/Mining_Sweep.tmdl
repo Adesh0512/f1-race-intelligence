@@ -1,0 +1,49 @@
+table Mining_Sweep
+	lineageTag: 42b7d823-128e-42a4-9277-24574e41066e
+
+	column 'min_support'
+		dataType: double
+		lineageTag: bf4f5006-8a54-4f82-933d-a481e9efec52
+		summarizeBy: none
+		sourceColumn: min_support
+
+	column 'itemsets'
+		dataType: int64
+		lineageTag: 8c556228-efa4-4833-8a04-8d109c51127a
+		summarizeBy: none
+		sourceColumn: itemsets
+
+	column 'apriori_candidates'
+		dataType: int64
+		lineageTag: ec7f06ba-a71b-4902-a538-baa0e6c30ed5
+		summarizeBy: none
+		sourceColumn: apriori_candidates
+
+	column 'fp_tree_nodes'
+		dataType: int64
+		lineageTag: 4da444c0-7bcf-45ad-a619-14a93e75c91a
+		summarizeBy: none
+		sourceColumn: fp_tree_nodes
+
+	column 'apriori_time_sec'
+		dataType: double
+		lineageTag: 7d1ba0c4-093d-467c-964b-8925f3af0cec
+		summarizeBy: none
+		sourceColumn: apriori_time_sec
+
+	column 'fpgrowth_time_sec'
+		dataType: double
+		lineageTag: 1064004a-66e8-4886-9b4d-1b749fc92f25
+		summarizeBy: none
+		sourceColumn: fpgrowth_time_sec
+
+	partition Mining_Sweep = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("ZY7JDcAgDARbQbxRZC/mcC2I/tsImOORvGaFPV5a8/RQ8sF5Rp5AJUPMPDmmBN0JI/XgzMF8E5aJUswRRDqO4jgq17GLKtHq0k8Cp50SrrM+B15bkap+LMmnSjCq+gs=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [min_support = _t, itemsets = _t, apriori_candidates = _t, fp_tree_nodes = _t, apriori_time_sec = _t, fpgrowth_time_sec = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"min_support", type number}, {"itemsets", Int64.Type}, {"apriori_candidates", Int64.Type}, {"fp_tree_nodes", Int64.Type}, {"apriori_time_sec", type number}, {"fpgrowth_time_sec", type number}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

@@ -8,6 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
+ref table Dim_Season
 ref table Race_Predictions
 ref table Classifier_Comparison
 ref table Season_Validation
@@ -15,3 +16,17 @@ ref table Feature_Importance
 ref table Association_Rules
 ref table Driver_Season_Tiers
 ref table Clustering_Comparison
+ref table Fact_Race_Results
+ref table Dim_Race
+ref table Dim_Driver
+ref table Dim_Constructor
+ref table Warehouse_Tables
+ref table Snowflake_Objects
+ref table Season_Entries
+ref table Mining_Sweep
+ref table Confusion_Matrix
+ref table Classification_Metrics
+ref table K_Selection
+ref table Tier_Profiles
+ref table Clustering_Metrics
+ref table Championship_Check

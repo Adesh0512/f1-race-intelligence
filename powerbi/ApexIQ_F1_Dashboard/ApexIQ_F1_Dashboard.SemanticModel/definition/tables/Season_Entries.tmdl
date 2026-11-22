@@ -1,0 +1,51 @@
+table Season_Entries
+	lineageTag: 362aff18-57c5-4032-8ef8-c4be81f4f051
+
+	measure 'Labelled Entries' = SUM(Season_Entries[entries])
+		formatString: #,0
+		lineageTag: 459bbc13-b21c-4ea2-8c62-4c01b57632e5
+
+	measure 'Dataset Grands Prix' = SUM(Season_Entries[grands_prix])
+		formatString: 0
+		lineageTag: b632d9cd-f17b-4b76-9a9f-076a8a921922
+
+	column 'season'
+		dataType: int64
+		lineageTag: 121b1cea-e08e-4f4d-9b6c-a4dc06f7836b
+		summarizeBy: none
+		sourceColumn: season
+
+	column 'split'
+		dataType: string
+		lineageTag: 6617c722-adba-4219-9598-bab1cbeab4ce
+		summarizeBy: none
+		sourceColumn: split
+
+	column 'entries'
+		dataType: int64
+		lineageTag: 92aeaef3-c0b2-478d-bac3-2526d4254f86
+		summarizeBy: none
+		sourceColumn: entries
+
+	column 'grands_prix'
+		dataType: int64
+		lineageTag: f6587cc2-7924-4125-9ce6-08049197b609
+		summarizeBy: none
+		sourceColumn: grands_prix
+
+	column 'winners'
+		dataType: int64
+		lineageTag: 1ca58747-a263-4ab8-9f47-852477b91218
+		summarizeBy: none
+		sourceColumn: winners
+
+	partition Season_Entries = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("lZO7DsIwDEV/pepUpCLFjvP6D7aqAwMDCwPw/4LmsbS2qyxXSpuja/s6yzJCSjTOw3h735+vYdqOVzQIl+0jUf4Hvuo6D5lwMgEx3w1VG+FFwpJhPYJMBM96RMUjsR5JJhweCTTGKFXZY1V/AhSCWAJlwiNLWJlAw/ZBikchYtVGuNM8UtVGKJmXfTh4hO5ZKZn7yHqk003ceYCcOTm2c4BuQs6cYvbHpo2wp29w76G88zL5A6FlznvImVPZXYSqjQhKVXzncuZU7+49Ui+BpndLUMm8EIhVG1Eyf3y+w7SdNoBUwPYCJAIhj6Rc+Ou6/gA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [season = _t, split = _t, entries = _t, grands_prix = _t, winners = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"season", Int64.Type}, {"split", type text}, {"entries", Int64.Type}, {"grands_prix", Int64.Type}, {"winners", Int64.Type}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table

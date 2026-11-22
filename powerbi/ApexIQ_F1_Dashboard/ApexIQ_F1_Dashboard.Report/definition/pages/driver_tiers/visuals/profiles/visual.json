@@ -1,0 +1,162 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "profiles",
+  "position": {
+    "x": 800,
+    "y": 195,
+    "z": 1000,
+    "height": 330,
+    "width": 460,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tier_Profiles"
+                    }
+                  },
+                  "Property": "cluster_name"
+                }
+              },
+              "queryRef": "Tier_Profiles.cluster_name",
+              "nativeQueryRef": "cluster_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tier_Profiles"
+                    }
+                  },
+                  "Property": "size"
+                }
+              },
+              "queryRef": "Tier_Profiles.size",
+              "nativeQueryRef": "size"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tier_Profiles"
+                    }
+                  },
+                  "Property": "avg_grid"
+                }
+              },
+              "queryRef": "Tier_Profiles.avg_grid",
+              "nativeQueryRef": "avg_grid"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tier_Profiles"
+                    }
+                  },
+                  "Property": "avg_finish"
+                }
+              },
+              "queryRef": "Tier_Profiles.avg_finish",
+              "nativeQueryRef": "avg_finish"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tier_Profiles"
+                    }
+                  },
+                  "Property": "win_rate"
+                }
+              },
+              "queryRef": "Tier_Profiles.win_rate",
+              "nativeQueryRef": "win_rate"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tier_Profiles"
+                    }
+                  },
+                  "Property": "podium_rate"
+                }
+              },
+              "queryRef": "Tier_Profiles.podium_rate",
+              "nativeQueryRef": "podium_rate"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tier_Profiles"
+                    }
+                  },
+                  "Property": "dnf_rate"
+                }
+              },
+              "queryRef": "Tier_Profiles.dnf_rate",
+              "nativeQueryRef": "dnf_rate"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Tier profiles (centroids)'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
