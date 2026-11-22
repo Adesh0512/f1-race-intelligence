@@ -27,3 +27,8 @@ derby.log
 
 # local editor / agent config
 .claude/
+
+# College report: the template is another project's report (other students' details); crops are rebuilt
+college_report/template.docx
+college_report/figures/crops/
+exam_simplified/output/

@@ -1,0 +1,23 @@
+[
+ {"name": "s01_home", "url": "http://localhost:8517/", "height": 900},
+ {"name": "s02_star", "url": "http://localhost:8517/D1_Warehouse_Design", "tab": "Star Schema", "height": 1100},
+ {"name": "s03_snowflake_schema", "url": "http://localhost:8517/D1_Warehouse_Design", "tab": "Snowflake Schema", "height": 1100},
+ {"name": "s04_olap", "url": "http://localhost:8517/D1_Warehouse_Design", "tab": "Live OLAP Queries", "height": 1100},
+ {"name": "s05_sf_deploy", "url": "http://localhost:8517/D1_Snowflake_Deployment", "wait": 20, "height": 1100},
+ {"name": "s06_sf_features", "url": "http://localhost:8517/Snowflake_Showcase", "wait": 15, "height": 1100},
+ {"name": "s07_architecture", "url": "http://localhost:8517/Architecture", "height": 1100},
+ {"name": "s08_labels", "url": "http://localhost:8517/D2_Supervised_Dataset", "tab": "Class Labels", "height": 1000},
+ {"name": "s09_mining_algos", "url": "http://localhost:8517/D2_Pattern_Mining", "tab": "Algorithm Comparison", "height": 1100},
+ {"name": "s10_rules", "url": "http://localhost:8517/D2_Pattern_Mining", "tab": "Outcome Rules", "height": 1000},
+ {"name": "s11_holdout", "url": "http://localhost:8517/D2_Classifier_Comparison", "tab": "Holdout Benchmark", "height": 1100},
+ {"name": "s12_cv", "url": "http://localhost:8517/D2_Classifier_Comparison", "tab": "Expanding-Window Validation", "height": 1000},
+ {"name": "s13_curves", "url": "http://localhost:8517/D2_Classification_Algorithm", "tab": "Curves & Threshold", "wait": 15, "height": 1100},
+ {"name": "s14_explorer", "url": "http://localhost:8517/D2_Classification_Algorithm", "tab": "Race Explorer", "wait": 15, "height": 1100},
+ {"name": "s15_predictor", "url": "http://localhost:8517/D2_Race_Predictor", "wait": 14, "height": 1450},
+ {"name": "s16_predictor_why", "url": "http://localhost:8517/D2_Race_Predictor", "wait": 14, "y": 1500, "height": 1000},
+ {"name": "s17_track", "url": "http://localhost:8517/D2_Race_Predictor", "tab": "Track record", "wait": 14, "height": 1000},
+ {"name": "s18_unsup", "url": "http://localhost:8517/D3_Unsupervised_Dataset", "height": 1000},
+ {"name": "s19_clust_cmp", "url": "http://localhost:8517/D3_Clustering_Comparison", "wait": 15, "height": 1100},
+ {"name": "s20_kmeans", "url": "http://localhost:8517/D3_KMeans_Clustering", "wait": 15, "height": 1100},
+ {"name": "s21_champ", "url": "http://localhost:8517/D3_Clustering_Metrics", "tab": "vs. Championship Standing", "wait": 15, "height": 1100}
+]
