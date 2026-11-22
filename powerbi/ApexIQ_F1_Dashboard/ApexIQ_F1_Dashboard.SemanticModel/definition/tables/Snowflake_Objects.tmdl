@@ -1,43 +1,43 @@
 table Snowflake_Objects
-	lineageTag: b56eca87-5d99-4e45-b3c9-4e7193d09bc2
+	lineageTag: 40e7cb9a-9dac-4535-ab94-c520a229ece3
 
 	measure 'Snowflake Objects' = COUNTROWS(Snowflake_Objects)
 		formatString: 0
-		lineageTag: db42325d-0472-46f9-89fd-4ed532bb89d7
+		lineageTag: 3f8c49be-b2f5-4fab-ad8f-b40e94855f29
 
 	column 'schema_name'
 		dataType: string
-		lineageTag: d7f49e66-9820-4600-9328-d8a1534278c8
+		lineageTag: 28a5d17b-eb05-4b52-89f5-ff5f71827413
 		summarizeBy: none
 		sourceColumn: schema_name
 
 	column 'table_name'
 		dataType: string
-		lineageTag: 251347a6-6318-403d-8149-eada2b05e089
+		lineageTag: ad34daf0-fe79-4e22-a7e8-ebe796f8780f
 		summarizeBy: none
 		sourceColumn: table_name
 
 	column 'table_type'
 		dataType: string
-		lineageTag: 9db8d0d3-b34c-4706-9362-c407b3bd886b
+		lineageTag: 305b56c6-de1a-4814-90df-863a319f7e8d
 		summarizeBy: none
 		sourceColumn: table_type
 
 	column 'row_count'
 		dataType: int64
-		lineageTag: 9da9afd6-0774-42ca-aee4-f675b171ed0f
+		lineageTag: c666d7c7-d3b1-4c8f-b4dd-26d3c4e91b62
 		summarizeBy: none
 		sourceColumn: row_count
 
 	column 'layer_order'
 		dataType: int64
-		lineageTag: 72501a86-1bd5-4a84-b740-c9adeb8c6eb7
+		lineageTag: 513e29d4-5dfd-435c-a85e-d019442f26a4
 		summarizeBy: none
 		sourceColumn: layer_order
 
 	column 'snapshot_date'
 		dataType: string
-		lineageTag: 3105ebca-808d-4aa3-972b-b06bf4ba5c7d
+		lineageTag: a5e98b52-6a83-41ae-b9b9-b7fadcde5285
 		summarizeBy: none
 		sourceColumn: snapshot_date
 
@@ -45,7 +45,7 @@ table Snowflake_Objects
 		mode: import
 		source =
 				let
-					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("nZTLbtswEEV/xfA6AUT50WQ5pkYFEz7cmaGFIAj4A0F3/f+KMozCDRXK3oiSiHswz/v+vgYP9k2M5vXDat1J6sickBIjcPCpD+TyxQEYVwIHi/nrab9r8rnLj7Zp949KPbbt+uNh9R+QUUfC1Kt0jAdrdLIIHdIhAHX5/mRwGM/ffz4/53h6lPh8MUJc6NAa/zM5YEGaj6y9kZQ6PCVtg8cbmd0w1c24pA3paOSrfvM0PSvq4FkoagmFrDa7RYTohd4K6maBugMppL5V7RLtNDJf1apZkjmBxsQ+DL2F17tjOFME6B5AD1rOBEKOVvg6nushvY1TjOgyUUWUs/kvMAdtQMy4hBQtcqG8m+cJsP2GEiUk1oGwS4Px6Ti+GJ2hBV5TgV07g7YxL06B86OphdUjSLYF446BBLwutF3taxDCXxG9JCPoGIVLnd9WIJMNjKvjjkBmTKuQTYUwtfvbuqrN7nkWQjCcKcPFQHjOQVRN/89CeM5Daoxzj3l2l2v6xQZdA+Wy8uwuL1FfdvD+GAQtOhw9Nb0UR0MVIR9/AQ==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [schema_name = _t, table_name = _t, table_type = _t, row_count = _t, layer_order = _t, snapshot_date = _t]),
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("nZRBbuMwDEWvEmTdArYTp+mSkemBZmQpJakYRVHoAsXs5v4jOQiKtHLlZCPZlv8DKZL/7W0NFsyraMXrh9W6k9CRPiEFRmBnQ+9oSAcHYFwJHAymt/2urdLepqWpmt1jXT82zfr9YfUFyKg8YejrcPQHo1UwCB3SwQF16fykcYz7338fH3M8FSU2HUTI4Do02v4KA7AgzUfW3EgKHZ6CMs7ijcxunO5ND0FpUl7Ld/1mP60FtbMs5JW4TFabdhHBW6HXjLpaoO5AMqlv62aJdmqZ7+q6WpI5gcLA1o29gT93x3CmCNA9gB6UnAmE7I3wdTzXTXobJxvRpaOyqMGkr8DslAbRcQjJG+TM9W6eJ8D2B4oXF1g5wi6M2oZjfNAqQTO8qgC7dgZlfBqcDOepKoXVI0iyBT0cHQlYlSl7vStBCF88WglacGAUzlV+W4BMNhBHZzgC6ZhWJpsCYSp3tElU0UhC/KfNxLGvllB+rE69aZ9nIQTjmTJebIjnfKgu6T+NiOecqMQ4dwrPOkJJv9jmS6B0rTzrCEvUl0m+PwZBgwNGZw6/sw1WZyHv/wE=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [schema_name = _t, table_name = _t, table_type = _t, row_count = _t, layer_order = _t, snapshot_date = _t]),
 					#"Changed Type" = Table.TransformColumnTypes(Source, {{"schema_name", type text}, {"table_name", type text}, {"table_type", type text}, {"row_count", Int64.Type}, {"layer_order", Int64.Type}, {"snapshot_date", type text}}, "en-US")
 				in
 					#"Changed Type"

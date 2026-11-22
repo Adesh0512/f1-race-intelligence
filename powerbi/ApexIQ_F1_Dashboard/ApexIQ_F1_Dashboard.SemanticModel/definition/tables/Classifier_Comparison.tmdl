@@ -1,55 +1,55 @@
 table Classifier_Comparison
-	lineageTag: 294a6381-109a-4515-9e24-8cd6bb3a8076
+	lineageTag: 20e7b914-5d6f-41d9-a602-8755e296458e
 
 	measure 'Champion ROC-AUC' = CALCULATE(SUM(Classifier_Comparison[roc_auc]), CONTAINSSTRING(Classifier_Comparison[model], "Champion"))
 		formatString: 0.0000
-		lineageTag: 5c9ae2d1-180e-487e-b8bc-dbecd7fb675e
+		lineageTag: 982d26b3-856d-489d-87d9-03587e26cb94
 
 	measure 'Models' = COUNTROWS(Classifier_Comparison)
 		formatString: 0
-		lineageTag: 20c1c307-f8f8-4436-affa-65ffd0bf08d9
+		lineageTag: 98cc36ed-a7fc-4176-8188-dacdbbb299c9
 
 	measure 'Best ROC-AUC' = MAX(Classifier_Comparison[roc_auc])
 		formatString: 0.0000
-		lineageTag: bfde62bf-43d5-4503-b3e4-221d8dfd0e3e
+		lineageTag: 4a19d84c-fdc8-4455-841a-4b3d2525eaf7
 
 	measure 'Best Winner Pick %' = MAX(Classifier_Comparison[top1_winner_hit_pct])
 		formatString: 0.0
-		lineageTag: f2cf3800-a2a2-45f2-abf8-000add1da0e2
+		lineageTag: 8b02bf80-40bd-4f6a-9c1c-dc0ebbdd80c3
 
 	column 'model'
 		dataType: string
-		lineageTag: 33f1ddfb-145f-4b59-b330-0e7f465205db
+		lineageTag: cf3d04c3-e0be-49fd-9fe7-994562bf852a
 		summarizeBy: none
 		sourceColumn: model
 
 	column 'roc_auc'
 		dataType: double
-		lineageTag: 029f95cb-787b-46d3-982c-e0b4f145047d
+		lineageTag: ef5241e5-d441-4cc6-aedf-8815eb591ec4
 		summarizeBy: none
 		sourceColumn: roc_auc
 
 	column 'pr_auc'
 		dataType: double
-		lineageTag: a688c0d6-273e-4b4d-b5fc-8f979f611f1e
+		lineageTag: 3ce6b001-65e6-4c40-83c3-79a00d17bdaf
 		summarizeBy: none
 		sourceColumn: pr_auc
 
 	column 'recall'
 		dataType: double
-		lineageTag: a5725bb5-5d62-4d91-9659-2f11dba50abc
+		lineageTag: 8180056c-d48f-401e-b866-7f475e732fb2
 		summarizeBy: none
 		sourceColumn: recall
 
 	column 'top1_winner_hit_pct'
 		dataType: double
-		lineageTag: 83596a05-c293-4699-b7b4-124e681e599e
+		lineageTag: eb19ff5e-e82e-4325-b2f9-202bcdb4a317
 		summarizeBy: none
 		sourceColumn: top1_winner_hit_pct
 
 	column 'top3_podium_hit_pct'
 		dataType: double
-		lineageTag: e4c4b165-a008-4c1f-94fe-5ece4b363992
+		lineageTag: 8c6f4b5f-236c-49f4-a760-0cb691c691c4
 		summarizeBy: none
 		sourceColumn: top3_podium_hit_pct
 

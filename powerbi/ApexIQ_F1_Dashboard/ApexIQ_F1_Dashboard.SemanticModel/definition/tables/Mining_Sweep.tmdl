@@ -1,39 +1,39 @@
 table Mining_Sweep
-	lineageTag: 42b7d823-128e-42a4-9277-24574e41066e
+	lineageTag: 7d76dc4d-48e1-4f7d-89a6-720ba9f6b229
 
 	column 'min_support'
 		dataType: double
-		lineageTag: bf4f5006-8a54-4f82-933d-a481e9efec52
+		lineageTag: 417c1beb-1a02-44b0-b0df-bd5082f80617
 		summarizeBy: none
 		sourceColumn: min_support
 
 	column 'itemsets'
 		dataType: int64
-		lineageTag: 8c556228-efa4-4833-8a04-8d109c51127a
+		lineageTag: 2082a10e-820a-4f52-9e23-13b59e1ea5b5
 		summarizeBy: none
 		sourceColumn: itemsets
 
 	column 'apriori_candidates'
 		dataType: int64
-		lineageTag: ec7f06ba-a71b-4902-a538-baa0e6c30ed5
+		lineageTag: 44900d90-4317-432c-b946-bb03afc58389
 		summarizeBy: none
 		sourceColumn: apriori_candidates
 
 	column 'fp_tree_nodes'
 		dataType: int64
-		lineageTag: 4da444c0-7bcf-45ad-a619-14a93e75c91a
+		lineageTag: 2a2216d8-3e20-44f1-9623-85b8c5176d28
 		summarizeBy: none
 		sourceColumn: fp_tree_nodes
 
 	column 'apriori_time_sec'
 		dataType: double
-		lineageTag: 7d1ba0c4-093d-467c-964b-8925f3af0cec
+		lineageTag: 96826d78-de34-42b5-8396-87eee243a9df
 		summarizeBy: none
 		sourceColumn: apriori_time_sec
 
 	column 'fpgrowth_time_sec'
 		dataType: double
-		lineageTag: 1064004a-66e8-4886-9b4d-1b749fc92f25
+		lineageTag: 6b43f987-170a-408a-afb9-9f84022a8357
 		summarizeBy: none
 		sourceColumn: fpgrowth_time_sec
 

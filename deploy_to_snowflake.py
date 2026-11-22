@@ -427,9 +427,10 @@ def deploy():
     clusters_csv = os.path.join(os.path.dirname(os.path.abspath(__file__)), "11_clustering_algorithm", "driver_season_clusters.csv")
     if os.path.exists(clusters_csv):
         cs.execute(f"PUT 'file://{clusters_csv.replace(os.sep, "/")}' @RAW.F1_RAW_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
-    preds_csv = os.path.join(os.path.dirname(os.path.abspath(__file__)), "06_classification_algorithm", "holdout_predictions.csv")
-    if os.path.exists(preds_csv):
-        cs.execute(f"PUT 'file://{preds_csv.replace(os.sep, "/")}' @RAW.F1_RAW_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
+    for name in ("holdout_predictions.csv", "forecast_2025.csv"):
+        csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "06_classification_algorithm", name)
+        if os.path.exists(csv_path):
+            cs.execute(f"PUT 'file://{csv_path.replace(os.sep, "/")}' @RAW.F1_RAW_STAGE AUTO_COMPRESS=TRUE OVERWRITE=TRUE;")
     for cmd in clean_sql_commands(master_section("07_DIMENSIONAL_MODEL.SQL")):
         try:
             cs.execute(cmd)
@@ -461,7 +462,8 @@ def deploy():
         ("DW.DIM_DRIVER", "SELECT COUNT(*) FROM DW.DIM_DRIVER;"),
         ("DW.DIM_CIRCUIT", "SELECT COUNT(*) FROM DW.DIM_CIRCUIT;"),
         ("ML.DRIVER_SEASON_CLUSTERS", "SELECT COUNT(*) FROM ML.DRIVER_SEASON_CLUSTERS;"),
-        ("ML.RACE_PREDICTIONS", "SELECT COUNT(*) FROM ML.RACE_PREDICTIONS;")
+        ("ML.RACE_PREDICTIONS", "SELECT COUNT(*) FROM ML.RACE_PREDICTIONS;"),
+        ("ML.RACE_FORECAST_2025", "SELECT COUNT(*) FROM ML.RACE_FORECAST_2025;")
     ]
 
     for label, qry in verification_queries:

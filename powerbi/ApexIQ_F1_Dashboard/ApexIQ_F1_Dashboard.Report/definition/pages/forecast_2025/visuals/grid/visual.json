@@ -1,0 +1,152 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "grid",
+  "position": {
+    "x": 530,
+    "y": 510,
+    "z": 1000,
+    "height": 190,
+    "width": 470,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_2025"
+                    }
+                  },
+                  "Property": "race"
+                }
+              },
+              "queryRef": "Forecast_2025.race",
+              "nativeQueryRef": "race"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_2025"
+                    }
+                  },
+                  "Property": "driver_name"
+                }
+              },
+              "queryRef": "Forecast_2025.driver_name",
+              "nativeQueryRef": "driver_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_2025"
+                    }
+                  },
+                  "Property": "constructor_name"
+                }
+              },
+              "queryRef": "Forecast_2025.constructor_name",
+              "nativeQueryRef": "constructor_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_2025"
+                    }
+                  },
+                  "Property": "projected_grid"
+                }
+              },
+              "queryRef": "Forecast_2025.projected_grid",
+              "nativeQueryRef": "projected_grid"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Forecast_2025"
+                    }
+                  },
+                  "Property": "win_probability"
+                }
+              },
+              "queryRef": "Forecast_2025.win_probability",
+              "nativeQueryRef": "win_probability"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Forecast_2025"
+                  }
+                },
+                "Property": "win_probability"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Projected grid and forecast'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

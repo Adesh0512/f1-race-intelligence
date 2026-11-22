@@ -1,0 +1,49 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "hdr",
+  "position": {
+    "x": 20,
+    "y": 8,
+    "z": 2000,
+    "height": 62,
+    "width": 1240,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "2. 2025 forecast: upcoming Grands Prix",
+                    "textStyle": {
+                      "fontSize": "20pt",
+                      "color": "#FFFFFF",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Champion retrained on 1994-2024; inputs rebuilt from each driver's history to the end of 2024; grid projected from recent starts",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#8B95A5"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -86,3 +86,9 @@ SELECT season, race_name, driver_name AS predicted_winner, ROUND(win_probability
 FROM ML.RACE_PREDICTIONS
 QUALIFY ROW_NUMBER() OVER (PARTITION BY race_id ORDER BY win_probability DESC) = 1
 ORDER BY season DESC, round DESC;
+
+-- 11. 2025 forecast: predicted winner of every upcoming Grand Prix
+SELECT round, race_name, driver_name AS forecast_winner, constructor_name, ROUND(win_probability, 1) AS win_pct
+FROM ML.RACE_FORECAST_2025
+WHERE predicted_rank = 1
+ORDER BY round;

@@ -1,21 +1,21 @@
 table Season_Validation
-	lineageTag: 01d8186d-7491-4ed8-81e4-cad01f7c9a02
+	lineageTag: 37c53728-c931-4819-84ad-d49b0cb76741
 
 	column 'test_season'
 		dataType: int64
-		lineageTag: 51197090-857f-4f65-aa7c-cefa1f245f4f
+		lineageTag: 7827d95f-6897-483c-aa96-fbf44e2f9264
 		summarizeBy: none
 		sourceColumn: test_season
 
 	column 'roc_auc'
 		dataType: double
-		lineageTag: 6913d19a-896b-479b-bd07-f4e7c2932371
+		lineageTag: 767e1803-5bfb-465b-ad6a-fd237cab30f3
 		summarizeBy: none
 		sourceColumn: roc_auc
 
 	column 'baseline_roc_auc'
 		dataType: double
-		lineageTag: 270e0da0-17e7-4985-9e10-80a7b9bace2c
+		lineageTag: 21c39b5c-849f-46cb-ba6e-e41abd57db9b
 		summarizeBy: none
 		sourceColumn: baseline_roc_auc
 

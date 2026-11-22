@@ -15,6 +15,7 @@ SCRIPTS = [
     "05_algorithm_comparison/train_comparison.py",
     "05_algorithm_comparison/temporal_validation.py",
     "06_classification_algorithm/improved_classifier.py",
+    "06_classification_algorithm/future_race.py",
     "07_innovation/baseline_vs_improved.py",
     "08_performance_metrics/calculate_metrics.py",
     "09_unsupervised_dataset/build_unsupervised_dataset.py",

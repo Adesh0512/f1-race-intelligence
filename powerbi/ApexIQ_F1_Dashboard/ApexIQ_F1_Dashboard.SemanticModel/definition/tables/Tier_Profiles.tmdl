@@ -1,75 +1,75 @@
 table Tier_Profiles
-	lineageTag: 4d0a097e-ee0a-46ee-999e-cbc21e8e0803
+	lineageTag: 57b6fdfa-ceb3-45e2-97aa-65536eeb9420
 
 	column 'cluster'
 		dataType: int64
-		lineageTag: ae179a85-eca1-4b35-8073-e141c2412d76
+		lineageTag: 837c133d-be55-4deb-a7b8-4b6d88f46210
 		summarizeBy: none
 		sourceColumn: cluster
 
 	column 'cluster_name'
 		dataType: string
-		lineageTag: 859c631f-2e6e-4385-851e-498185cebb54
+		lineageTag: 306e3354-3056-42c8-acef-49b4c606e763
 		summarizeBy: none
 		sourceColumn: cluster_name
 
 	column 'avg_grid'
 		dataType: double
-		lineageTag: 0db7c153-a61e-46bb-89e6-a2c65876128d
+		lineageTag: 9c3d0dd2-3bc5-49a1-9f70-922c69cb6db3
 		summarizeBy: none
 		sourceColumn: avg_grid
 
 	column 'avg_finish'
 		dataType: double
-		lineageTag: b78883f6-2946-4546-80af-88091f2993bd
+		lineageTag: a6bacc6e-9691-4052-955e-010dc2a71925
 		summarizeBy: none
 		sourceColumn: avg_finish
 
 	column 'finish_std'
 		dataType: double
-		lineageTag: af77bcfe-633d-4370-bc83-40ec1ffe2cb9
+		lineageTag: 36496c9c-dc49-47b9-8b46-5d886970d1ca
 		summarizeBy: none
 		sourceColumn: finish_std
 
 	column 'win_rate'
 		dataType: double
-		lineageTag: 874bb06f-720b-4dd1-bf01-b362b2131756
+		lineageTag: 60e9bb4d-4600-4ffe-940b-c530d3812fc4
 		summarizeBy: none
 		sourceColumn: win_rate
 
 	column 'podium_rate'
 		dataType: double
-		lineageTag: 76e85535-312a-4271-9aef-6736c41fb9e1
+		lineageTag: 306008af-0004-4eb0-92af-e300d068cd5c
 		summarizeBy: none
 		sourceColumn: podium_rate
 
 	column 'points_rate'
 		dataType: double
-		lineageTag: 67f71d22-ff8c-477d-b0bf-a53009bc6b2e
+		lineageTag: ea047523-bd30-4acf-9f53-239b2f837290
 		summarizeBy: none
 		sourceColumn: points_rate
 
 	column 'dnf_rate'
 		dataType: double
-		lineageTag: c529bca5-c352-4c51-8613-9d36311eee2c
+		lineageTag: a3e9f42d-3733-46cf-b797-7e11634e8c4f
 		summarizeBy: none
 		sourceColumn: dnf_rate
 
 	column 'teammate_quali_rate'
 		dataType: double
-		lineageTag: a6ab2c16-4e54-4d86-9bea-c1f1b4d16f0a
+		lineageTag: 15ad9a48-91df-4907-9f87-fbeebbe61d5f
 		summarizeBy: none
 		sourceColumn: teammate_quali_rate
 
 	column 'starts'
 		dataType: double
-		lineageTag: 739a9074-1d36-4082-992e-7df4442c508d
+		lineageTag: a856b682-b37a-4326-87ab-0e0c920221ae
 		summarizeBy: none
 		sourceColumn: starts
 
 	column 'size'
 		dataType: int64
-		lineageTag: ecb463d8-10a3-43f8-be62-14adfda3ab72
+		lineageTag: aebef9bd-c706-45ea-adc2-c44f03d4488f
 		summarizeBy: none
 		sourceColumn: size
 

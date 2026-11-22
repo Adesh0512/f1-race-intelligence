@@ -1,0 +1,91 @@
+table Forecast_2025
+	lineageTag: 40e41afa-78a7-4963-8761-5ba8996da00f
+
+	measure 'Forecast Winner' = IF(HASONEVALUE(Forecast_2025[race]), CALCULATE(MAX(Forecast_2025[driver_name]), Forecast_2025[predicted_rank] = 1), "Pick one race")
+		lineageTag: ca3a4cdd-1078-4ed4-b3b9-250a69a67625
+
+	measure 'Forecast Win %' = IF(HASONEVALUE(Forecast_2025[race]), CALCULATE(MAX(Forecast_2025[win_probability]), Forecast_2025[predicted_rank] = 1))
+		formatString: 0.0
+		lineageTag: 0183bd70-24d6-4705-a3f3-45a5e7e38d53
+
+	measure 'Main Rival' = IF(HASONEVALUE(Forecast_2025[race]), CALCULATE(MAX(Forecast_2025[driver_name]), Forecast_2025[predicted_rank] = 2), "Pick one race")
+		lineageTag: d6e27cc6-68c1-474f-9ce3-9ae8a7f6cc25
+
+	measure 'Expected Wins' = SUM(Forecast_2025[win_probability]) / 100
+		formatString: 0.0
+		lineageTag: 5150ccd8-3bec-47cf-a594-b68747766824
+
+	measure 'Races Forecast' = DISTINCTCOUNT(Forecast_2025[round])
+		formatString: 0
+		lineageTag: f8ddbf5a-379c-4be2-a22e-bc45f075a5b1
+
+	column 'season'
+		dataType: int64
+		lineageTag: 1f8e3fc6-fcb2-4cf6-af3f-8bd0ccce5acd
+		summarizeBy: none
+		sourceColumn: season
+
+	column 'round'
+		dataType: int64
+		lineageTag: 75887891-5246-4b5f-bf4d-986d28d89d9b
+		summarizeBy: none
+		sourceColumn: round
+
+	column 'race_name'
+		dataType: string
+		lineageTag: cf68aff8-4711-40dc-959a-4398081f5f1a
+		summarizeBy: none
+		sourceColumn: race_name
+
+	column 'circuit_name'
+		dataType: string
+		lineageTag: da0ac067-1380-4fe9-aa01-a3b93fe8c161
+		summarizeBy: none
+		sourceColumn: circuit_name
+
+	column 'driver_name'
+		dataType: string
+		lineageTag: c3d384ef-2b74-4927-bb03-6214351968a7
+		summarizeBy: none
+		sourceColumn: driver_name
+
+	column 'constructor_name'
+		dataType: string
+		lineageTag: 40209b4e-123a-46c6-aaef-ff602e69a570
+		summarizeBy: none
+		sourceColumn: constructor_name
+
+	column 'projected_grid'
+		dataType: int64
+		lineageTag: 7cf4cc5d-03f6-49e2-914e-6c2b7351b1ad
+		summarizeBy: none
+		sourceColumn: projected_grid
+
+	column 'win_probability'
+		dataType: double
+		lineageTag: 2c7205ad-8a9c-4b9f-8f85-2de67d7e0c0b
+		summarizeBy: none
+		sourceColumn: win_probability
+
+	column 'predicted_rank'
+		dataType: int64
+		lineageTag: 7d1889ac-ef35-4bec-adb9-684604a585ac
+		summarizeBy: none
+		sourceColumn: predicted_rank
+
+	column 'race'
+		dataType: string
+		lineageTag: 66521efa-cb50-482a-b950-e5442b50746c
+		summarizeBy: none
+		sourceColumn: race
+
+	partition Forecast_2025 = m
+		mode: import
+		source =
+				let
+					Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("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", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [season = _t, round = _t, race_name = _t, circuit_name = _t, driver_name = _t, constructor_name = _t, projected_grid = _t, win_probability = _t, predicted_rank = _t, race = _t]),
+					#"Changed Type" = Table.TransformColumnTypes(Source, {{"season", Int64.Type}, {"round", Int64.Type}, {"race_name", type text}, {"circuit_name", type text}, {"driver_name", type text}, {"constructor_name", type text}, {"projected_grid", Int64.Type}, {"win_probability", type number}, {"predicted_rank", Int64.Type}, {"race", type text}}, "en-US")
+				in
+					#"Changed Type"
+
+	annotation PBI_ResultType = Table
